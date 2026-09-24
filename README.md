@@ -8,6 +8,10 @@ A quiet place to write. Longhand runs in Chrome, works without the internet once
 2. Click the install icon at the right end of the address bar (a small screen with a down arrow), or open Chrome's ⋮ menu and choose **Cast, save and share → Install page as app…**
 3. Click **Install**. Longhand gets its own window and a place in your Dock and Launchpad, and it opens without an internet connection from then on.
 
+## Free, with a gift to 826 National
+
+Longhand is free. If it helps you write, please consider a gift to [826 National](https://826national.org/donate/), which runs free writing and tutoring programs for young people. Gifts go straight to 826 National. Longhand isn't affiliated with them and receives nothing.
+
 ## Keys
 
 - ⌘S saves to a Rich Text file. After the first save, Longhand keeps the file up to date as you write.
