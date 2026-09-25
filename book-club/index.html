@@ -1,0 +1,77 @@
+---
+layout: default
+title: The book club
+description: Longhand's book club reads one book at a time, a few chapters a week, and talks about it together.
+---
+{%- assign book = site.data.books | where: "status", "current" | first -%}
+{%- assign next = site.data.books | where: "status", "next" | first -%}
+{%- assign past = site.data.books | where: "status", "past" -%}
+<section class="lead wrap">
+  <p class="kicker">Talk · the book club</p>
+  <h1>The Longhand book club</h1>
+  <p class="dek">One book at a time, a few chapters a week. Read along whenever you can, and join the conversation when you have something to say.</p>
+</section>
+
+{%- if book %}
+<section class="wrap book" aria-labelledby="book-h">
+  <div class="book-head">
+    <p class="label"><span>Now reading</span></p>
+    <h2 id="book-h"><cite>{{ book.title }}</cite></h2>
+    <p class="byline">{{ book.author }}{% if book.year %}, {{ book.year }}{% endif %}</p>
+    <p>{{ book.blurb }}</p>
+    {%- if book.free_edition %}
+    <p class="actions"><a class="text-link" href="{{ book.free_edition }}">Read it free at Project Gutenberg</a></p>
+    {%- endif %}
+  </div>
+
+  <ol class="weeks" data-weeks>
+    {%- for w in book.schedule %}
+    <li data-week-of="{{ w.week_of | date: '%Y-%m-%d' }}">
+      <p class="week-when"><span class="week-n">Week {{ forloop.index }}</span><span class="week-date">from {{ w.week_of | date: "%B %-d" }}</span><span class="week-flag">This week</span></p>
+      <p class="week-reading">{{ w.reading }}</p>
+      {%- if w.questions %}
+      <ul class="questions">
+        {%- for q in w.questions %}
+        <li>{{ q }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- endif %}
+
+<section class="wrap prose club-how" aria-labelledby="how-h">
+  <h2 id="how-h">How it works</h2>
+  <p>Each week has a stretch of reading and a couple of questions to think about. Talk about them in our discussion space any time that week. Fell behind? Join in anywhere. Nobody takes attendance.</p>
+  {% include discussion.html %}
+  {%- if next %}
+  <p>Up next: <cite>{{ next.title }}</cite> by {{ next.author }}.</p>
+  {%- else %}
+  <p>Members help choose the next book. Bring your suggestions to the discussion.</p>
+  {%- endif %}
+</section>
+
+{%- if past.size > 0 %}
+<section class="wrap past" aria-labelledby="past-h">
+  <h2 class="label" id="past-h"><span>Books we've read</span></h2>
+  <ul class="toc">
+    {%- for b in past %}
+    <li><span class="toc-title"><cite>{{ b.title }}</cite></span><span class="toc-author">{{ b.author }}</span></li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+
+<script>
+  (function () {
+    var rows = document.querySelectorAll("[data-weeks] > li");
+    var now = new Date();
+    for (var i = 0; i < rows.length; i++) {
+      var start = new Date(rows[i].getAttribute("data-week-of") + "T00:00:00");
+      var end = new Date(start.getTime() + 7 * 864e5);
+      if (now >= start && now < end) rows[i].classList.add("this-week");
+    }
+  })();
+</script>

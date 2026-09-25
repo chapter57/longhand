@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+{%- assign description = page.description | default: site.description | strip_newlines | strip %}
+<meta name="description" content="{{ description | escape }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+<meta property="og:description" content="{{ description | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<link rel="icon" href="{{ '/write/icons/icon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ '/write/icons/icon-192.png' | relative_url }}">
+<meta name="theme-color" content="#F2F3EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141619" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="{{ '/fonts/Literata-normal-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="wordmark" href="{{ '/' | relative_url }}">Longhand</a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ '/write/' | relative_url }}">Write</a>
+      <a href="{{ '/journal/' | relative_url }}"{% if page.url contains '/journal/' and page.url != '/journal/submit/' %} aria-current="page"{% endif %}>Journal</a>
+      <a href="{{ '/book-club/' | relative_url }}"{% if page.url contains '/book-club/' %} aria-current="page"{% endif %}>Book club</a>
+      <a href="{{ '/journal/submit/' | relative_url }}"{% if page.url == '/journal/submit/' %} aria-current="page"{% endif %}>Submit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{{ content }}
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <p class="colophon-mark">Longhand</p>
+    <p>{{ site.description | strip }}</p>
+    <ul class="colophon-links">
+      <li><a href="{{ '/write/' | relative_url }}">The writing app</a></li>
+      <li><a href="{{ '/journal/' | relative_url }}">The journal</a></li>
+      <li><a href="{{ '/book-club/' | relative_url }}">The book club</a></li>
+      {%- if site.discussion_url != "" %}
+      <li><a href="{{ site.discussion_url }}">Join us on {{ site.discussion_name }}</a></li>
+      {%- endif %}
+      {%- if site.email != "" %}
+      <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+      {%- endif %}
+    </ul>
+    <p class="fine">Set in Literata and IBM Plex Mono. {{ site.season }}.</p>
+  </div>
+</footer>
+</body>
+</html>

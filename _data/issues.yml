@@ -1,0 +1,13 @@
+# The journal's issues, newest last.
+# status: "reading" while you're taking submissions, "published" once it's out.
+# Pieces belong to an issue through the "issue:" line in each file in _journal/.
+
+- number: 1
+  name: Issue One
+  status: reading
+  deadline: 2027-01-15
+  published_on:
+  note: >-
+    Our first issue. We're looking for poems, short fiction and essays that
+    sound like a person wrote them: specific, unhurried, and a little strange
+    in the way people are.

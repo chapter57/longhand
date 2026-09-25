@@ -1,0 +1,36 @@
+# The book club's books.
+# status: "current" for the book we're reading now, "next" for the one after,
+# "past" for books we've finished. Only one book should be "current".
+# Each week in the schedule starts on its "week_of" date.
+
+- title: Frankenstein
+  author: Mary Shelley
+  year: 1818
+  status: current
+  free_edition: https://www.gutenberg.org/ebooks/84
+  blurb: >-
+    A young scientist builds a living creature and runs from what he has made.
+    It was written by a nineteen-year-old on a rainy summer holiday, and it is
+    still one of the best books ever written about responsibility, loneliness,
+    and wanting to be known.
+  schedule:
+    - week_of: 2026-10-05
+      reading: Letters 1–4 and Chapters 1–5
+      questions:
+        - The novel opens with Walton's letters to his sister, not with Victor. Why do you think Shelley frames the story this way?
+        - Victor calls his pursuit of knowledge dangerous even as he tells it. Where do you see him choosing it anyway?
+    - week_of: 2026-10-12
+      reading: Chapters 6–10
+      questions:
+        - What does Justine's trial show about who gets believed, and why?
+        - Victor keeps silent when speaking might save someone. Can you understand him? Can you forgive him?
+    - week_of: 2026-10-19
+      reading: Chapters 11–17
+      questions:
+        - The creature learns language by listening to the De Lacey family. What else does he learn about people along with the words?
+        - These chapters are told in the creature's own voice. Did hearing him change how you see him?
+    - week_of: 2026-10-26
+      reading: Chapters 18–24
+      questions:
+        - Who is the monster by the end? Did your answer change as you read?
+        - Victor and the creature chase each other to the ice. What do they have in common?
