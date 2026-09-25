@@ -1,0 +1,39 @@
+---
+layout: default
+title: The journal
+description: Longhand's literary journal publishes poems, short fiction and essays that sound like a person wrote them.
+---
+{%- assign issues = site.data.issues | reverse -%}
+<section class="lead wrap">
+  <p class="kicker">Read · the journal</p>
+  <h1>The Longhand journal</h1>
+  <p class="dek">Poems, short fiction and essays that sound like a person wrote them. We publish a few times a year, online and free to read.</p>
+</section>
+
+<div class="wrap issues">
+  {%- for issue in issues %}
+  {%- assign pieces = site.journal | where: "issue", issue.number %}
+  <section class="issue" aria-labelledby="issue-{{ issue.number }}">
+    <header class="issue-head">
+      <h2 id="issue-{{ issue.number }}">{{ issue.name }}</h2>
+      <p class="meta">
+        {%- if issue.status == "reading" -%}
+        Open for submissions until {{ issue.deadline | date: "%B %-d, %Y" }}
+        {%- elsif issue.published_on -%}
+        Published {{ issue.published_on | date: "%B %Y" }}
+        {%- endif -%}
+      </p>
+    </header>
+    <p class="issue-note">{{ issue.note }}</p>
+    {%- if pieces.size > 0 %}
+    <ul class="toc toc-large">
+      {%- for p in pieces %}
+      <li><a href="{{ p.url | relative_url }}"><span class="toc-title">{{ p.title }}</span><span class="toc-author">{{ p.author }}</span>{% if p.form %}<span class="toc-form">{{ p.form }}</span>{% endif %}</a></li>
+      {%- endfor %}
+    </ul>
+    {%- elsif issue.status == "reading" %}
+    <p class="actions"><a class="button" href="{{ '/journal/submit/' | relative_url }}">Send us your work</a></p>
+    {%- endif %}
+  </section>
+  {%- endfor %}
+</div>

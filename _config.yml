@@ -1,0 +1,43 @@
+# Longhand's website settings.
+# GitHub rebuilds the site a minute or two after this file changes.
+
+title: Longhand
+tagline: A quiet place to write, read, and talk about both.
+description: >-
+  Longhand is a free writing app, a small literary journal, and a book club
+  for people who care how a sentence sounds.
+season: Autumn 2026
+
+# Fill these in to switch on the matching parts of the site.
+# Leave one as "" and the site says that part is coming soon.
+email: ""                 # where journal submissions and questions go, e.g. "editors@longhand.example"
+newsletter_username: ""   # your Buttondown username (buttondown.com), e.g. "longhand"
+discussion_url: ""        # invite link to your discussion space, e.g. "https://discord.gg/abc123"
+discussion_name: Discord  # what that space is called
+
+# The site's address. When you move to your own domain, set url to it
+# (e.g. "https://longhand.example") and set baseurl to "".
+url: "https://chapter57.github.io"
+baseurl: "/longhand"
+
+collections:
+  journal:
+    output: true
+    permalink: /journal/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: journal
+    values:
+      layout: piece
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

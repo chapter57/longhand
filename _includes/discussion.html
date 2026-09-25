@@ -1,0 +1,5 @@
+{%- if site.discussion_url != "" -%}
+<p><a class="button" href="{{ site.discussion_url }}">Join us on {{ site.discussion_name }}</a></p>
+{%- else -%}
+<p class="soon">The discussion space opens soon.</p>
+{%- endif -%}

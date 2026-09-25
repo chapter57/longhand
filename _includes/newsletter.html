@@ -1,0 +1,12 @@
+{%- if site.newsletter_username != "" -%}
+<form class="signup" action="https://buttondown.com/api/emails/embed-subscribe/{{ site.newsletter_username }}" method="post" target="_blank">
+  <label for="signup-email">Your email address</label>
+  <div class="signup-row">
+    <input id="signup-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com">
+    <button type="submit">Subscribe</button>
+  </div>
+  <p class="fine">About once a month: new issues, the next book, and news about the app. Unsubscribe any time.</p>
+</form>
+{%- else -%}
+<p class="soon">The newsletter starts soon. It will come about once a month, with new issues, the next book, and news about the app.</p>
+{%- endif -%}

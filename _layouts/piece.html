@@ -1,0 +1,36 @@
+---
+layout: default
+---
+{%- assign issue = site.data.issues | where: "number", page.issue | first -%}
+<article class="piece">
+  <header class="piece-head">
+    <p class="kicker">
+      <a href="{{ '/journal/' | relative_url }}">{{ issue.name | default: "The journal" }}</a>
+      {%- if page.form %} · {{ page.form | capitalize }}{% endif %}
+    </p>
+    <h1>{{ page.title }}</h1>
+    <p class="byline">{{ page.author }}</p>
+  </header>
+
+  <div class="piece-body{% if page.form == 'poem' %} poem{% endif %}">
+    {{ content }}
+  </div>
+
+  {%- if page.bio %}
+  <footer class="piece-foot">
+    <p class="bio">{{ page.bio | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
+  </footer>
+  {%- endif %}
+</article>
+
+{%- assign others = site.journal | where: "issue", page.issue | where_exp: "p", "p.url != page.url" -%}
+{%- if others.size > 0 %}
+<aside class="more">
+  <h2 class="label">More from {{ issue.name }}</h2>
+  <ul class="toc">
+    {%- for p in others %}
+    <li><a href="{{ p.url | relative_url }}"><span class="toc-title">{{ p.title }}</span><span class="toc-author">{{ p.author }}</span></a></li>
+    {%- endfor %}
+  </ul>
+</aside>
+{%- endif %}
