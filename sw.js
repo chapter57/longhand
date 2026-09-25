@@ -1,6 +1,6 @@
 // Keeps Longhand working offline. Bump VERSION whenever any app file changes,
 // so installed copies fetch the new files on their next launch.
-const VERSION = "longhand-4";
+const VERSION = "longhand-5";
 const FILES = [
   "./",
   "index.html",

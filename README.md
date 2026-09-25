@@ -1,14 +1,17 @@
 # Longhand
 
-A quiet place to write. Longhand runs in Chrome, works without the internet once installed, and saves your writing as Rich Text (`.rtf`) files that open in Word, Pages, TextEdit and Scrivener.
+A quiet place to write. Longhand runs in Chrome or Microsoft Edge on a Mac or Windows PC, works without the internet once installed, and saves your writing as Rich Text (`.rtf`) files that open in Word, Pages, TextEdit, LibreOffice and Scrivener.
 
-## Install it on your Mac
+## Install it
 
-1. Open the site in Chrome.
+1. Open the site in Chrome or Edge.
 2. Click the install icon at the right end of the address bar (a small screen with a down arrow), or open Chrome's ⋮ menu and choose **Cast, save and share → Install page as app…**
-3. Click **Install**. Longhand gets its own window and a place in your Dock and Launchpad, and it opens without an internet connection from then on.
+   In Edge, open the **⋯** menu and choose **Apps → Install this site as an app**.
+3. Click **Install**. Longhand gets its own window and an icon (in the Dock on a Mac, in the Start menu on Windows), and it opens without an internet connection from then on.
 
 ## Keys
+
+On Windows, use Ctrl where these say ⌘, and Shift for ⇧.
 
 - ⌘S saves to a Rich Text file. After the first save, Longhand keeps the file up to date as you write.
 - ⇧⌘S saves a copy under a new name.

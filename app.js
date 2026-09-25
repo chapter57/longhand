@@ -7,6 +7,10 @@
   const canUseFiles = "showSaveFilePicker" in window && "showOpenFilePicker" in window;
   const RTF_TYPES = [{ description: "Rich Text Document", accept: { "text/rtf": [".rtf"] } }];
   const OPEN_TYPES = [{ description: "Writing", accept: { "text/rtf": [".rtf"], "text/plain": [".txt", ".text", ".md"] } }];
+  // Shortcut labels: ⌘ on a Mac, Ctrl everywhere else. The shortcuts themselves accept either key.
+  const isMac = /Mac|iPhone|iPad/.test((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent);
+  const key = (k, shift) => (isMac ? (shift ? "\u21e7\u2318" : "\u2318") + k : "Ctrl+" + (shift ? "Shift+" : "") + k);
+  const APPS = isMac ? "Word, Pages, TextEdit or Scrivener" : "Word, LibreOffice or Scrivener";
 
   // ---------- small stores ----------
   // Settings live in localStorage; the writing itself lives in IndexedDB.
@@ -146,11 +150,11 @@
   // ---------- state ----------
   const STARTER = [
     ["h2", "Start here"],
-    ["p", "This is Longhand, a quiet place to write. It works without the internet, and it saves your writing as real files on your Mac."],
-    ["p", "Press ⌘S to save a piece as a Rich Text file. After that, Longhand keeps the file up to date as you write, and you can open it in Word, Pages, TextEdit or Scrivener whenever you like. Press ⌘O to open an .rtf file, and ⇧⌘S to save a copy under a new name."],
+    ["p", "This is Longhand, a quiet place to write. It works without the internet, and it saves your writing as real files on your computer."],
+    ["p", `Press ${key("S")} to save a piece as a Rich Text file. After that, Longhand keeps the file up to date as you write, and you can open it in ${APPS} whenever you like. Press ${key("O")} to open an .rtf file, and ${key("S", true)} to save a copy under a new name.`],
     ["p", "Even before you save a file, nothing is lost. Longhand keeps a copy of every piece on this computer. You’ll find them all under <em>Pieces</em>."],
     ["p", "Quotes curl themselves as you type: “Like this,” she said. Two hyphens become a dash — like that. Three dots become an ellipsis…"],
-    ["p", "Type # and a space at the start of a line to make a heading. Press ⌘I for <em>italics</em> and ⌘B for <strong>bold</strong>."],
+    ["p", `Type # and a space at the start of a line to make a heading. Press ${key("I")} for <em>italics</em> and ${key("B")} for <strong>bold</strong>.`],
     ["p", "<em>Focus</em> dims everything except the paragraph you are in. <em>Typewriter</em> keeps the line you are writing in the middle of the screen, so your eyes can stay put."],
     ["p", "The buttons fade away while you type. Move the mouse or press Esc and they come back. Spelling underlines are off until you ask for them, so they don’t interrupt a first draft."],
     ["p", "You can remove this page from <em>Pieces</em> whenever you like."],
@@ -278,8 +282,8 @@
     let msg, warn = false;
     if (backupBroken) { msg = "Longhand can’t keep its backup copy in this browser. Save to a file to be safe."; warn = true; }
     else if (p.fileError) { msg = p.fileError; warn = true; }
-    else if (!p.handle) msg = canUseFiles ? "Kept in Longhand · ⌘S saves it as a file" : "Kept in Longhand";
-    else if (p.needsPermission) msg = `Press ⌘S to keep saving to ${p.fileName}`;
+    else if (!p.handle) msg = canUseFiles ? `Kept in Longhand \u00b7 ${key("S")} saves it as a file` : "Kept in Longhand";
+    else if (p.needsPermission) msg = `Press ${key("S")} to keep saving to ${p.fileName}`;
     else if (p.dirty) msg = "";
     else msg = `Saved to ${p.fileName}`;
     s.textContent = msg;
@@ -615,6 +619,9 @@
   $("spellBtn").onclick = () => toggle("spell");
   $("sizeDown").onclick = () => { prefs.size--; applyPrefs(); };
   $("sizeUp").onclick = () => { prefs.size++; applyPrefs(); };
+  $("openBtn").title = `Open a Rich Text file (${key("O")})`;
+  $("saveBtn").title = `Save as a Rich Text file (${key("S")})`;
+  $("saveAsBtn").title = `Save this piece to a new file (${key("S", true)})`;
   $("openBtn").onclick = openFile;
   $("saveBtn").onclick = save;
   $("saveAsBtn").onclick = () => { closeDrawer(); saveAs(); };
@@ -737,7 +744,7 @@
     load(currentId);
   })();
 
-  // Files opened from Finder ("Open With > Longhand") arrive here.
+  // Files opened from Finder or File Explorer ("Open with > Longhand") arrive here.
   if ("launchQueue" in window) {
     window.launchQueue.setConsumer(async (params) => {
       await ready;
