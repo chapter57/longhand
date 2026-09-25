@@ -719,6 +719,12 @@
   const ready = (async () => {
     try { pieces = await db.all(); } catch (e) { backupBroken = true; pieces = []; }
     pieces.forEach((p) => { p.needsPermission = false; p.fileError = null; });
+    // A Start here page made while the 826 National note was live still carries its line; take it out.
+    for (const p of pieces) {
+      if (firstLine(p.html) !== "Start here") continue;
+      const cleaned = p.html.replace(/<p>Longhand is free\. If it helps you write, please consider a gift to 826 National[^<]*(<em>Pieces<\/em>)?\.?<\/p>/, "");
+      if (cleaned !== p.html) { p.html = cleaned; await keep(p); }
+    }
     if (!pieces.length) {
       const first = newPiece(STARTER);
       pieces.push(first);
