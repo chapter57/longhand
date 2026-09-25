@@ -12,13 +12,13 @@ season: Autumn 2026
 # Leave one as "" and the site says that part is coming soon.
 email: ""                 # where journal submissions and questions go, e.g. "editors@longhand.example"
 newsletter_username: ""   # your Buttondown username (buttondown.com), e.g. "longhand"
-discussion_url: ""        # invite link to your discussion space, e.g. "https://discord.gg/abc123"
-discussion_name: Discord  # what that space is called
+discussion_url: ""        # the forum's address, "https://forum.longhandlit.com", once it's installed
+discussion_name: the Longhand forum  # shown as "Join us on the Longhand forum"
 
-# The site's address. When you move to your own domain, set url to it
-# (e.g. "https://longhand.example") and set baseurl to "".
-url: "https://chapter57.github.io"
-baseurl: "/longhand"
+# The site's address. The CNAME file next to this one tells GitHub Pages
+# to serve the site at this domain.
+url: "https://longhandlit.com"
+baseurl: ""
 
 collections:
   journal:

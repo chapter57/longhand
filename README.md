@@ -41,11 +41,21 @@ When an issue is ready, change its `status` in `_data/issues.yml` from `reading`
 
 In `_data/books.yml`, change the finished book's `status` to `past`, and add the new book with `status: current`, a short blurb, and a weekly schedule. Each week's row is highlighted on the site automatically while that week is on.
 
-## Moving to your own domain
+## The domain
 
-1. In `_config.yml`, set `url` to your domain (like `"https://longhand.example"`) and set `baseurl` to `""`.
-2. In this project's **Settings → Pages**, enter the domain under **Custom domain**, and follow GitHub's instructions for your domain seller's settings.
-3. Writers reinstall the app from the new address. Longhand keeps its backup copies per address, so save pieces as files (⌘S / Ctrl+S) before switching.
+The site lives at [longhandlit.com](https://longhandlit.com), registered at Namecheap. The `CNAME` file tells GitHub Pages to serve it there, and `url` in `_config.yml` matches.
+
+DNS records for the website (the forum at `forum.longhandlit.com` is on Namecheap hosting and has its own record):
+
+| Type | Host | Value |
+|---|---|---|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | chapter57.github.io |
+
+The writing app's backup copies are kept per address, so anyone who used the app at an earlier address should save their pieces as files (⌘S / Ctrl+S) there, then reinstall from longhandlit.com/write/ and open them.
 
 ## The writing app
 
