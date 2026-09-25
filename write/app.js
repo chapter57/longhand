@@ -152,6 +152,7 @@
     ["h2", "Start here"],
     ["p", "This is Longhand, a quiet place to write. It works without the internet, and it saves your writing as real files on your computer."],
     ["p", `Press ${key("S")} to save a piece as a Rich Text file. After that, Longhand keeps the file up to date as you write, and you can open it in ${APPS} whenever you like. Press ${key("O")} to open an .rtf file, and ${key("S", true)} to save a copy under a new name.`],
+    ["p", "Need another format? <em>Export</em> saves a copy as a Word document for submitting your work, a PDF, Markdown for Substack and blogs, or plain text."],
     ["p", "Even before you save a file, nothing is lost. Longhand keeps a copy of every piece on this computer. You’ll find them all under <em>Pieces</em>."],
     ["p", "Quotes curl themselves as you type: “Like this,” she said. Two hyphens become a dash — like that. Three dots become an ellipsis…"],
     ["p", `Type # and a space at the start of a line to make a heading. Press ${key("I")} for <em>italics</em> and ${key("B")} for <strong>bold</strong>.`],
@@ -623,6 +624,74 @@
   $("saveBtn").title = `Save as a Rich Text file (${key("S")})`;
   $("saveAsBtn").title = `Save this piece to a new file (${key("S", true)})`;
   $("openBtn").onclick = openFile;
+
+  // ---------- export ----------
+  const EXPORTS = {
+    docx: { ext: ".docx", mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", desc: "Word Document", make: (d) => LonghandExport.toDocx(d) },
+    md: { ext: ".md", mime: "text/markdown", desc: "Markdown", make: (d) => LonghandExport.toMarkdown(d) },
+    txt: { ext: ".txt", mime: "text/plain", desc: "Plain Text", make: (d) => LonghandExport.toText(d) },
+  };
+  function exportBaseName() {
+    const p = piece();
+    const name = p && p.fileName ? stripExt(p.fileName) : firstLine(toHTML(blocksOf(editor)));
+    return (name || "Untitled").replace(/[\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 60) || "Untitled";
+  }
+  async function exportAs(kind) {
+    closeExportMenu();
+    saveNow();
+    if (kind === "pdf") {
+      toast(isMac ? "In the print window, choose \u201cSave as PDF\u201d next to Destination." : "In the print window, choose \u201cSave as PDF\u201d as the printer.");
+      const title = document.title;
+      document.title = exportBaseName();
+      setTimeout(() => { window.print(); document.title = title; }, 60);
+      return;
+    }
+    const f = EXPORTS[kind];
+    const blob = new Blob([f.make(htmlToDoc(toHTML(blocksOf(editor))))], { type: f.mime });
+    const name = exportBaseName() + f.ext;
+    if (canUseFiles) {
+      try {
+        const handle = await window.showSaveFilePicker({ suggestedName: name, types: [{ description: f.desc, accept: { [f.mime]: [f.ext] } }], id: "longhand-export" });
+        const w = await handle.createWritable();
+        await w.write(blob);
+        await w.close();
+        toast(`Exported ${handle.name}.`);
+      } catch (e) {
+        if (!e || e.name !== "AbortError") toast("Longhand couldn\u2019t save that file. Try again, or choose a different folder.");
+      }
+      return;
+    }
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    toast(`Saved ${name} to your Downloads folder.`);
+  }
+  function openExportMenu() {
+    wake();
+    $("exportMenu").hidden = false;
+    $("exportBtn").setAttribute("aria-expanded", "true");
+    $("exportMenu").querySelector("button").focus();
+  }
+  function closeExportMenu() {
+    $("exportMenu").hidden = true;
+    $("exportBtn").setAttribute("aria-expanded", "false");
+  }
+  $("exportBtn").onclick = () => ($("exportMenu").hidden ? openExportMenu() : closeExportMenu());
+  $("exportMenu").querySelectorAll("[data-export]").forEach((b) => { b.onclick = () => exportAs(b.dataset.export); });
+  $("exportMenu").addEventListener("keydown", (e) => {
+    const items = [...$("exportMenu").querySelectorAll("button")];
+    const i = items.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+    else if (e.key === "Escape") { e.stopPropagation(); closeExportMenu(); $("exportBtn").focus(); }
+  });
+  document.addEventListener("pointerdown", (e) => {
+    if (!$("exportMenu").hidden && !e.target.closest(".export")) closeExportMenu();
+  });
   $("saveBtn").onclick = save;
   $("saveAsBtn").onclick = () => { closeDrawer(); saveAs(); };
 
