@@ -58,7 +58,8 @@ Keys (on Windows, use Ctrl where these say ⌘, and Shift for ⇧):
 - ⌘S saves to a Rich Text file. After the first save, Longhand keeps the file up to date as you write.
 - ⇧⌘S saves a copy under a new name.
 - ⌘O opens an `.rtf` or `.txt` file.
+- **Export** saves a copy as Word (.docx), PDF (through the print window's "Save as PDF"), Markdown (.md) or plain text (.txt).
 - ⌘I and ⌘B for italics and bold. Type `#` and a space at the start of a line for a heading.
 - Esc brings the buttons back while you're writing.
 
-The app's files are in `write/`: `index.html` (page and styling), `app.js` (editor, saving, opening files), `rtf.js` (reads and writes Rich Text Format), `sw.js` (offline support; bump `VERSION` there whenever an app file changes), and `manifest.webmanifest` with `icons/` (what Chrome needs to install it).
+The app's files are in `write/`: `index.html` (page and styling), `app.js` (editor, saving, opening files), `rtf.js` (reads and writes Rich Text Format), `export.js` (Word, Markdown and plain-text exports), `sw.js` (offline support; bump `VERSION` there whenever an app file changes), and `manifest.webmanifest` with `icons/` (what Chrome needs to install it).

@@ -100,6 +100,17 @@
   .tools { display: flex; flex-wrap: wrap; gap: 2px; margin-left: auto; }
   .tools .sep { width: 1px; background: var(--rule); margin: 6px 4px; }
   #saveBtn { color: var(--accent); }
+  .export { position: relative; }
+  .export-menu {
+    position: absolute; right: 0; top: calc(100% + 6px); z-index: 25;
+    display: flex; flex-direction: column; width: max-content; max-width: min(320px, calc(100vw - 32px));
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 4px;
+    box-shadow: 0 10px 32px var(--shadow);
+  }
+  .export-menu button { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 8px 10px; }
+  .export-menu button:hover, .export-menu button:focus-visible { background: var(--paper); }
+  .x-name { color: var(--ink); font-weight: 500; }
+  .x-note { color: var(--ink-soft); font-size: 11px; }
 
   .bottom {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
@@ -176,6 +187,21 @@
     .tools { margin-left: 0; }
     #editor { line-height: 1.66; padding-top: 4vh; }
   }
+  /* Exporting a PDF prints just the writing, like a clean manuscript page. */
+  @page { margin: 1in; }
+  @media print {
+    :root { color-scheme: light; --paper: #fff; --ink: #000; }
+    html, body { background: #fff; color: #000; }
+    .bar, #drawer, #scrim, #toast { display: none !important; }
+    main { padding: 0; }
+    #editor, #editor.typewriter {
+      max-width: none; padding: 0; margin: 0; font-size: 12pt; line-height: 1.6; caret-color: transparent;
+    }
+    #editor.focus > * { opacity: 1 !important; }
+    #editor.empty > :first-child::before { content: none; }
+    #editor > h2 { break-after: avoid; }
+    #editor > p { orphans: 3; widows: 3; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .bar, #editor.focus > *, button { transition: none; }
   }
@@ -196,6 +222,15 @@
     <span class="sep" aria-hidden="true"></span>
     <button id="openBtn" title="Open a Rich Text file (⌘O)">Open</button>
     <button id="saveBtn" title="Save as a Rich Text file (⌘S)">Save</button>
+    <div class="export">
+      <button id="exportBtn" aria-haspopup="true" aria-expanded="false" aria-controls="exportMenu" title="Save a copy in another format">Export</button>
+      <div class="export-menu" id="exportMenu" role="menu" hidden>
+        <button role="menuitem" data-export="docx"><span class="x-name">Word</span><span class="x-note">.docx, for submitting to journals and publishers</span></button>
+        <button role="menuitem" data-export="pdf"><span class="x-name">PDF</span><span class="x-note">for sharing or printing</span></button>
+        <button role="menuitem" data-export="md"><span class="x-name">Markdown</span><span class="x-note">.md, for Substack, blogs and newsletters</span></button>
+        <button role="menuitem" data-export="txt"><span class="x-name">Plain text</span><span class="x-note">.txt, opens anywhere</span></button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -229,6 +264,7 @@
 <input type="file" id="fileInput" accept=".rtf,.txt,text/rtf,text/plain" hidden>
 
 <script src="rtf.js"></script>
+<script src="export.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
