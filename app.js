@@ -153,7 +153,6 @@
     ["p", "Type # and a space at the start of a line to make a heading. Press ⌘I for <em>italics</em> and ⌘B for <strong>bold</strong>."],
     ["p", "<em>Focus</em> dims everything except the paragraph you are in. <em>Typewriter</em> keeps the line you are writing in the middle of the screen, so your eyes can stay put."],
     ["p", "The buttons fade away while you type. Move the mouse or press Esc and they come back. Spelling underlines are off until you ask for them, so they don’t interrupt a first draft."],
-    ["p", "Longhand is free. If it helps you write, please consider a gift to 826 National, which runs free writing and tutoring programs for young people. You\u2019ll find the link at the bottom of <em>Pieces</em>."],
     ["p", "You can remove this page from <em>Pieces</em> whenever you like."],
   ].map(([t, h]) => `<${t}>${h}</${t}>`).join("");
 

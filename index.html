@@ -158,14 +158,7 @@
   .piece-open .f.none { color: var(--ink-faint); font-style: italic; }
   .piece-del { font-size: 11px; color: var(--ink-faint); }
   .piece-del:hover { color: var(--warn); }
-  .drawer-foot { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
-  .give {
-    margin: 0; padding-top: 12px; border-top: 1px solid var(--rule);
-    font-family: var(--serif); font-size: 14px; line-height: 1.55; color: var(--ink);
-  }
-  .give a { color: var(--accent); text-underline-offset: 3px; }
-  .give a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
-  .drawer-note { margin: 0; color: var(--ink-soft); line-height: 1.6; font-size: 11.5px; }
+  .drawer-note { margin: auto 0 0; color: var(--ink-soft); line-height: 1.6; font-size: 11.5px; }
   .drawer-note kbd { font-family: var(--mono); font-size: 11px; }
 
   #toast {
@@ -216,10 +209,7 @@
     </div>
   </div>
   <ul id="pieceList"></ul>
-  <div class="drawer-foot">
-    <p class="give">Longhand is free. If it helps you write, please consider a gift to <a id="giveLink" href="https://826national.org/donate/" target="_blank" rel="noopener">826&nbsp;National</a>, which runs free writing and tutoring programs for young people. Your gift goes straight to them. Longhand isn’t affiliated with 826 National and receives nothing.</p>
-    <p class="drawer-note">Longhand keeps a copy of every piece on this computer, so nothing is lost even before you save a file. Removing a piece from this list never deletes its file.</p>
-  </div>
+  <p class="drawer-note">Longhand keeps a copy of every piece on this computer, so nothing is lost even before you save a file. Removing a piece from this list never deletes its file.</p>
 </aside>
 
 <main>
