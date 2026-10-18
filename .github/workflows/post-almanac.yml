@@ -1,0 +1,40 @@
+# Posts the day's almanac entry to Bluesky and Mastodon every morning.
+# The script is .github/scripts/post_almanac.py. The accounts' passwords are
+# kept in the project's Settings → Secrets and variables → Actions.
+name: Post the almanac
+
+on:
+  schedule:
+    # 13:07 UTC: 9:07 a.m. in New York in summer, 8:07 a.m. in winter.
+    - cron: "7 13 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Post another day instead of today, as "MM-DD" (e.g. 11-30). Leave empty for today.'
+        required: false
+        default: ""
+      dry_run:
+        description: "Only show what would be posted, without posting"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python .github/scripts/post_almanac.py
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
+          MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+          ALMANAC_DATE: ${{ inputs.date }}
+          DRY_RUN: ${{ inputs.dry_run }}
