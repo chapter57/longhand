@@ -10,6 +10,10 @@ season: Autumn 2026
 # Where readers write to us.
 email: longhandlit@gmail.com
 
+# The almanac's Bluesky account. This address keeps working if the account's
+# handle changes.
+bluesky: "https://bsky.app/profile/did:plc:fpx4ses6oidyiwqyp4zkl7vq"
+
 # The site's address. The CNAME file next to this one tells GitHub Pages
 # to serve the site at this domain.
 url: "https://longhandlit.com"

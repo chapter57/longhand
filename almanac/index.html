@@ -19,6 +19,9 @@ description: "A literary almanac, one entry a day: writers' birthdays, famous bo
   <div class="week-list" data-almanac-week>
     <p class="soon">The week ahead appears here. The full calendar is below.</p>
   </div>
+  {%- if site.bluesky %}
+  <p class="follow"><a href="{{ site.bluesky }}" rel="me">Follow the almanac on Bluesky</a> for each day's entry in your feed.</p>
+  {%- endif %}
 </section>
 
 <div class="wrap">{% include ill-rule.html %}</div>

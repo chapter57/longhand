@@ -29,7 +29,7 @@ Please check every date and fact against two sources before adding it, and write
 
 ## Posting to Bluesky and Mastodon
 
-Every morning at about 9 a.m. New York time (8 a.m. in winter), GitHub posts the day's entry to Bluesky and Mastodon: its short note and a link to its full page. Days with no entry are skipped. The posting is done by `.github/workflows/post-almanac.yml` and `.github/scripts/post_almanac.py`.
+Every morning at about 9 a.m. New York time (8 a.m. in winter), GitHub posts the day's entry to Bluesky and Mastodon: its short note and a link to its full page. Days with no entry are skipped. On Bluesky the link card carries the entry's portrait, and each post is quietly tagged #BookSky, #Books, #Literature, #OnThisDay, #Writing and #Poetry so it reaches the book feeds. The site links to the Bluesky account (`bluesky` in `_config.yml`). The posting is done by `.github/workflows/post-almanac.yml` and `.github/scripts/post_almanac.py`.
 
 The accounts' details are kept privately in the project's **Settings → Secrets and variables → Actions**:
 
