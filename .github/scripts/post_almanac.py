@@ -20,6 +20,7 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from zoneinfo import ZoneInfo
 
@@ -29,6 +30,10 @@ SITE = "https://longhandlit.com"
 BLUESKY_LIMIT = 300
 MASTODON_LIMIT = 500
 HASHTAGS = "#OnThisDay #Books #Literature #Poetry"
+# Bluesky carries these without showing them, so posts reach the book feeds
+# without using up the character limit.
+BLUESKY_TAGS = ["BookSky", "Books", "Literature", "OnThisDay", "Writing", "Poetry"]
+BLUESKY_IMAGE_LIMIT = 1_000_000  # bytes
 
 
 def read_entries():
@@ -82,6 +87,38 @@ def request(url, data=None, headers=None, method=None):
         raise SystemExit(f"{url} answered {err.code}: {err.read().decode(errors='replace')[:500]}")
 
 
+def fetch(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "LonghandAlmanac/1.0 (" + SITE + ")"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.read(), r.headers.get_content_type()
+
+
+def portrait(e):
+    """The entry's portrait as (bytes, type), or None.
+
+    The same picture the site shows: one stored on the site, or else the lead
+    picture of the entry's Wikipedia article when it is a freely licensed
+    image on Wikimedia Commons."""
+    try:
+        if e.get("image"):
+            return fetch(SITE + "/" + e["image"].lstrip("/"))
+        if not e.get("portrait"):
+            return None
+        summary = json.loads(fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"
+                                   + urllib.parse.quote(e["portrait"], safe=""))[0])
+        thumb = (summary.get("thumbnail") or {}).get("source", "")
+        if "/wikipedia/commons/" not in thumb:
+            return None
+        sized = re.sub(r"/\d+px-([^/]+)$", r"/500px-\1", thumb)
+        try:
+            return fetch(sized)
+        except urllib.error.HTTPError:
+            return fetch(thumb)
+    except Exception as err:  # a missing picture never stops the post
+        print("Bluesky: no portrait,", err)
+        return None
+
+
 def post_bluesky(e, dry):
     # The link goes in a card under the post, so the words get the whole limit.
     top = headline(e)
@@ -108,7 +145,16 @@ def post_bluesky(e, dry):
         if uri == e["url"] and when > recent:
             print("Bluesky: already posted, skipping.")
             return
-    record = {"$type": "app.bsky.feed.post", "text": text, "langs": ["en"], "embed": card,
+    picture = portrait(e)
+    if picture and len(picture[0]) <= BLUESKY_IMAGE_LIMIT:
+        req = urllib.request.Request(api + "com.atproto.repo.uploadBlob", data=picture[0], method="POST",
+                                     headers={**auth, "Content-Type": picture[1]})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                card["external"]["thumb"] = json.loads(r.read())["blob"]
+        except urllib.error.HTTPError as err:
+            print("Bluesky: portrait upload failed,", err.code)
+    record = {"$type": "app.bsky.feed.post", "text": text, "langs": ["en"], "embed": card, "tags": BLUESKY_TAGS,
               "createdAt": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")}
     out = request(api + "com.atproto.repo.createRecord",
                   {"repo": session["did"], "collection": "app.bsky.feed.post", "record": record}, auth)

@@ -26,6 +26,9 @@ layout: default
       <h3 class="label" id="strip-h"><span>Coming up</span></h3>
       <ul data-almanac-strip></ul>
       <p class="actions"><a class="text-link" href="{{ '/almanac/' | relative_url }}">The week ahead</a></p>
+      {%- if site.bluesky %}
+      <p class="follow"><a href="{{ site.bluesky }}" rel="me">Follow the almanac on Bluesky</a> for each day's entry in your feed.</p>
+      {%- endif %}
     </aside>
   </div>
 </section>
