@@ -1,79 +1,63 @@
-# Pages CMS settings: the editing screens at https://app.pagescms.org.
-# Each entry under "content" becomes a section in the sidebar there.
+# Pages CMS settings: the editing screen at https://app.pagescms.org.
+# The almanac's calendar is one list of entries in _data/almanac.yml.
 
 media:
-  input: assets/images
-  output: /assets/images
+  input: assets/images/almanac
+  output: /assets/images/almanac
 
 content:
   - name: almanac
-    label: Almanac
-    description: Prompts, notes and open calls. The newest post appears first on the site.
-    type: collection
-    path: _posts
-    filename: "{year}-{month}-{day}-{primary}.md"
-    view:
-      fields: [title, kind, date]
-      primary: title
-      sort: [date, title]
-      default:
-        sort: date
-        order: desc
+    label: Almanac calendar
+    description: One entry per day. The site shows today's entry on the front page and the coming week on the Almanac page by itself.
+    type: file
+    path: _data/almanac.yml
+    list: true
     fields:
-      - name: title
-        label: Title
-        type: string
+      - name: month
+        label: Month (1–12)
+        type: number
         required: true
-      - name: date
-        label: Date
-        description: The post is listed under this date, newest first.
-        type: date
+      - name: day
+        label: Day of the month
+        type: number
+        required: true
+      - name: year
+        label: Year it happened
+        type: number
         required: true
       - name: kind
-        label: Kind of post
-        description: A Prompt is featured on the front page, with a "Write it in Longhand" button.
+        label: Kind
         type: select
-        default: Note
+        default: Born
         options:
-          values: [Prompt, Note, Open calls, News]
-      - name: summary
-        label: Summary
-        description: One or two sentences shown in lists and on the front page. Leave empty to use the start of the post.
-        type: text
-      - name: body
-        label: Post
-        type: rich-text
-
-  - name: essays
-    label: Essays
-    description: Longer essays on craft. Each one gets its own page and is listed on the front page.
-    type: collection
-    path: _essays
-    filename: "{primary}.md"
-    view:
-      fields: [title, published_on]
-      primary: title
-      sort: [published_on, title]
-      default:
-        sort: published_on
-        order: desc
-    fields:
-      - name: title
-        label: Title
+          values: [Born, Died, Published, Event]
+      - name: name
+        label: Name
+        description: The writer, or the book or event.
         type: string
         required: true
-      - name: dek
-        label: Description
-        description: One sentence that tells readers what the essay is about.
+      - name: note
+        label: Note
+        description: Two or three sentences. Please check the facts against two sources.
         type: text
-      - name: author
-        label: Author
-        type: string
-        default: Longhand
-      - name: published_on
-        label: Date
-        type: date
         required: true
-      - name: body
-        label: Essay
-        type: rich-text
+      - name: wiki
+        label: Read more link
+        description: Usually the Wikipedia article.
+        type: string
+      - name: read
+        label: Read the work link
+        description: A free copy (Project Gutenberg, Poetry Foundation) or a library search (WorldCat).
+        type: string
+      - name: read_label
+        label: Words on that link
+        description: For example, "Read his poems free" or "Find it at a library".
+        type: string
+      - name: image
+        label: Portrait (optional)
+        description: Only use images that are public domain or freely licensed.
+        type: image
+      - name: image_credit
+        label: Portrait credit
+        description: Who made the image and its license, for example "Joseph Severn, public domain, via Wikimedia Commons".
+        type: string

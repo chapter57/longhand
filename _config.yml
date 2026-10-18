@@ -3,50 +3,19 @@
 
 title: Longhand
 description: >-
-  Longhand is a free writing app, an almanac for writers, and an occasional
-  essay on craft.
+  Longhand is a free writing app and a literary almanac: a writer, a book or
+  a moment from literary history for every day.
 season: Autumn 2026
 
-# Where readers write to us: letters, answers to the prompt, open calls.
+# Where readers write to us.
 email: longhandlit@gmail.com
-
-# Once the Almanac has an email edition, put your Buttondown username here
-# (buttondown.com) and a sign-up box appears on the front page.
-newsletter_username: ""
 
 # The site's address. The CNAME file next to this one tells GitHub Pages
 # to serve the site at this domain.
 url: "https://longhandlit.com"
 baseurl: ""
 
-# The Almanac is the site's blog. Posts live in _posts/, and Pages CMS
-# (see .pages.yml) is the easiest way to write them.
-permalink: /almanac/:year/:month/:title/
-future: true
-
-collections:
-  essays:
-    output: true
-    permalink: /essays/:name/
-
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: post
-      kind: Note
-  - scope:
-      path: ""
-      type: essays
-    values:
-      layout: essay
-      author: Longhand
-
-plugins:
-  - jekyll-feed
-feed:
-  path: almanac/feed.xml
+# The almanac's entries are in _data/almanac.yml.
 
 markdown: kramdown
 kramdown:

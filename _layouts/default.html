@@ -16,7 +16,6 @@
 <meta name="theme-color" content="#141619" media="(prefers-color-scheme: dark)">
 <link rel="preload" href="{{ '/fonts/Literata-normal-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-<link rel="alternate" type="application/atom+xml" title="The Longhand Almanac" href="{{ '/almanac/feed.xml' | relative_url }}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the page</a>
@@ -26,8 +25,7 @@
     <a class="wordmark" href="{{ '/' | relative_url }}">Longhand</a>
     <nav class="nav" aria-label="Main">
       <a href="{{ '/write/' | relative_url }}">Write</a>
-      <a href="{{ '/almanac/' | relative_url }}"{% if page.collection == "posts" or page.url == "/almanac/" %} aria-current="page"{% endif %}>Almanac</a>
-      <a href="{{ '/#essays' | relative_url }}"{% if page.collection == "essays" %} aria-current="page"{% endif %}>Essays</a>
+      <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" %} aria-current="page"{% endif %}>Almanac</a>
       <a href="{{ '/#contact' | relative_url }}">Write to us</a>
     </nav>
   </div>
@@ -44,7 +42,6 @@
     <ul class="colophon-links">
       <li><a href="{{ '/write/' | relative_url }}">The writing app</a></li>
       <li><a href="{{ '/almanac/' | relative_url }}">The Almanac</a></li>
-      <li><a href="{{ '/#essays' | relative_url }}">Essays on craft</a></li>
       <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
     </ul>
     <p class="fine">Set in Literata and IBM Plex Mono. {{ site.season }}.</p>
