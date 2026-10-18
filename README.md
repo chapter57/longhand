@@ -29,20 +29,29 @@ Please check every date and fact against two sources before adding it, and write
 
 ## Posting to Bluesky and Mastodon
 
-Every morning at about 9 a.m. New York time (8 a.m. in winter), GitHub posts the day's entry to Bluesky and Mastodon: its short note and a link to its full page. Days with no entry are skipped. On Bluesky the link card carries the entry's portrait, and each post is quietly tagged #BookSky, #Books, #Literature, #OnThisDay, #Writing and #Poetry so it reaches the book feeds. The site links to the Bluesky account (`bluesky` in `_config.yml`). The posting is done by `.github/workflows/post-almanac.yml` and `.github/scripts/post_almanac.py`.
+GitHub posts the almanac to Bluesky and Mastodon three times a day, New York time (an hour earlier in winter):
+
+- **About 9:45 a.m.:** the day's entry, its short note with a link card to its full page. On Bluesky the card carries the entry's portrait.
+- **About 1 p.m.:** a short quote, with the same link card.
+- **About 7:30 p.m.:** a short poem or passage, posted as a quote card picture, with a link to the day's entry. The full text goes in the picture's description, for people using screen readers.
+
+The midday quotes and evening readings are in `_data/social.yml`, one pair per day. Everything in them is in the public domain; "translated for Longhand" marks our own translations. The quote cards are pictures in `assets/cards/`, drawn from that file by `.github/cards/render.mjs` (`npm install playwright js-yaml`, then `node .github/cards/render.mjs`); after changing an evening reading, draw its card again.
+
+Days with nothing in the almanac are skipped. Bluesky posts are quietly tagged #BookSky, #Books, #Literature, #OnThisDay, #Writing and #Poetry so they reach the book feeds. The site links to the Bluesky account (`bluesky` in `_config.yml`). The posting is done by `.github/workflows/post-almanac.yml` and `.github/scripts/post_almanac.py`.
 
 The accounts' details are kept privately in the project's **Settings → Secrets and variables → Actions**:
 
 - `BLUESKY_HANDLE`: the account name, e.g. `longhandlit.bsky.social`
 - `BLUESKY_APP_PASSWORD`: an app password made in Bluesky under Settings → Privacy and security → App passwords
 - `MASTODON_INSTANCE`: the server's address, e.g. `https://mastodon.social`
-- `MASTODON_TOKEN`: an access token made in Mastodon under Preferences → Development → New application, with the `write:statuses` permission
+- `MASTODON_TOKEN`: an access token made in Mastodon under Preferences → Development → New application, with the `write:statuses` and `write:media` permissions (the second lets it post the quote cards)
 
-If an account's details are missing, that account is skipped. To post by hand, or to preview without posting, open the **Actions** tab, choose **Post the almanac**, and click **Run workflow**.
+If an account's details are missing, that account is skipped. To post by hand, or to preview without posting, open the **Actions** tab, choose **Post the almanac**, click **Run workflow**, and pick which post.
 
 ## What's where
 
 - `index.html`: the front page, with Today in the Almanac, the app and "Write to us"
+- `_data/social.yml` and `assets/cards/`: the midday quotes and evening quote cards
 - `_almanac/`: the almanac, one file per day; `_layouts/almanac-entry.html` is the design of each entry's page
 - `almanac/index.html`: the Almanac page, with this week and the whole calendar
 - `assets/almanac.js`: picks today's entry and the coming week, and loads the portraits; `_includes/almanac-data.html` hands it the calendar

@@ -1,0 +1,1206 @@
+# The almanac's midday and evening posts on Bluesky and Mastodon, one pair per
+# day (the morning post is the almanac entry itself).
+#
+#   midday   a short quote, posted as text with a link to the day's entry
+#     intro    optional line before the quote, for a writer other than the
+#              day's own (used when the day's writer is still in copyright)
+#     text, author, source
+#   evening  a short poem or passage, posted as a quote card
+#            (assets/cards/<month>-<day>.png, made by .github/cards/render.mjs)
+#     title, author, source, text
+#
+# Everything quoted here is in the public domain. "Translated for Longhand"
+# marks our own translation of an original that is in the public domain.
+
+# ---------- October ----------
+
+- month: 10
+  day: 17
+  midday:
+    intro: Jupiter Hammon addressed a poem to Phillis Wheatley, the young poet in Boston.
+    text: "Imagination! who can sing thy force?"
+    author: Phillis Wheatley
+    source: '"On Imagination," 1773'
+  evening:
+    title: An Evening Thought
+    author: Jupiter Hammon
+    source: 1760
+    text: |
+      Salvation comes by Jesus Christ alone,
+      The only Son of God;
+      Redemption now to every one,
+      That love his holy Word.
+
+- month: 10
+  day: 18
+  midday:
+    intro: Peacock's teasing essay on poetry provoked his friend Shelley to answer it.
+    text: "Poets are the unacknowledged legislators of the world."
+    author: Percy Bysshe Shelley
+    source: A Defence of Poetry, 1821
+  evening:
+    title: The War-Song of Dinas Vawr
+    author: Thomas Love Peacock
+    source: The Misfortunes of Elphin, 1829
+    text: |
+      The mountain sheep are sweeter,
+      But the valley sheep are fatter;
+      We therefore deemed it meeter
+      To carry off the latter.
+
+- month: 10
+  day: 19
+  midday:
+    text: "Man is a noble animal, splendid in ashes, and pompous in the grave."
+    author: Sir Thomas Browne
+    source: Hydriotaphia, Urn-Burial, 1658
+  evening:
+    title: Religio Medici
+    author: Sir Thomas Browne
+    source: 1643
+    text: |
+      We carry within us the wonders we seek without us: there is all Africa and her prodigies in us.
+
+- month: 10
+  day: 20
+  midday:
+    text: "For I is someone else."
+    author: Arthur Rimbaud
+    source: letter, May 1871 (translated for Longhand)
+  evening:
+    title: My Bohemia
+    author: Arthur Rimbaud
+    source: 1870 (translated for Longhand)
+    text: |
+      I went off, my fists in my torn pockets;
+      my overcoat, too, was becoming ideal;
+      I walked beneath the sky, Muse, and I was yours;
+      oh, what splendid loves I dreamed!
+
+- month: 10
+  day: 21
+  midday:
+    text: "That willing suspension of disbelief for the moment, which constitutes poetic faith."
+    author: Samuel Taylor Coleridge
+    source: Biographia Literaria, 1817
+  evening:
+    title: Kubla Khan
+    author: Samuel Taylor Coleridge
+    source: 1816
+    text: |
+      In Xanadu did Kubla Khan
+      A stately pleasure-dome decree:
+      Where Alph, the sacred river, ran
+      Through caverns measureless to man
+      Down to a sunless sea.
+
+- month: 10
+  day: 22
+  midday:
+    intro: Ivan Bunin admired Anton Chekhov above every other writer.
+    text: "Brevity is the sister of talent."
+    author: Anton Chekhov
+    source: letter to his brother Alexander, 1889 (translated for Longhand)
+  evening:
+    title: The Lady with the Dog
+    author: Anton Chekhov
+    source: 1899, translated by Constance Garnett
+    text: |
+      It was said that a new person had appeared on the sea-front: a lady with a little dog.
+
+- month: 10
+  day: 23
+  midday:
+    text: "When men were all asleep the snow came flying, / In large white flakes falling on the city brown."
+    author: Robert Bridges
+    source: '"London Snow," 1880'
+  evening:
+    title: God's Grandeur
+    author: Gerard Manley Hopkins
+    source: written 1877, published by Robert Bridges in 1918
+    text: |
+      The world is charged with the grandeur of God.
+      It will flame out, like shining from shook foil;
+
+- month: 10
+  day: 24
+  midday:
+    intro: For Denise Levertov's birthday, her friend and mentor.
+    text: "By the road to the contagious hospital / under the surge of the blue / mottled clouds driven from the / northeast—a cold wind."
+    author: William Carlos Williams
+    source: Spring and All, 1923
+  evening:
+    title: The Red Wheelbarrow
+    author: William Carlos Williams
+    source: Spring and All, 1923
+    text: |
+      so much depends
+      upon
+
+      a red wheel
+      barrow
+
+      glazed with rain
+      water
+
+      beside the white
+      chickens.
+
+- month: 10
+  day: 25
+  midday:
+    text: "The lyf so short, the craft so long to lerne."
+    author: Geoffrey Chaucer
+    source: The Parliament of Fowls
+  evening:
+    title: The Canterbury Tales
+    author: Geoffrey Chaucer
+    source: General Prologue
+    text: |
+      Whan that Aprille with his shoures soote
+      The droghte of March hath perced to the roote,
+      And bathed every veyne in swich licour
+      Of which vertu engendred is the flour;
+
+- month: 10
+  day: 26
+  midday:
+    intro: For Beryl Markham, who flew the Atlantic alone.
+    text: "To strive, to seek, to find, and not to yield."
+    author: Alfred, Lord Tennyson
+    source: '"Ulysses," 1842'
+  evening:
+    title: '"Hope" is the thing with feathers'
+    author: Emily Dickinson
+    source: written about 1861
+    text: |
+      "Hope" is the thing with feathers -
+      That perches in the soul -
+      And sings the tune without the words -
+      And never stops - at all -
+
+- month: 10
+  day: 27
+  midday:
+    intro: For Dylan Thomas's birthday, an older Welsh poet.
+    text: "I saw Eternity the other night, / Like a great ring of pure and endless light."
+    author: Henry Vaughan
+    source: '"The World," 1650'
+  evening:
+    title: Love (III)
+    author: George Herbert, born in Wales
+    source: The Temple, 1633
+    text: |
+      Love bade me welcome: yet my soul drew back,
+      Guilty of dust and sin.
+
+- month: 10
+  day: 28
+  midday:
+    text: "The chief end I propose to myself in all my labours is to vex the world rather than divert it."
+    author: Jonathan Swift
+    source: letter to Alexander Pope, 1725
+  evening:
+    title: Gulliver's Travels
+    author: Jonathan Swift
+    source: 1726
+    text: |
+      My father had a small estate in Nottinghamshire: I was the third of five sons.
+
+- month: 10
+  day: 29
+  midday:
+    text: "When a man is tired of London, he is tired of life; for there is in London all that life can afford."
+    author: Samuel Johnson
+    source: in Boswell's Life of Johnson, 1791
+  evening:
+    title: The Life of Samuel Johnson
+    author: James Boswell
+    source: their first meeting, 1763
+    text: |
+      "Mr. Johnson, I do indeed come from Scotland, but I cannot help it."
+      "That, Sir, I find, is what a very great many of your countrymen cannot help."
+
+- month: 10
+  day: 30
+  midday:
+    text: "The wind is rising! We must try to live!"
+    author: Paul Valéry
+    source: '"The Graveyard by the Sea," 1920 (translated for Longhand)'
+  evening:
+    title: The Graveyard by the Sea
+    author: Paul Valéry
+    source: 1920 (translated for Longhand)
+    text: |
+      This quiet roof, where doves are walking,
+      quivers between the pines, between the tombs;
+      Noon the just composes there with fire
+      the sea, the sea, forever beginning again!
+
+- month: 10
+  day: 31
+  midday:
+    text: "Negative Capability, that is when man is capable of being in uncertainties, Mysteries, doubts, without any irritable reaching after fact & reason."
+    author: John Keats
+    source: letter to his brothers, 1817
+  evening:
+    title: To Autumn
+    author: John Keats
+    source: 1819
+    text: |
+      Season of mists and mellow fruitfulness,
+      Close bosom-friend of the maturing sun;
+      Conspiring with him how to load and bless
+      With fruit the vines that round the thatch-eves run;
+
+# ---------- November ----------
+
+- month: 11
+  day: 1
+  midday:
+    text: "None of them knew the color of the sky."
+    author: Stephen Crane
+    source: '"The Open Boat," 1897'
+  evening:
+    title: In the Desert
+    author: Stephen Crane
+    source: The Black Riders, 1895
+    text: |
+      In the desert
+      I saw a creature, naked, bestial,
+      Who, squatting upon the ground,
+      Held his heart in his hands,
+      And ate of it.
+      I said, "Is it good, friend?"
+      "It is bitter—bitter," he answered;
+      "But I like it
+      Because it is bitter,
+      And because it is my heart."
+
+- month: 11
+  day: 2
+  midday:
+    text: "Ours is essentially a tragic age, so we refuse to take it tragically."
+    author: D. H. Lawrence
+    source: "Lady Chatterley's Lover, 1928"
+  evening:
+    title: Piano
+    author: D. H. Lawrence
+    source: 1918
+    text: |
+      Softly, in the dusk, a woman is singing to me;
+      Taking me back down the vista of years, till I see
+      A child sitting under the piano, in the boom of the tingling strings
+      And pressing the small, poised feet of a mother who smiles as she sings.
+
+- month: 11
+  day: 3
+  midday:
+    text: "To him who in the love of Nature holds / Communion with her visible forms, she speaks / A various language."
+    author: William Cullen Bryant
+    source: '"Thanatopsis," 1817'
+  evening:
+    title: Thanatopsis
+    author: William Cullen Bryant
+    source: 1817, final lines
+    text: |
+      So live, that when thy summons comes to join
+      The innumerable caravan, which moves
+      To that mysterious realm, where each shall take
+      His chamber in the silent halls of death,
+      Thou go not, like the quarry-slave at night,
+      Scourged to his dungeon, but, sustained and soothed
+      By an unfaltering trust, approach thy grave,
+      Like one who wraps the drapery of his couch
+      About him, and lies down to pleasant dreams.
+
+- month: 11
+  day: 4
+  midday:
+    text: "My subject is War, and the pity of War. The Poetry is in the pity."
+    author: Wilfred Owen
+    source: draft preface to his poems, 1918
+  evening:
+    title: Anthem for Doomed Youth
+    author: Wilfred Owen
+    source: 1917
+    text: |
+      What passing-bells for these who die as cattle?
+      — Only the monstrous anger of the guns.
+      Only the stuttering rifles' rapid rattle
+      Can patter out their hasty orisons.
+
+- month: 11
+  day: 5
+  midday:
+    intro: For Ida Tarbell, who put Standard Oil's secrets in print.
+    text: "Sunlight is said to be the best of disinfectants."
+    author: Louis D. Brandeis
+    source: Other People's Money, 1914
+  evening:
+    title: The American Crisis
+    author: Thomas Paine
+    source: 1776
+    text: |
+      These are the times that try men's souls. The summer soldier and the sunshine patriot will, in this crisis, shrink from the service of their country; but he that stands by it now, deserves the love and thanks of man and woman.
+
+- month: 11
+  day: 6
+  midday:
+    intro: For Robert Musil, from a fellow writer of the old Austrian empire.
+    text: "A book must be the axe for the frozen sea within us."
+    author: Franz Kafka
+    source: letter to Oskar Pollak, 1904 (translated for Longhand)
+  evening:
+    title: The Trees
+    author: Franz Kafka
+    source: 1913 (translated for Longhand)
+    text: |
+      For we are like tree trunks in the snow. They seem to lie flat on the surface, and a little push should be enough to roll them away. No, that can't be done, for they are firmly joined to the ground. But look, even that is only how it seems.
+
+- month: 11
+  day: 7
+  midday:
+    intro: For Albert Camus, the motto of another great essayist.
+    text: "What do I know?"
+    author: Michel de Montaigne
+    source: Essays, 1580 (translated for Longhand)
+  evening:
+    title: Confessions
+    author: Augustine of Hippo, born in what is now Algeria
+    source: about 400 (translated for Longhand)
+    text: |
+      Late have I loved you, beauty so ancient and so new, late have I loved you! And look, you were within, and I was outside.
+
+- month: 11
+  day: 8
+  midday:
+    text: "Welcome to my house! Enter freely and of your own will!"
+    author: Bram Stoker
+    source: Dracula, 1897
+  evening:
+    title: Dracula
+    author: Bram Stoker
+    source: 1897, the opening
+    text: |
+      3 May. Bistritz.—Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late.
+
+- month: 11
+  day: 9
+  midday:
+    text: "Nature is not a temple but a workshop, and man is the worker in it."
+    author: Ivan Turgenev
+    source: Fathers and Sons, 1862 (translated for Longhand)
+  evening:
+    title: The Russian Language
+    author: Ivan Turgenev
+    source: 1882 (translated for Longhand)
+    text: |
+      In days of doubt, in days of painful brooding over the fate of my country, you alone are my support and stay, O great, mighty, truthful and free Russian language!
+
+- month: 11
+  day: 10
+  midday:
+    text: "A person only plays when he is, in the full sense of the word, a human being, and he is only fully a human being when he plays."
+    author: Friedrich Schiller
+    source: Letters on the Aesthetic Education of Man, 1795 (translated for Longhand)
+  evening:
+    title: Ode to Joy
+    author: Friedrich Schiller
+    source: as Beethoven set it, 1824 (translated for Longhand)
+    text: |
+      Joy, bright spark of the gods,
+      daughter of Elysium,
+      drunk with fire we enter,
+      heavenly one, your holy place!
+      Your magic binds again
+      what custom sternly parted;
+      all people become brothers
+      where your gentle wing rests.
+
+- month: 11
+  day: 11
+  midday:
+    text: "Above all, don't lie to yourself."
+    author: Fyodor Dostoevsky
+    source: The Brothers Karamazov, 1880, translated by Constance Garnett
+  evening:
+    title: Notes from Underground
+    author: Fyodor Dostoevsky
+    source: 1864, translated by Constance Garnett
+    text: |
+      I am a sick man.... I am a spiteful man. I am an unattractive man. I believe my liver is diseased.
+
+- month: 11
+  day: 12
+  midday:
+    intro: For Michael Ende, who wrote about a boy who falls into the book he is reading.
+    text: "There is no Frigate like a Book / To take us Lands away."
+    author: Emily Dickinson
+    source: written about 1873
+  evening:
+    title: The Land of Story-Books
+    author: Robert Louis Stevenson
+    source: A Child's Garden of Verses, 1885
+    text: |
+      At evening when the lamp is lit,
+      Around the fire my parents sit;
+      They sit at home and talk and sing,
+      And do not play at anything.
+
+- month: 11
+  day: 13
+  midday:
+    text: "Fifteen men on the dead man's chest— / Yo-ho-ho, and a bottle of rum!"
+    author: Robert Louis Stevenson
+    source: Treasure Island, 1883
+  evening:
+    title: Requiem
+    author: Robert Louis Stevenson
+    source: 1887
+    text: |
+      Under the wide and starry sky,
+      Dig the grave and let me lie.
+      Glad did I live and gladly die,
+      And I laid me down with a will.
+
+      This be the verse you grave for me:
+      Here he lies where he longed to be;
+      Home is the sailor, home from sea,
+      And the hunter home from the hill.
+
+- month: 11
+  day: 14
+  midday:
+    text: "Whenever it is a damp, drizzly November in my soul… then, I account it high time to get to sea as soon as I can."
+    author: Herman Melville
+    source: Moby-Dick, 1851
+  evening:
+    title: Moby-Dick
+    author: Herman Melville
+    source: 1851, the opening
+    text: |
+      Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.
+
+- month: 11
+  day: 15
+  midday:
+    text: "Imaginary gardens with real toads in them."
+    author: Marianne Moore
+    source: '"Poetry," 1919'
+  evening:
+    title: Poetry
+    author: Marianne Moore
+    source: 1919
+    text: |
+      I, too, dislike it: there are things that are important beyond all this fiddle.
+      Reading it, however, with a perfect contempt for it, one discovers in
+      it after all, a place for the genuine.
+
+- month: 11
+  day: 16
+  midday:
+    intro: For Chinua Achebe, one of the first books by an African writer in English.
+    text: "I was born, in the year 1745, situated in a charming fruitful vale, named Essaka."
+    author: Olaudah Equiano
+    source: The Interesting Narrative, 1789
+  evening:
+    title: The Second Coming
+    author: W. B. Yeats
+    source: 1920, which gave Achebe his title
+    text: |
+      Turning and turning in the widening gyre
+      The falcon cannot hear the falconer;
+      Things fall apart; the centre cannot hold;
+      Mere anarchy is loosed upon the world,
+
+- month: 11
+  day: 17
+  midday:
+    intro: For Joost van den Vondel, from a fellow scholar of the Low Countries.
+    text: "In the land of the blind, the one-eyed man is king."
+    author: Erasmus
+    source: Adages, 1500 (translated for Longhand)
+  evening:
+    title: Paradise Lost
+    author: John Milton
+    source: 1667, Satan speaking; Vondel wrote his own Lucifer in 1654
+    text: |
+      The mind is its own place, and in itself
+      Can make a Heaven of Hell, a Hell of Heaven.
+
+- month: 11
+  day: 18
+  midday:
+    intro: For Margaret Atwood, from the first great novel of dark imagining.
+    text: "Beware; for I am fearless, and therefore powerful."
+    author: Mary Shelley
+    source: Frankenstein, 1818
+  evening:
+    title: Frankenstein
+    author: Mary Shelley
+    source: 1818
+    text: |
+      It was on a dreary night of November that I beheld the accomplishment of my toils.
+
+- month: 11
+  day: 19
+  midday:
+    text: "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+    author: Abraham Lincoln
+    source: the Gettysburg Address, 1863
+  evening:
+    title: The Gettysburg Address
+    author: Abraham Lincoln
+    source: November 19, 1863
+    text: |
+      The world will little note, nor long remember what we say here, but it can never forget what they did here.
+
+- month: 11
+  day: 20
+  midday:
+    intro: For Selma Lagerlöf, from another writer of the North.
+    text: "Life can only be understood backwards; but it must be lived forwards."
+    author: Søren Kierkegaard
+    source: journal, 1843 (translated for Longhand)
+  evening:
+    title: The Wild Swans at Coole
+    author: W. B. Yeats
+    source: 1917
+    text: |
+      The trees are in their autumn beauty,
+      The woodland paths are dry,
+      Under the October twilight the water
+      Mirrors a still sky;
+
+- month: 11
+  day: 21
+  midday:
+    text: "We must cultivate our garden."
+    author: Voltaire
+    source: Candide, 1759 (translated for Longhand)
+  evening:
+    title: Candide
+    author: Voltaire
+    source: 1759, the opening (translated for Longhand)
+    text: |
+      In Westphalia, in the castle of the Baron of Thunder-ten-tronckh, there lived a young man to whom nature had given the gentlest of manners. His face announced his soul.
+
+- month: 11
+  day: 22
+  midday:
+    text: "If we had a keen vision and feeling of all ordinary human life, it would be like hearing the grass grow and the squirrel's heart beat, and we should die of that roar which lies on the other side of silence."
+    author: George Eliot
+    source: Middlemarch, 1871–72
+  evening:
+    title: Middlemarch
+    author: George Eliot
+    source: 1871–72, the last lines
+    text: |
+      For the growing good of the world is partly dependent on unhistoric acts; and that things are not so ill with you and me as they might have been, is half owing to the number who lived faithfully a hidden life, and rest in unvisited tombs.
+
+- month: 11
+  day: 23
+  midday:
+    intro: For Paul Celan, a question another German poet asked.
+    text: "And what are poets for in a destitute time?"
+    author: Friedrich Hölderlin
+    source: '"Bread and Wine," 1800 (translated for Longhand)'
+  evening:
+    title: Psalm 137
+    author: The Bible
+    source: King James Version, 1611
+    text: |
+      By the rivers of Babylon, there we sat down, yea, we wept, when we remembered Zion.
+      We hanged our harps upon the willows in the midst thereof.
+
+- month: 11
+  day: 24
+  midday:
+    text: "Once upon a time there was a piece of wood."
+    author: Carlo Collodi
+    source: The Adventures of Pinocchio, 1883 (translated for Longhand)
+  evening:
+    title: The Adventures of Pinocchio
+    author: Carlo Collodi
+    source: 1883, the opening (translated for Longhand)
+    text: |
+      Once upon a time there was…
+      "A king!" my little readers will say at once.
+      No, children, you are wrong. Once upon a time there was a piece of wood. It was not a fine piece of wood, just a plain one from the woodpile, the kind you put in the stove in winter to light a fire and warm the rooms.
+
+- month: 11
+  day: 25
+  midday:
+    text: '"Who killed the Commander?" "Fuenteovejuna, sir."'
+    author: Lope de Vega
+    source: Fuenteovejuna (translated for Longhand)
+  evening:
+    title: A Sonnet on Writing a Sonnet
+    author: Lope de Vega
+    source: from his play La niña de plata (translated for Longhand)
+    text: |
+      Violante has ordered me to write a sonnet;
+      I've never been in such a fix in all my life.
+      Fourteen lines, they say, make up a sonnet:
+      and joke by joke, here go the first three.
+
+- month: 11
+  day: 26
+  midday:
+    text: '"Begin at the beginning," the King said, very gravely, "and go on till you come to the end: then stop."'
+    author: Lewis Carroll
+    source: "Alice's Adventures in Wonderland, 1865"
+  evening:
+    title: "Alice's Adventures in Wonderland"
+    author: Lewis Carroll
+    source: 1865, the opening
+    text: |
+      Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, "and what is the use of a book," thought Alice "without pictures or conversations?"
+
+- month: 11
+  day: 27
+  midday:
+    intro: For James Agee, who wrote about Alabama's tenant farmers.
+    text: "The mass of men lead lives of quiet desperation."
+    author: Henry David Thoreau
+    source: Walden, 1854
+  evening:
+    title: There Was a Child Went Forth
+    author: Walt Whitman
+    source: 1855
+    text: |
+      There was a child went forth every day,
+      And the first object he look'd upon, that object he became,
+
+- month: 11
+  day: 28
+  midday:
+    text: "To see a World in a Grain of Sand / And a Heaven in a Wild Flower, / Hold Infinity in the palm of your hand / And Eternity in an hour."
+    author: William Blake
+    source: '"Auguries of Innocence"'
+  evening:
+    title: The Tyger
+    author: William Blake
+    source: Songs of Experience, 1794
+    text: |
+      Tyger Tyger, burning bright,
+      In the forests of the night;
+      What immortal hand or eye,
+      Could frame thy fearful symmetry?
+
+- month: 11
+  day: 29
+  midday:
+    text: '"Christmas won''t be Christmas without any presents," grumbled Jo, lying on the rug.'
+    author: Louisa May Alcott
+    source: Little Women, 1868
+  evening:
+    title: Little Women
+    author: Louisa May Alcott
+    source: 1868–69
+    text: |
+      I'm not afraid of storms, for I'm learning how to sail my ship.
+
+- month: 11
+  day: 30
+  midday:
+    text: "The difference between the almost right word and the right word is really a large matter—'tis the difference between the lightning-bug and the lightning."
+    author: Mark Twain
+    source: letter to George Bainton, 1888
+  evening:
+    title: Adventures of Huckleberry Finn
+    author: Mark Twain
+    source: 1884, the opening
+    text: |
+      You don't know about me without you have read a book by the name of The Adventures of Tom Sawyer; but that ain't no matter. That book was made by Mr. Mark Twain, and he told the truth, mainly.
+
+# ---------- December ----------
+
+- month: 12
+  day: 1
+  midday:
+    intro: For James Baldwin, from the great autobiography of an earlier generation.
+    text: "You have seen how a man was made a slave; you shall see how a slave was made a man."
+    author: Frederick Douglass
+    source: Narrative of the Life of Frederick Douglass, 1845
+  evening:
+    title: The Negro Speaks of Rivers
+    author: Langston Hughes
+    source: 1921
+    text: |
+      I've known rivers:
+      I've known rivers ancient as the world and older than the flow of human blood in human veins.
+
+      My soul has grown deep like the rivers.
+
+- month: 12
+  day: 2
+  midday:
+    intro: For Ann Patchett, novelist and bookseller.
+    text: "Some books are to be tasted, others to be swallowed, and some few to be chewed and digested."
+    author: Francis Bacon
+    source: '"Of Studies," 1625'
+  evening:
+    title: Ecclesiastes 12:12
+    author: The Bible
+    source: King James Version, 1611
+    text: |
+      And further, by these, my son, be admonished: of making many books there is no end; and much study is a weariness of the flesh.
+
+- month: 12
+  day: 3
+  midday:
+    text: "My task which I am trying to achieve is, by the power of the written word to make you hear, to make you feel—it is, before all, to make you see."
+    author: Joseph Conrad
+    source: preface to The Nigger of the "Narcissus", 1897
+  evening:
+    title: Heart of Darkness
+    author: Joseph Conrad
+    source: 1899, the opening
+    text: |
+      The Nellie, a cruising yawl, swung to her anchor without a flutter of the sails, and was at rest. The flood had made, the wind was nearly calm, and being bound down the river, the only thing for it was to come to and wait for the turn of the tide.
+
+- month: 12
+  day: 4
+  midday:
+    text: "Be patient toward all that is unsolved in your heart, and try to love the questions themselves."
+    author: Rainer Maria Rilke
+    source: Letters to a Young Poet, 1903 (translated for Longhand)
+  evening:
+    title: Autumn Day
+    author: Rainer Maria Rilke
+    source: 1902 (translated for Longhand)
+    text: |
+      Lord: it is time. The summer was immense.
+      Lay your shadow on the sundials,
+      and on the meadows let the winds go free.
+
+      …
+
+      Whoever has no house now will not build one.
+      Whoever is alone now will stay alone,
+      will wake, read, write long letters,
+      and wander restlessly along the avenues,
+      back and forth, as the leaves drift down.
+
+- month: 12
+  day: 5
+  midday:
+    text: "Remember me when I am gone away, / Gone far away into the silent land."
+    author: Christina Rossetti
+    source: '"Remember," 1862'
+  evening:
+    title: In the Bleak Midwinter
+    author: Christina Rossetti
+    source: 1872
+    text: |
+      What can I give Him,
+      Poor as I am?
+      If I were a shepherd
+      I would bring a lamb;
+      If I were a Wise Man
+      I would do my part;
+      Yet what I can I give Him:
+      Give my heart.
+
+- month: 12
+  day: 6
+  midday:
+    text: "Three hours a day will produce as much as a man ought to write."
+    author: Anthony Trollope
+    source: An Autobiography, 1883
+  evening:
+    title: An Autobiography
+    author: Anthony Trollope
+    source: 1883, on his method
+    text: |
+      … to write with my watch before me, and to require from myself 250 words every quarter of an hour.
+
+- month: 12
+  day: 7
+  midday:
+    text: "That is happiness; to be dissolved into something complete and great."
+    author: Willa Cather
+    source: My Ántonia, 1918
+  evening:
+    title: My Ántonia
+    author: Willa Cather
+    source: 1918
+    text: |
+      There was nothing but land: not a country at all, but the material out of which countries are made.
+
+- month: 12
+  day: 8
+  midday:
+    text: "Seize the day, and put as little trust as you can in tomorrow."
+    author: Horace
+    source: Odes 1.11 (translated for Longhand)
+  evening:
+    title: Odes 3.30
+    author: Horace
+    source: 23 BC (translated for Longhand)
+    text: |
+      I have built a monument more lasting than bronze,
+      higher than the royal pile of the pyramids,
+      which no devouring rain, no raging north wind
+      can tear down, nor the countless chain of years
+      and the flight of time. I shall not wholly die.
+
+- month: 12
+  day: 9
+  midday:
+    text: "Who kills a man kills a reasonable creature, God's image; but he who destroys a good book, kills reason itself."
+    author: John Milton
+    source: Areopagitica, 1644
+  evening:
+    title: On His Blindness
+    author: John Milton
+    source: written about 1652
+    text: |
+      When I consider how my light is spent,
+      Ere half my days, in this dark world and wide,
+      And that one talent which is death to hide
+      Lodged with me useless …
+
+      They also serve who only stand and wait.
+
+- month: 12
+  day: 10
+  midday:
+    text: "Are you too deeply occupied to say if my Verse is alive?"
+    author: Emily Dickinson
+    source: letter to Thomas Wentworth Higginson, 1862
+  evening:
+    title: Tell all the truth but tell it slant
+    author: Emily Dickinson
+    source: written about 1872
+    text: |
+      Tell all the truth but tell it slant —
+      Success in Circuit lies
+      Too bright for our infirm Delight
+      The Truth's superb surprise
+      As Lightning to the Children eased
+      With explanation kind
+      The Truth must dazzle gradually
+      Or all the world be blind —
+
+- month: 12
+  day: 11
+  midday:
+    intro: For Naguib Mahfouz, a poet of Egypt's other great city, Alexandria.
+    text: "When you set out on the road to Ithaka, / pray that the road be long, / full of adventures, full of knowledge."
+    author: C. P. Cavafy
+    source: '"Ithaka," 1911 (translated for Longhand)'
+  evening:
+    title: On Children
+    author: Kahlil Gibran
+    source: The Prophet, 1923
+    text: |
+      Your children are not your children.
+      They are the sons and daughters of Life's longing for itself.
+
+- month: 12
+  day: 12
+  midday:
+    text: "Be steady and well-ordered in your life, like a bourgeois, so that you can be violent and original in your work."
+    author: Gustave Flaubert
+    source: letter, 1876 (translated for Longhand)
+  evening:
+    title: Madame Bovary
+    author: Gustave Flaubert
+    source: 1857 (translated for Longhand)
+    text: |
+      Human speech is like a cracked kettle on which we beat out tunes for bears to dance to, when we long to move the stars.
+
+- month: 12
+  day: 13
+  midday:
+    text: "No man but a blockhead ever wrote, except for money."
+    author: Samuel Johnson
+    source: in Boswell's Life of Johnson, 1791
+  evening:
+    title: A Dictionary of the English Language
+    author: Samuel Johnson
+    source: 1755
+    text: |
+      LEXICOGRAPHER. A writer of dictionaries; a harmless drudge, that busies himself in tracing the original, and detailing the signification of words.
+
+      OATS. A grain, which in England is generally given to horses, but in Scotland supports the people.
+
+- month: 12
+  day: 14
+  midday:
+    intro: For Shirley Jackson, from the master of dread before her.
+    text: "All that we see or seem / Is but a dream within a dream."
+    author: Edgar Allan Poe
+    source: '"A Dream Within a Dream," 1849'
+  evening:
+    title: The Tell-Tale Heart
+    author: Edgar Allan Poe
+    source: 1843, the opening
+    text: |
+      TRUE!—nervous—very, very dreadfully nervous I had been and am; but why will you say that I am mad?
+
+- month: 12
+  day: 15
+  midday:
+    intro: For Edna O'Brien, from another Irish writer.
+    text: "Tread softly because you tread on my dreams."
+    author: W. B. Yeats
+    source: '"He Wishes for the Cloths of Heaven," 1899'
+  evening:
+    title: The Dead
+    author: James Joyce, whose stories made O'Brien a writer
+    source: Dubliners, 1914, the last lines
+    text: |
+      His soul swooned slowly as he heard the snow falling faintly through the universe and faintly falling, like the descent of their last end, upon all the living and the dead.
+
+- month: 12
+  day: 16
+  midday:
+    text: "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife."
+    author: Jane Austen
+    source: Pride and Prejudice, 1813
+  evening:
+    title: Northanger Abbey
+    author: Jane Austen
+    source: 1817, in defense of the novel
+    text: |
+      … only some work in which the greatest powers of the mind are displayed, in which the most thorough knowledge of human nature, the happiest delineation of its varieties, the liveliest effusions of wit and humour, are conveyed to the world in the best-chosen language.
+
+- month: 12
+  day: 17
+  midday:
+    text: "For of all sad words of tongue or pen, / The saddest are these: 'It might have been!'"
+    author: John Greenleaf Whittier
+    source: '"Maud Muller," 1856'
+  evening:
+    title: Snow-Bound
+    author: John Greenleaf Whittier
+    source: 1866, the opening
+    text: |
+      The sun that brief December day
+      Rose cheerless over hills of gray,
+      And, darkly circled, gave at noon
+      A sadder light than waning moon.
+
+- month: 12
+  day: 18
+  midday:
+    text: "Romance at short notice was her speciality."
+    author: Saki
+    source: '"The Open Window," 1914'
+  evening:
+    title: The Open Window
+    author: Saki
+    source: 1914, the opening
+    text: |
+      "My aunt will be down presently, Mr. Nuttel," said a very self-possessed young lady of fifteen; "in the meantime you must try and put up with me."
+
+- month: 12
+  day: 19
+  midday:
+    text: "Whatever our souls are made of, his and mine are the same."
+    author: Emily Brontë
+    source: Wuthering Heights, 1847
+  evening:
+    title: No Coward Soul Is Mine
+    author: Emily Brontë
+    source: 1846
+    text: |
+      No coward soul is mine,
+      No trembler in the world's storm-troubled sphere:
+      I see Heaven's glories shine,
+      And faith shines equal, arming me from fear.
+
+- month: 12
+  day: 20
+  midday:
+    intro: For Sandra Cisneros, from the great poet of colonial Mexico.
+    text: "Foolish men, who accuse / women without reason, / not seeing you're the cause / of the very thing you blame."
+    author: Sor Juana Inés de la Cruz
+    source: 1689 (translated for Longhand)
+  evening:
+    title: Simple Verses
+    author: José Martí
+    source: 1891 (translated for Longhand)
+    text: |
+      I am an honest man
+      from where the palm tree grows,
+      and before I die I want
+      to pour the verses from my soul.
+
+- month: 12
+  day: 21
+  midday:
+    text: "So we beat on, boats against the current, borne back ceaselessly into the past."
+    author: F. Scott Fitzgerald
+    source: The Great Gatsby, 1925
+  evening:
+    title: The Great Gatsby
+    author: F. Scott Fitzgerald
+    source: 1925, the opening
+    text: |
+      In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since.
+      "Whenever you feel like criticizing any one," he told me, "just remember that all the people in this world haven't had the advantages that you've had."
+
+- month: 12
+  day: 22
+  midday:
+    text: "Once upon a time there were four little Rabbits, and their names were— Flopsy, Mopsy, Cotton-tail, and Peter."
+    author: Beatrix Potter
+    source: The Tale of Peter Rabbit, 1902
+  evening:
+    title: The Tale of Peter Rabbit
+    author: Beatrix Potter
+    source: 1902
+    text: |
+      "Now, my dears," said old Mrs. Rabbit one morning, "you may go into the fields or down the lane, but don't go into Mr. McGregor's garden: your Father had an accident there; he was put in a pie by Mrs. McGregor."
+
+- month: 12
+  day: 23
+  midday:
+    text: "The stockings were hung by the chimney with care, / In hopes that St. Nicholas soon would be there."
+    author: Anonymous
+    source: '"A Visit from St. Nicholas," Troy Sentinel, December 23, 1823'
+  evening:
+    title: A Visit from St. Nicholas
+    author: Anonymous, later credited to Clement Clarke Moore
+    source: 1823, as first printed
+    text: |
+      More rapid than eagles his coursers they came,
+      And he whistled, and shouted, and called them by name:
+      "Now, Dasher! now, Dancer! now, Prancer and Vixen!
+      On, Comet! on, Cupid! on, Dunder and Blixem!"
+
+- month: 12
+  day: 24
+  midday:
+    text: "The best which has been thought and said in the world."
+    author: Matthew Arnold
+    source: Culture and Anarchy, 1869
+  evening:
+    title: Dover Beach
+    author: Matthew Arnold
+    source: 1867
+    text: |
+      The sea is calm to-night.
+      The tide is full, the moon lies fair
+      Upon the straits;—on the French coast the light
+      Gleams and is gone; the cliffs of England stand,
+      Glimmering and vast, out in the tranquil bay.
+
+- month: 12
+  day: 25
+  midday:
+    intro: For Dorothy Wordsworth's birthday, the poem her journal gave her brother.
+    text: "I wandered lonely as a cloud / That floats on high o'er vales and hills, / When all at once I saw a crowd, / A host, of golden daffodils."
+    author: William Wordsworth
+    source: 1807
+  evening:
+    title: Grasmere Journal
+    author: Dorothy Wordsworth
+    source: April 15, 1802
+    text: |
+      I never saw daffodils so beautiful they grew among the mossy stones about and about them, some rested their heads upon these stones as on a pillow for weariness and the rest tossed and reeled and danced and seemed as if they verily laughed with the wind.
+
+- month: 12
+  day: 26
+  midday:
+    text: "Full many a flower is born to blush unseen, / And waste its sweetness on the desert air."
+    author: Thomas Gray
+    source: Elegy Written in a Country Churchyard, 1751
+  evening:
+    title: Elegy Written in a Country Churchyard
+    author: Thomas Gray
+    source: 1751, the opening
+    text: |
+      The curfew tolls the knell of parting day,
+      The lowing herd wind slowly o'er the lea,
+      The plowman homeward plods his weary way,
+      And leaves the world to darkness and to me.
+
+- month: 12
+  day: 27
+  midday:
+    text: "We are nothing; less than nothing, and dreams. We are only what might have been."
+    author: Charles Lamb
+    source: '"Dream-Children," 1822'
+  evening:
+    title: The Old Familiar Faces
+    author: Charles Lamb
+    source: 1798
+    text: |
+      I have had playmates, I have had companions,
+      In my days of childhood, in my joyful school-days;
+      All, all are gone, the old familiar faces.
+
+- month: 12
+  day: 28
+  midday:
+    intro: For Amos Oz, who argued all his life for peace.
+    text: "Pray for the peace of Jerusalem: they shall prosper that love thee."
+    author: Psalm 122
+    source: King James Version, 1611
+  evening:
+    title: My Heart Is in the East
+    author: Judah Halevi
+    source: 12th century (translated for Longhand)
+    text: |
+      My heart is in the east, and I am at the far end of the west.
+      How can I taste what I eat? How could it please me?
+
+- month: 12
+  day: 29
+  midday:
+    text: '"Will no one rid me of this turbulent priest?"'
+    author: Henry II, as the story goes
+    source: words put in his mouth long after Becket's murder, 1170
+  evening:
+    title: The Canterbury Tales
+    author: Geoffrey Chaucer
+    source: General Prologue
+    text: |
+      Thanne longen folk to goon on pilgrimages,
+      And palmeres for to seken straunge strondes,
+      To ferne halwes, kowthe in sondry londes;
+      And specially from every shires ende
+      Of Engelond to Caunterbury they wende,
+      The hooly blisful martir for to seke,
+      That hem hath holpen whan that they were seeke.
+
+- month: 12
+  day: 30
+  midday:
+    text: "If you can keep your head when all about you / Are losing theirs and blaming it on you."
+    author: Rudyard Kipling
+    source: '"If—," 1910'
+  evening:
+    title: How the Elephant Got Its Trunk
+    author: Rudyard Kipling
+    source: Just So Stories, 1902, the opening
+    text: |
+      In the High and Far-Off Times the Elephant, O Best Beloved, had no trunk.
+
+- month: 12
+  day: 31
+  midday:
+    intro: For James T. Fields, who carried The Scarlet Letter from Hawthorne's hands to print.
+    text: "It is either very good or very bad,—I don't know which."
+    author: Nathaniel Hawthorne
+    source: handing Fields the manuscript, 1849, in Fields's Yesterdays with Authors
+  evening:
+    title: In Memoriam, CVI
+    author: Alfred, Lord Tennyson
+    source: 1850
+    text: |
+      Ring out, wild bells, to the wild sky,
+      The flying cloud, the frosty light:
+      The year is dying in the night;
+      Ring out, wild bells, and let him die.
+
+      Ring out the old, ring in the new,
+      Ring, happy bells, across the snow:
+      The year is going, let him go;
+      Ring out the false, ring in the true.

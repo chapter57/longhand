@@ -1,18 +1,27 @@
-# Posts the day's almanac entry to Bluesky and Mastodon every morning.
+# Posts the day's almanac to Bluesky and Mastodon three times a day: the
+# entry in the morning, a quote at midday and a quote card in the evening.
 # The script is .github/scripts/post_almanac.py. The accounts' passwords are
 # kept in the project's Settings → Secrets and variables → Actions.
 name: Post the almanac
 
 on:
   schedule:
+    # Times are UTC; New York is 4 hours behind in summer, 5 in winter.
     # GitHub sometimes starts scheduled runs late, or skips them when it's
-    # busy, so there are two: the morning one, and a backup a few hours later
-    # that only posts to accounts the morning run didn't reach. Times are UTC:
-    # 13:47 is 9:47 a.m. in New York in summer, 8:47 a.m. in winter.
-    - cron: "47 13 * * *"
-    - cron: "23 17 * * *"
+    # busy, so the morning and evening posts each have a backup run that only
+    # posts what the first run didn't.
+    - cron: "47 13 * * *"   # morning: 9:47 a.m. summer, 8:47 a.m. winter
+    - cron: "23 15 * * *"   # morning backup
+    - cron: "7 17 * * *"    # midday: 1:07 p.m. summer, 12:07 p.m. winter
+    - cron: "37 23 * * *"   # evening: 7:37 p.m. summer, 6:37 p.m. winter
+    - cron: "53 1 * * *"    # evening backup (still the same evening in New York)
   workflow_dispatch:
     inputs:
+      slot:
+        description: "Which post"
+        type: choice
+        options: [morning, midday, evening]
+        default: morning
       date:
         description: 'Post another day instead of today, as "MM-DD" (e.g. 11-30). Leave empty for today.'
         required: false
@@ -34,10 +43,21 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml
-      - name: Note today's date in New York
+      - name: Work out the day and which post this is
         id: day
-        run: echo "date=$(TZ=America/New_York date +%F)" >> "$GITHUB_OUTPUT"
-      # Remembers which accounts have already posted today's entry.
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          CHOSEN: ${{ inputs.slot }}
+        run: |
+          echo "date=$(TZ=America/New_York date +%F)" >> "$GITHUB_OUTPUT"
+          case "$SCHEDULE" in
+            "47 13 * * *"|"23 15 * * *") slot=morning ;;
+            "7 17 * * *") slot=midday ;;
+            "37 23 * * *"|"53 1 * * *") slot=evening ;;
+            *) slot="${CHOSEN:-morning}" ;;
+          esac
+          echo "slot=$slot" >> "$GITHUB_OUTPUT"
+      # Remembers which posts have already gone out today.
       - uses: actions/cache/restore@v4
         with:
           path: .posted
@@ -49,6 +69,7 @@ jobs:
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
           MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
           MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+          SLOT: ${{ steps.day.outputs.slot }}
           ALMANAC_DATE: ${{ inputs.date }}
           DRY_RUN: ${{ inputs.dry_run }}
           # A run by hand for another day posts regardless.
