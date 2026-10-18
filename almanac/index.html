@@ -1,36 +1,50 @@
 ---
 layout: default
 title: The Almanac
-description: Prompts, notes on craft, and places to send your work, posted as they come.
+description: "A literary almanac, one entry a day: writers' birthdays, famous books' anniversaries, and moments from literary history."
 ---
-{%- assign latest = site.posts | first -%}
+{%- assign months = site.data.almanac | sort: "day" | group_by_exp: "e", "e.month | prepend: '0' | slice: -2, 2" | sort: "name" -%}
 <section class="lead lead-almanac wrap">
   <div class="lead-copy">
     <p class="kicker">Read · the Almanac</p>
     <h1>The Longhand Almanac</h1>
-    <p class="dek">Prompts to write toward, short notes on the work of writing, and places currently reading submissions. Posted as they come, a few times a month.</p>
+    <p class="dek">One entry a day: a writer's birthday, a famous book's anniversary, or a moment from literary history, with a link to start reading.</p>
     <div class="moons-wrap">{% include ill-moons.html %}</div>
   </div>
-  {%- if latest %}
-  <div class="lead-art lead-art-small">{% include ill-postmark.html month=latest.date %}</div>
-  {%- endif %}
+  <div class="lead-art lead-art-small">{% include ill-postmark.html month=site.time %}</div>
 </section>
 
-<div class="wrap almanac-archive">
-  {%- if site.posts.size > 0 %}
-  {%- assign months = site.posts | group_by_exp: "p", "p.date | date: '%B %Y'" %}
+<section class="dept wrap" aria-labelledby="week-h">
+  <h2 class="label" id="week-h"><span>This week</span><span class="label-note">today and the six days after</span></h2>
+  <div class="week-list" data-almanac-week>
+    <p class="soon">The week ahead appears here. The full calendar is below.</p>
+  </div>
+</section>
+
+<div class="wrap">{% include ill-rule.html %}</div>
+
+<section class="dept wrap calendar" aria-labelledby="cal-h">
+  <h2 class="label" id="cal-h"><span>The calendar</span><span class="label-note">every entry, by month</span></h2>
   {%- for m in months %}
-  <section class="archive-month" aria-labelledby="m-{{ forloop.index }}">
-    <h2 class="label" id="m-{{ forloop.index }}"><span>{{ m.name }}</span></h2>
-    <ul class="post-list">
-      {%- for p in m.items %}
-      {% include post-item.html post=p %}
+  {%- assign month_name = "2000-" | append: m.name | append: "-01" | date: "%B" %}
+  <section class="cal-month" aria-labelledby="month-{{ m.name }}">
+    <h3 class="cal-month-name" id="month-{{ m.name }}">{{ month_name }}</h3>
+    <ol class="cal-list">
+      {%- for e in m.items %}
+      <li class="cal-row" id="d-{{ e.month }}-{{ e.day }}">
+        <p class="cal-day"><span class="cal-day-n">{{ e.day }}</span><span class="cal-today">Today</span></p>
+        <div class="cal-body">
+          <p class="entry-kicker"><span class="kind kind-{{ e.kind | slugify }}">{{ e.kind }}</span><span>{{ e.year }}</span></p>
+          <p class="cal-name">{{ e.name }}</p>
+          <p class="cal-note">{{ e.note }}</p>
+          <p class="entry-links"><a href="{{ e.read }}">{{ e.read_label }}</a><a href="{{ e.wiki }}">Read more</a></p>
+        </div>
+      </li>
       {%- endfor %}
-    </ul>
+    </ol>
   </section>
   {%- endfor %}
-  <p class="fine">Follow along in a feed reader: <a href="{{ '/almanac/feed.xml' | relative_url }}">longhandlit.com/almanac/feed.xml</a></p>
-  {%- else %}
-  <p class="soon">The first post arrives soon.</p>
-  {%- endif %}
-</div>
+  <p class="fine">Spot a mistake, or know a date we should add? Write to us at <a href="mailto:{{ site.email }}?subject=Almanac">{{ site.email }}</a>.</p>
+</section>
+
+{% include almanac-data.html %}

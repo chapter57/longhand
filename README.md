@@ -1,38 +1,44 @@
 # Longhand
 
-A quiet place to write, and a little company while you do: a free writing app, an almanac for writers, and an occasional essay on craft.
+A quiet place to write, and a little company while you do: a free writing app and a literary almanac with a writer, a book or a moment from literary history for every day.
 
 The site is built by GitHub Pages from this project. Changes go live a minute or two after they reach the `gh-pages` branch. Readers write to longhandlit@gmail.com (set as `email` in `_config.yml`).
 
-## Posting to the Almanac and adding essays (the easy way)
+## The Almanac
 
-The site is set up for **Pages CMS**, a free editor that works like a blog dashboard. Its settings are in `.pages.yml`.
+The almanac is a calendar, written once, in `_data/almanac.yml`: one entry per day, each with a short note, a link to read the work and a link to read more. Nobody has to post anything. The site picks the entries by itself, using each visitor's own date:
+
+- **Today in the Almanac** on the front page shows today's entry, and a short "Coming up" list for the next six days. On a day with no entry, it shows the next one coming up.
+- **This week** at the top of the Almanac page (`/almanac/`) shows today and the six days after. Below it is the whole calendar, month by month, with today highlighted.
+
+The calendar currently runs from October 17 to November 30. Entries repeat every year.
+
+Each entry has a lettered card in place of a portrait. To use a real portrait, add an image that is public domain or freely licensed (Wikimedia Commons is a good source), and fill in its credit.
+
+## Editing the calendar (the easy way)
+
+The site is set up for **Pages CMS**, a free editor. Its settings are in `.pages.yml`.
 
 1. Go to [app.pagescms.org](https://app.pagescms.org) and sign in with GitHub.
-2. The first time, allow Pages CMS access to the `chapter57/longhand` project when GitHub asks, then open the project and choose the `gh-pages` branch.
-3. Choose **Almanac** or **Essays** in the sidebar, click **Add an entry**, and fill in the boxes:
-   - **Almanac:** Title, Date, Kind of post (Prompt, Note, Open calls or News), an optional Summary, and the post itself.
-   - **Essays:** Title, Description, Author, Date, and the essay itself.
-4. Click **Save**. The post is published to the site a minute or two later.
+2. Open the `chapter57/longhand` project and choose the `gh-pages` branch.
+3. Choose **Almanac calendar** in the sidebar. Add, change or remove entries: month and day, the year it happened, the kind (Born, Died, Published or Event), the name, a note of two or three sentences, the links, and an optional portrait with its credit.
+4. Click **Save**. The site updates a minute or two later.
 
-The newest **Prompt** is featured on the front page with a "Write it in Longhand" button, and the four latest other posts are listed beside it. Every post also appears on the Almanac page (`/almanac/`), grouped by month, and in the feed at `/almanac/feed.xml`. Images added in the editor are stored in `assets/images/`.
+Please check every date and fact against two sources before adding it. Saving through Pages CMS may remove the explanatory comments at the top of `_data/almanac.yml`; the entries themselves are kept.
 
 ## What's where
 
-- `index.html`: the front page, with the app, the Almanac, the essays and "Write to us"
-- `_posts/`: Almanac posts, one file each, named by date and title
-- `almanac/index.html`: the Almanac page, listing every post by month
-- `_essays/`: one file per craft essay
+- `index.html`: the front page, with Today in the Almanac, the app and "Write to us"
+- `_data/almanac.yml`: the almanac's calendar, one entry per day
+- `almanac/index.html`: the Almanac page, with this week and the whole calendar
+- `assets/almanac.js`: picks today's entry and the coming week; `_includes/almanac-data.html` hands it the calendar
+- `assets/images/almanac/`: portraits, if any are added
 - `_layouts/`, `_includes/`, `assets/site.css`: the page design; the drawings (pen, moon phases, postmark, envelope, ink rule) are in `_includes/ill-*.html`
 - `.pages.yml`: the Pages CMS editing screens
 - `_config.yml`: site settings
 - `fonts/`: Literata and IBM Plex Mono, both under the SIL Open Font License (see `fonts/OFL.txt`)
 - `write/`: the Longhand writing app
 - `sw.js`: retires the offline copy that older installs of the app kept at the site's main address
-
-## The Almanac by email
-
-When you set up an email edition at [Buttondown](https://buttondown.com), put your username in `newsletter_username` in `_config.yml`, and a sign-up box replaces the "write to us to be added" note on the front page.
 
 ## The domain
 
