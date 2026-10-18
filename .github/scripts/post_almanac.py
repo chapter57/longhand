@@ -10,6 +10,8 @@ Settings, all from the environment:
   MASTODON_INSTANCE, MASTODON_TOKEN        e.g. https://mastodon.social
   ALMANAC_DATE                             optional, "MM-DD", to post another day
   DRY_RUN                                  "true" to print the posts, not send them
+  POSTED_DIR                               optional folder that remembers which accounts
+                                           already posted today, so a second run skips them
 """
 import datetime
 import glob
@@ -94,11 +96,21 @@ def post_bluesky(e, dry):
         return
     api = "https://bsky.social/xrpc/"
     session = request(api + "com.atproto.server.createSession", {"identifier": handle, "password": password})
+    auth = {"Authorization": "Bearer " + session["accessJwt"]}
+    # Don't post the same entry twice: look for it among the account's recent posts.
+    feed = request(api + "app.bsky.feed.getAuthorFeed?limit=30&actor=" + session["did"], headers=auth)
+    recent = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=2)
+    for item in feed.get("feed", []):
+        rec = item.get("post", {}).get("record", {})
+        uri = rec.get("embed", {}).get("external", {}).get("uri")
+        when = datetime.datetime.fromisoformat(rec.get("createdAt", "1970-01-01T00:00:00Z").replace("Z", "+00:00"))
+        if uri == e["url"] and when > recent:
+            print("Bluesky: already posted, skipping.")
+            return
     record = {"$type": "app.bsky.feed.post", "text": text, "langs": ["en"], "embed": card,
               "createdAt": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")}
     out = request(api + "com.atproto.repo.createRecord",
-                  {"repo": session["did"], "collection": "app.bsky.feed.post", "record": record},
-                  {"Authorization": "Bearer " + session["accessJwt"]})
+                  {"repo": session["did"], "collection": "app.bsky.feed.post", "record": record}, auth)
     print("Bluesky: posted", out.get("uri"))
 
 
@@ -130,9 +142,18 @@ def main():
         print(f"No almanac entry for {want}; nothing to post.")
         return
     dry = os.environ.get("DRY_RUN", "").lower() == "true"
-    for e in found:
-        post_bluesky(e, dry)
-        post_mastodon(e, dry)
+    posted = os.environ.get("POSTED_DIR", "").strip()
+    if posted:
+        os.makedirs(posted, exist_ok=True)
+    for name, post in (("bluesky", post_bluesky), ("mastodon", post_mastodon)):
+        mark = os.path.join(posted, name) if posted else ""
+        if mark and os.path.exists(mark) and not dry:
+            print(f"{name.capitalize()}: already posted today, skipping.")
+            continue
+        for e in found:
+            post(e, dry)
+        if mark and not dry:
+            open(mark, "w").close()
 
 
 if __name__ == "__main__":

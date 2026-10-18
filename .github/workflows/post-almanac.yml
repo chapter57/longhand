@@ -5,8 +5,12 @@ name: Post the almanac
 
 on:
   schedule:
-    # 13:07 UTC: 9:07 a.m. in New York in summer, 8:07 a.m. in winter.
-    - cron: "7 13 * * *"
+    # GitHub sometimes starts scheduled runs late, or skips them when it's
+    # busy, so there are two: the morning one, and a backup a few hours later
+    # that only posts to accounts the morning run didn't reach. Times are UTC:
+    # 13:47 is 9:47 a.m. in New York in summer, 8:47 a.m. in winter.
+    - cron: "47 13 * * *"
+    - cron: "23 17 * * *"
   workflow_dispatch:
     inputs:
       date:
@@ -30,6 +34,15 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml
+      - name: Note today's date in New York
+        id: day
+        run: echo "date=$(TZ=America/New_York date +%F)" >> "$GITHUB_OUTPUT"
+      # Remembers which accounts have already posted today's entry.
+      - uses: actions/cache/restore@v4
+        with:
+          path: .posted
+          key: posted-${{ steps.day.outputs.date }}-${{ github.run_id }}
+          restore-keys: posted-${{ steps.day.outputs.date }}-
       - run: python .github/scripts/post_almanac.py
         env:
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
@@ -38,3 +51,10 @@ jobs:
           MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
           ALMANAC_DATE: ${{ inputs.date }}
           DRY_RUN: ${{ inputs.dry_run }}
+          # A run by hand for another day posts regardless.
+          POSTED_DIR: ${{ inputs.date == '' && '.posted' || '' }}
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .posted
+          key: posted-${{ steps.day.outputs.date }}-${{ github.run_id }}
