@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-{%- assign page_title = page.title %}{% if page.collection == "almanac" %}{% assign page_title = page.name %}{% endif %}
+{%- assign page_title = page.title %}{% if page.collection == "almanac" %}{% assign page_title = page.name %}{% elsif page.collection == "reviews" %}{% assign page_title = page.book | append: ", reviewed by " | append: page.reviewer %}{% endif %}
 <title>{% if page_title %}{{ page_title }} · {% endif %}{{ site.title }}</title>
 {%- assign description = page.dek | default: page.description | default: page.note | default: site.description | strip_newlines | strip %}
 <meta name="description" content="{{ description | escape }}">
@@ -27,6 +27,7 @@
     <nav class="nav" aria-label="Main">
       <a href="{{ '/write/' | relative_url }}">Write</a>
       <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" or page.collection == "almanac" %} aria-current="page"{% endif %}>Almanac</a>
+      <a href="{{ '/reviews/' | relative_url }}"{% if page.url == "/reviews/" or page.collection == "reviews" %} aria-current="page"{% endif %}>Reviews</a>
       <a href="{{ '/#contact' | relative_url }}">Write to us</a>
     </nav>
   </div>
@@ -43,6 +44,7 @@
     <ul class="colophon-links">
       <li><a href="{{ '/write/' | relative_url }}">The writing app</a></li>
       <li><a href="{{ '/almanac/' | relative_url }}">The Almanac</a></li>
+      <li><a href="{{ '/reviews/' | relative_url }}">Reviews</a></li>
       {%- if site.bluesky %}
       <li><a href="{{ site.bluesky }}" rel="me">Follow us on Bluesky</a></li>
       {%- endif %}

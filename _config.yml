@@ -14,6 +14,10 @@ email: longhandlit@gmail.com
 # handle changes.
 bluesky: "https://bsky.app/profile/did:plc:fpx4ses6oidyiwqyp4zkl7vq"
 
+# Review submissions are emailed to the address above through Web3Forms. This
+# key only allows sending to that inbox, so it's safe in public.
+web3forms_key: "7c72d9f4-af8b-4949-98fd-3433f5086676"
+
 # The site's address. The CNAME file next to this one tells GitHub Pages
 # to serve the site at this domain.
 url: "https://longhandlit.com"
@@ -25,12 +29,20 @@ collections:
   almanac:
     output: true
     permalink: /almanac/:title/
+  # Readers' reviews of classic books, one file each, added after vetting.
+  reviews:
+    output: true
+    permalink: /reviews/:name/
 
 defaults:
   - scope:
       type: almanac
     values:
       layout: almanac-entry
+  - scope:
+      type: reviews
+    values:
+      layout: review
 
 markdown: kramdown
 kramdown:

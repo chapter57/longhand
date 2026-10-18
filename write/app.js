@@ -134,7 +134,7 @@
   const STARTER = [
     ["h2", "Start here"],
     ["p", "This is Longhand, a quiet place to write. Click at the end of this page and begin, or open <em>Pieces</em> and start a fresh one."],
-    ["p", "Your writing stays with you. Longhand saves every piece as you type, in this browser on this computer. Nothing is sent to us or to anyone else. There’s no account, and we never see a word you write."],
+    ["p", "Your writing stays with you. Longhand saves every piece as you type, in this browser on this computer. Nothing is sent to us or to anyone else. There’s no account, and we never see a word you write, unless you choose <em>Submit as a review</em> under <em>Export</em> to send us a piece."],
     ["p", "That also means your pieces live only here. They won’t appear on another computer, and clearing this browser’s history and site data erases them. When a piece matters, use <em>Export</em> to keep a copy: a Word document for submitting your work, a PDF, Markdown for Substack and blogs, or plain text."],
     ["p", "If you like, install Longhand on your computer. It gets its own window and icon, and it works without the internet. In Chrome, click the install icon at the right end of the address bar. In Microsoft Edge, open the ⋯ menu and choose <em>Apps</em>, then <em>Install this site as an app</em>."],
     ["p", "Quotes curl themselves as you type: “Like this,” she said. Two hyphens become a dash — like that. Three dots become an ellipsis…"],
@@ -170,7 +170,8 @@
 
   // ---------- saving ----------
   // Every piece is saved as you type, in this browser's storage on this computer.
-  // Nothing is ever sent anywhere. Export is the only way writing leaves Longhand.
+  // Nothing is ever sent anywhere. Export, and Submit as a review when the writer
+  // chooses it for one piece, are the only ways writing leaves Longhand.
   let saveTimer = 0;
 
   function scheduleSave() {
@@ -525,6 +526,74 @@
   });
   document.addEventListener("pointerdown", (e) => {
     if (!$("exportMenu").hidden && !e.target.closest(".export")) closeExportMenu();
+  });
+
+  // ---------- submitting a piece as a review ----------
+  // Sends this one piece, only when the writer asks, to Longhand's editors by
+  // email through Web3Forms. The access key only allows sending to that inbox.
+  const REVIEW_KEY = "7c72d9f4-af8b-4949-98fd-3433f5086676";
+  const REVIEW_MIN = 300, REVIEW_MAX = 1500;
+  const reviewForm = $("reviewForm");
+  function openReview() {
+    closeExportMenu();
+    saveNow();
+    const words = countWords();
+    const count = $("reviewCount");
+    count.textContent = `This piece is ${words.toLocaleString()} ${words === 1 ? "word" : "words"}. Reviews are usually 700 to 1,000.`;
+    const ok = words >= REVIEW_MIN && words <= REVIEW_MAX;
+    count.classList.toggle("warn", !ok);
+    if (!ok) count.textContent += words < REVIEW_MIN ? " This one is too short to send yet." : " Please trim it before sending.";
+    $("reviewSend").disabled = !ok;
+    const saved = prefsStore.get("reviewer", {});
+    reviewForm.reviewer.value = reviewForm.reviewer.value || saved.name || "";
+    reviewForm.email.value = reviewForm.email.value || saved.email || "";
+    $("reviewStatus").textContent = "";
+    $("reviewStatus").classList.remove("warn");
+    $("reviewDialog").showModal();
+  }
+  $("reviewItem").onclick = openReview;
+  $("reviewCancel").onclick = () => $("reviewDialog").close();
+  reviewForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = reviewForm, status = $("reviewStatus");
+    if (f.botcheck.checked) return;
+    const text = LonghandExport.toText(htmlToDoc(toHTML(blocksOf(editor))));
+    prefsStore.set("reviewer", { name: f.reviewer.value.trim(), email: f.email.value.trim() });
+    $("reviewSend").disabled = true;
+    status.classList.remove("warn");
+    status.textContent = "Sending…";
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: REVIEW_KEY,
+          subject: `Review: ${f.book.value.trim()}, by ${f.reviewer.value.trim()}`,
+          from_name: "Longhand Reviews",
+          name: f.reviewer.value.trim(),
+          email: f.email.value.trim(),
+          book: f.book.value.trim(),
+          book_author: f.book_author.value.trim(),
+          words: countWords(),
+          sent_from: "the Longhand writing app",
+          review: text,
+          botcheck: false,
+        }),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.success) throw new Error(out.message || res.status);
+      $("reviewDialog").close();
+      f.book.value = f.book_author.value = "";
+      f.consent.checked = false;
+      toast("Sent. Thank you! Your review is on its way to Longhand's editors.");
+    } catch (err) {
+      status.classList.add("warn");
+      status.textContent = navigator.onLine === false
+        ? "You're offline, so it couldn't be sent. Your piece is safe here; try again when you're connected."
+        : "Something went wrong and it wasn't sent. Your piece is safe here; please try again in a moment.";
+    } finally {
+      $("reviewSend").disabled = false;
+    }
   });
 
   // ---------- toast ----------

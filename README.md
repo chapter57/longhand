@@ -27,6 +27,12 @@ The site is set up for **Pages CMS**, a free editor. Its settings are in `.pages
 
 Please check every date and fact against two sources before adding it, and write entries in your own words.
 
+## Reviews
+
+Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) in two ways: from the writing app (Export, then *Submit as a review*), or with the form on the Reviews page (`/reviews/`). Either way the review arrives by email at longhandlit@gmail.com, sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`) and `write/app.js` (`REVIEW_KEY`), only allows sending to that inbox. The writing app sends nothing unless the writer chooses *Submit as a review* for a piece, and then sends only that piece.
+
+Nothing is published automatically. To publish a review you've approved, open Pages CMS, choose **Reviews**, click **Add an entry**, and fill in the book, its author, the reviewer's name, the date, a one-line summary, the Bookshop.org link if you have one, and the review itself. It appears on the Reviews page a minute or two after you save, at its own address. Reviews are stored one file each in `_reviews/`; `_layouts/review.html` is the design of each review's page.
+
 ## Posting to Bluesky and Mastodon
 
 GitHub posts the almanac to Bluesky and Mastodon three times a day, New York time (an hour earlier in winter):
@@ -51,6 +57,7 @@ If an account's details are missing, that account is skipped. To post by hand, o
 ## What's where
 
 - `index.html`: the front page, with Today in the Almanac, the app and "Write to us"
+- `reviews/index.html`, `_reviews/`: the Reviews page, its submission form, and the published reviews
 - `_data/social.yml` and `assets/cards/`: the midday quotes and evening quote cards
 - `_almanac/`: the almanac, one file per day; `_layouts/almanac-entry.html` is the design of each entry's page
 - `almanac/index.html`: the Almanac page, with this week and the whole calendar

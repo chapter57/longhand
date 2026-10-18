@@ -76,3 +76,49 @@ content:
         label: The full entry
         description: The longer, original piece on the entry's own page.
         type: rich-text
+  - name: reviews
+    label: Reviews
+    description: Readers' reviews of classic books. Add one after you've approved it; it appears on the Reviews page.
+    type: collection
+    path: _reviews
+    filename: "{fields.date}-{primary}.md"
+    view:
+      fields: [book, reviewer, date]
+      primary: book
+      sort: [date]
+    fields:
+      - name: book
+        label: Book title
+        type: string
+        required: true
+      - name: book_author
+        label: Book author
+        type: string
+        required: true
+      - name: book_year
+        label: Year the book was published
+        type: string
+      - name: reviewer
+        label: Reviewer's name
+        description: As they asked for it to appear.
+        type: string
+        required: true
+      - name: date
+        label: Date published on the site
+        type: date
+        required: true
+      - name: description
+        label: One-line summary
+        description: Shown in the list of reviews and in links shared on social media.
+        type: string
+      - name: bookshop
+        label: Bookshop.org link
+        description: A link to the book on Bookshop.org, with your affiliate ID.
+        type: string
+      - name: read
+        label: Read it free link
+        description: For public-domain books, a link to a free copy, such as on Project Gutenberg.
+        type: string
+      - name: body
+        label: The review
+        type: rich-text

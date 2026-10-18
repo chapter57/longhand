@@ -1,0 +1,105 @@
+---
+layout: default
+title: Reviews
+description: "Readers' reviews of classic books, and how to send us yours."
+---
+{%- assign reviews = site.reviews | sort: "date" | reverse -%}
+<section class="lead wrap">
+  <div class="lead-copy">
+    <p class="kicker">Read · Reviews</p>
+    <h1>Classic books, read again.</h1>
+    <p class="dek">Readers write about the old books that still matter to them: what surprised them, what moved them, and why they think you should read it too. Send us yours.</p>
+  </div>
+  <div class="lead-art lead-art-small">{% include ill-envelope.html %}</div>
+</section>
+
+<section class="dept wrap" aria-labelledby="published-h">
+  <h2 class="label" id="published-h"><span>From our readers</span></h2>
+  {%- if reviews.size > 0 %}
+  <ol class="review-list">
+    {%- for r in reviews %}
+    <li>
+      <a class="review-item" href="{{ r.url | relative_url }}">
+        <span class="review-book">{{ r.book }}</span>
+        <span class="review-meta">{{ r.book_author }} · reviewed by {{ r.reviewer }}</span>
+        {%- if r.description %}<span class="review-dek">{{ r.description }}</span>{% endif %}
+      </a>
+    </li>
+    {%- endfor %}
+  </ol>
+  {%- else %}
+  <p class="soon">The first reviews are coming soon. Yours could be one of them.</p>
+  {%- endif %}
+</section>
+
+<div class="wrap">{% include ill-rule.html %}</div>
+
+<section class="dept wrap" id="submit" aria-labelledby="submit-h">
+  <h2 class="label" id="submit-h"><span>Send us a review</span><span class="label-note">we read everything</span></h2>
+  <div class="review-grid">
+    <div class="review-guide">
+      <p class="dept-title">What we're looking for</p>
+      <ul>
+        <li><strong>A classic:</strong> any book published at least fifty years ago.</li>
+        <li><strong>700 to 1,000 words.</strong></li>
+        <li><strong>Your response, not a summary.</strong> Tell us what the book did to you, what surprised you, what you'd say to someone about to read it. Assume your reader knows the story, or doesn't need to.</li>
+        <li><strong>Spoilers are fine</strong> if you warn us at the top.</li>
+        <li><strong>Your own writing,</strong> not published anywhere else.</li>
+        <li><strong>Written by you, not by AI.</strong> We don't publish reviews written or rewritten with AI tools; we want to hear your voice.</li>
+      </ul>
+      <p>As the review's author, you keep the copyright. By sending a review you agree that Longhand may publish it on this site and share it on social media. We may make small edits for clarity and will check any larger changes with you first. We'll write back either way, usually within two weeks.</p>
+      <p>You can write it in <a href="{{ '/write/' | relative_url }}">Longhand</a>, our free writing app, and send it from there: choose <em>Export</em>, then <em>Submit as a review</em>. Or paste it into the form here.</p>
+    </div>
+    <form class="review-form" id="reviewForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="{{ site.web3forms_key }}">
+      <input type="hidden" name="from_name" value="Longhand Reviews">
+      <input type="hidden" name="subject" value="Review from the Longhand website">
+      <input type="hidden" name="sent_from" value="the Longhand website">
+      <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label>Your name, as it should appear <input name="name" autocomplete="name" required maxlength="80"></label>
+      <label>Your email, so we can reply (never published) <input name="email" type="email" autocomplete="email" required maxlength="120"></label>
+      <label>Book title <input name="book" required maxlength="160"></label>
+      <label>Book author <input name="book_author" required maxlength="120"></label>
+      <label>Your review <textarea name="review" rows="14" required></textarea></label>
+      <p class="fine review-words" id="reviewWords" aria-live="polite">0 words. Reviews are usually 700 to 1,000.</p>
+      <label class="check"><input name="consent" type="checkbox" required> I wrote this review myself, without using AI, and it hasn't been published elsewhere. Longhand may publish it on longhandlit.com and share it on social media. The review's author keeps the copyright.</label>
+      <p class="actions"><button class="button" type="submit">Send review</button></p>
+      <p class="fine review-status" id="reviewStatus" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+(function () {
+  var form = document.getElementById("reviewForm");
+  var words = document.getElementById("reviewWords"), status = document.getElementById("reviewStatus");
+  var count = function () { var t = form.review.value.trim(); return t ? t.split(/\s+/).length : 0; };
+  form.review.addEventListener("input", function () {
+    var n = count();
+    words.textContent = n.toLocaleString() + (n === 1 ? " word" : " words") + ". Reviews are usually 700 to 1,000.";
+  });
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (form.botcheck.checked) return;
+    var n = count();
+    if (n < 300) { status.textContent = "That's a little short. Reviews are usually 700 to 1,000 words."; return; }
+    if (n > 1500) { status.textContent = "That's a little long. Please trim it to about 1,000 words."; return; }
+    var data = Object.fromEntries(new FormData(form));
+    data.subject = "Review: " + data.book + ", by " + data.name;
+    data.words = n;
+    data.botcheck = false;
+    var button = form.querySelector("button");
+    button.disabled = true;
+    status.textContent = "Sending…";
+    fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok || !j.success) throw new Error(j.message); }); })
+      .then(function () {
+        form.reset();
+        words.textContent = "0 words. Reviews are usually 700 to 1,000.";
+        status.textContent = "Sent. Thank you! We'll write back soon.";
+      })
+      .catch(function () { status.textContent = "Something went wrong and it wasn't sent. Please try again in a moment, or email it to {{ site.email }}."; })
+      .then(function () { button.disabled = false; });
+  });
+})();
+</script>
