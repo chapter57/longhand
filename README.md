@@ -27,6 +27,19 @@ The site is set up for **Pages CMS**, a free editor. Its settings are in `.pages
 
 Please check every date and fact against two sources before adding it, and write entries in your own words.
 
+## Posting to Bluesky and Mastodon
+
+Every morning at about 9 a.m. New York time (8 a.m. in winter), GitHub posts the day's entry to Bluesky and Mastodon: its short note and a link to its full page. Days with no entry are skipped. The posting is done by `.github/workflows/post-almanac.yml` and `.github/scripts/post_almanac.py`.
+
+The accounts' details are kept privately in the project's **Settings → Secrets and variables → Actions**:
+
+- `BLUESKY_HANDLE`: the account name, e.g. `longhandlit.bsky.social`
+- `BLUESKY_APP_PASSWORD`: an app password made in Bluesky under Settings → Privacy and security → App passwords
+- `MASTODON_INSTANCE`: the server's address, e.g. `https://mastodon.social`
+- `MASTODON_TOKEN`: an access token made in Mastodon under Preferences → Development → New application, with the `write:statuses` permission
+
+If an account's details are missing, that account is skipped. To post by hand, or to preview without posting, open the **Actions** tab, choose **Post the almanac**, and click **Run workflow**.
+
 ## What's where
 
 - `index.html`: the front page, with Today in the Almanac, the app and "Write to us"
@@ -39,6 +52,7 @@ Please check every date and fact against two sources before adding it, and write
 - `_config.yml`: site settings
 - `fonts/`: Literata and IBM Plex Mono, both under the SIL Open Font License (see `fonts/OFL.txt`)
 - `write/`: the Longhand writing app
+- `.github/`: the daily posting to Bluesky and Mastodon
 - `sw.js`: retires the offline copy that older installs of the app kept at the site's main address
 
 ## The domain
