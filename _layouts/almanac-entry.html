@@ -14,7 +14,7 @@ layout: default
   <header class="piece-head">
     <div class="piece-art entry-art" data-art="{{ page.month }}-{{ page.day }}"></div>
     <div class="piece-title">
-      <p class="entry-kicker"><span class="kind kind-{{ page.kind | slugify }}">{{ page.kind }}</span><span>{{ month_name }} {{ page.day }}, {{ page.year }}</span></p>
+      <p class="entry-kicker"><span class="kind kind-{{ page.kind | slugify }}">{{ page.kind }}</span><span>{{ month_name }} {{ page.day }}, {% if page.year < 0 %}{{ page.year | abs }} BC{% else %}{{ page.year }}{% endif %}</span></p>
       <h1 class="piece-name">{{ page.name }}</h1>
       <p class="piece-dek">{{ page.note }}</p>
     </div>
