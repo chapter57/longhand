@@ -20,8 +20,12 @@ on:
       slot:
         description: "Which post"
         type: choice
-        options: [morning, midday, evening]
+        options: [morning, midday, evening, announcement]
         default: morning
+      announcement:
+        description: 'For "announcement": the post''s id in _data/announcements.yml (e.g. reviews-call)'
+        required: false
+        default: ""
       date:
         description: 'Post another day instead of today, as "MM-DD" (e.g. 11-30). Leave empty for today.'
         required: false
@@ -70,6 +74,7 @@ jobs:
           MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
           MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
           SLOT: ${{ steps.day.outputs.slot }}
+          ANNOUNCEMENT: ${{ inputs.announcement }}
           ALMANAC_DATE: ${{ inputs.date }}
           DRY_RUN: ${{ inputs.dry_run }}
           # A run by hand for another day posts regardless.

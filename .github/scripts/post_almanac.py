@@ -14,7 +14,10 @@ A platform whose secrets aren't set is skipped.
 Settings, all from the environment:
   BLUESKY_HANDLE, BLUESKY_APP_PASSWORD     e.g. longhandlit.bsky.social
   MASTODON_INSTANCE, MASTODON_TOKEN        e.g. https://mastodon.social
-  SLOT                                     morning (the default), midday or evening
+  SLOT                                     morning (the default), midday or evening, or
+                                           announcement for a one-off post
+  ANNOUNCEMENT                             with SLOT=announcement, which one, by its id in
+                                           _data/announcements.yml
   ALMANAC_DATE                             optional, "MM-DD", to post another day
   DRY_RUN                                  "true" to print the posts, not send them
   POSTED_DIR                               optional folder that remembers which posts
@@ -130,6 +133,19 @@ def evening(e, social):
 SLOTS = {"morning": morning, "midday": midday, "evening": evening}
 
 
+def announcement(name):
+    """A one-off post from _data/announcements.yml, as (entry-like link, post)."""
+    found = [a for a in yaml.safe_load(open("_data/announcements.yml", encoding="utf-8")) if a["id"] == name]
+    if not found:
+        raise SystemExit(f"No announcement called {name!r} in _data/announcements.yml.")
+    a = found[0]
+    link = {"url": a["link"], "name": a["title"], "note": a["description"], "image_file": a.get("image")}
+    return link, {"bluesky": a["bluesky"].strip(), "mastodon": a.get("mastodon", a["bluesky"]).strip(),
+                  "card": True, "card_title": a["title"],
+                  "hashtags": a.get("hashtags", "#Books #Reading #Literature"),
+                  "tags": a.get("tags", ["BookSky", "Books", "Reading", "Literature", "Writing"])}
+
+
 # ---------- sending ----------
 
 def request(url, data=None, headers=None, method=None):
@@ -218,11 +234,12 @@ def post_bluesky(e, post, dry):
             print("Bluesky: picture upload failed,", err.code)
             return None
 
-    record = {"$type": "app.bsky.feed.post", "text": text, "langs": ["en"], "tags": BLUESKY_TAGS,
+    record = {"$type": "app.bsky.feed.post", "text": text, "langs": ["en"], "tags": post.get("tags", BLUESKY_TAGS),
               "createdAt": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")}
     if post.get("card"):
-        card = {"uri": e["url"], "title": e["name"] + " · The Longhand Almanac", "description": fit(e["note"], 280)}
-        picture = portrait(e)
+        card = {"uri": e["url"], "title": post.get("card_title") or e["name"] + " · The Longhand Almanac",
+                "description": fit(e["note"], 280)}
+        picture = (open(e["image_file"], "rb").read(), "image/png") if e.get("image_file") else portrait(e)
         if picture and len(picture[0]) <= BLUESKY_IMAGE_LIMIT:
             blob = upload(*picture)
             if blob:
@@ -264,7 +281,8 @@ def mastodon_media(instance, token, path, alt):
 
 def post_mastodon(e, post, dry):
     # Mastodon counts every link as 23 characters.
-    text = f"{post['mastodon']}\n\n{e['url']}\n\n{HASHTAGS}"
+    tags = post.get("hashtags", HASHTAGS)
+    text = f"{post['mastodon']}\n\n{e['url']}\n\n{tags}"
     if dry:
         print(f"--- Mastodon ---\n{text}" + ("\n[image] " + post["image"][0] if post.get("image") else ""))
         return
@@ -283,10 +301,10 @@ def post_mastodon(e, post, dry):
         else:
             # No picture: put the words themselves in the post, if they fit.
             words = post["fallback"]
-            if len(words) + 23 + len(HASHTAGS) + 6 > MASTODON_LIMIT:
+            if len(words) + 23 + len(tags) + 6 > MASTODON_LIMIT:
                 print("Mastodon: the reading doesn't fit without its picture, skipping.")
                 return
-            status["status"] = f"{words}\n\n{e['url']}\n\n{HASHTAGS}"
+            status["status"] = f"{words}\n\n{e['url']}\n\n{tags}"
     out = request(instance + "/api/v1/statuses", status,
                   {"Authorization": "Bearer " + token, "Idempotency-Key": "longhand-" + uuid.uuid5(uuid.NAMESPACE_URL, text).hex})
     print("Mastodon: posted", out.get("url"))
@@ -296,8 +314,14 @@ def main():
     today = datetime.datetime.now(ZoneInfo("America/New_York"))
     want = os.environ.get("ALMANAC_DATE", "").strip() or today.strftime("%m-%d")
     slot = os.environ.get("SLOT", "").strip() or "morning"
+    dry = os.environ.get("DRY_RUN", "").lower() == "true"
+    if slot == "announcement":
+        e, post = announcement(os.environ.get("ANNOUNCEMENT", "").strip())
+        for send in (post_bluesky, post_mastodon):
+            send(e, post, dry)
+        return
     if slot not in SLOTS:
-        raise SystemExit(f"Unknown SLOT {slot!r}; use morning, midday or evening.")
+        raise SystemExit(f"Unknown SLOT {slot!r}; use morning, midday, evening or announcement.")
     month, day = (int(x) for x in want.split("-"))
     found = [e for e in read_entries() if e["month"] == month and e["day"] == day]
     social = [s for s in read_social() if s["month"] == month and s["day"] == day]
@@ -305,7 +329,6 @@ def main():
         print(f"Nothing in the almanac for {want} at {slot}; nothing to post.")
         return
     e, post = found[0], SLOTS[slot](found[0], social[0] if social else None)
-    dry = os.environ.get("DRY_RUN", "").lower() == "true"
     posted = os.environ.get("POSTED_DIR", "").strip()
     if posted:
         os.makedirs(posted, exist_ok=True)

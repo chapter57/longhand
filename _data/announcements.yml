@@ -1,0 +1,32 @@
+# One-off posts for Bluesky and Mastodon, sent by hand: Actions → Post the
+# almanac → Run workflow, choose "announcement" and type the post's id.
+#
+#   id           a short name for the post
+#   link         the page the post links to (shown as a card on Bluesky)
+#   title        the card's title
+#   description  the card's description
+#   image        optional: a picture for the card, 1200×630, in assets/cards/
+#   bluesky      the post's words, at most 300 characters (the link goes in the card)
+#   mastodon     optional: Mastodon's words, if different; the link and hashtags are added
+#   hashtags     optional: Mastodon's hashtags (normally #Books #Reading #Literature)
+#   tags         optional: Bluesky's hidden tags
+
+- id: reviews-call
+  link: https://longhandlit.com/reviews/
+  title: Send us a review · Longhand
+  description: Write about a classic book that still matters to you. 700 to 1,000 words, in your own voice. We read everything.
+  image: assets/cards/reviews-call.png
+  hashtags: "#Books #Reading #ClassicBooks #AmWriting"
+  tags: [BookSky, Books, Reading, ClassicBooks, Writing, AmWriting]
+  bluesky: |
+    Longhand is looking for reviews of classic books.
+
+    Pick a book at least 50 years old that still matters to you, and tell us why in 700 to 1,000 words, in your own voice (no AI). We'll publish our favorites on longhandlit.com.
+
+    Guidelines and the form are here:
+  mastodon: |
+    Longhand is looking for reviews of classic books.
+
+    Pick a book at least 50 years old that still matters to you, and tell us why in 700 to 1,000 words, in your own voice (no AI). We'll publish our favorites on longhandlit.com. You can even write it in our free writing app and send it from there.
+
+    Guidelines and the form:
