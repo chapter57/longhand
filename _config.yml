@@ -15,7 +15,18 @@ email: longhandlit@gmail.com
 url: "https://longhandlit.com"
 baseurl: ""
 
-# The almanac's entries are in _data/almanac.yml.
+# The almanac: one file per day in _almanac/, each with its own page at
+# /almanac/<file name>/.
+collections:
+  almanac:
+    output: true
+    permalink: /almanac/:title/
+
+defaults:
+  - scope:
+      type: almanac
+    values:
+      layout: almanac-entry
 
 markdown: kramdown
 kramdown:

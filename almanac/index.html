@@ -3,12 +3,12 @@ layout: default
 title: The Almanac
 description: "A literary almanac, one entry a day: writers' birthdays, famous books' anniversaries, and moments from literary history."
 ---
-{%- assign months = site.data.almanac | sort: "day" | group_by_exp: "e", "e.month | prepend: '0' | slice: -2, 2" | sort: "name" -%}
+{%- assign months = site.almanac | sort: "day" | group_by_exp: "e", "e.month | prepend: '0' | slice: -2, 2" | sort: "name" -%}
 <section class="lead lead-almanac wrap">
   <div class="lead-copy">
     <p class="kicker">Read · the Almanac</p>
     <h1>The Longhand Almanac</h1>
-    <p class="dek">One entry a day: a writer's birthday, a famous book's anniversary, or a moment from literary history, with a link to start reading.</p>
+    <p class="dek">One entry a day: a writer's birthday, a famous book's anniversary, or a moment from literary history, with the story behind it and a link to start reading.</p>
     <div class="moons-wrap">{% include ill-moons.html %}</div>
   </div>
   <div class="lead-art lead-art-small">{% include ill-postmark.html month=site.time %}</div>
@@ -35,9 +35,9 @@ description: "A literary almanac, one entry a day: writers' birthdays, famous bo
         <p class="cal-day"><span class="cal-day-n">{{ e.day }}</span><span class="cal-today">Today</span></p>
         <div class="cal-body">
           <p class="entry-kicker"><span class="kind kind-{{ e.kind | slugify }}">{{ e.kind }}</span><span>{{ e.year }}</span></p>
-          <p class="cal-name">{{ e.name }}</p>
+          <p class="cal-name"><a href="{{ e.url | relative_url }}">{{ e.name }}</a></p>
           <p class="cal-note">{{ e.note }}</p>
-          <p class="entry-links"><a href="{{ e.read }}">{{ e.read_label }}</a><a href="{{ e.wiki }}">Read more</a></p>
+          <p class="entry-links"><a href="{{ e.url | relative_url }}">The full entry</a><a href="{{ e.read }}">{{ e.read_label }}</a></p>
         </div>
       </li>
       {%- endfor %}

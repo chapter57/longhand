@@ -6,14 +6,15 @@ The site is built by GitHub Pages from this project. Changes go live a minute or
 
 ## The Almanac
 
-The almanac is a calendar, written once, in `_data/almanac.yml`: one entry per day, each with a short note, a link to read the work and a link to read more. Nobody has to post anything. The site picks the entries by itself, using each visitor's own date:
+The almanac is a calendar, written once: one file per day in `_almanac/`. Each file holds the day's short note, links, and a longer original entry, which gets its own page (for example `/almanac/11-30-mark-twain/`). Nobody has to post anything. The site picks the entries by itself, using each visitor's own date:
 
 - **Today in the Almanac** on the front page shows today's entry, and a short "Coming up" list for the next six days. On a day with no entry, it shows the next one coming up.
 - **This week** at the top of the Almanac page (`/almanac/`) shows today and the six days after. Below it is the whole calendar, month by month, with today highlighted.
+- Each entry's own page has the full piece, with links to the day before and the day after.
 
 The calendar currently runs from October 17 to November 30. Entries repeat every year.
 
-Each entry has a lettered card in place of a portrait. To use a real portrait, add an image that is public domain or freely licensed (Wikimedia Commons is a good source), and fill in its credit.
+**Portraits.** Each entry's `portrait` names a Wikipedia article (for example `John_Keats`). The reader's browser loads the picture at the top of that article, but only if it's a freely licensed picture from Wikimedia Commons, and credits its maker and license, linked to the picture's page. For a book or event, `pictured` says who is shown. If there is no portrait, or Wikipedia can't be reached, a lettered card appears instead. To store a portrait on the site instead, add the image and fill in `image` and `image_credit`.
 
 ## Editing the calendar (the easy way)
 
@@ -21,17 +22,17 @@ The site is set up for **Pages CMS**, a free editor. Its settings are in `.pages
 
 1. Go to [app.pagescms.org](https://app.pagescms.org) and sign in with GitHub.
 2. Open the `chapter57/longhand` project and choose the `gh-pages` branch.
-3. Choose **Almanac calendar** in the sidebar. Add, change or remove entries: month and day, the year it happened, the kind (Born, Died, Published or Event), the name, a note of two or three sentences, the links, and an optional portrait with its credit.
+3. Choose **Almanac calendar** in the sidebar. Open an entry to change it, or add a new one: month and day, the year it happened, the kind (Born, Died, Published or Event), the name, a note of two or three sentences, the portrait, the links, and the full entry.
 4. Click **Save**. The site updates a minute or two later.
 
-Please check every date and fact against two sources before adding it. Saving through Pages CMS may remove the explanatory comments at the top of `_data/almanac.yml`; the entries themselves are kept.
+Please check every date and fact against two sources before adding it, and write entries in your own words.
 
 ## What's where
 
 - `index.html`: the front page, with Today in the Almanac, the app and "Write to us"
-- `_data/almanac.yml`: the almanac's calendar, one entry per day
+- `_almanac/`: the almanac, one file per day; `_layouts/almanac-entry.html` is the design of each entry's page
 - `almanac/index.html`: the Almanac page, with this week and the whole calendar
-- `assets/almanac.js`: picks today's entry and the coming week; `_includes/almanac-data.html` hands it the calendar
+- `assets/almanac.js`: picks today's entry and the coming week, and loads the portraits; `_includes/almanac-data.html` hands it the calendar
 - `assets/images/almanac/`: portraits, if any are added
 - `_layouts/`, `_includes/`, `assets/site.css`: the page design; the drawings (pen, moon phases, postmark, envelope, ink rule) are in `_includes/ill-*.html`
 - `.pages.yml`: the Pages CMS editing screens

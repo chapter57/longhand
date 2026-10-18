@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{%- assign months = site.almanac | sort: "day" | group_by_exp: "e", "e.month | prepend: '0' | slice: -2, 2" | sort: "name" -%}
+{%- assign ordered = "" | split: "" -%}
+{%- for m in months -%}{%- for e in m.items -%}{%- assign ordered = ordered | push: e -%}{%- endfor -%}{%- endfor -%}
+{%- assign last = ordered.size | minus: 1 -%}
+{%- for e in ordered -%}{%- if e.url == page.url -%}{%- assign here = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+{%- if here == 0 %}{% assign prev = ordered[last] %}{% else %}{% assign prev_i = here | minus: 1 %}{% assign prev = ordered[prev_i] %}{% endif -%}
+{%- if here == last %}{% assign next = ordered[0] %}{% else %}{% assign next_i = here | plus: 1 %}{% assign next = ordered[next_i] %}{% endif -%}
+{%- assign month_name = "2000-" | append: page.month | append: "-01" | date: "%B" -%}
+<article class="piece wrap" data-almanac-piece="{{ page.month }}-{{ page.day }}">
+  <p class="kicker piece-back"><a href="{{ '/almanac/' | relative_url }}">The Almanac</a> · {{ month_name }} {{ page.day }}</p>
+  <header class="piece-head">
+    <div class="piece-art entry-art" data-art="{{ page.month }}-{{ page.day }}"></div>
+    <div class="piece-title">
+      <p class="entry-kicker"><span class="kind kind-{{ page.kind | slugify }}">{{ page.kind }}</span><span>{{ month_name }} {{ page.day }}, {{ page.year }}</span></p>
+      <h1 class="piece-name">{{ page.name }}</h1>
+      <p class="piece-dek">{{ page.note }}</p>
+    </div>
+  </header>
+  <div class="piece-body">
+{{ content }}
+  </div>
+  <footer class="piece-foot">
+    <p class="entry-links"><a href="{{ page.read }}">{{ page.read_label }}</a>{% if page.wiki %}<a href="{{ page.wiki }}">Read more on Wikipedia</a>{% endif %}</p>
+    <nav class="piece-nav" aria-label="More from the almanac">
+      <a class="piece-prev" href="{{ prev.url | relative_url }}"><span class="piece-nav-label">The day before</span><span class="piece-nav-name">{{ prev.name }}</span></a>
+      <a class="piece-next" href="{{ next.url | relative_url }}"><span class="piece-nav-label">The day after</span><span class="piece-nav-name">{{ next.name }}</span></a>
+    </nav>
+    <p class="fine">Spot a mistake? Write to us at <a href="mailto:{{ site.email }}?subject={{ page.name | uri_escape }}">{{ site.email }}</a>.</p>
+  </footer>
+</article>
+
+{% include almanac-data.html %}

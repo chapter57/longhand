@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-{%- assign description = page.dek | default: page.description | default: site.description | strip_newlines | strip %}
+{%- assign page_title = page.title %}{% if page.collection == "almanac" %}{% assign page_title = page.name %}{% endif %}
+<title>{% if page_title %}{{ page_title }} · {% endif %}{{ site.title }}</title>
+{%- assign description = page.dek | default: page.description | default: page.note | default: site.description | strip_newlines | strip %}
 <meta name="description" content="{{ description | escape }}">
 <meta property="og:site_name" content="{{ site.title }}">
-<meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+<meta property="og:title" content="{{ page_title | default: site.title | escape }}">
 <meta property="og:description" content="{{ description | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <link rel="icon" href="{{ '/write/icons/icon.svg' | relative_url }}" type="image/svg+xml">
@@ -25,7 +26,7 @@
     <a class="wordmark" href="{{ '/' | relative_url }}">Longhand</a>
     <nav class="nav" aria-label="Main">
       <a href="{{ '/write/' | relative_url }}">Write</a>
-      <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" %} aria-current="page"{% endif %}>Almanac</a>
+      <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" or page.collection == "almanac" %} aria-current="page"{% endif %}>Almanac</a>
       <a href="{{ '/#contact' | relative_url }}">Write to us</a>
     </nav>
   </div>
