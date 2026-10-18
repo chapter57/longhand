@@ -45,8 +45,9 @@ description: "Readers' reviews of classic books, and how to send us yours."
         <li><strong>Your response, not a summary.</strong> Tell us what the book did to you, what surprised you, what you'd say to someone about to read it. Assume your reader knows the story, or doesn't need to.</li>
         <li><strong>Spoilers are fine</strong> if you warn us at the top.</li>
         <li><strong>Your own writing,</strong> not published anywhere else.</li>
+        <li><strong>Written by you, not by AI.</strong> We don't publish reviews written or rewritten with AI tools; we want to hear your voice.</li>
       </ul>
-      <p>You keep the copyright. By sending a review you agree that Longhand may publish it on this site and share it on social media. We may make small edits for clarity and will check any larger changes with you first. We'll write back either way, usually within two weeks.</p>
+      <p>As the review's author, you keep the copyright. By sending a review you agree that Longhand may publish it on this site and share it on social media. We may make small edits for clarity and will check any larger changes with you first. We'll write back either way, usually within two weeks.</p>
       <p>You can write it in <a href="{{ '/write/' | relative_url }}">Longhand</a>, our free writing app, and send it from there: choose <em>Export</em>, then <em>Submit as a review</em>. Or paste it into the form here.</p>
     </div>
     <form class="review-form" id="reviewForm" action="https://api.web3forms.com/submit" method="POST">
@@ -61,7 +62,7 @@ description: "Readers' reviews of classic books, and how to send us yours."
       <label>Book author <input name="book_author" required maxlength="120"></label>
       <label>Your review <textarea name="review" rows="14" required></textarea></label>
       <p class="fine review-words" id="reviewWords" aria-live="polite">0 words. Reviews are usually 700 to 1,000.</p>
-      <label class="check"><input name="consent" type="checkbox" required> This is my own original writing, not published elsewhere. Longhand may publish it on longhandlit.com and share it on social media; I keep the copyright.</label>
+      <label class="check"><input name="consent" type="checkbox" required> I wrote this review myself, without using AI, and it hasn't been published elsewhere. Longhand may publish it on longhandlit.com and share it on social media. The review's author keeps the copyright.</label>
       <p class="actions"><button class="button" type="submit">Send review</button></p>
       <p class="fine review-status" id="reviewStatus" aria-live="polite"></p>
     </form>

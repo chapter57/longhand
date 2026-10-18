@@ -29,7 +29,7 @@ Please check every date and fact against two sources before adding it, and write
 
 ## Reviews
 
-Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words) in two ways: from the writing app (Export, then *Submit as a review*), or with the form on the Reviews page (`/reviews/`). Either way the review arrives by email at longhandlit@gmail.com, sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`) and `write/app.js` (`REVIEW_KEY`), only allows sending to that inbox. The writing app sends nothing unless the writer chooses *Submit as a review* for a piece, and then sends only that piece.
+Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) in two ways: from the writing app (Export, then *Submit as a review*), or with the form on the Reviews page (`/reviews/`). Either way the review arrives by email at longhandlit@gmail.com, sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`) and `write/app.js` (`REVIEW_KEY`), only allows sending to that inbox. The writing app sends nothing unless the writer chooses *Submit as a review* for a piece, and then sends only that piece.
 
 Nothing is published automatically. To publish a review you've approved, open Pages CMS, choose **Reviews**, click **Add an entry**, and fill in the book, its author, the reviewer's name, the date, a one-line summary, the Bookshop.org link if you have one, and the review itself. It appears on the Reviews page a minute or two after you save, at its own address. Reviews are stored one file each in `_reviews/`; `_layouts/review.html` is the design of each review's page.
 
