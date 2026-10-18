@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="piece wrap">
+  <p class="kicker piece-back"><a href="{{ '/reviews/' | relative_url }}">Reviews</a></p>
+  <header class="review-head">
+    <p class="entry-kicker"><span class="kind">Review</span><span>{{ page.date | date: "%B %-d, %Y" }}</span></p>
+    <h1 class="piece-name">{{ page.book }}</h1>
+    <p class="piece-dek">{{ page.book_author }}{% if page.book_year %}, {{ page.book_year }}{% endif %}</p>
+    <p class="review-by">Reviewed by {{ page.reviewer }}</p>
+  </header>
+  <div class="piece-body review-body">
+{{ content }}
+  </div>
+  <footer class="piece-foot review-foot">
+    {%- if page.bookshop or page.read %}
+    <p class="entry-links">{% if page.bookshop %}<a href="{{ page.bookshop }}">Buy from an independent bookstore</a>{% endif %}{% if page.read %}<a href="{{ page.read }}">Read it free</a>{% endif %}</p>
+    {%- endif %}
+    <p class="fine">Have a classic of your own to write about? <a href="{{ '/reviews/#submit' | relative_url }}">Send us a review</a>.</p>
+  </footer>
+</article>
