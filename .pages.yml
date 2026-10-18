@@ -1,5 +1,5 @@
 # Pages CMS settings: the editing screen at https://app.pagescms.org.
-# The almanac's calendar is one list of entries in _data/almanac.yml.
+# The almanac is one file per day in _almanac/. Each has its own page.
 
 media:
   input: assets/images/almanac
@@ -9,9 +9,12 @@ content:
   - name: almanac
     label: Almanac calendar
     description: One entry per day. The site shows today's entry on the front page and the coming week on the Almanac page by itself.
-    type: file
-    path: _data/almanac.yml
-    list: true
+    type: collection
+    path: _almanac
+    filename: "{fields.month}-{fields.day}-{primary}.md"
+    view:
+      fields: [name, month, day, kind]
+      primary: name
     fields:
       - name: month
         label: Month (1–12)
@@ -53,11 +56,23 @@ content:
         label: Words on that link
         description: For example, "Read his poems free" or "Find it at a library".
         type: string
+      - name: portrait
+        label: Portrait from Wikipedia
+        description: The end of the Wikipedia address for the person to picture, for example "John_Keats". The picture at the top of that article is shown, with its credit. Leave empty for no portrait.
+        type: string
+      - name: pictured
+        label: Who is pictured
+        description: Only needed when the entry is a book or an event, for example "Herman Melville".
+        type: string
       - name: image
-        label: Portrait (optional)
-        description: Only use images that are public domain or freely licensed.
+        label: Portrait stored on the site (optional)
+        description: Used instead of the Wikipedia portrait. Only use images that are public domain or freely licensed.
         type: image
       - name: image_credit
         label: Portrait credit
         description: Who made the image and its license, for example "Joseph Severn, public domain, via Wikimedia Commons".
         type: string
+      - name: body
+        label: The full entry
+        description: The longer, original piece on the entry's own page.
+        type: rich-text

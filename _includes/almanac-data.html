@@ -1,2 +1,6 @@
-<script>window.LONGHAND_ALMANAC = {{ site.data.almanac | jsonify }};</script>
+<script>window.LONGHAND_ALMANAC = [
+{%- for e in site.almanac %}
+  {"month": {{ e.month | jsonify }}, "day": {{ e.day | jsonify }}, "year": {{ e.year | jsonify }}, "kind": {{ e.kind | jsonify }}, "name": {{ e.name | jsonify }}, "note": {{ e.note | jsonify }}, "url": {{ e.url | relative_url | jsonify }}, "read": {{ e.read | jsonify }}, "read_label": {{ e.read_label | jsonify }}, "wiki": {{ e.wiki | jsonify }}, "portrait": {{ e.portrait | jsonify }}, "pictured": {{ e.pictured | jsonify }}, "image": {{ e.image | jsonify }}, "image_credit": {{ e.image_credit | jsonify }}}{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+];</script>
 <script src="{{ '/assets/almanac.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
