@@ -52,7 +52,9 @@ The accounts' details are kept privately in the project's **Settings → Secrets
 - `MASTODON_INSTANCE`: the server's address, e.g. `https://mastodon.social`
 - `MASTODON_TOKEN`: an access token made in Mastodon under Preferences → Development → New application, with the `write:statuses` and `write:media` permissions (the second lets it post the quote cards)
 
-If an account's details are missing, that account is skipped. To post by hand, or to preview without posting, open the **Actions** tab, choose **Post the almanac**, click **Run workflow**, and pick which post.
+If an account's details are missing, that account is skipped. For a one-off post, like an announcement, add it to `_data/announcements.yml` (the file explains each field), then run **Post the almanac** by hand, choose **announcement**, and type the post's id.
+
+To post by hand, or to preview without posting, open the **Actions** tab, choose **Post the almanac**, click **Run workflow**, and pick which post.
 
 ## What's where
 
