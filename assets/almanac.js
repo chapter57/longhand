@@ -60,15 +60,16 @@
       ">" + art(e) + "</div>";
   }
 
+  function yearText(y) { return y < 0 ? -y + " BC" : String(y); }
   function ago(e, today) {
-    var n = today.getFullYear() - e.year;
+    var n = today.getFullYear() - e.year - (e.year < 0 ? 1 : 0); // there was no year 0
     if (n <= 0) return "";
     return n + (n === 1 ? " year" : " years") + " ago";
   }
 
   function card(e, today, opts) {
     opts = opts || {};
-    var when = MONTHS[e.month - 1] + " " + e.day + ", " + e.year;
+    var when = MONTHS[e.month - 1] + " " + e.day + ", " + yearText(e.year);
     var years = opts.isToday ? ago(e, today) : "";
     var links = (e.url ? '<a href="' + esc(e.url) + '">The full entry</a>' : "") +
       '<a href="' + esc(e.read) + '">' + esc(e.read_label || "Read") + "</a>";

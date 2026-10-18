@@ -12,7 +12,7 @@ The almanac is a calendar, written once: one file per day in `_almanac/`. Each f
 - **This week** at the top of the Almanac page (`/almanac/`) shows today and the six days after. Below it is the whole calendar, month by month, with today highlighted.
 - Each entry's own page has the full piece, with links to the day before and the day after.
 
-The calendar currently runs from October 17 to November 30. Entries repeat every year.
+The calendar currently runs from October 17 to December 31. Entries repeat every year.
 
 **Portraits.** Each entry's `portrait` names a Wikipedia article (for example `John_Keats`). The reader's browser loads the picture at the top of that article, but only if it's a freely licensed picture from Wikimedia Commons, and credits its maker and license, linked to the picture's page. For a book or event, `pictured` says who is shown. If there is no portrait, or Wikipedia can't be reached, a lettered card appears instead. To store a portrait on the site instead, add the image and fill in `image` and `image_credit`.
 

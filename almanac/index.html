@@ -34,7 +34,7 @@ description: "A literary almanac, one entry a day: writers' birthdays, famous bo
       <li class="cal-row" id="d-{{ e.month }}-{{ e.day }}">
         <p class="cal-day"><span class="cal-day-n">{{ e.day }}</span><span class="cal-today">Today</span></p>
         <div class="cal-body">
-          <p class="entry-kicker"><span class="kind kind-{{ e.kind | slugify }}">{{ e.kind }}</span><span>{{ e.year }}</span></p>
+          <p class="entry-kicker"><span class="kind kind-{{ e.kind | slugify }}">{{ e.kind }}</span><span>{% if e.year < 0 %}{{ e.year | abs }} BC{% else %}{{ e.year }}{% endif %}</span></p>
           <p class="cal-name"><a href="{{ e.url | relative_url }}">{{ e.name }}</a></p>
           <p class="cal-note">{{ e.note }}</p>
           <p class="entry-links"><a href="{{ e.url | relative_url }}">The full entry</a><a href="{{ e.read }}">{{ e.read_label }}</a></p>

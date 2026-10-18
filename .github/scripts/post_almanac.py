@@ -48,7 +48,8 @@ def headline(e):
         "Died": "Died on this day in {year}: {name}.",
         "Published": "Published on this day in {year}: {name}.",
     }.get(e["kind"], "On this day in {year}: {name}.")
-    return lead.format(year=e["year"], name=e["name"])
+    year = f"{-e['year']} BC" if e["year"] < 0 else e["year"]
+    return lead.format(year=year, name=e["name"])
 
 
 def fit(text, limit):
