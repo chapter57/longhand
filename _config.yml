@@ -3,9 +3,12 @@
 
 title: Longhand
 description: >-
-  Longhand is a free writing app and a literary almanac: a writer, a book or
-  a moment from literary history for every day.
+  The Longhand Almanac: a writer, a book or a moment from literary history,
+  every day, with the story behind it and somewhere to start reading.
 season: Autumn 2026
+# The almanac's first day. Entries open one day at a time from here: readers
+# see today's and every earlier one, never the days still to come.
+almanac_start: "2026-10-17"
 
 # Where readers write to us.
 email: longhandlit@gmail.com

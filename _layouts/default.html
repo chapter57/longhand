@@ -2,6 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+document.documentElement.classList.add("js");
+// The almanac opens one day at a time from almanac_start: an entry is open once
+// its date has come round, in the visitor's own time zone, since then.
+(function () {
+  var p = {{ site.almanac_start | jsonify }}.split("-"), start = new Date(+p[0], p[1] - 1, +p[2]);
+  window.longhandOpen = function (m, d) {
+    var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var on = new Date(today.getFullYear(), m - 1, d);
+    if (on > today) on = new Date(today.getFullYear() - 1, m - 1, d);
+    return on >= start;
+  };
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 {%- assign page_title = page.title %}{% if page.collection == "almanac" %}{% assign page_title = page.name %}{% elsif page.collection == "reviews" %}{% assign page_title = page.book | append: ", reviewed by " | append: page.reviewer %}{% endif %}
 <title>{% if page_title %}{{ page_title }} · {% endif %}{{ site.title }}</title>
@@ -29,7 +43,6 @@
   <div class="masthead-inner">
     <a class="wordmark" href="{{ '/' | relative_url }}">Longhand</a>
     <nav class="nav" aria-label="Main">
-      <a href="{{ '/write/' | relative_url }}">Write</a>
       <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" or page.collection == "almanac" %} aria-current="page"{% endif %}>Almanac</a>
       <a href="{{ '/reviews/' | relative_url }}"{% if page.url == "/reviews/" or page.collection == "reviews" %} aria-current="page"{% endif %}>Reviews</a>
       <a href="{{ '/#contact' | relative_url }}">Write to us</a>

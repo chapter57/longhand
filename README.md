@@ -1,16 +1,20 @@
 # Longhand
 
-A quiet place to write, and a little company while you do: a free writing app and a literary almanac with a writer, a book or a moment from literary history for every day.
+A literary almanac: a writer, a book or a moment from literary history, every day, with reviews of classic books by readers. A free writing app for writers is tucked in at the bottom of the front page and in the Reviews section.
 
 The site is built by GitHub Pages from this project. Changes go live a minute or two after they reach the `gh-pages` branch. Readers write to longhandlit@gmail.com (set as `email` in `_config.yml`).
 
 ## The Almanac
 
-The almanac is a calendar, written once: one file per day in `_almanac/`. Each file holds the day's short note, links, and a longer original entry, which gets its own page (for example `/almanac/11-30-mark-twain/`). Nobody has to post anything. The site picks the entries by itself, using each visitor's own date:
+The almanac is a calendar, written once: one file per day in `_almanac/`. Each file holds the day's short note, links, and a longer original entry, which gets its own page (for example `/almanac/11-30-mark-twain/`). Nobody has to post anything. The site picks the entries by itself, using each visitor's own date.
 
-- **Today in the Almanac** on the front page shows today's entry, and a short "Coming up" list for the next six days. On a day with no entry, it shows the next one coming up.
-- **This week** at the top of the Almanac page (`/almanac/`) shows today and the six days after. Below it is the whole calendar, month by month, with today highlighted.
-- Each entry's own page has the full piece, with links to the day before and the day after.
+Entries open one day at a time, starting from `almanac_start` in `_config.yml` (October 17, 2026). Readers see today's entry and every earlier one, never the days still to come, so there's a reason to come back tomorrow:
+
+- **Today in the Almanac** on the front page shows today's entry, and "Earlier this week" lists the six days before.
+- **This past week** at the top of the Almanac page (`/almanac/`) shows today and the six days before, and below it every entry so far, month by month.
+- An entry's own page links to the day before and the day after, but only to days that have opened. Visiting a day still to come shows "Not yet," with the date it opens.
+
+Once a full year has passed, every entry is open. (Pages for days to come are hidden by the reader's browser, not removed, so they're still in the site's files.)
 
 The calendar currently runs from October 17 to December 31. Entries repeat every year.
 
@@ -66,7 +70,7 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 
 ## What's where
 
-- `index.html`: the front page, with Today in the Almanac, the app and "Write to us"
+- `index.html`: the front page: Today in the Almanac, the call for reviews, "Write to us", and the writing app at the bottom
 - `reviews/index.html`, `_reviews/`: the Reviews page, its submission form, and the published reviews
 - `_data/social.yml` and `assets/cards/`: the midday quotes and evening quote cards
 - `_almanac/`: the almanac, one file per day; `_layouts/almanac-entry.html` is the design of each entry's page

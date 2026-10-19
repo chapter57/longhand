@@ -1,6 +1,7 @@
-// The Longhand Almanac: shows today's entry and the coming week, using the
-// visitor's own date. Entries come from _data/almanac.yml, embedded in the
-// page as window.LONGHAND_ALMANAC.
+// The Longhand Almanac: shows today's entry and the past week, using the
+// visitor's own date. Entries come from _almanac/, embedded in the page as
+// window.LONGHAND_ALMANAC. Entries open one day at a time (window.longhandOpen,
+// in the page head), so nothing still to come is shown.
 (function () {
   "use strict";
   var entries = window.LONGHAND_ALMANAC || [];
@@ -15,8 +16,9 @@
     });
   }
   function slug(s) { return String(s).toLowerCase().replace(/[^a-z]+/g, "-"); }
+  function isOpen(e) { return window.longhandOpen ? window.longhandOpen(e.month, e.day) : true; }
   function onDay(date) {
-    return entries.filter(function (e) { return e.month === date.getMonth() + 1 && e.day === date.getDate(); });
+    return entries.filter(function (e) { return e.month === date.getMonth() + 1 && e.day === date.getDate() && isOpen(e); });
   }
   function anchor(e) { return "d-" + e.month + "-" + e.day; }
 
@@ -90,7 +92,7 @@
 
   var today = new Date();
 
-  // Front page: today's entry, or the next one coming up, plus the week ahead.
+  // Front page: today's entry, or the latest one, plus the days just before.
   var todayEl = document.querySelector("[data-almanac-today]");
   if (todayEl && entries.length) {
     var dateEl = document.querySelector("[data-almanac-date]");
@@ -99,20 +101,20 @@
     if (hits.length) {
       todayEl.innerHTML = hits.map(function (e) { return card(e, today, { feature: true, isToday: true }); }).join("");
     } else {
-      var next = null, nextDate = null;
-      for (var i = 1; i <= 366 && !next; i++) {
-        var d = addDays(today, i), h = onDay(d);
-        if (h.length) { next = h[0]; nextDate = d; }
+      var last = null, lastDate = null;
+      for (var i = 1; i <= 366 && !last; i++) {
+        var d = addDays(today, -i), h = onDay(d);
+        if (h.length) { last = h[0]; lastDate = d; }
       }
-      todayEl.innerHTML = next
-        ? '<p class="entry-coming">Nothing in the almanac for today. Coming up on ' + esc(dayLabel(nextDate)) + ":</p>" + card(next, today, { feature: true })
-        : '<p class="soon">New entries are on their way.</p>';
+      todayEl.innerHTML = last
+        ? '<p class="entry-coming">Nothing new in the almanac today. The latest, from ' + esc(dayLabel(lastDate)) + ":</p>" + card(last, today, { feature: true })
+        : '<p class="soon">The first entry opens soon.</p>';
     }
     var stripEl = document.querySelector("[data-almanac-strip]");
     if (stripEl) {
       var items = [];
       for (var j = 1; j <= 6; j++) {
-        var dd = addDays(today, j);
+        var dd = addDays(today, -j);
         onDay(dd).forEach(function (e) {
           items.push('<li><a href="' + esc(e.url || "/almanac/#" + anchor(e)) + '"><span class="strip-date">' +
             esc(DAYS[dd.getDay()].slice(0, 3) + " " + dd.getDate()) + '</span><span class="strip-name">' + esc(e.name) + "</span></a></li>");
@@ -123,20 +125,26 @@
     }
   }
 
-  // Almanac page: the next seven days, and today's place in the full calendar.
+  // Almanac page: today and the six days before, and today's place in the calendar.
   var weekEl = document.querySelector("[data-almanac-week]");
   if (weekEl && entries.length) {
     var parts = [];
     for (var k = 0; k < 7; k++) {
-      var day = addDays(today, k);
+      var day = addDays(today, -k);
       var found = onDay(day);
       if (!found.length) continue;
       parts.push('<div class="week-day' + (k === 0 ? " is-today" : "") + '">' +
         '<p class="week-day-label">' + (k === 0 ? "Today \u00b7 " : "") + esc(dayLabel(day)) + "</p>" +
         found.map(function (e) { return card(e, today, { isToday: k === 0 }); }).join("") + "</div>");
     }
-    weekEl.innerHTML = parts.length ? parts.join("") : '<p class="soon">Nothing in the almanac this week yet. New entries are on their way.</p>';
+    weekEl.innerHTML = parts.length ? parts.join("") : '<p class="soon">The first entry opens soon.</p>';
   }
+
+  // An entry's page links to the days on either side, but only to days that have opened.
+  Array.prototype.forEach.call(document.querySelectorAll("[data-almanac-day]"), function (a) {
+    var md = a.getAttribute("data-almanac-day").split("-");
+    if (window.longhandOpen && !window.longhandOpen(+md[0], +md[1])) a.hidden = true;
+  });
   onDay(today).forEach(function (e) {
     var row = document.getElementById(anchor(e));
     if (row) row.classList.add("is-today");
@@ -177,7 +185,7 @@
       return getJSON("https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title)).then(function (s) {
         var thumb = s.thumbnail && s.thumbnail.source, orig = s.originalimage && s.originalimage.source;
         if (!thumb || !orig || thumb.indexOf("/wikipedia/commons/") < 0) return null;
-        var file = decodeURIComponent(orig.split("/").pop());
+        var file = decodeURIComponent(orig.split("?")[0].split("/").pop());
         var info = { src: thumb, big: orig, file: file, artist: "", license: "" };
         return getJSON("https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&format=json&origin=*&titles=" +
           encodeURIComponent("File:" + file)).then(function (c) {
