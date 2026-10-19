@@ -10,6 +10,8 @@ import glob
 import json
 import os
 import re
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -20,8 +22,17 @@ UA = {"User-Agent": "LonghandAlmanac/1.0 (https://longhandlit.com; longhandlit@g
 
 
 def get(url):
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
-        return r.read()
+    # Wikimedia turns away fast or repeated requests, so go slowly and wait when asked.
+    for wait in (5, 20, 60, 120):
+        time.sleep(1.5)
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+                return r.read()
+        except urllib.error.HTTPError as err:
+            if err.code != 429:
+                raise
+            time.sleep(wait)
+    raise RuntimeError("Wikimedia kept saying to slow down")
 
 
 def plain(html):
@@ -29,11 +40,12 @@ def plain(html):
 
 
 os.makedirs(OUT, exist_ok=True)
-credits = {}
+saved = os.path.join(OUT, "credits.yml")
+credits = (yaml.safe_load(open(saved, encoding="utf-8")) or {}) if os.path.exists(saved) else {}
 for path in sorted(glob.glob("_almanac/*.md")):
     e = yaml.safe_load(open(path, encoding="utf-8").read().split("---", 2)[1])
     key = f"{e['month']}-{e['day']}"
-    if not e.get("portrait"):
+    if not e.get("portrait") or key in credits:
         continue
     try:
         summary = json.loads(get("https://en.wikipedia.org/api/rest_v1/page/summary/"
@@ -44,9 +56,9 @@ for path in sorted(glob.glob("_almanac/*.md")):
             print(key, "no Commons picture")
             continue
         data = None
-        if thumb and (summary["originalimage"].get("width") or 0) > 1080:
+        if thumb and (summary["originalimage"].get("width") or 0) > 960:
             try:
-                data = get(re.sub(r"/\d+px-([^/]+)$", r"/1080px-\1", thumb))
+                data = get(re.sub(r"/\d+px-([^/]+)$", r"/960px-\1", thumb))
             except Exception:
                 data = None
         data = data or get(original)
