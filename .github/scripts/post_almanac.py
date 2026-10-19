@@ -19,10 +19,12 @@ Settings, all from the environment:
                                            so the script renews it every week and keeps the
                                            new one, locked with this one, in INSTAGRAM_DIR
   INSTAGRAM_DIR                            optional folder for the renewed token
-  SLOT                                     morning (the default), midday or evening, or
-                                           announcement for a one-off post
+  SLOT                                     morning (the default), midday or evening,
+                                           announcement for a one-off post, or instagram for
+                                           a carousel post on Instagram only
   ANNOUNCEMENT                             with SLOT=announcement, which one, by its id in
-                                           _data/announcements.yml
+                                           _data/announcements.yml; with SLOT=instagram, which
+                                           carousel, by its id in _data/instagram.yml
   ALMANAC_DATE                             optional, "MM-DD", to post another day
   DRY_RUN                                  "true" to print the posts, not send them
   POSTED_DIR                               optional folder that remembers which posts
@@ -413,6 +415,47 @@ def post_instagram(e, post, dry):
     return True
 
 
+def post_instagram_carousel(name, dry):
+    """Posts a carousel from _data/instagram.yml: its slides, drawn into
+    assets/instagram/<id>-<n>.jpg, and its caption."""
+    found = [p for p in yaml.safe_load(open("_data/instagram.yml", encoding="utf-8")) if p["id"] == name]
+    if not found:
+        raise SystemExit(f"No Instagram post called {name!r} in _data/instagram.yml.")
+    post = found[0]
+    images = [f"{SITE}/assets/instagram/{name}-{n}.jpg" for n in range(1, len(post["slides"]) + 1)]
+    caption = curly(post["caption"].strip())[:2200]
+    if dry:
+        print(f"--- Instagram carousel ({len(caption)} characters) ---\n{caption}\n" + "\n".join(images))
+        return
+    if not os.environ.get("INSTAGRAM_TOKEN"):
+        raise SystemExit("Instagram: no token set.")
+    token = instagram_token()
+    me = instagram_call("me", {"fields": "user_id,username"}, token)
+    user = me["user_id"]
+    recent = instagram_call(f"{user}/media", {"fields": "caption", "limit": 5}, token)
+    if any((m.get("caption") or "").strip() == caption for m in recent.get("data", [])):
+        print("Instagram: already posted, skipping.")
+        return
+
+    def ready(container):
+        # Instagram fetches each picture from the site before it can be used.
+        for _ in range(30):
+            status = instagram_call(container, {"fields": "status_code"}, token).get("status_code")
+            if status == "FINISHED":
+                return container
+            if status == "ERROR":
+                raise SystemExit("Instagram: couldn't use a picture for " + container)
+            time.sleep(4)
+        raise SystemExit("Instagram: a picture took too long")
+
+    children = [ready(instagram_call(f"{user}/media", {"image_url": url, "is_carousel_item": "true"}, token, post=True)["id"])
+                for url in images]
+    album = ready(instagram_call(f"{user}/media", {"media_type": "CAROUSEL", "children": ",".join(children),
+                                                   "caption": caption}, token, post=True)["id"])
+    out = instagram_call(f"{user}/media_publish", {"creation_id": album}, token, post=True)
+    print(f"Instagram: posted carousel {out.get('id')} as @{me.get('username')}")
+
+
 def main():
     today = datetime.datetime.now(ZoneInfo("America/New_York"))
     want = os.environ.get("ALMANAC_DATE", "").strip() or today.strftime("%m-%d")
@@ -423,8 +466,11 @@ def main():
         for send in (post_bluesky, post_mastodon):
             send(e, post, dry)
         return
+    if slot == "instagram":
+        post_instagram_carousel(os.environ.get("ANNOUNCEMENT", "").strip(), dry)
+        return
     if slot not in SLOTS:
-        raise SystemExit(f"Unknown SLOT {slot!r}; use morning, midday, evening or announcement.")
+        raise SystemExit(f"Unknown SLOT {slot!r}; use morning, midday, evening, announcement or instagram.")
     month, day = (int(x) for x in want.split("-"))
     found = [e for e in read_entries() if e["month"] == month and e["day"] == day]
     social = [s for s in read_social() if s["month"] == month and s["day"] == day]
