@@ -289,6 +289,22 @@ h1, h2, h3 { text-wrap: balance; }
 .piece-nav-name { font-size: 1.1rem; line-height: 1.3; }
 
 /* ---------- reviews ---------- */
+/* Front page: the call for reviews, and the writing app at the bottom. */
+.review-call-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 2rem clamp(1.5rem, 5vw, 4rem); align-items: center; padding-bottom: clamp(1rem, 3vw, 2rem); }
+.review-call .dept-title { font-size: clamp(1.7rem, 3.4vw, 2.3rem); }
+.review-call p { max-width: var(--measure); }
+.review-call-art { max-width: 13rem; justify-self: center; color: var(--accent); }
+.tool { padding-top: clamp(2rem, 5vw, 3rem); }
+.tool-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 1rem clamp(1.5rem, 5vw, 4rem); align-items: start; }
+.tool-title { font-size: 1.2rem; margin: 0; }
+.tool p { max-width: var(--measure); color: var(--ink-soft); margin-top: 0; }
+.tool .actions { margin-top: 0.75rem; }
+.site-note { padding-bottom: 1rem; }
+/* The almanac opens one day at a time: days still to come stay out of sight. */
+.js .cal-row:not(.is-open), .js .cal-month:not(.has-open), .js [data-almanac-piece]:not(.is-open) { display: none; }
+.piece-nav a[hidden] { display: none; }
+.cal-more { font-style: italic; color: var(--ink-soft); margin: 1.5rem 0 0.5rem; }
+.not-yet .piece-name { margin-top: 1rem; }
 .review-list { list-style: none; margin: 0; padding: 0; max-width: 52rem; }
 .review-item { display: flex; flex-direction: column; gap: 0.2rem; padding-block: 1rem; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); }
 .review-item:hover .review-book { color: var(--accent); }
@@ -339,7 +355,8 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* ---------- narrow screens ---------- */
 @media (max-width: 760px) {
-  .lead, .write-grid, .today-grid, .band-inner { grid-template-columns: minmax(0, 1fr); }
+  .lead, .write-grid, .today-grid, .band-inner, .review-call-grid, .tool-grid { grid-template-columns: minmax(0, 1fr); }
+  .review-call-art { display: none; }
   .entry, .entry-feature { grid-template-columns: 5.5rem minmax(0, 1fr); }
   .piece-head, .review-grid { grid-template-columns: minmax(0, 1fr); }
   .piece-art { max-width: 11rem; }
