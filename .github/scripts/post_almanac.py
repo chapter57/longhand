@@ -223,7 +223,7 @@ def post_bluesky(e, post, dry):
     handle, password = os.environ.get("BLUESKY_HANDLE"), os.environ.get("BLUESKY_APP_PASSWORD")
     if not handle or not password:
         print("Bluesky: no handle or app password set, skipping.")
-        return
+        return False
     api = "https://bsky.social/xrpc/"
     session = request(api + "com.atproto.server.createSession", {"identifier": handle, "password": password})
     auth = {"Authorization": "Bearer " + session["accessJwt"]}
@@ -235,7 +235,7 @@ def post_bluesky(e, post, dry):
         when = datetime.datetime.fromisoformat(rec.get("createdAt", "1970-01-01T00:00:00Z").replace("Z", "+00:00"))
         if rec.get("text") == text and when > recent:
             print("Bluesky: already posted, skipping.")
-            return
+            return True
 
     def upload(data, kind):
         req = urllib.request.Request(api + "com.atproto.repo.uploadBlob", data=data, method="POST",
@@ -271,6 +271,7 @@ def post_bluesky(e, post, dry):
     out = request(api + "com.atproto.repo.createRecord",
                   {"repo": session["did"], "collection": "app.bsky.feed.post", "record": record}, auth)
     print("Bluesky: posted", out.get("uri"))
+    return True
 
 
 def mastodon_media(instance, token, path, alt):
@@ -302,7 +303,7 @@ def post_mastodon(e, post, dry):
     instance, token = os.environ.get("MASTODON_INSTANCE"), os.environ.get("MASTODON_TOKEN")
     if not instance or not token:
         print("Mastodon: no instance or token set, skipping.")
-        return
+        return False
     if not instance.startswith("http"):
         instance = "https://" + instance
     instance = instance.rstrip("/")
@@ -316,11 +317,12 @@ def post_mastodon(e, post, dry):
             words = post["fallback"]
             if len(words) + 23 + len(tags) + 6 > MASTODON_LIMIT:
                 print("Mastodon: the reading doesn't fit without its picture, skipping.")
-                return
+                return False
             status["status"] = f"{words}\n\n{e['url']}\n\n{tags}"
     out = request(instance + "/api/v1/statuses", status,
                   {"Authorization": "Bearer " + token, "Idempotency-Key": "longhand-" + uuid.uuid5(uuid.NAMESPACE_URL, text).hex})
     print("Mastodon: posted", out.get("url"))
+    return True
 
 
 def instagram_call(path, params, token, post=False):
@@ -379,7 +381,7 @@ def instagram_token():
 
 def post_instagram(e, post, dry):
     if not post.get("instagram"):
-        return
+        return False
     month, day = e["month"], e["day"]
     image = f"{SITE}/assets/cards/{month}-{day}.jpg"
     caption = post["instagram"][:2200]
@@ -388,7 +390,7 @@ def post_instagram(e, post, dry):
         return
     if not os.environ.get("INSTAGRAM_TOKEN"):
         print("Instagram: no token set, skipping.")
-        return
+        return False
     token = instagram_token()
     me = instagram_call("me", {"fields": "user_id,username"}, token)
     user = me["user_id"]
@@ -396,7 +398,7 @@ def post_instagram(e, post, dry):
     recent = instagram_call(f"{user}/media", {"fields": "caption", "limit": 5}, token)
     if any((m.get("caption") or "").strip() == caption.strip() for m in recent.get("data", [])):
         print("Instagram: already posted, skipping.")
-        return
+        return True
     container = instagram_call(f"{user}/media", {"image_url": image, "caption": caption}, token, post=True)["id"]
     # Instagram fetches the picture from the site before it can be published.
     for _ in range(30):
@@ -408,6 +410,7 @@ def post_instagram(e, post, dry):
         time.sleep(4)
     out = instagram_call(f"{user}/media_publish", {"creation_id": container}, token, post=True)
     print(f"Instagram: posted {out.get('id')} as @{me.get('username')}")
+    return True
 
 
 def main():
@@ -437,8 +440,8 @@ def main():
         if mark and os.path.exists(mark) and not dry:
             print(f"{name.capitalize()}: already posted this {slot}, skipping.")
             continue
-        send(e, post, dry)
-        if mark and not dry:
+        # Only a post that went up is remembered, so a skipped account gets another try.
+        if send(e, post, dry) and mark and not dry:
             open(mark, "w").close()
 
 
