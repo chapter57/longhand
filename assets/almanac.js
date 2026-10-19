@@ -125,6 +125,26 @@
     }
   }
 
+  // Front page: the library card. The last few days are written in, today is
+  // stamped, and the lines below stay blank for the days still to come.
+  var cardEl = document.querySelector("[data-almanac-card-rows]");
+  if (cardEl && entries.length) {
+    var rows = [];
+    for (var c = 5; c >= 1; c--) {
+      var cd = addDays(today, -c);
+      onDay(cd).forEach(function (e) {
+        rows.push('<span class="libcard-row"><span class="libcard-date">' + esc(MONTHS[cd.getMonth()].slice(0, 3) + " " + cd.getDate()) +
+          '</span><span class="libcard-name">' + esc(e.name) + "</span></span>");
+      });
+    }
+    if (onDay(today).length) {
+      rows.push('<span class="libcard-row libcard-today"><span class="libcard-name">' +
+        '<span class="libcard-stamp">' + esc(MONTHS[today.getMonth()].slice(0, 3) + " " + today.getDate() + " " + today.getFullYear()) + "</span></span></span>");
+    }
+    while (rows.length < 7) rows.push('<span class="libcard-row"><span class="libcard-date"></span><span class="libcard-name"></span></span>');
+    cardEl.innerHTML = rows.join("");
+  }
+
   // Almanac page: today and the six days before, and today's place in the calendar.
   var weekEl = document.querySelector("[data-almanac-week]");
   if (weekEl && entries.length) {
