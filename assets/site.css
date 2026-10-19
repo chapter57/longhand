@@ -20,6 +20,9 @@
   --accent-wash: rgba(47, 79, 120, 0.12);
   --margin-red: rgba(170, 70, 60, 0.35);
   --shadow: rgba(20, 24, 30, 0.10);
+  --card: #F8F4E8;
+  --pencil: #3A4F6E;
+  --stamp-blend: multiply;
   --serif: "Literata", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
   --gutter: max(16px, 4vw);
@@ -39,6 +42,9 @@
     --accent-wash: rgba(157, 182, 214, 0.16);
     --margin-red: rgba(225, 130, 115, 0.35);
     --shadow: rgba(0, 0, 0, 0.45);
+    --card: #1D2024;
+    --pencil: #B3C3D8;
+    --stamp-blend: normal;
   }
 }
 :root[data-theme="dark"] {
@@ -54,6 +60,9 @@
   --accent-wash: rgba(157, 182, 214, 0.16);
   --margin-red: rgba(225, 130, 115, 0.35);
   --shadow: rgba(0, 0, 0, 0.45);
+  --card: #1D2024;
+  --pencil: #B3C3D8;
+  --stamp-blend: normal;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -197,6 +206,27 @@ h1, h2, h3 { text-wrap: balance; }
 /* ---------- the Almanac ---------- */
 .text-link { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .lead-almanac .moons-wrap { margin-top: 1.5rem; }
+/* The front page's library card, stamped once a day. */
+.lead-card { max-width: 24rem; }
+.libcard { position: relative; display: block; text-decoration: none; color: var(--ink); background: var(--card);
+  border: 1.5px solid var(--ink); border-radius: 5px; padding: 1.2rem 1.4rem 1.6rem; box-shadow: 0 10px 24px var(--shadow); transform: rotate(1.6deg); transition: transform 0.2s; }
+.libcard:hover { transform: rotate(0.6deg) translateY(-2px); }
+.libcard-head { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); }
+.libcard-title { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase; }
+.libcard-sub { font-style: italic; font-size: 0.8rem; color: var(--ink-soft); }
+.libcard-rows { display: block; }
+.libcard-row { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr); align-items: center; min-height: 2.15rem; border-bottom: 1px solid var(--rule); position: relative; }
+.libcard-row::before { content: ""; position: absolute; top: 0; bottom: 0; left: 3.2rem; width: 1px; background: var(--rule); }
+.libcard-date { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--ink-soft); text-transform: uppercase; }
+.libcard-name { font-style: italic; font-size: 0.95rem; color: var(--pencil); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 0.4rem; }
+.libcard-stamp { display: inline-block; font-family: var(--mono); font-weight: 500; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); border: 2px solid var(--accent); border-radius: 3px; padding: 0.2rem 0.55rem; transform: rotate(-4deg); margin: 0.35rem 0 0.35rem 0.2rem;
+  opacity: 0.88; mix-blend-mode: var(--stamp-blend); animation: libcard-stamp 0.5s 0.3s both cubic-bezier(.2,1.6,.4,1); }
+.libcard-today { min-height: 2.7rem; }
+.libcard-today .libcard-name { grid-column: 1 / -1; padding-left: 1.2rem; overflow: visible; }
+@keyframes libcard-stamp { from { transform: rotate(-4deg) scale(1.6); opacity: 0; } to { transform: rotate(-4deg) scale(1); opacity: 0.88; } }
+.libcard-pocket { position: absolute; left: 50%; bottom: -1px; width: 3.2rem; height: 0.55rem; margin-left: -1.6rem; border: 1.5px solid var(--ink); border-bottom: 0; border-radius: 1.6rem 1.6rem 0 0; background: var(--paper); }
+@media (prefers-reduced-motion: reduce) { .libcard-stamp { animation: none; } .libcard { transition: none; } }
 .lead-art-small { max-width: 11rem; }
 .lead-art-small .ill-postmark { width: 100%; }
 
