@@ -242,8 +242,10 @@ h1, h2, h3 { text-wrap: balance; }
 .strip-date { flex: 0 0 3.6rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--ink-soft); text-transform: uppercase; }
 .strip-name { font-size: 1.05rem; }
 .week-strip .actions { margin-top: 1rem; }
-.follow { margin: 1rem 0 0; font-size: 0.92rem; color: var(--ink-soft); }
-.follow a { font-weight: 600; }
+.social { display: flex; gap: 0.9rem; margin: 1.1rem 0 0; }
+.social a { color: var(--ink-soft); display: inline-flex; padding: 0.3rem; margin: -0.3rem; border-radius: 6px; }
+.social a:hover, .social a:focus-visible { color: var(--accent); }
+.social svg { display: block; }
 
 /* Almanac page: this week */
 .week-list { display: flex; flex-direction: column; gap: 2rem; max-width: 52rem; }

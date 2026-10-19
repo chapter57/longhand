@@ -13,6 +13,7 @@ email: longhandlit@gmail.com
 # The almanac's Bluesky account. This address keeps working if the account's
 # handle changes.
 bluesky: "https://bsky.app/profile/did:plc:fpx4ses6oidyiwqyp4zkl7vq"
+instagram: "https://www.instagram.com/longhandliterature/"
 
 # Review submissions are emailed to the address above through Web3Forms. This
 # key only allows sending to that inbox, so it's safe in public.
