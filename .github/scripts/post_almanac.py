@@ -1,4 +1,5 @@
-"""Posts the day's almanac to Bluesky and Mastodon, three times a day.
+"""Posts the day's almanac to Bluesky and Mastodon, three times a day, and
+the evening quote card to Instagram.
 
 Run by .github/workflows/post-almanac.yml. Each run makes one of the day's
 posts (today's date in New York time):
@@ -14,6 +15,10 @@ A platform whose secrets aren't set is skipped.
 Settings, all from the environment:
   BLUESKY_HANDLE, BLUESKY_APP_PASSWORD     e.g. longhandlit.bsky.social
   MASTODON_INSTANCE, MASTODON_TOKEN        e.g. https://mastodon.social
+  INSTAGRAM_TOKEN                          an Instagram API access token; it lasts 60 days,
+                                           so the script renews it every week and keeps the
+                                           new one, locked with this one, in INSTAGRAM_DIR
+  INSTAGRAM_DIR                            optional folder for the renewed token
   SLOT                                     morning (the default), midday or evening, or
                                            announcement for a one-off post
   ANNOUNCEMENT                             with SLOT=announcement, which one, by its id in
@@ -28,7 +33,9 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -41,6 +48,9 @@ SITE = "https://longhandlit.com"
 BLUESKY_LIMIT = 300
 MASTODON_LIMIT = 500
 HASHTAGS = "#OnThisDay #Books #Literature #Poetry"
+INSTAGRAM_API = "https://graph.instagram.com/v23.0/"
+INSTAGRAM_HASHTAGS = ("#poetry #books #literature #onthisday #bookstagram #booksofinstagram "
+                      "#classicbooks #classicliterature #literaryquotes #poetrycommunity #readingcommunity #writersofinstagram")
 # Bluesky carries these without showing them, so posts reach the book feeds
 # without using up the character limit.
 BLUESKY_TAGS = ["BookSky", "Books", "Literature", "OnThisDay", "Writing", "Poetry"]
@@ -127,6 +137,9 @@ def evening(e, social):
     return {"bluesky": top + "\n\nToday in the almanac: " + e["url"],
             "mastodon": top + "\n\nToday in the almanac:",
             "image": (f"assets/cards/{e['month']}-{e['day']}.png", alt[:1900]),
+            # Instagram links don't work in captions, so the link is in the profile.
+            "instagram": f"{top}\n\n{alt}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
+                         f"\n\n{INSTAGRAM_HASHTAGS}",
             "fallback": curly(str(p["text"]).strip()) + "\n— " + curly(p["author"])}
 
 
@@ -310,6 +323,93 @@ def post_mastodon(e, post, dry):
     print("Mastodon: posted", out.get("url"))
 
 
+def instagram_call(path, params, token, post=False):
+    params = {**params, "access_token": token}
+    data = urllib.parse.urlencode(params).encode()
+    url = INSTAGRAM_API + path
+    req = (urllib.request.Request(url, data=data, method="POST", headers={"User-Agent": USER_AGENT}) if post
+           else urllib.request.Request(url + "?" + data.decode(), headers={"User-Agent": USER_AGENT}))
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read())
+    except urllib.error.HTTPError as err:
+        raise SystemExit(f"Instagram: {path} answered {err.code}: {err.read().decode(errors='replace')[:500]}")
+
+
+def openssl(args, data, key):
+    """Locks or unlocks the saved token, with the token in the project's secrets as the key."""
+    out = subprocess.run(["openssl", "enc", "-aes-256-cbc", "-pbkdf2", "-pass", "env:LONGHAND_KEY", *args],
+                         input=data, capture_output=True, env={**os.environ, "LONGHAND_KEY": key})
+    return out.stdout if out.returncode == 0 else None
+
+
+def instagram_token():
+    """The newest Instagram token, renewed if it's more than a week old.
+
+    Instagram tokens last 60 days. Each renewal gives a new one, which can't be
+    written back to the project's secrets, so it's kept in INSTAGRAM_DIR (saved
+    between runs by the workflow), locked with the original token as the key."""
+    first = os.environ.get("INSTAGRAM_TOKEN", "").strip()
+    folder = os.environ.get("INSTAGRAM_DIR", "").strip()
+    saved = os.path.join(folder, "token") if folder else ""
+    token, renewed = first, 0
+    if saved and os.path.exists(saved):
+        opened = openssl(["-d"], open(saved, "rb").read(), first)
+        try:
+            kept = json.loads(opened)
+            token, renewed = kept["token"], kept["renewed"]
+        except (TypeError, ValueError, KeyError):
+            print("Instagram: the saved token couldn't be read; using the one in the secrets.")
+    if time.time() - renewed > 7 * 86400:
+        try:
+            fresh = instagram_call("refresh_access_token", {"grant_type": "ig_refresh_token"}, token)
+            token = fresh["access_token"]
+            if saved:
+                os.makedirs(folder, exist_ok=True)
+                locked = openssl(["-e"], json.dumps({"token": token, "renewed": time.time()}).encode(), first)
+                if locked:
+                    open(saved, "wb").write(locked)
+            print("Instagram: renewed the token; it now lasts until", time.strftime(
+                "%B %-d", time.gmtime(time.time() + fresh.get("expires_in", 0))))
+        except SystemExit as err:
+            # A token less than a day old can't be renewed yet; it still works.
+            print("Instagram: couldn't renew the token this time.", err)
+    return token
+
+
+def post_instagram(e, post, dry):
+    if not post.get("instagram"):
+        return
+    month, day = e["month"], e["day"]
+    image = f"{SITE}/assets/cards/{month}-{day}.jpg"
+    caption = post["instagram"][:2200]
+    if dry:
+        print(f"--- Instagram ({len(caption)} characters) ---\n{caption}\n[image] {image}")
+        return
+    if not os.environ.get("INSTAGRAM_TOKEN"):
+        print("Instagram: no token set, skipping.")
+        return
+    token = instagram_token()
+    me = instagram_call("me", {"fields": "user_id,username"}, token)
+    user = me["user_id"]
+    # Don't post the same card twice: look at the account's last few posts.
+    recent = instagram_call(f"{user}/media", {"fields": "caption", "limit": 5}, token)
+    if any((m.get("caption") or "").strip() == caption.strip() for m in recent.get("data", [])):
+        print("Instagram: already posted, skipping.")
+        return
+    container = instagram_call(f"{user}/media", {"image_url": image, "caption": caption}, token, post=True)["id"]
+    # Instagram fetches the picture from the site before it can be published.
+    for _ in range(30):
+        status = instagram_call(container, {"fields": "status_code"}, token).get("status_code")
+        if status == "FINISHED":
+            break
+        if status == "ERROR":
+            raise SystemExit("Instagram: couldn't use the picture at " + image)
+        time.sleep(4)
+    out = instagram_call(f"{user}/media_publish", {"creation_id": container}, token, post=True)
+    print(f"Instagram: posted {out.get('id')} as @{me.get('username')}")
+
+
 def main():
     today = datetime.datetime.now(ZoneInfo("America/New_York"))
     want = os.environ.get("ALMANAC_DATE", "").strip() or today.strftime("%m-%d")
@@ -332,7 +432,7 @@ def main():
     posted = os.environ.get("POSTED_DIR", "").strip()
     if posted:
         os.makedirs(posted, exist_ok=True)
-    for name, send in (("bluesky", post_bluesky), ("mastodon", post_mastodon)):
+    for name, send in (("bluesky", post_bluesky), ("mastodon", post_mastodon), ("instagram", post_instagram)):
         mark = os.path.join(posted, f"{slot}-{name}") if posted else ""
         if mark and os.path.exists(mark) and not dry:
             print(f"{name.capitalize()}: already posted this {slot}, skipping.")

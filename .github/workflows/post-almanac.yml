@@ -1,5 +1,6 @@
 # Posts the day's almanac to Bluesky and Mastodon three times a day: the
-# entry in the morning, a quote at midday and a quote card in the evening.
+# entry in the morning, a quote at midday and a quote card in the evening,
+# which also goes to Instagram.
 # The script is .github/scripts/post_almanac.py. The accounts' passwords are
 # kept in the project's Settings → Secrets and variables → Actions.
 name: Post the almanac
@@ -74,6 +75,13 @@ jobs:
           path: .posted
           key: posted-${{ steps.day.outputs.date }}-${{ github.run_id }}
           restore-keys: posted-${{ steps.day.outputs.date }}-
+      # The renewed Instagram token (locked; see the script).
+      - uses: actions/cache/restore@v4
+        if: steps.day.outputs.slot != 'skip'
+        with:
+          path: .instagram
+          key: instagram-${{ github.run_id }}
+          restore-keys: instagram-
       - run: python .github/scripts/post_almanac.py
         if: steps.day.outputs.slot != 'skip'
         env:
@@ -81,6 +89,8 @@ jobs:
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
           MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
           MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          INSTAGRAM_DIR: .instagram
           SLOT: ${{ steps.day.outputs.slot }}
           ANNOUNCEMENT: ${{ inputs.announcement }}
           ALMANAC_DATE: ${{ inputs.date }}
@@ -92,3 +102,8 @@ jobs:
         with:
           path: .posted
           key: posted-${{ steps.day.outputs.date }}-${{ github.run_id }}
+      - uses: actions/cache/save@v4
+        if: always() && hashFiles('.instagram/token') != ''
+        with:
+          path: .instagram
+          key: instagram-${{ github.run_id }}

@@ -54,6 +54,10 @@ The accounts' details are kept privately in the project's **Settings → Secrets
 - `MASTODON_INSTANCE`: the server's address, e.g. `https://mastodon.social`
 - `MASTODON_TOKEN`: an access token made in Mastodon under Preferences → Development → New application, with the `write:statuses` and `write:media` permissions (the second lets it post the quote cards)
 
+- `INSTAGRAM_TOKEN`: an Instagram API access token for the Longhand Instagram account (a Professional account), made in the Meta app dashboard under **Instagram → API setup with Instagram login → Generate access tokens**
+
+Instagram gets the evening quote card only, from the `.jpg` copy of the card (Instagram takes only JPEG pictures). Links don't work in Instagram captions, so the caption points to the link in the profile, which should be longhandlit.com/almanac/. Instagram tokens last 60 days; the posting renews the token every week and keeps the new one, locked, in GitHub's cache. If more than 60 days pass with no evening post, make a new token and replace the secret.
+
 If an account's details are missing, that account is skipped. For a one-off post, like an announcement, add it to `_data/announcements.yml` (the file explains each field), then run **Post the almanac** by hand, choose **announcement**, and type the post's id.
 
 To post by hand, or to preview without posting, open the **Actions** tab, choose **Post the almanac**, click **Run workflow**, and pick which post.
