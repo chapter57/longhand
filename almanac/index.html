@@ -3,7 +3,7 @@ layout: default
 title: The Almanac
 description: "A literary almanac, one entry a day: writers' birthdays, famous books' anniversaries, and moments from literary history."
 ---
-{%- assign months = site.almanac | sort: "day" | group_by_exp: "e", "e.month | prepend: '0' | slice: -2, 2" | sort: "name" -%}
+{%- assign months = site.almanac | sort: "day" | group_by_exp: "e", "e.month | prepend: '0' | slice: -2, 2" | sort: "name" | reverse -%}
 <section class="lead lead-almanac wrap">
   <div class="lead-copy">
     <p class="kicker">Read · the Almanac</p>
@@ -14,23 +14,16 @@ description: "A literary almanac, one entry a day: writers' birthdays, famous bo
   <div class="lead-art lead-art-small">{% include ill-postmark.html month=site.time %}</div>
 </section>
 
-<section class="dept wrap" aria-labelledby="week-h">
-  <h2 class="label" id="week-h"><span>This past week</span><span class="label-note">today and the six days before</span></h2>
-  <div class="week-list" data-almanac-week>
-    <p class="soon">The past week appears here. Every earlier entry is below.</p>
-  </div>
-</section>
-
-<div class="wrap">{% include ill-rule.html %}</div>
-
 <section class="dept wrap calendar" aria-labelledby="cal-h">
-  <h2 class="label" id="cal-h"><span>Every entry so far</span><span class="label-note">by month</span></h2>
+  <h2 class="label" id="cal-h"><span>Every entry so far</span><span class="label-note">newest first</span></h2>
+  <p class="cal-more">Tomorrow's entry opens at midnight.</p>
   {%- for m in months %}
   {%- assign month_name = "2000-" | append: m.name | append: "-01" | date: "%B" %}
   <section class="cal-month" aria-labelledby="month-{{ m.name }}">
     <h3 class="cal-month-name" id="month-{{ m.name }}">{{ month_name }}</h3>
     <ol class="cal-list">
-      {%- for e in m.items %}
+      {%- assign days = m.items | sort: "day" | reverse %}
+      {%- for e in days %}
       <li class="cal-row" id="d-{{ e.month }}-{{ e.day }}" data-day="{{ e.month }}-{{ e.day }}">
         <p class="cal-day"><span class="cal-day-n">{{ e.day }}</span><span class="cal-today">Today</span></p>
         <div class="cal-body">
@@ -44,13 +37,18 @@ description: "A literary almanac, one entry a day: writers' birthdays, famous bo
     </ol>
   </section>
   {%- endfor %}
-  <p class="cal-more">Tomorrow's entry opens at midnight.</p>
   <script>
     // Only the days that have opened; the rest wait their turn.
     if (window.longhandOpen) Array.prototype.forEach.call(document.querySelectorAll(".cal-row[data-day]"), function (row) {
       var md = row.getAttribute("data-day").split("-");
       if (longhandOpen(+md[0], +md[1])) { row.classList.add("is-open"); row.closest(".cal-month").classList.add("has-open"); }
     });
+    // Newest month first, counting from today, so January follows December once the year turns.
+    (function () {
+      var now = new Date(), months = Array.prototype.slice.call(document.querySelectorAll(".cal-month"));
+      var since = function (sec) { var m = +sec.querySelector(".cal-row").getAttribute("data-day").split("-")[0]; return (now.getMonth() + 1 - m + 12) % 12; };
+      months.sort(function (a, b) { return since(a) - since(b); }).forEach(function (sec) { sec.parentNode.insertBefore(sec, document.querySelector(".calendar > .fine")); });
+    })();
   </script>
   <p class="fine">Spot a mistake, or know a date we should add? Write to us at <a href="mailto:{{ site.email }}?subject=Almanac">{{ site.email }}</a>.</p>
 </section>
