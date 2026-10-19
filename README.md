@@ -58,6 +58,8 @@ The accounts' details are kept privately in the project's **Settings → Secrets
 
 Instagram gets the evening quote card only, from the `.jpg` copy of the card (Instagram takes only JPEG pictures). Links don't work in Instagram captions, so the caption points to the link in the profile, which should be longhandlit.com/almanac/. Instagram tokens last 60 days; the posting renews the token every week and keeps the new one, locked, in GitHub's cache. If more than 60 days pass with no evening post, make a new token and replace the secret.
 
+**Instagram carousels.** A post of several slides is written in `_data/instagram.yml` (its slides and caption), drawn into `assets/instagram/<id>-<n>.jpg` by `.github/instagram/carousel.mjs`, and posted, once the pictures are on the site, by running **Post the almanac** with **instagram** and the post's id. The cover slide uses the writer's portrait from `.github/instagram/portraits/`, which the **Fetch portraits** workflow downloads from Wikimedia Commons with each picture's maker and license (`credits.yml`); the credit is printed on the slide.
+
 If an account's details are missing, that account is skipped. For a one-off post, like an announcement, add it to `_data/announcements.yml` (the file explains each field), then run **Post the almanac** by hand, choose **announcement**, and type the post's id.
 
 To post by hand, or to preview without posting, open the **Actions** tab, choose **Post the almanac**, click **Run workflow**, and pick which post.

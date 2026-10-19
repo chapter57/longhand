@@ -21,10 +21,10 @@ on:
       slot:
         description: "Which post"
         type: choice
-        options: [morning, midday, evening, announcement]
+        options: [morning, midday, evening, announcement, instagram]
         default: morning
       announcement:
-        description: 'For "announcement": the post''s id in _data/announcements.yml (e.g. reviews-call)'
+        description: 'For "announcement" or "instagram": the post''s id in _data/announcements.yml or _data/instagram.yml'
         required: false
         default: ""
       date:

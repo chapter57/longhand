@@ -1,0 +1,48 @@
+# Instagram carousel posts. Each is drawn into assets/instagram/<id>-<n>.jpg by
+# .github/instagram/carousel.mjs, then posted with the "instagram" choice of
+# the Post the almanac workflow (type the id). Slide kinds:
+#   cover  the portrait (.github/instagram/portraits/<portrait>.jpg) under a headline
+#   text   a heading and a short paragraph
+#   words  a heading, big words, and a line under them
+#   quote  a quotation on the blue page
+#   end    the follow-us page
+- id: 10-19-browne
+  slides:
+    - kind: cover
+      portrait: 10-19
+      kicker: Born today in 1605
+      title: He died on his 77th birthday.
+      sub: And 158 years later, someone took his skull.
+    - kind: text
+      title: A country doctor with a secret talent
+      body: Thomas Browne treated patients in Norwich, England, for more than forty years. In his spare hours he wrote some of the richest, strangest prose in the English language.
+    - kind: text
+      title: He wrote a bestseller by accident.
+      body: Religio Medici, "The Religion of a Doctor," was written for himself and passed around among friends. In 1642 someone printed it without asking him. It was soon translated across Europe.
+    - kind: text
+      title: He busted myths, one by one.
+      body: Do elephants have no joints? Are a badger's legs shorter on one side? Does a dead kingfisher, hung on a thread, point its beak into the wind? In Vulgar Errors (1646), he went through the popular beliefs of his day and checked.
+    - kind: words
+      title: You use his words.
+      words: [electricity, hallucination]
+      body: Browne is credited with the first recorded uses of both.
+    - kind: quote
+      text: Man is a noble animal, splendid in ashes, and pompous in the grave.
+      by: Sir Thomas Browne, Urn-Burial, 1658
+    - kind: text
+      title: About that skull…
+      body: In 1840, workmen in his Norwich church broke open his coffin by accident, and his skull was carried off. It spent decades in a hospital museum, and was finally buried again in 1922, 82 years later.
+    - kind: quote
+      text: We carry within us the wonders we seek without us.
+      by: Sir Thomas Browne, Religio Medici, 1643
+    - kind: end
+  caption: |
+    Sir Thomas Browne was born on October 19, 1605, and died on October 19, 1682. In between, this small-town doctor wrote some of the most beautiful sentences in English, gave us words we still use every day, and became the subject of one of literature's strangest afterlives. 💀📜
+
+    Swipe through ➡️
+
+    Which writer should we feature next? Tell us in the comments.
+
+    Read the full story: link in bio.
+
+    #ThomasBrowne #OnThisDay #LiteraryHistory #Bookstagram #BooksOfInstagram #ClassicLiterature #ClassicBooks #HistoryOfMedicine #Words #Etymology #Literature #ReadingCommunity
