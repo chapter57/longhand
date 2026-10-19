@@ -56,6 +56,14 @@ content:
         label: Words on that link
         description: For example, "Read his poems free" or "Find it at a library".
         type: string
+      - name: buy
+        label: Book to buy
+        description: The title of the book the bookstore link points to, for example "Moby-Dick".
+        type: string
+      - name: isbn
+        label: The book's ISBN
+        description: The 13-digit ISBN (starting 978) of the edition to link to on Bookshop.org. Leave empty for no bookstore link.
+        type: string
       - name: portrait
         label: Portrait from Wikipedia
         description: The end of the Wikipedia address for the person to picture, for example "John_Keats". The picture at the top of that article is shown, with its credit. Leave empty for no portrait.
@@ -111,9 +119,9 @@ content:
         label: One-line summary
         description: Shown in the list of reviews and in links shared on social media.
         type: string
-      - name: bookshop
-        label: Bookshop.org link
-        description: A link to the book on Bookshop.org, with your affiliate ID.
+      - name: isbn
+        label: The book's ISBN
+        description: The 13-digit ISBN (starting 978) of an edition of the book. The page then links to it on Bookshop.org with Longhand's affiliate ID.
         type: string
       - name: read
         label: Read it free link

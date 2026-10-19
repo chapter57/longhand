@@ -8,6 +8,8 @@ note: "Peter Rabbit began as a picture letter to a sick little boy. Publishers t
 portrait: "Beatrix_Potter"
 read: "https://www.gutenberg.org/ebooks/search/?query=Beatrix+Potter"
 read_label: "Read her tales free"
+buy: "The Tale of Peter Rabbit"
+isbn: "9780723247708"
 wiki: "https://en.wikipedia.org/wiki/Beatrix_Potter"
 ---
 Beatrix Potter was born in London in 1866 to a wealthy family and educated at home by governesses. She was a lonely child, and she filled her schoolroom with animals: rabbits, mice, a hedgehog, frogs, a bat. She drew them constantly, with great precision, and on family holidays in Scotland and the Lake District she drew plants and fungi, too.

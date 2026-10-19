@@ -8,6 +8,8 @@ note: "Achebe's first novel, Things Fall Apart (1958), told the story of colonia
 portrait: "Chinua_Achebe"
 read: "https://search.worldcat.org/search?q=Things+Fall+Apart+Achebe"
 read_label: "Find it at a library"
+buy: "Things Fall Apart"
+isbn: "9780385474542"
 wiki: "https://en.wikipedia.org/wiki/Chinua_Achebe"
 ---
 Chinua Achebe was born in the Igbo town of Ogidi, in southeastern Nigeria, then a British colony. His parents were Christian converts, and his father was a church teacher. He grew up between two worlds: the hymns and Bible of the mission, and the stories, proverbs and festivals of the older Igbo life that still surrounded him. At university in Ibadan he switched from medicine to English, and there he read novels by Europeans about Africa, which showed Africans as savage or comic. He decided someone needed to tell the story from the other side.

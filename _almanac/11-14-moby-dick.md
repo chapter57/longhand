@@ -9,6 +9,8 @@ portrait: "Herman_Melville"
 pictured: "Herman Melville"
 read: "https://www.gutenberg.org/ebooks/search/?query=Moby+Dick"
 read_label: "Read it free"
+buy: "Moby-Dick"
+isbn: "9780142437247"
 wiki: "https://en.wikipedia.org/wiki/Moby-Dick"
 ---
 Herman Melville had gone to sea as a young man, and in 1841, at twenty-one, he sailed from Massachusetts on a whaling ship, the *Acushnet*. A year and a half later he jumped ship in the Marquesas Islands, lived for a few weeks among the people of the Taipi valley, and drifted around the Pacific for two more years before coming home. His first books, *Typee* and *Omoo*, were adventure stories drawn from those years, and they made him popular.

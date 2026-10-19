@@ -8,6 +8,8 @@ note: "Born in Ottawa, Atwood has written poetry, criticism and more than a doze
 portrait: "Margaret_Atwood"
 read: "https://search.worldcat.org/search?q=Margaret+Atwood"
 read_label: "Find her books at a library"
+buy: "The Handmaid's Tale"
+isbn: "9780385490818"
 wiki: "https://en.wikipedia.org/wiki/Margaret_Atwood"
 ---
 Margaret Atwood was born in Ottawa, but she spent much of her childhood in the forests of northern Quebec and Ontario, where her father, an entomologist, studied insects. The family lived for months at a time far from towns, without electricity, and she did not go to school full-time until she was nearly a teenager. She read everything she could find, from fairy tales to comic books, and she decided at sixteen that she would be a writer.

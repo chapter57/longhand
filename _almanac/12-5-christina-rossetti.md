@@ -8,6 +8,8 @@ note: "Rossetti's Goblin Market is one of the strangest and most musical poems i
 portrait: "Christina_Rossetti"
 read: "https://www.gutenberg.org/ebooks/search/?query=Christina+Rossetti"
 read_label: "Read her poems free"
+buy: "Selected Poems"
+isbn: "9780140424690"
 wiki: "https://en.wikipedia.org/wiki/Christina_Rossetti"
 ---
 Christina Rossetti was born in London, the youngest of four children of Gabriele Rossetti, an Italian poet and political exile who taught Italian at King's College. It was a household of talk, books and art. Her brother Dante Gabriel became a famous painter and poet, and helped found the Pre-Raphaelite Brotherhood; her brother William Michael became a critic and her editor; her sister Maria became an Anglican nun.

@@ -8,6 +8,8 @@ note: "Raised in Kenya, Markham trained racehorses, flew as a bush pilot, and in
 portrait: "Beryl_Markham"
 read: "https://search.worldcat.org/search?q=West+with+the+Night"
 read_label: "Find it at a library"
+buy: "West with the Night"
+isbn: "9780865477636"
 wiki: "https://en.wikipedia.org/wiki/Beryl_Markham"
 ---
 Beryl Markham was born Beryl Clutterbuck in a village in the English Midlands, but she grew up in Kenya, where her father took her as a small child to farm and train racehorses near Njoro, in the Rift Valley. Her mother soon went back to England. Beryl stayed, ran barefoot with the children of the neighboring Kipsigis people, learned to hunt with a spear, and was, by her own account, mostly left to raise herself.

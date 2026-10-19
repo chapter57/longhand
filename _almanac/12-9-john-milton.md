@@ -8,6 +8,8 @@ note: "Milton was completely blind when he composed Paradise Lost, dictating it 
 portrait: "John_Milton"
 read: "https://www.gutenberg.org/ebooks/search/?query=Paradise+Lost"
 read_label: "Read Paradise Lost free"
+buy: "Paradise Lost"
+isbn: "9780140424393"
 wiki: "https://en.wikipedia.org/wiki/John_Milton"
 ---
 John Milton was born on Bread Street in London, the son of a prosperous scrivener who also composed music. He was a brilliant and intensely serious student; at Cambridge his fellow students called him "the Lady of Christ's" for his fine features and his refusal to join in their rougher amusements. After university he spent six years reading at his father's house in the country, preparing himself, he believed, for a great work.

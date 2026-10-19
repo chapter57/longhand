@@ -8,6 +8,8 @@ note: "Kipling wrote The Jungle Book while living in Vermont, and the Just So St
 portrait: "Rudyard_Kipling"
 read: "https://www.gutenberg.org/ebooks/search/?query=Rudyard+Kipling"
 read_label: "Read his books free"
+buy: "The Jungle Books"
+isbn: "9780140183160"
 wiki: "https://en.wikipedia.org/wiki/Rudyard_Kipling"
 ---
 Rudyard Kipling was born in Bombay, now Mumbai, where his father taught at an art school. His first years were happy ones, spent with Indian servants who told him stories and spoke to him in Hindustani. Then, when he was five, his parents took him and his younger sister to England and left them, without explanation, as paying boarders with a family in Southsea. The woman who ran the house was harsh and cruel to him, and he spent nearly six years there, an experience he later wrote about in the story "Baa Baa, Black Sheep."

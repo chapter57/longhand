@@ -8,6 +8,8 @@ note: "Fitzgerald died believing himself a failure; The Great Gatsby had sold po
 portrait: "F._Scott_Fitzgerald"
 read: "https://www.gutenberg.org/ebooks/search/?query=Great+Gatsby"
 read_label: "Read The Great Gatsby free"
+buy: "The Great Gatsby"
+isbn: "9780743273565"
 wiki: "https://en.wikipedia.org/wiki/F._Scott_Fitzgerald"
 ---
 Francis Scott Key Fitzgerald was born in 1896 in St. Paul, Minnesota, and named for a distant relative who wrote "The Star-Spangled Banner." He went to Princeton, where he wrote musical comedies and neglected his classes, and left without a degree to join the army in 1917. Stationed near Montgomery, Alabama, he met Zelda Sayre, a judge's daughter, who agreed to marry him if he could support her.

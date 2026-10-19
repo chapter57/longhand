@@ -8,6 +8,8 @@ note: "Rimbaud wrote the poetry that changed French literature while still a tee
 portrait: "Arthur_Rimbaud"
 read: "https://www.gutenberg.org/ebooks/search/?query=Rimbaud"
 read_label: "Read his poems free"
+buy: "Illuminations"
+isbn: "9780811201841"
 wiki: "https://en.wikipedia.org/wiki/Arthur_Rimbaud"
 ---
 Arthur Rimbaud wrote nearly all of his poetry between the ages of fifteen and twenty, and then he stopped, and never seems to have looked back. In those five or six years he changed what poems could do.

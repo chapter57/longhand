@@ -8,6 +8,8 @@ note: "Coleridge and William Wordsworth published Lyrical Ballads in 1798, openi
 portrait: "Samuel_Taylor_Coleridge"
 read: "https://www.gutenberg.org/ebooks/search/?query=Coleridge"
 read_label: "Read his poems free"
+buy: "The Complete Poems"
+isbn: "9780140423532"
 wiki: "https://en.wikipedia.org/wiki/Samuel_Taylor_Coleridge"
 ---
 Samuel Taylor Coleridge was the youngest of a vicar's many children, born in Ottery St Mary in Devon. He was sent to school in London at Christ's Hospital, where he became lifelong friends with Charles Lamb, and then to Cambridge. There, deep in debt and unhappy in love, he ran off and enlisted in the cavalry under the absurd name of Silas Tomkyn Comberbache. He was a terrible horseman, and his brothers bought him out a few months later.

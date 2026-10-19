@@ -8,6 +8,8 @@ note: "The Welsh poet of \"Do not go gentle into that good night\" and the radio
 portrait: "Dylan_Thomas"
 read: "https://search.worldcat.org/search?q=Dylan+Thomas+collected+poems"
 read_label: "Find his poems at a library"
+buy: "A Child's Christmas in Wales"
+isbn: "9780811226226"
 wiki: "https://en.wikipedia.org/wiki/Dylan_Thomas"
 ---
 Dylan Thomas was born in Swansea, in South Wales, in a house on a hill above the town, and named after a figure in the old Welsh tales of the *Mabinogion*. His father was an English teacher who loved poetry and read Shakespeare aloud to him as a baby; he spoke no Welsh at home. Dylan was a poor student at everything but English, and left school at sixteen to become a junior reporter on the local paper.

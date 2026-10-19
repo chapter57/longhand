@@ -8,6 +8,8 @@ note: "Alcott nursed soldiers during the Civil War and wrote about it in Hospita
 portrait: "Louisa_May_Alcott"
 read: "https://www.gutenberg.org/ebooks/search/?query=Louisa+May+Alcott"
 read_label: "Read her books free"
+buy: "Little Women"
+isbn: "9780140390698"
 wiki: "https://en.wikipedia.org/wiki/Louisa_May_Alcott"
 ---
 Louisa May Alcott was born in Germantown, Pennsylvania, on her father's thirty-third birthday. Bronson Alcott was a teacher and philosopher of grand ideas and no practical sense, and the family was almost always poor. They moved more than twenty times, at one point to a short-lived farm commune called Fruitlands, before settling in Concord, Massachusetts, where their neighbors included Ralph Waldo Emerson, Henry David Thoreau and Nathaniel Hawthorne. Louisa borrowed books from Emerson's library.

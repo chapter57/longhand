@@ -16,6 +16,8 @@ The calendar currently runs from October 17 to December 31. Entries repeat every
 
 **Portraits.** Each entry's `portrait` names a Wikipedia article (for example `John_Keats`). The reader's browser loads the picture at the top of that article, but only if it's a freely licensed picture from Wikimedia Commons, and credits its maker and license, linked to the picture's page. For a book or event, `pictured` says who is shown. If there is no portrait, or Wikipedia can't be reached, a lettered card appears instead. To store a portrait on the site instead, add the image and fill in `image` and `image_credit`.
 
+**Bookstore links.** An entry with a `buy` (the book's title) and an `isbn` (the 13-digit ISBN of an edition) links to that book on Bookshop.org, using Longhand's affiliate ID (`bookshop_id` in `_config.yml`). Bookshop.org shares its profits with independent bookstores, and Longhand earns a small commission on sales; the page says so under the link. Entries without an ISBN have no bookstore link. Reviews work the same way, with `isbn`.
+
 ## Editing the calendar (the easy way)
 
 The site is set up for **Pages CMS**, a free editor. Its settings are in `.pages.yml`.
@@ -31,7 +33,7 @@ Please check every date and fact against two sources before adding it, and write
 
 Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) in two ways: from the writing app (Export, then *Submit as a review*), or with the form on the Reviews page (`/reviews/`). Either way the review arrives by email at longhandlit@gmail.com, sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`) and `write/app.js` (`REVIEW_KEY`), only allows sending to that inbox. The writing app sends nothing unless the writer chooses *Submit as a review* for a piece, and then sends only that piece.
 
-Nothing is published automatically. To publish a review you've approved, open Pages CMS, choose **Reviews**, click **Add an entry**, and fill in the book, its author, the reviewer's name, the date, a one-line summary, the Bookshop.org link if you have one, and the review itself. It appears on the Reviews page a minute or two after you save, at its own address. Reviews are stored one file each in `_reviews/`; `_layouts/review.html` is the design of each review's page.
+Nothing is published automatically. To publish a review you've approved, open Pages CMS, choose **Reviews**, click **Add an entry**, and fill in the book, its author, the reviewer's name, the date, a one-line summary, the book's ISBN (for the bookstore link), and the review itself. It appears on the Reviews page a minute or two after you save, at its own address. Reviews are stored one file each in `_reviews/`; `_layouts/review.html` is the design of each review's page.
 
 ## Posting to Bluesky and Mastodon
 

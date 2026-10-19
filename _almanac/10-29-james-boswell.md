@@ -8,6 +8,8 @@ note: "Boswell met Samuel Johnson in a London bookshop in 1763 and spent much of
 portrait: "James_Boswell"
 read: "https://www.gutenberg.org/ebooks/search/?query=Boswell+Life+of+Johnson"
 read_label: "Read it free"
+buy: "The Life of Samuel Johnson"
+isbn: "9780140436624"
 wiki: "https://en.wikipedia.org/wiki/James_Boswell"
 ---
 James Boswell was born in Edinburgh, the eldest son of a stern Scottish judge who wanted him to be a lawyer. Boswell did eventually become one, but what he really wanted was to be in London, among famous people, and to write down everything they said.

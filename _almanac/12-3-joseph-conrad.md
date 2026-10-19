@@ -8,6 +8,8 @@ note: "Born to Polish parents in what is now Ukraine, Conrad went to sea at sixt
 portrait: "Joseph_Conrad"
 read: "https://www.gutenberg.org/ebooks/search/?query=Joseph+Conrad"
 read_label: "Read his novels free"
+buy: "Heart of Darkness"
+isbn: "9780141441672"
 wiki: "https://en.wikipedia.org/wiki/Joseph_Conrad"
 ---
 Joseph Conrad was born Józef Teodor Konrad Korzeniowski, in Berdychiv, a town that was then part of the Russian Empire and is now in Ukraine. His parents were Polish patriots. His father, a poet and translator, was arrested for his part in the movement for Polish independence and sent into exile in northern Russia, and the family went with him. Conrad's mother died when he was seven, his father when he was eleven.

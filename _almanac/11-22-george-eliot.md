@@ -8,6 +8,8 @@ note: "Mary Ann Evans chose a man's name so her novels would be taken seriously.
 portrait: "George_Eliot"
 read: "https://www.gutenberg.org/ebooks/search/?query=George+Eliot"
 read_label: "Read her novels free"
+buy: "Middlemarch"
+isbn: "9780141439549"
 wiki: "https://en.wikipedia.org/wiki/George_Eliot"
 ---
 Mary Ann Evans was born on a farm in Warwickshire, in the English Midlands, the daughter of an estate manager. She was a serious, devout, bookish girl, and the countryside and small-town life of her childhood became the world of almost all her novels. In her early twenties, after reading widely in science and the new German biblical criticism, she lost her religious faith and refused to go to church. Her father was so angry that for a time he would not live with her. She went back, in the end, but kept her own beliefs.

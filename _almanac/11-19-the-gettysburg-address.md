@@ -9,6 +9,8 @@ portrait: "Abraham_Lincoln"
 pictured: "Abraham Lincoln"
 read: "https://www.gutenberg.org/ebooks/search/?query=Gettysburg+Address"
 read_label: "Read it free"
+buy: "Lincoln at Gettysburg, by Garry Wills"
+isbn: "9780671867423"
 wiki: "https://en.wikipedia.org/wiki/Gettysburg_Address"
 ---
 In early July 1863, the armies of the Union and the Confederacy fought for three days around the small town of Gettysburg, Pennsylvania. It was the bloodiest battle of the Civil War, and the dead lay in shallow graves across the fields. That autumn, a new cemetery was laid out for the Union soldiers, and November 19 was set for its dedication.

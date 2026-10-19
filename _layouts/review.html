@@ -13,8 +13,12 @@ layout: default
 {{ content }}
   </div>
   <footer class="piece-foot review-foot">
-    {%- if page.bookshop or page.read %}
-    <p class="entry-links">{% if page.bookshop %}<a href="{{ page.bookshop }}">Buy from an independent bookstore</a>{% endif %}{% if page.read %}<a href="{{ page.read }}">Read it free</a>{% endif %}</p>
+    {%- if page.isbn %}{% capture shop %}https://bookshop.org/a/{{ site.bookshop_id }}/{{ page.isbn }}{% endcapture %}{% else %}{% assign shop = page.bookshop %}{% endif %}
+    {%- if shop or page.read %}
+    <p class="entry-links">{% if shop %}<a href="{{ shop }}">Buy it from an independent bookstore</a>{% endif %}{% if page.read %}<a href="{{ page.read }}">Read it free</a>{% endif %}</p>
+    {%- endif %}
+    {%- if shop %}
+    <p class="fine">The bookstore link goes to Bookshop.org, which shares its profits with independent bookstores. Longhand earns a small commission on what you buy there, at no cost to you.</p>
     {%- endif %}
     <p class="fine">Have a classic of your own to write about? <a href="{{ '/reviews/#submit' | relative_url }}">Send us a review</a>.</p>
   </footer>

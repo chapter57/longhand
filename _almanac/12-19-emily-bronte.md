@@ -8,6 +8,8 @@ note: "Emily Brontë published one novel, Wuthering Heights, under the name Elli
 portrait: "Emily_Brontë"
 read: "https://www.gutenberg.org/ebooks/search/?query=Wuthering+Heights"
 read_label: "Read Wuthering Heights free"
+buy: "Wuthering Heights"
+isbn: "9780141439556"
 wiki: "https://en.wikipedia.org/wiki/Emily_Bront%C3%AB"
 ---
 Emily Brontë grew up in the parsonage at Haworth, a stone village on the edge of the Yorkshire moors, where her father was the curate. Her mother died when she was three, and her two eldest sisters died as children after an outbreak of disease at their boarding school. The four who survived, Charlotte, Branwell, Emily and Anne, made their own world at home. They wrote tiny books in tiny handwriting about imaginary kingdoms. Emily and Anne invented one called Gondal, and kept writing about it into adulthood.

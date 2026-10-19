@@ -8,6 +8,8 @@ note: "For most of his working life Stoker managed London's Lyceum Theatre for t
 portrait: "Bram_Stoker"
 read: "https://www.gutenberg.org/ebooks/search/?query=Dracula"
 read_label: "Read Dracula free"
+buy: "Dracula"
+isbn: "9780141439846"
 wiki: "https://en.wikipedia.org/wiki/Bram_Stoker"
 ---
 Bram Stoker was born in Dublin and was so sickly as a small child that he could barely walk until he was seven. He spent those years in bed, listening to his mother's stories, some of them about the cholera epidemic she had lived through as a girl in the west of Ireland. Then he recovered completely and became a champion athlete at Trinity College Dublin.

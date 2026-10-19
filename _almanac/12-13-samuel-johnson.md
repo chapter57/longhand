@@ -8,6 +8,8 @@ note: "Johnson wrote his great Dictionary of the English Language almost single-
 portrait: "Samuel_Johnson"
 read: "https://www.gutenberg.org/ebooks/search/?query=Samuel+Johnson"
 read_label: "Read his work free"
+buy: "Boswell's Life of Samuel Johnson"
+isbn: "9780140436624"
 wiki: "https://en.wikipedia.org/wiki/Samuel_Johnson"
 ---
 Samuel Johnson was born in 1709 in Lichfield, in the English Midlands, the son of a struggling bookseller. As a baby he caught scrofula, a form of tuberculosis, which scarred his face and damaged his sight and hearing. He grew up huge, awkward and twitching with tics, and astonishingly well read, having devoured his father's stock. He went to Oxford but had to leave after a year when the money ran out.

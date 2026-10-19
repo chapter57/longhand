@@ -8,6 +8,8 @@ note: "Israel's best-known novelist wrote for decades from a kibbutz, and argued
 portrait: "Amos_Oz"
 read: "https://search.worldcat.org/search?q=Amos+Oz+A+Tale+of+Love+and+Darkness"
 read_label: "Find his books at a library"
+buy: "A Tale of Love and Darkness"
+isbn: "9780156032520"
 wiki: "https://en.wikipedia.org/wiki/Amos_Oz"
 ---
 Amos Oz was born Amos Klausner in Jerusalem in 1939, under British rule, the only child of two book-loving immigrants from Eastern Europe. His father, a scholar and librarian, hoped to become a great professor; his mother, Fania, was gentle, imaginative and deeply unhappy. When Amos was twelve, she took her own life.

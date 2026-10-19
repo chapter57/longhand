@@ -9,6 +9,8 @@ portrait: "D._H._Lawrence"
 pictured: "D. H. Lawrence"
 read: "https://www.gutenberg.org/ebooks/search/?query=Lady+Chatterley"
 read_label: "Read the novel free"
+buy: "Lady Chatterley's Lover"
+isbn: "9780141441498"
 wiki: "https://en.wikipedia.org/wiki/R_v_Penguin_Books_Ltd"
 ---
 D. H. Lawrence finished *Lady Chatterley's Lover* in 1928, two years before his death, and had it printed privately in Florence. It tells the story of Constance Chatterley, married to a rich mine owner paralyzed in the First World War, and her love affair with the gamekeeper on his estate, Oliver Mellors. It is also an angry book about class, industry and the deadening of modern life. But what made it notorious was that it described sex frankly and used words that could not then be printed in Britain. For more than thirty years, only expurgated versions were legally sold there.

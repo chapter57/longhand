@@ -8,6 +8,8 @@ note: "In 1849 Dostoevsky was led out to be shot with other political prisoners,
 portrait: "Fyodor_Dostoevsky"
 read: "https://www.gutenberg.org/ebooks/search/?query=Dostoevsky"
 read_label: "Read his novels free"
+buy: "Crime and Punishment"
+isbn: "9780679734505"
 wiki: "https://en.wikipedia.org/wiki/Fyodor_Dostoevsky"
 ---
 Fyodor Dostoevsky was born in Moscow, where his father was a doctor at a hospital for the poor. He trained as a military engineer, but quickly gave it up to write. His first novel, *Poor Folk* (1846), a story in letters between a poor copying clerk and a young woman he loves, made him famous overnight. The great critic Vissarion Belinsky greeted him as a new Gogol.

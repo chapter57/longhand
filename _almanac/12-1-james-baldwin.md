@@ -8,6 +8,8 @@ note: "Baldwin wrote novels and essays of rare power about race, love and faith 
 portrait: "James_Baldwin"
 read: "https://search.worldcat.org/search?q=James+Baldwin+Notes+of+a+Native+Son"
 read_label: "Find his essays at a library"
+buy: "The Fire Next Time"
+isbn: "9780679744726"
 wiki: "https://en.wikipedia.org/wiki/James_Baldwin"
 ---
 James Baldwin was born in Harlem in 1924, the eldest of nine children, and raised by his mother and a stern stepfather who was a preacher. At fourteen, Baldwin became a preacher himself, and for three years he held congregations spellbound. He later said that the pulpit taught him how to hold a room, and that he left it because he wanted to tell the truth in a different way.

@@ -8,6 +8,8 @@ note: "The Austrian novelist spent the last two decades of his life on The Man W
 portrait: "Robert_Musil"
 read: "https://search.worldcat.org/search?q=The+Man+Without+Qualities"
 read_label: "Find it at a library"
+buy: "The Man Without Qualities"
+isbn: "9780679767879"
 wiki: "https://en.wikipedia.org/wiki/Robert_Musil"
 ---
 Robert Musil was born in Klagenfurt, in southern Austria, in the last decades of the Austro-Hungarian Empire. His parents sent him to military boarding schools, which he hated, and those years became his first novel, *The Confusions of Young Törless* (1906), about the cruelty boys inflict on one another at a remote academy. It was a success, and it is still read as a dark forecast of the century to come.

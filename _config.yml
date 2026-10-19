@@ -16,6 +16,8 @@ bluesky: "https://bsky.app/profile/did:plc:fpx4ses6oidyiwqyp4zkl7vq"
 
 # Review submissions are emailed to the address above through Web3Forms. This
 # key only allows sending to that inbox, so it's safe in public.
+# Bookshop.org affiliate ID: book links on the site earn a small commission.
+bookshop_id: "130078"
 web3forms_key: "7c72d9f4-af8b-4949-98fd-3433f5086676"
 
 # The site's address. The CNAME file next to this one tells GitHub Pages

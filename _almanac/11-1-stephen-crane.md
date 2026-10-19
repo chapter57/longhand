@@ -8,6 +8,8 @@ note: "Crane had never seen a battle when he wrote The Red Badge of Courage (189
 portrait: "Stephen_Crane"
 read: "https://www.gutenberg.org/ebooks/search/?query=Stephen+Crane"
 read_label: "Read his work free"
+buy: "The Red Badge of Courage and Other Stories"
+isbn: "9780143039358"
 wiki: "https://en.wikipedia.org/wiki/Stephen_Crane"
 ---
 Stephen Crane was the fourteenth child of a Methodist minister in Newark, New Jersey, and he grew up surrounded by sermons against drink, cards and novels. He took up all three. After brief spells at two colleges, where he cared more about baseball than his classes, he went to New York to work as a freelance journalist, living poor and writing about the Bowery and the slums of the Lower East Side.

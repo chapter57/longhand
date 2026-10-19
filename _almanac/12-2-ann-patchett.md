@@ -8,6 +8,8 @@ note: "Patchett is the novelist of Bel Canto and The Dutch House. When her city 
 portrait: "Ann_Patchett"
 read: "https://search.worldcat.org/search?q=Ann+Patchett+Bel+Canto"
 read_label: "Find her books at a library"
+buy: "Bel Canto"
+isbn: "9780060934415"
 wiki: "https://en.wikipedia.org/wiki/Ann_Patchett"
 ---
 Ann Patchett was born in Los Angeles and grew up in Nashville, Tennessee, where she still lives. She studied writing at Sarah Lawrence College and the Iowa Writers' Workshop, and while she was working on her first novel she supported herself by waiting tables, a job she has written about with great affection.

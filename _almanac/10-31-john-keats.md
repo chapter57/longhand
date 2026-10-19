@@ -8,6 +8,8 @@ note: "Keats wrote his great odes, to a nightingale, to autumn and on a Grecian 
 portrait: "John_Keats"
 read: "https://www.gutenberg.org/ebooks/search/?query=Keats"
 read_label: "Read his poems free"
+buy: "The Complete Poems"
+isbn: "9780140422108"
 wiki: "https://en.wikipedia.org/wiki/John_Keats"
 ---
 John Keats was born in London, the eldest son of a man who managed a livery stable. His father died after a fall from a horse when John was eight, and his mother died of tuberculosis when he was fourteen. He was apprenticed to a surgeon and went on to train at Guy's Hospital, qualifying to practice as an apothecary. But he had fallen in love with poetry, and at twenty-one he gave up medicine to write.
