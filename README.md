@@ -75,6 +75,10 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 - `.github/`: the daily posting to Bluesky and Mastodon
 - `sw.js`: retires the offline copy that older installs of the app kept at the site's main address
 
+## Visitor numbers
+
+The website counts its visits with GoatCounter, which uses no cookies and doesn't track people across sites. The numbers are at [cdamonsmith.goatcounter.com](https://cdamonsmith.goatcounter.com) (sign in with the GoatCounter account). The counter is added to every page that uses the site's design (`goatcounter` in `_config.yml`); the writing app counts nothing.
+
 ## The domain
 
 The site lives at [longhandlit.com](https://longhandlit.com), registered at Namecheap. The `CNAME` file tells GitHub Pages to serve it there, and `url` in `_config.yml` matches.
