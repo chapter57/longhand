@@ -1,5 +1,6 @@
 // Draws the evening quote cards, assets/cards/<month>-<day>.png, from
-// _data/social.yml, in the site's own type and colors.
+// _data/social.yml, in the site's own type and colors, and a .jpg copy of each
+// for Instagram, which only takes JPEG pictures.
 //
 //   npm install playwright js-yaml   (once)
 //   node .github/cards/render.mjs [month-day ...]
@@ -84,6 +85,7 @@ for (const d of days) {
     for (let size = poem ? 50 : 60; size >= 24 && !done; size -= 1) done = fits(size, false);
   });
   await tab.locator(".card").screenshot({ path: path.join(root, "assets/cards", key + ".png") });
+  await tab.locator(".card").screenshot({ path: path.join(root, "assets/cards", key + ".jpg"), type: "jpeg", quality: 90 });
   console.log("drew", key);
 }
 await browser.close();
