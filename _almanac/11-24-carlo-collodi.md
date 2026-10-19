@@ -8,6 +8,8 @@ note: "Carlo Lorenzini took his pen name from his mother's home village of Collo
 portrait: "Carlo_Collodi"
 read: "https://www.gutenberg.org/ebooks/search/?query=Pinocchio"
 read_label: "Read Pinocchio free"
+buy: "The Adventures of Pinocchio"
+isbn: "9780143136095"
 wiki: "https://en.wikipedia.org/wiki/Carlo_Collodi"
 ---
 Carlo Lorenzini was born in Florence, the eldest of ten children, of whom only a few survived childhood. His father was a cook and his mother a seamstress, both working for a wealthy noble family, the Marchesi Ginori. He spent part of his childhood with relatives in his mother's home village of Collodi, in the hills of Tuscany, and years later he took the village's name as his pen name.

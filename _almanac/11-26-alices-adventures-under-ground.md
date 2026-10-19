@@ -9,6 +9,8 @@ portrait: "Lewis_Carroll"
 pictured: "Lewis Carroll"
 read: "https://www.gutenberg.org/ebooks/search/?query=Alice%27s+Adventures+in+Wonderland"
 read_label: "Read it free"
+buy: "Alice's Adventures in Wonderland"
+isbn: "9780141439761"
 wiki: "https://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland"
 ---
 On July 4, 1862, a young mathematics lecturer at Christ Church, Oxford, named Charles Lutwidge Dodgson took the three daughters of the college's dean, Henry Liddell, on a rowing trip up the River Thames, along with a friend. To keep the girls entertained, he made up a story about a girl who falls down a rabbit hole into a strange world. The girl was named after the middle sister, Alice, who was ten. At the end of the day, Alice asked him to write it down.

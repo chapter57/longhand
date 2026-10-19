@@ -9,6 +9,8 @@ portrait: "Jonathan_Swift"
 pictured: "Jonathan Swift"
 read: "https://www.gutenberg.org/ebooks/search/?query=Gulliver%27s+Travels"
 read_label: "Read it free"
+buy: "Gulliver's Travels"
+isbn: "9780141439495"
 wiki: "https://en.wikipedia.org/wiki/Gulliver%27s_Travels"
 ---
 On October 28, 1726, the London bookseller Benjamin Motte published *Travels into Several Remote Nations of the World*, by Lemuel Gulliver, "first a surgeon, and then a captain of several ships." There was no other author's name. Everyone who mattered soon knew it was by Jonathan Swift, the Dean of St Patrick's Cathedral in Dublin, but Swift kept up the joke, and the secrecy was also prudent. Motte was nervous enough about the book's attacks on politicians to have some passages softened before printing, which annoyed Swift a great deal.

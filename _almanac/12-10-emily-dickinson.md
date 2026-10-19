@@ -8,6 +8,8 @@ note: "Dickinson wrote nearly 1,800 poems in her room in Amherst, Massachusetts,
 portrait: "Emily_Dickinson"
 read: "https://www.gutenberg.org/ebooks/search/?query=Emily+Dickinson"
 read_label: "Read her poems free"
+buy: "The Poems of Emily Dickinson"
+isbn: "9780674018242"
 wiki: "https://en.wikipedia.org/wiki/Emily_Dickinson"
 ---
 Emily Dickinson was born in Amherst, Massachusetts, into one of the town's leading families; her grandfather helped found Amherst College, and her father was a lawyer and congressman. She went to school at Amherst Academy and spent a year at Mount Holyoke Female Seminary, and then came home, where she lived for the rest of her life.

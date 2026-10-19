@@ -8,6 +8,8 @@ note: "Agee wrote film criticism, screenplays and Let Us Now Praise Famous Men, 
 portrait: "James_Agee"
 read: "https://search.worldcat.org/search?q=A+Death+in+the+Family+Agee"
 read_label: "Find it at a library"
+buy: "A Death in the Family"
+isbn: "9780143105718"
 wiki: "https://en.wikipedia.org/wiki/James_Agee"
 ---
 James Agee was born in Knoxville, Tennessee. When he was six, his father was killed in a car accident, driving home at night after visiting his own sick father. That death was the central event of Agee's life, and he spent his last years writing about it.

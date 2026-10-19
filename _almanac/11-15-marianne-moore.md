@@ -8,6 +8,8 @@ note: "Moore's poems are precise, witty and full of animals. Her best-known poem
 portrait: "Marianne_Moore"
 read: "https://www.poetryfoundation.org/poets/marianne-moore"
 read_label: "Read her poems"
+buy: "Complete Poems"
+isbn: "9780140188516"
 wiki: "https://en.wikipedia.org/wiki/Marianne_Moore"
 ---
 Marianne Moore was born in Kirkwood, Missouri, in the house of her grandfather, a Presbyterian minister. She never knew her father, who had suffered a breakdown before she was born. She was raised by her mother, Mary, and lived with her for nearly all of Mary's life, in a close and formidable partnership. Mary read every poem Marianne wrote.

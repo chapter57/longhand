@@ -23,11 +23,14 @@ layout: default
 {{ content }}
   </div>
   <footer class="piece-foot">
-    <p class="entry-links"><a href="{{ page.read }}">{{ page.read_label }}</a>{% if page.wiki %}<a href="{{ page.wiki }}">Read more on Wikipedia</a>{% endif %}</p>
+    <p class="entry-links">{% if page.isbn %}<a href="https://bookshop.org/a/{{ site.bookshop_id }}/{{ page.isbn }}">Buy {{ page.buy }} from an independent bookstore</a>{% endif %}<a href="{{ page.read }}">{{ page.read_label }}</a>{% if page.wiki %}<a href="{{ page.wiki }}">Read more on Wikipedia</a>{% endif %}</p>
     <nav class="piece-nav" aria-label="More from the almanac">
       <a class="piece-prev" href="{{ prev.url | relative_url }}"><span class="piece-nav-label">The day before</span><span class="piece-nav-name">{{ prev.name }}</span></a>
       <a class="piece-next" href="{{ next.url | relative_url }}"><span class="piece-nav-label">The day after</span><span class="piece-nav-name">{{ next.name }}</span></a>
     </nav>
+    {%- if page.isbn %}
+    <p class="fine">The bookstore link goes to Bookshop.org, which shares its profits with independent bookstores. Longhand earns a small commission on what you buy there, at no cost to you.</p>
+    {%- endif %}
     <p class="fine">Spot a mistake? Write to us at <a href="mailto:{{ site.email }}?subject={{ page.name | uri_escape }}">{{ site.email }}</a>.</p>
   </footer>
 </article>

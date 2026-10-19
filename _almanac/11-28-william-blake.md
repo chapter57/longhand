@@ -8,6 +8,8 @@ note: "Poet, painter and engraver, Blake printed and hand-colored his own books,
 portrait: "William_Blake"
 read: "https://www.gutenberg.org/ebooks/search/?query=William+Blake"
 read_label: "Read his poems free"
+buy: "Songs of Innocence and of Experience"
+isbn: "9780192810892"
 wiki: "https://en.wikipedia.org/wiki/William_Blake"
 ---
 William Blake was born above his father's hosiery shop in Soho, London, and he never went to an ordinary school. As a boy he told his parents he had seen a tree filled with angels on Peckham Rye, then a common south of the river. He saw visions all his life, and he never doubted them.

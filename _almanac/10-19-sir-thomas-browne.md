@@ -8,6 +8,8 @@ note: "A doctor in Norwich, Browne wrote some of the richest prose in English, b
 portrait: "Thomas_Browne"
 read: "https://www.gutenberg.org/ebooks/search/?query=Thomas+Browne"
 read_label: "Read his work free"
+buy: "Religio Medici and Urne-Buriall"
+isbn: "9781590174883"
 wiki: "https://en.wikipedia.org/wiki/Thomas_Browne"
 ---
 Thomas Browne was a country doctor in Norwich for more than forty years, and in his spare hours he wrote prose so rich and strange that writers from Samuel Johnson to Virginia Woolf to W. G. Sebald have fallen under its spell. He was born in London, the son of a silk merchant, and studied medicine at Montpellier, Padua and Leiden, the best medical schools of the day, before settling in Norwich in 1637.

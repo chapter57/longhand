@@ -8,6 +8,8 @@ note: "Trollope wrote forty-seven novels while working full-time for the Post Of
 portrait: "Anthony_Trollope"
 read: "https://www.gutenberg.org/ebooks/search/?query=Anthony+Trollope"
 read_label: "Read his novels free"
+buy: "Barchester Towers"
+isbn: "9780140432039"
 wiki: "https://en.wikipedia.org/wiki/Anthony_Trollope"
 ---
 Anthony Trollope had an unhappy start. His father was a brilliant, bad-tempered lawyer who failed at everything, and Anthony was sent to Harrow and Winchester as a poor boy among rich ones, where he was bullied and miserable. The family was rescued by his mother, Frances Trollope, who began writing in her fifties and became a bestselling author with a book about her travels in America.

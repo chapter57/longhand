@@ -8,6 +8,8 @@ note: "Born in Edinburgh, Stevenson gave us Treasure Island (1883) and Strange C
 portrait: "Robert_Louis_Stevenson"
 read: "https://www.gutenberg.org/ebooks/search/?query=Robert+Louis+Stevenson"
 read_label: "Read his books free"
+buy: "Treasure Island"
+isbn: "9780140437683"
 wiki: "https://en.wikipedia.org/wiki/Robert_Louis_Stevenson"
 ---
 Robert Louis Stevenson came from a famous Edinburgh family of engineers who built lighthouses around the coast of Scotland, and he was expected to join the firm. He was a sickly child, often in bed with fevers and coughs, and he was raised largely by his devoted nurse, Alison Cunningham, who filled his head with Bible stories and tales of Scottish martyrs. Years later he dedicated *A Child's Garden of Verses* to her.

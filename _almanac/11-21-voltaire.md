@@ -8,6 +8,8 @@ note: "Born François-Marie Arouet in Paris, Voltaire wrote plays, histories, po
 portrait: "Voltaire"
 read: "https://www.gutenberg.org/ebooks/search/?query=Candide"
 read_label: "Read Candide free"
+buy: "Candide"
+isbn: "9780140455106"
 wiki: "https://en.wikipedia.org/wiki/Voltaire"
 ---
 Voltaire was born François-Marie Arouet in Paris, the son of a lawyer, and was educated by the Jesuits. His father wanted him to study law. He wanted to write, and to be witty, and he soon found that wit could be dangerous. In 1717 some satirical verses about the Regent of France sent him to the Bastille for nearly a year. He used the time to write a tragedy, and when he came out, he took the name Voltaire.

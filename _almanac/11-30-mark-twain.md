@@ -8,6 +8,8 @@ note: "Samuel Clemens was born shortly after Halley's Comet passed, and predicte
 portrait: "Mark_Twain"
 read: "https://www.gutenberg.org/ebooks/search/?query=Mark+Twain"
 read_label: "Read his books free"
+buy: "Adventures of Huckleberry Finn"
+isbn: "9780143107323"
 wiki: "https://en.wikipedia.org/wiki/Mark_Twain"
 ---
 Samuel Langhorne Clemens was born in the tiny village of Florida, Missouri, in 1835, a couple of weeks after Halley's Comet made its closest approach to the sun. When he was four, the family moved to Hannibal, a town on the Mississippi River, and the river and the town became the world of *Tom Sawyer* and *Huckleberry Finn*.

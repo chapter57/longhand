@@ -8,6 +8,8 @@ note: "Born in Ilford, England, Levertov moved to the United States and became o
 portrait: "Denise_Levertov"
 read: "https://www.poetryfoundation.org/poets/denise-levertov"
 read_label: "Read her poems"
+buy: "Selected Poems"
+isbn: "9780811215541"
 wiki: "https://en.wikipedia.org/wiki/Denise_Levertov"
 ---
 Denise Levertov never went to school. She was born in Ilford, just east of London, and taught at home by her parents: her father, Paul Levertoff, a Russian Jewish scholar who had become a Christian and an Anglican priest, and her Welsh mother, Beatrice, who read aloud to the family from the great Victorian novels. The house was full of books, visitors and political argument.

@@ -8,6 +8,8 @@ note: "Rilke's Letters to a Young Poet, written to a cadet who sent him poems, h
 portrait: "Rainer_Maria_Rilke"
 read: "https://search.worldcat.org/search?q=Rilke+Letters+to+a+Young+Poet"
 read_label: "Find his work at a library"
+buy: "Letters to a Young Poet"
+isbn: "9780141192321"
 wiki: "https://en.wikipedia.org/wiki/Rainer_Maria_Rilke"
 ---
 Rainer Maria Rilke was born in Prague, then part of Austria-Hungary, and was sent as a boy to military schools, which he hated. He left to study and to write, and by his twenties he was traveling restlessly across Europe, living in borrowed rooms and the houses of admirers, with poetry as his only fixed address.

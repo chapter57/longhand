@@ -8,6 +8,8 @@ note: "Born Paul Antschel in Czernowitz, Celan survived the Holocaust, in which 
 portrait: "Paul_Celan"
 read: "https://search.worldcat.org/search?q=Paul+Celan+poems"
 read_label: "Find his poems at a library"
+buy: "Selected Poems and Prose of Paul Celan"
+isbn: "9780393322248"
 wiki: "https://en.wikipedia.org/wiki/Paul_Celan"
 ---
 Paul Celan was born Paul Antschel in Czernowitz, a multilingual city in the region of Bukovina, which had been part of Austria-Hungary and was then part of Romania; today it is Chernivtsi, in Ukraine. He grew up in a German-speaking Jewish family. His mother, whom he adored, loved German poetry and made sure he spoke the language perfectly.

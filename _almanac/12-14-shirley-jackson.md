@@ -8,6 +8,8 @@ note: "Jackson's story \"The Lottery\" brought The New Yorker more letters than 
 portrait: "Shirley_Jackson"
 read: "https://search.worldcat.org/search?q=Shirley+Jackson+The+Lottery"
 read_label: "Find her work at a library"
+buy: "We Have Always Lived in the Castle"
+isbn: "9780143039976"
 wiki: "https://en.wikipedia.org/wiki/Shirley_Jackson"
 ---
 Shirley Jackson was born in San Francisco and grew up in the comfortable suburb of Burlingame, with a mother who never quite approved of her. At Syracuse University she met Stanley Edgar Hyman, who read one of her stories in a college magazine and decided he would marry its author. He did. They settled in North Bennington, Vermont, where he taught at Bennington College, and raised four children in a big, untidy, book-filled house.

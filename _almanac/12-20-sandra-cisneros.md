@@ -8,6 +8,8 @@ note: "Cisneros's The House on Mango Street, a book of short vignettes about a g
 portrait: "Sandra_Cisneros"
 read: "https://search.worldcat.org/search?q=Sandra+Cisneros+The+House+on+Mango+Street"
 read_label: "Find it at a library"
+buy: "The House on Mango Street"
+isbn: "9780679734772"
 wiki: "https://en.wikipedia.org/wiki/Sandra_Cisneros"
 ---
 Sandra Cisneros was born in Chicago, the only daughter among seven children of a Mexican father and a Mexican American mother. The family moved often, between Chicago and Mexico City and from one Chicago apartment to another, and she grew up shy and bookish, an outsider in her own family of brothers and at school.

@@ -8,6 +8,8 @@ note: "Cather moved from Virginia to the Nebraska prairie at nine, and that land
 portrait: "Willa_Cather"
 read: "https://www.gutenberg.org/ebooks/search/?query=Willa+Cather"
 read_label: "Read My Ántonia free"
+buy: "My Ántonia"
+isbn: "9780679741879"
 wiki: "https://en.wikipedia.org/wiki/Willa_Cather"
 ---
 Willa Cather was born in the Back Creek Valley of Virginia, and when she was nine her family moved west to Nebraska, first to a farm and then to the small railroad town of Red Cloud. The move was a shock. In *My Ántonia*, her narrator remembers arriving to find that there seemed to be nothing but land, "not a country at all, but the material out of which countries are made." Then it seized her. Her neighbors were immigrant families from Bohemia, Sweden, Norway, Russia and Germany, and she spent hours listening to the older women tell stories of the old country in their own languages.

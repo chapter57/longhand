@@ -9,6 +9,8 @@ portrait: "Thomas_Becket"
 pictured: "Thomas Becket"
 read: "https://www.gutenberg.org/ebooks/search/?query=Chaucer+Canterbury+Tales"
 read_label: "Read The Canterbury Tales free"
+buy: "The Canterbury Tales"
+isbn: "9780140424386"
 wiki: "https://en.wikipedia.org/wiki/Thomas_Becket"
 ---
 Thomas Becket was the son of a London merchant who rose to become the closest friend and most powerful servant of King Henry II. As chancellor he lived in splendor, rode to war, and managed the king's business brilliantly. In 1162 Henry made him Archbishop of Canterbury, the head of the church in England, expecting a loyal ally.

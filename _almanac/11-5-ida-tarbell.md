@@ -8,6 +8,8 @@ note: "Tarbell's History of the Standard Oil Company, first published in install
 portrait: "Ida_Tarbell"
 read: "https://www.gutenberg.org/ebooks/search/?query=Ida+Tarbell"
 read_label: "Read it free"
+buy: "The History of the Standard Oil Company"
+isbn: "9780486428215"
 wiki: "https://en.wikipedia.org/wiki/Ida_Tarbell"
 ---
 Ida Tarbell grew up in the oil fields of northwestern Pennsylvania in the years after the first oil well was drilled there in 1859, a landscape of derricks, mud and boom towns. Her father made wooden tanks to store oil and later became an independent oil producer. When she was fourteen, a secret scheme between the railroads and a group of refiners, led by John D. Rockefeller's Standard Oil, threatened to ruin independent men like him. She never forgot it.

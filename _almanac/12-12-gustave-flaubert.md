@@ -8,6 +8,8 @@ note: "Flaubert spent five years on Madame Bovary, sometimes a week on a single 
 portrait: "Gustave_Flaubert"
 read: "https://www.gutenberg.org/ebooks/search/?query=Madame+Bovary"
 read_label: "Read Madame Bovary free"
+buy: "Madame Bovary"
+isbn: "9780143106494"
 wiki: "https://en.wikipedia.org/wiki/Gustave_Flaubert"
 ---
 Gustave Flaubert was born in Rouen, in Normandy, where his father was chief surgeon at the city hospital; the family lived in an apartment inside it, and as a boy Gustave and his sister would climb up to peer through a window into the dissecting room. He was sent to Paris to study law, which he hated, and in 1844 he suffered a sudden seizure, perhaps epilepsy, that ended his legal career. His family moved to a house at Croisset, beside the Seine near Rouen, and he lived and wrote there for most of his life.

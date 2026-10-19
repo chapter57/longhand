@@ -8,6 +8,8 @@ note: "Mahfouz wrote more than thirty novels about the streets of Cairo while wo
 portrait: "Naguib_Mahfouz"
 read: "https://search.worldcat.org/search?q=Naguib+Mahfouz+Palace+Walk"
 read_label: "Find his novels at a library"
+buy: "Palace Walk"
+isbn: "9780307947109"
 wiki: "https://en.wikipedia.org/wiki/Naguib_Mahfouz"
 ---
 Naguib Mahfouz was born in Gamaliya, one of the oldest neighborhoods of medieval Cairo, the youngest of seven children. When he was seven, he watched from his window the street demonstrations of the 1919 revolution against British rule, and the crowded lanes, cafés and houses of old Cairo became the world of his fiction.

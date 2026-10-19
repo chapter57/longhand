@@ -8,6 +8,8 @@ note: "Born in French Algeria, Camus wrote The Stranger (1942) and The Plague (1
 portrait: "Albert_Camus"
 read: "https://search.worldcat.org/search?q=Albert+Camus+The+Stranger"
 read_label: "Find it at a library"
+buy: "The Stranger"
+isbn: "9780679720201"
 wiki: "https://en.wikipedia.org/wiki/Albert_Camus"
 ---
 Albert Camus was born in Algeria, then a part of France, and grew up very poor in a working-class neighborhood of Algiers. His father was killed in the First World War when Albert was not yet one. His mother, who was nearly deaf and could not read, cleaned houses, and the family lived with his stern grandmother in a small apartment with no running water.

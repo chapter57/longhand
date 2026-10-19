@@ -8,6 +8,8 @@ note: "This is the traditional date of Chaucer's death, taken from his tomb in W
 portrait: "Geoffrey_Chaucer"
 read: "https://www.gutenberg.org/ebooks/search/?query=Chaucer"
 read_label: "Read The Canterbury Tales free"
+buy: "The Canterbury Tales"
+isbn: "9780140424386"
 wiki: "https://en.wikipedia.org/wiki/Geoffrey_Chaucer"
 ---
 Geoffrey Chaucer was not, in his own lifetime, mainly known as a poet. He was a busy royal servant: a page in a noble household as a boy, a soldier captured in France and ransomed (the king contributed), a diplomat sent to Italy and France, and for twelve years the official in charge of customs on wool in the Port of London. During those years he lived in rooms over Aldgate, one of the gates in London's city wall, and wrote in his spare time.

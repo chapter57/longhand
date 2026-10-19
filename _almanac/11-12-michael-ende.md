@@ -8,6 +8,8 @@ note: "The son of a surrealist painter, Ende wrote Momo and The Neverending Stor
 portrait: "Michael_Ende"
 read: "https://search.worldcat.org/search?q=The+Neverending+Story+Ende"
 read_label: "Find it at a library"
+buy: "The Neverending Story"
+isbn: "9780140386332"
 wiki: "https://en.wikipedia.org/wiki/Michael_Ende"
 ---
 Michael Ende was born in Garmisch-Partenkirchen, in the Bavarian Alps, the only child of the painter Edgar Ende, whose dreamlike, surrealist pictures were condemned by the Nazis as "degenerate art." Growing up in a house where imagination was a kind of resistance left its mark on everything he wrote.

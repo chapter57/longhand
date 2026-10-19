@@ -8,6 +8,8 @@ note: "Austen's novels were published without her name, \"By a Lady.\" Her first
 portrait: "Jane_Austen"
 read: "https://www.gutenberg.org/ebooks/search/?query=Jane+Austen"
 read_label: "Read her novels free"
+buy: "Pride and Prejudice"
+isbn: "9780141439518"
 wiki: "https://en.wikipedia.org/wiki/Jane_Austen"
 ---
 Jane Austen was born in the rectory at Steventon, a village in Hampshire, the seventh of eight children of the Reverend George Austen and his wife, Cassandra. It was a lively, bookish family that put on plays in the barn and read novels aloud in the evenings, and as a girl Jane filled notebooks with wild comic stories to make them laugh.

@@ -8,6 +8,8 @@ note: "Turgenev's A Sportsman's Sketches quietly showed readers the lives of Rus
 portrait: "Ivan_Turgenev"
 read: "https://www.gutenberg.org/ebooks/search/?query=Turgenev"
 read_label: "Read his work free"
+buy: "Fathers and Sons"
+isbn: "9780141441337"
 wiki: "https://en.wikipedia.org/wiki/Ivan_Turgenev"
 ---
 Ivan Turgenev grew up on Spasskoye, his mother's large estate south of Moscow, where she owned thousands of serfs and treated them, and her son, with frightening cruelty. He spent his life writing against the world he was born into, though always with a gentleness she never showed.
