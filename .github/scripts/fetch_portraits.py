@@ -45,7 +45,7 @@ credits = (yaml.safe_load(open(saved, encoding="utf-8")) or {}) if os.path.exist
 for path in sorted(glob.glob("_almanac/*.md")):
     e = yaml.safe_load(open(path, encoding="utf-8").read().split("---", 2)[1])
     key = f"{e['month']}-{e['day']}"
-    if not e.get("portrait") or key in credits:
+    if not e.get("portrait") or (credits.get(key) or {}).get("license"):
         continue
     try:
         summary = json.loads(get("https://en.wikipedia.org/api/rest_v1/page/summary/"
@@ -55,14 +55,15 @@ for path in sorted(glob.glob("_almanac/*.md")):
         if "/wikipedia/commons/" not in original:
             print(key, "no Commons picture")
             continue
-        data = None
-        if thumb and (summary["originalimage"].get("width") or 0) > 960:
+        name = urllib.parse.unquote(original.split("?")[0].rsplit("/", 1)[1])
+        done = credits.get(key, {}).get("file")
+        data = open(os.path.join(OUT, done), "rb").read() if done and os.path.exists(os.path.join(OUT, done)) else None
+        if not data and thumb and (summary["originalimage"].get("width") or 0) > 960:
             try:
                 data = get(re.sub(r"/\d+px-([^/]+)$", r"/960px-\1", thumb))
             except Exception:
                 data = None
         data = data or get(original)
-        name = urllib.parse.unquote(original.rsplit("/", 1)[1])
         file = key + (".jpg" if data[:2] == b"\xff\xd8" else ".png" if data[:4] == b"\x89PNG" else ".img")
         open(os.path.join(OUT, file), "wb").write(data)
         meta, info = {}, None
