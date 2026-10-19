@@ -63,12 +63,16 @@ for path in sorted(glob.glob("_almanac/*.md")):
                 data = None
         data = data or get(original)
         name = urllib.parse.unquote(original.rsplit("/", 1)[1])
-        info = json.loads(get("https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo"
-                              "&iiprop=extmetadata&titles=" + urllib.parse.quote("File:" + name)))
-        meta = next(iter(info["query"]["pages"].values()))["imageinfo"][0]["extmetadata"]
-        ext = os.path.splitext(name)[1].lower()
-        file = f"{key}{'.jpg' if ext in ('.jpg', '.jpeg') else ext}"
+        file = key + (".jpg" if data[:2] == b"\xff\xd8" else ".png" if data[:4] == b"\x89PNG" else ".img")
         open(os.path.join(OUT, file), "wb").write(data)
+        meta, info = {}, None
+        try:
+            info = json.loads(get("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode({
+                "action": "query", "format": "json", "formatversion": "2", "prop": "imageinfo",
+                "iiprop": "extmetadata", "titles": "File:" + name})))
+            meta = info["query"]["pages"][0]["imageinfo"][0]["extmetadata"]
+        except Exception as err:
+            print(key, "no credit details:", err, str(info)[:300])
         credits[key] = {"file": file, "commons": "File:" + name, "pictured": e.get("pictured") or e["name"],
                         "artist": plain(meta.get("Artist", {}).get("value")),
                         "license": plain(meta.get("LicenseShortName", {}).get("value")),
