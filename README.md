@@ -11,7 +11,7 @@ The almanac is a calendar, written once: one file per day in `_almanac/`. Each f
 Entries open one day at a time, starting from `almanac_start` in `_config.yml` (October 17, 2026). Readers see today's entry and every earlier one, never the days still to come, so there's a reason to come back tomorrow:
 
 - **Today in the Almanac** on the front page shows today's entry, and "Earlier this week" lists the six days before.
-- **This past week** at the top of the Almanac page (`/almanac/`) shows today and the six days before, and below it every entry so far, month by month.
+- The Almanac page (`/almanac/`) lists every entry so far, newest first, with today's highlighted.
 - An entry's own page links to the day before and the day after, but only to days that have opened. Visiting a day still to come shows "Not yet," with the date it opens.
 
 Once a full year has passed, every entry is open. (Pages for days to come are hidden by the reader's browser, not removed, so they're still in the site's files.)
