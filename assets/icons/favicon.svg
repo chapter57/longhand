@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>.d{fill:#2F4F78}.s{fill:#F2F3EE;opacity:.6}@media (prefers-color-scheme:dark){.d{fill:#9DB6D6}.s{fill:#141619;opacity:.35}}</style>
+  <path class="d" d="M30 9c14-2 26 8 25 22s-11 25-25 25S6 47 8 33 16 11 30 9z"/>
+  <ellipse class="s" cx="23" cy="22" rx="7" ry="4" transform="rotate(-30 23 22)"/>
+  <circle class="d" cx="56" cy="11" r="3.2"/>
+</svg>

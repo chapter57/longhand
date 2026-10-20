@@ -80,6 +80,7 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 - `_layouts/`, `_includes/`, `assets/site.css`: the page design; the drawings (pen, moon phases, postmark, envelope, ink rule) are in `_includes/ill-*.html`
 - `.pages.yml`: the Pages CMS editing screens
 - `_config.yml`: site settings
+- `assets/icons/`, `favicon.ico`: the site icon (a blue ink drop); `assets/brand/`: the banner and round logo for social profiles
 - `fonts/`: Literata and IBM Plex Mono, both under the SIL Open Font License (see `fonts/OFL.txt`)
 - `write/`: the Longhand writing app
 - `.github/`: the daily posting to Bluesky and Mastodon
