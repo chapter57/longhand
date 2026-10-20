@@ -125,24 +125,68 @@
     }
   }
 
-  // Front page: the library card. The last few days are written in, today is
-  // stamped, and the lines below stay blank for the days still to come.
-  var cardEl = document.querySelector("[data-almanac-card-rows]");
-  if (cardEl && entries.length) {
-    var rows = [];
-    for (var c = 5; c >= 1; c--) {
-      var cd = addDays(today, -c);
-      onDay(cd).forEach(function (e) {
-        rows.push('<span class="libcard-row"><span class="libcard-date">' + esc(MONTHS[cd.getMonth()].slice(0, 3) + " " + cd.getDate()) +
-          '</span><span class="libcard-name">' + esc(e.name) + "</span></span>");
-      });
-    }
-    if (onDay(today).length) {
-      rows.push('<span class="libcard-row libcard-today"><span class="libcard-name">' +
-        '<span class="libcard-stamp">' + esc(MONTHS[today.getMonth()].slice(0, 3) + " " + today.getDate() + " " + today.getFullYear()) + "</span></span></span>");
-    }
-    while (rows.length < 7) rows.push('<span class="libcard-row"><span class="libcard-date"></span><span class="libcard-name"></span></span>');
-    cardEl.innerHTML = rows.join("");
+  // Front page: the ink field, a drop of ink for every day of the almanac, in
+  // order from its first day. Opened days are inked in a shape grown from the
+  // writer's name; today's is wet and blue; days still to come are faint rings.
+  var inkEl = document.querySelector("[data-almanac-ink-drops]");
+  if (inkEl && entries.length) {
+    var sp = String(window.LONGHAND_ALMANAC_START || "2026-10-17").split("-");
+    var startDate = new Date(+sp[0], sp[1] - 1, +sp[2]);
+    var seq = entries.map(function (e) {
+      var on = new Date(startDate.getFullYear(), e.month - 1, e.day);
+      if (on < startDate) on = new Date(startDate.getFullYear() + 1, e.month - 1, e.day);
+      return { e: e, on: on };
+    }).sort(function (x, y) { return x.on - y.on; });
+    var seed = function (text) { // a small repeatable random-number maker, one per name
+      var h = 2166136261;
+      for (var q = 0; q < text.length; q++) { h ^= text.charCodeAt(q); h = Math.imul(h, 16777619); }
+      return function () { h += 0x6D2B79F5; var t = h; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    };
+    var blob = function (cx, cy, r, rand) { // a closed, smooth, irregular drop
+      var n = 9, pts = [];
+      for (var q = 0; q < n; q++) {
+        var ang = (q / n) * Math.PI * 2 + (rand() - 0.5) * 0.5, rad = r * (0.74 + rand() * 0.42);
+        pts.push([cx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad]);
+      }
+      var d = "M" + pts[0][0].toFixed(1) + " " + pts[0][1].toFixed(1);
+      for (var q2 = 0; q2 < n; q2++) {
+        var p0 = pts[(q2 + n - 1) % n], p1 = pts[q2], p2 = pts[(q2 + 1) % n], p3 = pts[(q2 + 2) % n];
+        d += "C" + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + " " + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + " " +
+          (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + " " + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + " " + p2[0].toFixed(1) + " " + p2[1].toFixed(1);
+      }
+      return d + "Z";
+    };
+    var COLS = 7, CELL = 40, todayKey = today.getMonth() + 1 + "-" + today.getDate(), opened = 0, parts2 = [];
+    // The field grows a day at a time: what has opened, then only a row of
+    // faint rings for the days ahead.
+    var shown = 0;
+    seq.forEach(function (it, i) { if (isOpen(it.e)) shown = i + 1; });
+    seq = seq.slice(0, Math.min(seq.length, (Math.ceil(shown / COLS) + 1) * COLS));
+    seq.forEach(function (it, i) {
+      var e = it.e, cx = (i % COLS) * CELL + CELL / 2, cy = Math.floor(i / COLS) * CELL + CELL / 2, rand = seed(e.name);
+      var label = esc(e.name + ", " + MONTHS[e.month - 1] + " " + e.day);
+      if (!isOpen(e)) { parts2.push('<circle class="ink-later" cx="' + cx + '" cy="' + cy + '" r="7"/>'); return; }
+      opened++;
+      var isToday = e.month + "-" + e.day === todayKey, r = 8.5 + rand() * 7;
+      cx += (rand() - 0.5) * 7; cy += (rand() - 0.5) * 7;
+      // Ink dries as it ages: older drops are paler.
+      var age = Math.max(0, Math.round((today - it.on) / 86400000) % 365);
+      var fade = isToday ? 1 : (0.3 + 0.62 * Math.exp(-age / 18)).toFixed(2);
+      var shape = '<path class="ink-drop' + (isToday ? " ink-today" : "") + '" style="opacity:' + fade + '" d="' + blob(cx, cy, r, rand) + '"/>';
+      if (isToday) {
+        shape += '<ellipse class="ink-shine" cx="' + (cx - r * 0.3).toFixed(1) + '" cy="' + (cy - r * 0.35).toFixed(1) + '" rx="' + (r * 0.28).toFixed(1) + '" ry="' + (r * 0.16).toFixed(1) + '" transform="rotate(-30 ' + cx + " " + cy + ')"/>';
+        for (var k2 = 0; k2 < 3; k2++) {
+          var a2 = rand() * Math.PI * 2, dist = r * (1.25 + rand() * 0.5);
+          shape += '<circle class="ink-splat" cx="' + (cx + Math.cos(a2) * dist).toFixed(1) + '" cy="' + (cy + Math.sin(a2) * dist).toFixed(1) + '" r="' + (1 + rand() * 1.6).toFixed(1) + '"/>';
+        }
+      }
+      parts2.push('<a href="' + esc(e.url || "/almanac/") + '" aria-label="' + label + '"><title>' + label + "</title>" + shape + "</a>");
+    });
+    var rowsN = Math.ceil(seq.length / COLS);
+    inkEl.innerHTML = '<svg viewBox="0 0 ' + COLS * CELL + " " + rowsN * CELL + '" role="group" aria-label="The almanac so far">' + parts2.join("") + "</svg>";
+    var noteEl = document.querySelector("[data-almanac-ink-note]");
+    if (noteEl) noteEl.textContent = opened === 1 ? "The first drop of ink. A new one every day."
+      : opened + " drops of ink so far, one a day. Tomorrow's is still in the pen.";
   }
 
   // Almanac page: today and the six days before, and today's place in the calendar.

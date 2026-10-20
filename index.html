@@ -7,14 +7,20 @@ layout: default
   if ((matchMedia("(display-mode: standalone)").matches || navigator.standalone) && !document.referrer) location.replace("write/");
 </script>
 
-<section class="lead wrap">
-  <div class="lead-copy">
-    <p class="kicker">{{ site.season }} · The Longhand Almanac</p>
-    <h1>Something worth reading, every day.</h1>
-    <p class="dek">Each day the almanac opens a new entry: a writer's birthday, a famous book's anniversary, or a moment from literary history, with the story behind it and somewhere to start reading. Come back tomorrow for the next one.</p>
-    {% include social-icons.html %}
+<section class="hero wrap">
+  <p class="kicker">{{ site.season }} · A writer, a book or a moment, every day</p>
+  <div class="hero-title">
+    {% include ill-hand.html %}
+    <h1>Longhand <span>Literature</span></h1>
   </div>
-  <div class="lead-art lead-card">{% include ill-card.html %}</div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="hero-line">Something worth reading, every day.</p>
+      <p class="dek">Each day the almanac opens a new entry: a writer's birthday, a famous book's anniversary, or a moment from literary history, with the story behind it and somewhere to start reading. Come back tomorrow for the next one.</p>
+      {% include social-icons.html %}
+    </div>
+    {% include ill-inkfield.html %}
+  </div>
 </section>
 
 <section class="dept wrap today" id="almanac" aria-labelledby="today-h">
@@ -26,7 +32,7 @@ layout: default
     <aside class="week-strip" aria-labelledby="strip-h">
       <h3 class="label" id="strip-h"><span>Earlier this week</span></h3>
       <ul data-almanac-strip></ul>
-      <p class="actions"><a class="text-link" href="{{ '/almanac/' | relative_url }}">Every entry so far</a></p>
+      <p class="actions"><a class="text-link" href="{{ '/almanac/' | relative_url }}">Every entry so far</a>{% if site.bookshop_shop != "" %}<a class="text-link" href="{{ site.bookshop_shop }}">The Almanac Shelf</a>{% endif %}</p>
     </aside>
   </div>
 </section>

@@ -20,9 +20,7 @@
   --accent-wash: rgba(47, 79, 120, 0.12);
   --margin-red: rgba(170, 70, 60, 0.35);
   --shadow: rgba(20, 24, 30, 0.10);
-  --card: #F8F4E8;
-  --pencil: #3A4F6E;
-  --stamp-blend: multiply;
+  --hand-fill: #E4E9F0;
   --serif: "Literata", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
   --gutter: max(16px, 4vw);
@@ -42,9 +40,7 @@
     --accent-wash: rgba(157, 182, 214, 0.16);
     --margin-red: rgba(225, 130, 115, 0.35);
     --shadow: rgba(0, 0, 0, 0.45);
-    --card: #1D2024;
-    --pencil: #B3C3D8;
-    --stamp-blend: normal;
+    --hand-fill: #1C232D;
   }
 }
 :root[data-theme="dark"] {
@@ -60,9 +56,7 @@
   --accent-wash: rgba(157, 182, 214, 0.16);
   --margin-red: rgba(225, 130, 115, 0.35);
   --shadow: rgba(0, 0, 0, 0.45);
-  --card: #1D2024;
-  --pencil: #B3C3D8;
-  --stamp-blend: normal;
+  --hand-fill: #1C232D;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -206,27 +200,40 @@ h1, h2, h3 { text-wrap: balance; }
 /* ---------- the Almanac ---------- */
 .text-link { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .lead-almanac .moons-wrap { margin-top: 1.5rem; }
-/* The front page's library card, stamped once a day. */
-.lead-card { max-width: 24rem; }
-.libcard { position: relative; display: block; text-decoration: none; color: var(--ink); background: var(--card);
-  border: 1.5px solid var(--ink); border-radius: 5px; padding: 1.2rem 1.4rem 1.6rem; box-shadow: 0 10px 24px var(--shadow); transform: rotate(1.6deg); transition: transform 0.2s; }
-.libcard:hover { transform: rotate(0.6deg) translateY(-2px); }
-.libcard-head { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); }
-.libcard-title { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase; }
-.libcard-sub { font-style: italic; font-size: 0.8rem; color: var(--ink-soft); }
-.libcard-rows { display: block; }
-.libcard-row { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr); align-items: center; min-height: 2.15rem; border-bottom: 1px solid var(--rule); position: relative; }
-.libcard-row::before { content: ""; position: absolute; top: 0; bottom: 0; left: 3.2rem; width: 1px; background: var(--rule); }
-.libcard-date { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--ink-soft); text-transform: uppercase; }
-.libcard-name { font-style: italic; font-size: 0.95rem; color: var(--pencil); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 0.4rem; }
-.libcard-stamp { display: inline-block; font-family: var(--mono); font-weight: 500; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--accent); border: 2px solid var(--accent); border-radius: 3px; padding: 0.2rem 0.55rem; transform: rotate(-4deg); margin: 0.35rem 0 0.35rem 0.2rem;
-  opacity: 0.88; mix-blend-mode: var(--stamp-blend); animation: libcard-stamp 0.5s 0.3s both cubic-bezier(.2,1.6,.4,1); }
-.libcard-today { min-height: 2.7rem; }
-.libcard-today .libcard-name { grid-column: 1 / -1; padding-left: 1.2rem; overflow: visible; }
-@keyframes libcard-stamp { from { transform: rotate(-4deg) scale(1.6); opacity: 0; } to { transform: rotate(-4deg) scale(1); opacity: 0.88; } }
-.libcard-pocket { position: absolute; left: 50%; bottom: -1px; width: 3.2rem; height: 0.55rem; margin-left: -1.6rem; border: 1.5px solid var(--ink); border-bottom: 0; border-radius: 1.6rem 1.6rem 0 0; background: var(--paper); }
-@media (prefers-reduced-motion: reduce) { .libcard-stamp { animation: none; } .libcard { transition: none; } }
+/* ---------- front page: Longhand Literature ---------- */
+.hero { padding-block: clamp(2.25rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.25rem); }
+.hero-title { position: relative; margin: clamp(0.75rem, 2vw, 1.25rem) 0 clamp(1.5rem, 4vw, 2.5rem); }
+.hero h1 { position: relative; z-index: 1; margin: 0; font-weight: 400; font-size: clamp(3rem, 11vw, 8.2rem); line-height: 0.92; letter-spacing: -0.035em; }
+.hero h1 span { display: block; font-style: italic; padding-left: clamp(1.5rem, 9vw, 9rem); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2rem clamp(1.5rem, 5vw, 4.5rem); align-items: start; }
+.hero-line { font-size: clamp(1.35rem, 2.6vw, 1.75rem); line-height: 1.25; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+.hero .dek { margin-top: 0; }
+
+/* The long hand, stretched out behind the title: cuff, arm (any length), hand. */
+.longhand { position: absolute; z-index: 0; left: -1rem; right: -0.5rem; top: 50%; height: clamp(6.5rem, 17vw, 14rem);
+  transform: translateY(-46%); display: flex; align-items: stretch; pointer-events: none; color: var(--accent); }
+.longhand svg { height: 100%; width: auto; flex: none; overflow: visible; }
+/* The arm is the cuff's and hand's two edges joined (y 82 to 140 of 220), at any length. */
+.longhand-arm { flex: 1; position: relative; margin-inline: -1px; }
+.longhand-arm::before { content: ""; position: absolute; left: 0; right: 0; top: calc(82 / 220 * 100%); bottom: calc(80 / 220 * 100%);
+  border-block: 1.5px solid currentColor; background: repeating-linear-gradient(100deg, transparent 0 26px, var(--accent-wash) 26px 28px) bottom / 100% 34% no-repeat, var(--hand-fill); }
+.lh-fill { fill: var(--hand-fill); }
+.lh-line { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.longhand .lh-line { stroke-width: 1.5px; }
+.longhand .lh-thin { stroke-width: 1px; }
+
+/* The ink field: a drop of ink for every day. */
+.inkfield { margin: 0; max-width: 26rem; justify-self: end; width: 100%; }
+.inkfield-drops svg { display: block; width: 100%; height: auto; overflow: visible; }
+.inkfield-note { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.9rem; }
+.ink-drop { fill: var(--ink); transition: transform 0.25s; transform-box: fill-box; transform-origin: center; }
+a:hover > .ink-drop, a:focus-visible > .ink-drop { fill: var(--accent); transform: scale(1.18); }
+.ink-today { fill: var(--accent); animation: ink-wet 3.2s ease-in-out infinite; }
+.ink-shine { fill: var(--paper); opacity: 0.55; pointer-events: none; }
+.ink-later { fill: none; stroke: var(--rule); stroke-width: 1.2; stroke-dasharray: 2 3; }
+.ink-splat { fill: var(--accent); opacity: 0.8; }
+@keyframes ink-wet { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .ink-today { animation: none; } .ink-drop { transition: none; } }
 .lead-art-small { max-width: 11rem; }
 .lead-art-small .ill-postmark { width: 100%; }
 
@@ -385,7 +392,8 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* ---------- narrow screens ---------- */
 @media (max-width: 760px) {
-  .lead, .write-grid, .today-grid, .band-inner, .review-call-grid, .tool-grid { grid-template-columns: minmax(0, 1fr); }
+  .lead, .write-grid, .today-grid, .band-inner, .review-call-grid, .tool-grid, .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .inkfield { justify-self: start; max-width: 20rem; }
   .review-call-art { display: none; }
   .entry, .entry-feature { grid-template-columns: 5.5rem minmax(0, 1fr); }
   .piece-head, .review-grid { grid-template-columns: minmax(0, 1fr); }

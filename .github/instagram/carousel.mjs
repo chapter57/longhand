@@ -66,6 +66,20 @@ blockquote { font: italic 68px/1.32 L; margin: 0; letter-spacing: -0.01em; }
 .end li { font: 38px/1.45 L; list-style: none; margin: 0 0 18px; padding-left: 52px; position: relative; }
 .end li::before { content: "→"; position: absolute; left: 0; color: #2F4F78; font-family: M; }
 .end ul { margin: 0; padding: 0; }
+/* shelf: a cover of book spines, and a page for each book */
+.shelf { background: #1E2227; color: #F2F3EE; }
+.shelf .top { color: #C9D6E8; }
+.shelf h1 { font: 600 112px/1.0 L; letter-spacing: -0.025em; margin: 0 0 28px; }
+.shelf .sub { font: italic 46px/1.3 L; color: #E3E1DA; max-width: 820px; }
+.spines { display: flex; align-items: flex-end; gap: 14px; height: 300px; margin-bottom: 64px; }
+.spine { width: 74px; border-radius: 4px 4px 0 0; position: relative; }
+.spine i { position: absolute; left: 50%; top: 22px; bottom: 22px; width: 2px; margin-left: -1px; background: rgba(242,243,238,0.35); }
+.shelf-rule { height: 10px; background: #8E9398; border-radius: 2px; margin-top: -64px; margin-bottom: 64px; }
+.book .n { font: 500 24px/1 M; letter-spacing: 0.14em; color: #2F4F78; text-transform: uppercase; margin-bottom: 40px; }
+.book h2 { font: italic 600 92px/1.05 L; margin: 0 0 22px; }
+.book .who { font: 500 28px/1.4 M; letter-spacing: 0.06em; color: #5B6168; text-transform: uppercase; margin-bottom: 52px; }
+.book p { font: 42px/1.45 L; }
+.book .where { margin-top: 52px; font: 500 22px/1.4 M; letter-spacing: 0.08em; color: #2F4F78; text-transform: uppercase; }
 /* the red margin line of a notebook page */
 .ruled::before { content: ""; position: absolute; top: 0; bottom: 0; left: 64px; width: 2px; background: rgba(170, 70, 60, 0.35); }
 `;
@@ -94,11 +108,23 @@ function slide(s, n, total, id) {
       <div class="words">${s.words.map((w) => `<div class="word">${esc(w)}</div>`).join("")}</div>
       <p>${esc(s.body)}</p></div>${foot}</div>`;
   }
+  if (s.kind === "shelf") {
+    const colors = ["#2F4F78", "#AA463C", "#C9A227", "#3E6B4F", "#9DB6D6", "#6B4E71", "#D9D4C7"];
+    const spines = colors.map((c, i) => `<div class="spine" style="background:${c};height:${[86, 100, 78, 94, 70, 98, 82][i]}%"><i></i></div>`).join("");
+    return `<div class="s shelf"><div class="top"><span>The Longhand Almanac</span>${count}</div><div class="mid">
+      <div class="spines">${spines}</div><div class="shelf-rule"></div>
+      <h1>${esc(s.title)}</h1><div class="sub">${esc(s.sub)}</div></div>
+      <div class="foot"><span>@longhandliterature</span><span>Swipe →</span></div></div>`;
+  }
+  if (s.kind === "book") {
+    return `<div class="s book ruled">${top}<div class="mid"><div class="n">${esc(s.n)}</div><h2>${esc(s.title)}</h2>
+      <div class="who">${esc(s.by)}</div><p>${esc(s.body)}</p><div class="where">On our Bookshop.org shelf · link in bio</div></div>${foot}</div>`;
+  }
   if (s.kind === "end") {
     return `<div class="s end ruled">${top}<div class="mid">
       <h2>A writer, a book or a moment from literary history. Every day.</h2>
       <div class="handle">Follow @longhandliterature</div>
-      <ul><li>Save this post for later</li><li>Send it to a reader you love</li><li>The full story is at the link in our bio</li></ul>
+      <ul>${(s.lines || ["Save this post for later", "Send it to a reader you love", "The full story is at the link in our bio"]).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>
       </div><div class="foot"><span>longhandlit.com</span><span></span></div></div>`;
   }
   return `<div class="s ruled">${top}<div class="mid"><h2>${esc(s.title)}</h2><p>${esc(s.body)}</p></div>${foot}</div>`;
