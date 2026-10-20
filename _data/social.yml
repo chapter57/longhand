@@ -80,19 +80,18 @@
 - month: 10
   day: 21
   midday:
-    text: "That willing suspension of disbelief for the moment, which constitutes poetic faith."
-    author: Samuel Taylor Coleridge
-    source: Biographia Literaria, 1817
+    intro: "For Jack Kerouac, a line from the first great poem of the American road."
+    text: "Henceforth I ask not good-fortune, I myself am good-fortune."
+    author: "Walt Whitman"
+    source: "\"Song of the Open Road,\" 1856"
   evening:
-    title: Kubla Khan
-    author: Samuel Taylor Coleridge
-    source: 1816
+    title: "Song of the Open Road"
+    author: "Walt Whitman"
+    source: "1856"
     text: |
-      In Xanadu did Kubla Khan
-      A stately pleasure-dome decree:
-      Where Alph, the sacred river, ran
-      Through caverns measureless to man
-      Down to a sunless sea.
+      Afoot and light-hearted I take to the open road,
+      Healthy, free, the world before me,
+      The long brown path before me leading wherever I choose.
 
 - month: 10
   day: 22
@@ -111,16 +110,23 @@
 - month: 10
   day: 23
   midday:
-    text: "When men were all asleep the snow came flying, / In large white flakes falling on the city brown."
-    author: Robert Bridges
-    source: '"London Snow," 1880'
+    intro: "For Philip Lamantia, who found Surrealism as a teenager, the line the Surrealists loved best."
+    text: "Beautiful as the chance meeting, on a dissecting table, of a sewing machine and an umbrella."
+    author: "Comte de Lautréamont"
+    source: "Les Chants de Maldoror, 1869 (translated for Longhand)"
   evening:
-    title: God's Grandeur
-    author: Gerard Manley Hopkins
-    source: written 1877, published by Robert Bridges in 1918
+    title: "Dream-Land"
+    author: "Edgar Allan Poe"
+    source: "1844"
     text: |
-      The world is charged with the grandeur of God.
-      It will flame out, like shining from shook foil;
+      By a route obscure and lonely,
+      Haunted by ill angels only,
+      Where an Eidolon, named NIGHT,
+      On a black throne reigns upright,
+      I have reached these lands but newly
+      From an ultimate dim Thule—
+      From a wild weird clime that lieth, sublime,
+      Out of SPACE—out of TIME.
 
 - month: 10
   day: 24
@@ -401,22 +407,23 @@
 - month: 11
   day: 10
   midday:
-    text: "A person only plays when he is, in the full sense of the word, a human being, and he is only fully a human being when he plays."
-    author: Friedrich Schiller
-    source: Letters on the Aesthetic Education of Man, 1795 (translated for Longhand)
+    text: "One must be absolutely modern."
+    author: "Arthur Rimbaud"
+    source: "A Season in Hell, 1873 (translated for Longhand)"
   evening:
-    title: Ode to Joy
-    author: Friedrich Schiller
-    source: as Beethoven set it, 1824 (translated for Longhand)
+    title: "Sensation"
+    author: "Arthur Rimbaud"
+    source: "1870 (translated for Longhand)"
     text: |
-      Joy, bright spark of the gods,
-      daughter of Elysium,
-      drunk with fire we enter,
-      heavenly one, your holy place!
-      Your magic binds again
-      what custom sternly parted;
-      all people become brothers
-      where your gentle wing rests.
+      On blue summer evenings I will go down the paths,
+      pricked by the wheat, treading the fine grass:
+      dreaming, I'll feel its coolness on my feet.
+      I'll let the wind bathe my bare head.
+
+      I won't speak, I won't think of anything:
+      but endless love will rise up in my soul,
+      and I'll go far, far off, like a vagabond,
+      through Nature, happy as if with a woman.
 
 - month: 11
   day: 11
@@ -546,32 +553,34 @@
 - month: 11
   day: 19
   midday:
-    text: "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
-    author: Abraham Lincoln
-    source: the Gettysburg Address, 1863
+    intro: "For Joanne Kyger, who lived four years in Japan, the most famous poem in Japanese."
+    text: "The old pond: a frog jumps in, the sound of the water."
+    author: "Matsuo Bashō"
+    source: "1686 (translated for Longhand)"
   evening:
-    title: The Gettysburg Address
-    author: Abraham Lincoln
-    source: November 19, 1863
+    title: "Summer Grasses"
+    author: "Matsuo Bashō"
+    source: "The Narrow Road to the Deep North, 1689 (translated for Longhand)"
     text: |
-      The world will little note, nor long remember what we say here, but it can never forget what they did here.
+      Summer grasses:
+      all that is left
+      of warriors' dreams.
 
 - month: 11
   day: 20
   midday:
-    intro: For Selma Lagerlöf, from another writer of the North.
-    text: "Life can only be understood backwards; but it must be lived forwards."
-    author: Søren Kierkegaard
-    source: journal, 1843 (translated for Longhand)
+    intro: "For Don DeLillo, novelist of crowds, from Poe's story of a man who cannot bear to be alone."
+    text: "He refuses to be alone. He is the man of the crowd."
+    author: "Edgar Allan Poe"
+    source: "\"The Man of the Crowd,\" 1840"
   evening:
-    title: The Wild Swans at Coole
-    author: W. B. Yeats
-    source: 1917
+    title: "Crossing Brooklyn Ferry"
+    author: "Walt Whitman"
+    source: "1856"
     text: |
-      The trees are in their autumn beauty,
-      The woodland paths are dry,
-      Under the October twilight the water
-      Mirrors a still sky;
+      Crowds of men and women attired in the usual costumes, how curious you are to me!
+      On the ferry-boats the hundreds and hundreds that cross, returning home, are more curious to me than you suppose,
+      And you that shall cross from shore to shore years hence are more to me, and more in my meditations, than you might suppose.
 
 - month: 11
   day: 21
@@ -632,18 +641,19 @@
 - month: 11
   day: 25
   midday:
-    text: '"Who killed the Commander?" "Fuenteovejuna, sir."'
-    author: Lope de Vega
-    source: Fuenteovejuna (translated for Longhand)
+    intro: "Shelagh Delaney was nineteen when her first play opened. John Keats was twenty-two when he wrote this."
+    text: "When I have fears that I may cease to be / Before my pen has glean'd my teeming brain"
+    author: "John Keats"
+    source: "1818"
   evening:
-    title: A Sonnet on Writing a Sonnet
-    author: Lope de Vega
-    source: from his play La niña de plata (translated for Longhand)
+    title: "No Coward Soul Is Mine"
+    author: "Emily Brontë"
+    source: "1846"
     text: |
-      Violante has ordered me to write a sonnet;
-      I've never been in such a fix in all my life.
-      Fourteen lines, they say, make up a sonnet:
-      and joke by joke, here go the first three.
+      No coward soul is mine,
+      No trembler in the world's storm-troubled sphere:
+      I see Heaven's glories shine,
+      And faith shines equal, arming me from fear.
 
 - month: 11
   day: 26
@@ -916,17 +926,24 @@
 - month: 12
   day: 13
   midday:
-    text: "No man but a blockhead ever wrote, except for money."
-    author: Samuel Johnson
-    source: in Boswell's Life of Johnson, 1791
+    intro: "Kenneth Patchen, poet and painter, has often been compared with William Blake."
+    text: "The road of excess leads to the palace of wisdom."
+    author: "William Blake"
+    source: "The Marriage of Heaven and Hell, 1790"
   evening:
-    title: A Dictionary of the English Language
-    author: Samuel Johnson
-    source: 1755
+    title: "The Sick Rose"
+    author: "William Blake"
+    source: "1794"
     text: |
-      LEXICOGRAPHER. A writer of dictionaries; a harmless drudge, that busies himself in tracing the original, and detailing the signification of words.
+      O Rose thou art sick.
+      The invisible worm,
+      That flies in the night
+      In the howling storm:
 
-      OATS. A grain, which in England is generally given to horses, but in Scotland supports the people.
+      Has found out thy bed
+      Of crimson joy:
+      And his dark secret love
+      Does thy life destroy.
 
 - month: 12
   day: 14
@@ -1048,15 +1065,19 @@
 - month: 12
   day: 22
   midday:
-    text: "Once upon a time there were four little Rabbits, and their names were— Flopsy, Mopsy, Cotton-tail, and Peter."
-    author: Beatrix Potter
-    source: The Tale of Peter Rabbit, 1902
+    intro: "Kenneth Rexroth loved the Chinese poet Du Fu above all others. Here is Du Fu, in our own version."
+    text: "The country is broken; the mountains and rivers remain. Spring in the city: deep grass and trees."
+    author: "Du Fu"
+    source: "\"Spring View,\" 757 (translated for Longhand)"
   evening:
-    title: The Tale of Peter Rabbit
-    author: Beatrix Potter
-    source: 1902
+    title: "Quiet Night Thoughts"
+    author: "Li Bai"
+    source: "8th century (translated for Longhand)"
     text: |
-      "Now, my dears," said old Mrs. Rabbit one morning, "you may go into the fields or down the lane, but don't go into Mr. McGregor's garden: your Father had an accident there; he was put in a pie by Mrs. McGregor."
+      Before my bed, the bright moonlight:
+      I wondered if it was frost on the ground.
+      I lift my head and gaze at the bright moon,
+      lower my head, and think of home.
 
 - month: 12
   day: 23
@@ -1108,33 +1129,34 @@
 - month: 12
   day: 26
   midday:
-    text: "Full many a flower is born to blush unseen, / And waste its sweetness on the desert air."
-    author: Thomas Gray
-    source: Elegy Written in a Country Churchyard, 1751
+    intro: "Henry Miller wrote a whole book about Rimbaud. Here is Rimbaud, in our own version."
+    text: "One evening I sat Beauty on my knees. And I found her bitter. And I cursed her."
+    author: "Arthur Rimbaud"
+    source: "A Season in Hell, 1873 (translated for Longhand)"
   evening:
-    title: Elegy Written in a Country Churchyard
-    author: Thomas Gray
-    source: 1751, the opening
+    title: "Song of Myself"
+    author: "Walt Whitman"
+    source: "Leaves of Grass, 1892"
     text: |
-      The curfew tolls the knell of parting day,
-      The lowing herd wind slowly o'er the lea,
-      The plowman homeward plods his weary way,
-      And leaves the world to darkness and to me.
+      I depart as air, I shake my white locks at the runaway sun,
+      I effuse my flesh in eddies, and drift it in lacy jags.
+
+      I bequeath myself to the dirt to grow from the grass I love,
+      If you want me again look for me under your boot-soles.
 
 - month: 12
   day: 27
   midday:
-    text: "We are nothing; less than nothing, and dreams. We are only what might have been."
-    author: Charles Lamb
-    source: '"Dream-Children," 1822'
+    intro: "Charles Olson's first book, Call Me Ishmael, was about Melville. From Moby-Dick:"
+    text: "It is not down in any map; true places never are."
+    author: "Herman Melville"
+    source: "Moby-Dick, 1851"
   evening:
-    title: The Old Familiar Faces
-    author: Charles Lamb
-    source: 1798
+    title: "Moby-Dick"
+    author: "Herman Melville"
+    source: "1851"
     text: |
-      I have had playmates, I have had companions,
-      In my days of childhood, in my joyful school-days;
-      All, all are gone, the old familiar faces.
+      Say you are in the country; in some high land of lakes. Take almost any path you please, and ten to one it carries you down in a dale, and leaves you there by a pool in the stream. There is magic in it.
 
 - month: 12
   day: 28
