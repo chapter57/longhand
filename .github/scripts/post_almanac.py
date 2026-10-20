@@ -422,7 +422,10 @@ def post_instagram_carousel(name, dry):
     if not found:
         raise SystemExit(f"No Instagram post called {name!r} in _data/instagram.yml.")
     post = found[0]
-    images = [f"{SITE}/assets/instagram/{name}-{n}.jpg" for n in range(1, len(post["slides"]) + 1)]
+    # Run from a working branch, the slides come from GitHub's copy of that
+    # branch, so a carousel can go out before it reaches the site.
+    base = os.environ.get("INSTAGRAM_IMAGE_BASE", "").strip() or SITE
+    images = [f"{base}/assets/instagram/{name}-{n}.jpg" for n in range(1, len(post["slides"]) + 1)]
     caption = curly(post["caption"].strip())[:2200]
     if dry:
         print(f"--- Instagram carousel ({len(caption)} characters) ---\n{caption}\n" + "\n".join(images))

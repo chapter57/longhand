@@ -91,6 +91,7 @@ jobs:
           MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           INSTAGRAM_DIR: .instagram
+          INSTAGRAM_IMAGE_BASE: ${{ github.ref_name != 'gh-pages' && format('https://raw.githubusercontent.com/{0}/{1}', github.repository, github.ref_name) || '' }}
           SLOT: ${{ steps.day.outputs.slot }}
           ANNOUNCEMENT: ${{ inputs.announcement }}
           ALMANAC_DATE: ${{ inputs.date }}
