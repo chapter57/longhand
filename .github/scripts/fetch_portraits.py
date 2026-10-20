@@ -18,7 +18,7 @@ import urllib.request
 import yaml
 
 OUT = ".github/instagram/portraits"
-UA = {"User-Agent": "LonghandAlmanac/1.0 (https://longhandlit.com; longhandlit@gmail.com)"}
+UA = {"User-Agent": "LonghandAlmanac/1.0 (https://longhandlit.com; hello@longhandlit.com)"}
 
 
 def get(url):
