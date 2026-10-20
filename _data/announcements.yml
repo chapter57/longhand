@@ -30,3 +30,17 @@
     Pick a book at least 50 years old that still matters to you, and tell us why in 700 to 1,000 words, in your own voice (no AI). We'll publish our favorites on longhandlit.com. You can even write it in our free writing app and send it from there.
 
     Guidelines and the form:
+
+- id: new-look
+  link: https://longhandlit.com/
+  title: Longhand Literature
+  description: A writer, a book or a moment from literary history, every day. A new entry opens each day; the rest wait their turn.
+  image: assets/cards/new-look.png
+  hashtags: "#Books #Literature #OnThisDay #Poetry"
+  tags: [BookSky, Books, Literature, OnThisDay, Poetry, Writing]
+  bluesky: |
+    Longhand has a new look.
+
+    Every day the almanac opens one new entry: a writer, a book or a moment from literary history. You can read everything that came before, but tomorrow's is still in the pen.
+
+    Today: Sir Thomas Browne, who died on his 77th birthday.
