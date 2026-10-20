@@ -16,7 +16,7 @@ description: "A literary almanac, one entry a day: writers' birthdays, famous bo
 
 <section class="dept wrap calendar" aria-labelledby="cal-h">
   <h2 class="label" id="cal-h"><span>Every entry so far</span><span class="label-note">newest first</span></h2>
-  <p class="cal-more">Tomorrow's entry opens at midnight.</p>
+  <p class="cal-more">Tomorrow's entry opens at midnight.{% if site.bookshop_shop != "" %} The books from the almanac are on <a href="{{ site.bookshop_shop }}">our shelf at Bookshop.org</a>.{% endif %}</p>
   {%- for m in months %}
   {%- assign month_name = "2000-" | append: m.name | append: "-01" | date: "%B" %}
   <section class="cal-month" aria-labelledby="month-{{ m.name }}">

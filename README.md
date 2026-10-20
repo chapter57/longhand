@@ -20,7 +20,7 @@ The calendar currently runs from October 17 to December 31. Entries repeat every
 
 **Portraits.** Each entry's `portrait` names a Wikipedia article (for example `John_Keats`). The reader's browser loads the picture at the top of that article, but only if it's a freely licensed picture from Wikimedia Commons, and credits its maker and license, linked to the picture's page. For a book or event, `pictured` says who is shown. If there is no portrait, or Wikipedia can't be reached, a lettered card appears instead. To store a portrait on the site instead, add the image and fill in `image` and `image_credit`.
 
-**Bookstore links.** An entry with a `buy` (the book's title) and an `isbn` (the 13-digit ISBN of an edition) links to that book on Bookshop.org, using Longhand's affiliate ID (`bookshop_id` in `_config.yml`). Bookshop.org shares its profits with independent bookstores, and Longhand earns a small commission on sales; the page says so under the link. Entries without an ISBN have no bookstore link. Reviews work the same way, with `isbn`.
+**Bookstore links.** An entry with a `buy` (the book's title) and an `isbn` (the 13-digit ISBN of an edition) links to that book on Bookshop.org, using Longhand's affiliate ID (`bookshop_id` in `_config.yml`). Bookshop.org shares its profits with independent bookstores, and Longhand earns a small commission on sales; the page says so under the link. Entries without an ISBN have no bookstore link. Reviews work the same way, with `isbn`. Once `bookshop_shop` in `_config.yml` holds the address of the Longhand storefront on Bookshop.org, the front page and the Almanac page link to it as the Almanac Shelf.
 
 ## Editing the calendar (the easy way)
 

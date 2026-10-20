@@ -32,7 +32,7 @@ layout: default
     <aside class="week-strip" aria-labelledby="strip-h">
       <h3 class="label" id="strip-h"><span>Earlier this week</span></h3>
       <ul data-almanac-strip></ul>
-      <p class="actions"><a class="text-link" href="{{ '/almanac/' | relative_url }}">Every entry so far</a></p>
+      <p class="actions"><a class="text-link" href="{{ '/almanac/' | relative_url }}">Every entry so far</a>{% if site.bookshop_shop != "" %}<a class="text-link" href="{{ site.bookshop_shop }}">The Almanac Shelf</a>{% endif %}</p>
     </aside>
   </div>
 </section>
