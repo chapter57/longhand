@@ -80,6 +80,7 @@ function aboutPage(d) {
   // Commons sometimes repeats the name ("Unknown authorUnknown author").
   let artist = String((c && c.artist) || "");
   if (artist.length % 2 === 0 && artist.slice(0, artist.length / 2) === artist.slice(artist.length / 2)) artist = artist.slice(0, artist.length / 2);
+  artist = artist.replace(/\s*\(talk\)\.?/g, "").trim();
   if (/^unknown/i.test(artist)) artist = "";
   const credit = img ? `Portrait: ${artist ? artist + ", " : ""}${c.license}, via Wikimedia Commons` : "";
   return `<!doctype html><meta charset="utf-8"><style>
