@@ -2,12 +2,17 @@
 # day (the morning post is the almanac entry itself).
 #
 #   midday   a short quote, posted as text with a link to the day's entry
-#     intro    optional line before the quote, for a writer other than the
-#              day's own (used when the day's writer is still in copyright)
+#     intro    optional line before the quote
 #     text, author, source
 #   evening  a short poem or passage, posted as a quote card
 #            (assets/cards/<month>-<day>.png, made by .github/cards/render.mjs)
 #     title, author, source, text
+#
+# When the day's writer is still in copyright, we don't quote them, and we
+# don't quote someone else in their place: we say something about them.
+#   midday   text only, in our own words (no author)
+#   evening  about: a few sentences in our own words, drawn on a card with
+#            the writer's portrait
 #
 # Everything quoted here is in the public domain. "Translated for Longhand"
 # marks our own translation of an original that is in the public domain.
@@ -96,61 +101,33 @@
 - month: 10
   day: 22
   midday:
-    intro: Ivan Bunin admired Anton Chekhov above every other writer.
-    text: "Brevity is the sister of talent."
-    author: Anton Chekhov
-    source: letter to his brother Alexander, 1889 (translated for Longhand)
+    text: "Ivan Bunin left Russia in 1920 and never went back. He wrote some of his finest stories in exile in Grasse, in the south of France, where he lived through the Second World War."
   evening:
-    title: The Lady with the Dog
-    author: Anton Chekhov
-    source: 1899, translated by Constance Garnett
-    text: |
-      It was said that a new person had appeared on the sea-front: a lady with a little dog.
+    about: >-
+      The first Russian to win the Nobel Prize in Literature, in 1933. Bunin
+      wrote plain, exact prose about fading country houses, birch woods and long
+      autumns, and "The Gentleman from San Francisco" is still one of the great
+      short stories.
 
 - month: 10
   day: 23
   midday:
-    intro: "For Philip Lamantia, who found Surrealism as a teenager, the line the Surrealists loved best."
-    text: "Beautiful as the chance meeting, on a dissecting table, of a sewing machine and an umbrella."
-    author: "Comte de Lautréamont"
-    source: "Les Chants de Maldoror, 1869 (translated for Longhand)"
+    text: "At fifteen, Philip Lamantia sent his poems to André Breton, the founder of Surrealism, and Breton published them. Lamantia left high school and went to New York to join the Surrealists."
   evening:
-    title: "Dream-Land"
-    author: "Edgar Allan Poe"
-    source: "1844"
-    text: |
-      By a route obscure and lonely,
-      Haunted by ill angels only,
-      Where an Eidolon, named NIGHT,
-      On a black throne reigns upright,
-      I have reached these lands but newly
-      From an ultimate dim Thule—
-      From a wild weird clime that lieth, sublime,
-      Out of SPACE—out of TIME.
+    about: >-
+      A San Francisco Surrealist who was publishing at fifteen, read at the Six
+      Gallery in 1955 beside Ginsberg, and spent his life writing visionary
+      poems of birds, cities and the sacred.
 
 - month: 10
   day: 24
   midday:
-    intro: For Denise Levertov's birthday, her friend and mentor.
-    text: "By the road to the contagious hospital / under the surge of the blue / mottled clouds driven from the / northeast—a cold wind."
-    author: William Carlos Williams
-    source: Spring and All, 1923
+    text: "Denise Levertov never went to school. She was taught at home in Essex, and at twelve she sent her poems to T. S. Eliot, who wrote back with pages of advice."
   evening:
-    title: The Red Wheelbarrow
-    author: William Carlos Williams
-    source: Spring and All, 1923
-    text: |
-      so much depends
-      upon
-
-      a red wheel
-      barrow
-
-      glazed with rain
-      water
-
-      beside the white
-      chickens.
+    about: >-
+      Born in England, at home in America. Levertov wrote poems of close
+      attention to light, animals and the ordinary miracle of a day, and in the
+      1960s she turned that attention on the Vietnam War.
 
 - month: 10
   day: 25
@@ -171,34 +148,22 @@
 - month: 10
   day: 26
   midday:
-    intro: For Beryl Markham, who flew the Atlantic alone.
-    text: "To strive, to seek, to find, and not to yield."
-    author: Alfred, Lord Tennyson
-    source: '"Ulysses," 1842'
+    text: "Beryl Markham grew up on a farm in Kenya, hunting with Kipsigis boys and training racehorses. In 1936 she flew alone across the Atlantic, against the wind, and crash-landed in a bog in Nova Scotia."
   evening:
-    title: '"Hope" is the thing with feathers'
-    author: Emily Dickinson
-    source: written about 1861
-    text: |
-      "Hope" is the thing with feathers -
-      That perches in the soul -
-      And sings the tune without the words -
-      And never stops - at all -
+    about: >-
+      Racehorse trainer, bush pilot, and the first woman to fly solo across the
+      Atlantic from east to west. Her memoir, West with the Night, sat nearly
+      forgotten for forty years before readers found it again.
 
 - month: 10
   day: 27
   midday:
-    intro: For Dylan Thomas's birthday, an older Welsh poet.
-    text: "I saw Eternity the other night, / Like a great ring of pure and endless light."
-    author: Henry Vaughan
-    source: '"The World," 1650'
+    text: "Dylan Thomas wrote many of the poems that made him famous before he was twenty, in notebooks he kept as a teenager in Swansea."
   evening:
-    title: Love (III)
-    author: George Herbert, born in Wales
-    source: The Temple, 1633
-    text: |
-      Love bade me welcome: yet my soul drew back,
-      Guilty of dust and sin.
+    about: >-
+      The Welsh poet of "Do not go gentle into that good night" and Under Milk
+      Wood, who read poems aloud like no one before him. His 1952 recording for
+      a tiny new label, Caedmon, is often called the start of the audiobook.
 
 - month: 10
   day: 28
@@ -353,30 +318,22 @@
 - month: 11
   day: 6
   midday:
-    intro: For Robert Musil, from a fellow writer of the old Austrian empire.
-    text: "A book must be the axe for the frozen sea within us."
-    author: Franz Kafka
-    source: letter to Oskar Pollak, 1904 (translated for Longhand)
+    text: "Robert Musil trained as an engineer and earned a doctorate in philosophy before he gave himself to fiction. His first novel, Young Törless (1906), is set in a military school much like the one he went to."
   evening:
-    title: The Trees
-    author: Franz Kafka
-    source: 1913 (translated for Longhand)
-    text: |
-      For we are like tree trunks in the snow. They seem to lie flat on the surface, and a little push should be enough to roll them away. No, that can't be done, for they are firmly joined to the ground. But look, even that is only how it seems.
+    about: >-
+      The Austrian who spent twenty years on one vast novel, The Man Without
+      Qualities, about Vienna on the eve of the First World War, and died with
+      it unfinished. Readers still argue over how it would have ended.
 
 - month: 11
   day: 7
   midday:
-    intro: For Albert Camus, the motto of another great essayist.
-    text: "What do I know?"
-    author: Michel de Montaigne
-    source: Essays, 1580 (translated for Longhand)
+    text: "Before he was a novelist, Albert Camus was a goalkeeper for a university team in Algiers, until tuberculosis ended his playing at seventeen."
   evening:
-    title: Confessions
-    author: Augustine of Hippo, born in what is now Algeria
-    source: about 400 (translated for Longhand)
-    text: |
-      Late have I loved you, beauty so ancient and so new, late have I loved you! And look, you were within, and I was outside.
+    about: >-
+      Born poor in French Algeria, Camus wrote The Stranger and The Plague, and
+      asked how to live well in a world that offers no answers. He won the Nobel
+      Prize at 44.
 
 - month: 11
   day: 8
@@ -441,19 +398,12 @@
 - month: 11
   day: 12
   midday:
-    intro: For Michael Ende, who wrote about a boy who falls into the book he is reading.
-    text: "There is no Frigate like a Book / To take us Lands away."
-    author: Emily Dickinson
-    source: written about 1873
+    text: "The Neverending Story was first printed in two colors of ink: red for the world of the boy reading the book, green for the world inside it."
   evening:
-    title: The Land of Story-Books
-    author: Robert Louis Stevenson
-    source: A Child's Garden of Verses, 1885
-    text: |
-      At evening when the lamp is lit,
-      Around the fire my parents sit;
-      They sit at home and talk and sing,
-      And do not play at anything.
+    about: >-
+      German storyteller of Momo and The Neverending Story, books about time,
+      imagination and the worlds we disappear into when we read. Children read
+      them first; adults come back to them.
 
 - month: 11
   day: 13
@@ -507,19 +457,13 @@
 - month: 11
   day: 16
   midday:
-    intro: For Chinua Achebe, one of the first books by an African writer in English.
-    text: "I was born, in the year 1745, situated in a charming fruitful vale, named Essaka."
-    author: Olaudah Equiano
-    source: The Interesting Narrative, 1789
+    text: "Chinua Achebe sent the only handwritten copy of Things Fall Apart to a typing agency in London, and it sat there for months until a friend went in to ask about it."
   evening:
-    title: The Second Coming
-    author: W. B. Yeats
-    source: 1920, which gave Achebe his title
-    text: |
-      Turning and turning in the widening gyre
-      The falcon cannot hear the falconer;
-      Things fall apart; the centre cannot hold;
-      Mere anarchy is loosed upon the world,
+    about: >-
+      The Nigerian novelist who told the story of colonialism from inside an
+      Igbo village. Things Fall Apart has been read by millions in dozens of
+      languages, and Achebe is often called the father of the modern African
+      novel.
 
 - month: 11
   day: 17
@@ -539,48 +483,32 @@
 - month: 11
   day: 18
   midday:
-    intro: For Margaret Atwood, from the first great novel of dark imagining.
-    text: "Beware; for I am fearless, and therefore powerful."
-    author: Mary Shelley
-    source: Frankenstein, 1818
+    text: "Margaret Atwood wrote much of The Handmaid's Tale in West Berlin in 1984, on a rented typewriter."
   evening:
-    title: Frankenstein
-    author: Mary Shelley
-    source: 1818
-    text: |
-      It was on a dreary night of November that I beheld the accomplishment of my toils.
+    about: >-
+      Poet, novelist and critic, Atwood has written more than fifty books, from
+      The Edible Woman to The Handmaid's Tale and its sequel, The Testaments,
+      which won her a second Booker Prize.
 
 - month: 11
   day: 19
   midday:
-    intro: "For Joanne Kyger, who lived four years in Japan, the most famous poem in Japanese."
-    text: "The old pond: a frog jumps in, the sound of the water."
-    author: "Matsuo Bashō"
-    source: "1686 (translated for Longhand)"
+    text: "In 1960 Joanne Kyger married the poet Gary Snyder in Japan, where they lived for four years. Her journals from those years were later published as Strange Big Moon."
   evening:
-    title: "Summer Grasses"
-    author: "Matsuo Bashō"
-    source: "The Narrow Road to the Deep North, 1689 (translated for Longhand)"
-    text: |
-      Summer grasses:
-      all that is left
-      of warriors' dreams.
+    about: >-
+      A poet of the San Francisco Renaissance, Kyger wrote for half a century
+      from Bolinas, California: clear, funny, Zen-minded poems about ordinary
+      days, birds, neighbors and the weather of a life.
 
 - month: 11
   day: 20
   midday:
-    intro: "For Don DeLillo, novelist of crowds, from Poe's story of a man who cannot bear to be alone."
-    text: "He refuses to be alone. He is the man of the crowd."
-    author: "Edgar Allan Poe"
-    source: "\"The Man of the Crowd,\" 1840"
+    text: "Don DeLillo spent five years writing ads in New York, then quit to write novels. His first, Americana, came out in 1971."
   evening:
-    title: "Crossing Brooklyn Ferry"
-    author: "Walt Whitman"
-    source: "1856"
-    text: |
-      Crowds of men and women attired in the usual costumes, how curious you are to me!
-      On the ferry-boats the hundreds and hundreds that cross, returning home, are more curious to me than you suppose,
-      And you that shall cross from shore to shore years hence are more to me, and more in my meditations, than you might suppose.
+    about: >-
+      The novelist of crowds, conspiracies and television noise. White Noise,
+      Libra and Underworld are portraits of America so sharp they sometimes seem
+      to predict it.
 
 - month: 11
   day: 21
@@ -611,17 +539,13 @@
 - month: 11
   day: 23
   midday:
-    intro: For Paul Celan, a question another German poet asked.
-    text: "And what are poets for in a destitute time?"
-    author: Friedrich Hölderlin
-    source: '"Bread and Wine," 1800 (translated for Longhand)'
+    text: "Paul Celan made his living in Paris as a translator. He put Shakespeare's sonnets, Emily Dickinson and Rimbaud into German."
   evening:
-    title: Psalm 137
-    author: The Bible
-    source: King James Version, 1611
-    text: |
-      By the rivers of Babylon, there we sat down, yea, we wept, when we remembered Zion.
-      We hanged our harps upon the willows in the midst thereof.
+    about: >-
+      Born in Czernowitz, Celan survived the Holocaust, in which his parents
+      were killed, and wrote in German, the language of his mother and of her
+      murderers. "Death Fugue" is one of the most important poems of the
+      century.
 
 - month: 11
   day: 24
@@ -641,19 +565,12 @@
 - month: 11
   day: 25
   midday:
-    intro: "Shelagh Delaney was nineteen when her first play opened. John Keats was twenty-two when he wrote this."
-    text: "When I have fears that I may cease to be / Before my pen has glean'd my teeming brain"
-    author: "John Keats"
-    source: "1818"
+    text: "Shelagh Delaney wrote A Taste of Honey in about two weeks, after seeing a play she was sure she could do better."
   evening:
-    title: "No Coward Soul Is Mine"
-    author: "Emily Brontë"
-    source: "1846"
-    text: |
-      No coward soul is mine,
-      No trembler in the world's storm-troubled sphere:
-      I see Heaven's glories shine,
-      And faith shines equal, arming me from fear.
+    about: >-
+      A working-class girl from Salford who wrote A Taste of Honey at nineteen
+      and shook up British theater. Morrissey called her a hero and put her face
+      on the cover of a Smiths record.
 
 - month: 11
   day: 26
@@ -671,17 +588,12 @@
 - month: 11
   day: 27
   midday:
-    intro: For James Agee, who wrote about Alabama's tenant farmers.
-    text: "The mass of men lead lives of quiet desperation."
-    author: Henry David Thoreau
-    source: Walden, 1854
+    text: "In 1936 James Agee and the photographer Walker Evans spent a summer with three tenant-farming families in Alabama. The magazine that sent them never ran the story; it became Let Us Now Praise Famous Men."
   evening:
-    title: There Was a Child Went Forth
-    author: Walt Whitman
-    source: 1855
-    text: |
-      There was a child went forth every day,
-      And the first object he look'd upon, that object he became,
+    about: >-
+      Poet, film critic, screenwriter of The African Queen, and author of A
+      Death in the Family, which won the Pulitzer Prize after he died. Agee
+      wrote about ordinary lives as if nothing mattered more.
 
 - month: 11
   day: 28
@@ -730,33 +642,22 @@
 - month: 12
   day: 1
   midday:
-    intro: For James Baldwin, from the great autobiography of an earlier generation.
-    text: "You have seen how a man was made a slave; you shall see how a slave was made a man."
-    author: Frederick Douglass
-    source: Narrative of the Life of Frederick Douglass, 1845
+    text: "James Baldwin left New York for Paris in 1948 with about forty dollars. It was there that he finished his first novel, Go Tell It on the Mountain."
   evening:
-    title: The Negro Speaks of Rivers
-    author: Langston Hughes
-    source: 1921
-    text: |
-      I've known rivers:
-      I've known rivers ancient as the world and older than the flow of human blood in human veins.
-
-      My soul has grown deep like the rivers.
+    about: >-
+      Novelist, essayist, preacher's son from Harlem. Baldwin wrote about race,
+      love and faith in America with a power no one has matched, and The Fire
+      Next Time is as urgent now as the year it came out.
 
 - month: 12
   day: 2
   midday:
-    intro: For Ann Patchett, novelist and bookseller.
-    text: "Some books are to be tasted, others to be swallowed, and some few to be chewed and digested."
-    author: Francis Bacon
-    source: '"Of Studies," 1625'
+    text: "When Nashville lost its last big bookstores in 2011, Ann Patchett opened a new one, Parnassus Books. It is still open, and still busy."
   evening:
-    title: Ecclesiastes 12:12
-    author: The Bible
-    source: King James Version, 1611
-    text: |
-      And further, by these, my son, be admonished: of making many books there is no end; and much study is a weariness of the flesh.
+    about: >-
+      The novelist of Bel Canto, Commonwealth and The Dutch House, whose books
+      are about families, music and the strange communities people make. She
+      also runs one of America's best-loved bookstores.
 
 - month: 12
   day: 3
@@ -898,17 +799,12 @@
 - month: 12
   day: 11
   midday:
-    intro: For Naguib Mahfouz, a poet of Egypt's other great city, Alexandria.
-    text: "When you set out on the road to Ithaka, / pray that the road be long, / full of adventures, full of knowledge."
-    author: C. P. Cavafy
-    source: '"Ithaka," 1911 (translated for Longhand)'
+    text: "Naguib Mahfouz kept his job in Egypt's civil service for most of his writing life, and wrote in the evenings. Readers could find him at his regular table in Cairo's cafés."
   evening:
-    title: On Children
-    author: Kahlil Gibran
-    source: The Prophet, 1923
-    text: |
-      Your children are not your children.
-      They are the sons and daughters of Life's longing for itself.
+    about: >-
+      The first writer in Arabic to win the Nobel Prize. Mahfouz wrote more than
+      thirty novels about Cairo's streets, families and cafés, and his Cairo
+      Trilogy is a whole world in three volumes.
 
 - month: 12
   day: 12
@@ -926,52 +822,32 @@
 - month: 12
   day: 13
   midday:
-    intro: "Kenneth Patchen, poet and painter, has often been compared with William Blake."
-    text: "The road of excess leads to the palace of wisdom."
-    author: "William Blake"
-    source: "The Marriage of Heaven and Hell, 1790"
+    text: "Kenneth Patchen spent much of his life in pain from a back injury, and wrote and painted from bed. He sold books with hand-painted covers, one by one, to get by."
   evening:
-    title: "The Sick Rose"
-    author: "William Blake"
-    source: "1794"
-    text: |
-      O Rose thou art sick.
-      The invisible worm,
-      That flies in the night
-      In the howling storm:
-
-      Has found out thy bed
-      Of crimson joy:
-      And his dark secret love
-      Does thy life destroy.
+    about: >-
+      Poet, novelist and painter of picture-poems, Patchen was reading his work
+      to jazz long before it was cool. The Beats who came after him counted him
+      as a hero.
 
 - month: 12
   day: 14
   midday:
-    intro: For Shirley Jackson, from the master of dread before her.
-    text: "All that we see or seem / Is but a dream within a dream."
-    author: Edgar Allan Poe
-    source: '"A Dream Within a Dream," 1849'
+    text: "Shirley Jackson said she wrote \"The Lottery\" in a single morning in 1948, after pushing her daughter home from the store in a stroller."
   evening:
-    title: The Tell-Tale Heart
-    author: Edgar Allan Poe
-    source: 1843, the opening
-    text: |
-      TRUE!—nervous—very, very dreadfully nervous I had been and am; but why will you say that I am mad?
+    about: >-
+      The writer of "The Lottery," The Haunting of Hill House and We Have Always
+      Lived in the Castle: the great American master of quiet dread, whose
+      haunted houses are really about the people inside them.
 
 - month: 12
   day: 15
   midday:
-    intro: For Edna O'Brien, from another Irish writer.
-    text: "Tread softly because you tread on my dreams."
-    author: W. B. Yeats
-    source: '"He Wishes for the Cloths of Heaven," 1899'
+    text: "Edna O'Brien wrote her first novel, The Country Girls, in a few weeks, soon after moving from Ireland to London."
   evening:
-    title: The Dead
-    author: James Joyce, whose stories made O'Brien a writer
-    source: Dubliners, 1914, the last lines
-    text: |
-      His soul swooned slowly as he heard the snow falling faintly through the universe and faintly falling, like the descent of their last end, upon all the living and the dead.
+    about: >-
+      The Irish novelist whose first book was banned, and burned in her home
+      parish, and who went on writing about women's lives, Ireland and love for
+      six more decades.
 
 - month: 12
   day: 16
@@ -1034,19 +910,12 @@
 - month: 12
   day: 20
   midday:
-    intro: For Sandra Cisneros, from the great poet of colonial Mexico.
-    text: "Foolish men, who accuse / women without reason, / not seeing you're the cause / of the very thing you blame."
-    author: Sor Juana Inés de la Cruz
-    source: 1689 (translated for Longhand)
+    text: "Sandra Cisneros began The House on Mango Street at the Iowa Writers' Workshop, when she realized that no one around her had grown up the way she had."
   evening:
-    title: Simple Verses
-    author: José Martí
-    source: 1891 (translated for Longhand)
-    text: |
-      I am an honest man
-      from where the palm tree grows,
-      and before I die I want
-      to pour the verses from my soul.
+    about: >-
+      Poet and storyteller from Chicago, Cisneros wrote The House on Mango
+      Street, a book of short, luminous vignettes that has sold millions of
+      copies and is read in classrooms across America.
 
 - month: 12
   day: 21
@@ -1065,19 +934,12 @@
 - month: 12
   day: 22
   midday:
-    intro: "Kenneth Rexroth loved the Chinese poet Du Fu above all others. Here is Du Fu, in our own version."
-    text: "The country is broken; the mountains and rivers remain. Spring in the city: deep grass and trees."
-    author: "Du Fu"
-    source: "\"Spring View,\" 757 (translated for Longhand)"
+    text: "Kenneth Rexroth left school young and educated himself in libraries, jazz clubs and the mountains, and went on to translate Chinese and Japanese poetry that is still loved."
   evening:
-    title: "Quiet Night Thoughts"
-    author: "Li Bai"
-    source: "8th century (translated for Longhand)"
-    text: |
-      Before my bed, the bright moonlight:
-      I wondered if it was frost on the ground.
-      I lift my head and gaze at the bright moon,
-      lower my head, and think of home.
+    about: >-
+      Poet, translator, anarchist and radio host, Rexroth was the father figure
+      of San Francisco poetry. He was master of ceremonies at the 1955 Six
+      Gallery reading, where Allen Ginsberg first read "Howl."
 
 - month: 12
   day: 23
@@ -1129,49 +991,33 @@
 - month: 12
   day: 26
   midday:
-    intro: "Henry Miller wrote a whole book about Rimbaud. Here is Rimbaud, in our own version."
-    text: "One evening I sat Beauty on my knees. And I found her bitter. And I cursed her."
-    author: "Arthur Rimbaud"
-    source: "A Season in Hell, 1873 (translated for Longhand)"
+    text: "Henry Miller worked for years in the employment office of a New York telegraph company, hiring and firing messengers, before he quit to write."
   evening:
-    title: "Song of Myself"
-    author: "Walt Whitman"
-    source: "Leaves of Grass, 1892"
-    text: |
-      I depart as air, I shake my white locks at the runaway sun,
-      I effuse my flesh in eddies, and drift it in lacy jags.
-
-      I bequeath myself to the dirt to grow from the grass I love,
-      If you want me again look for me under your boot-soles.
+    about: >-
+      He went to Paris broke at nearly forty and came back a legend. Tropic of
+      Cancer was banned in America for almost thirty years, and the fight over
+      it helped change what American writers were allowed to say.
 
 - month: 12
   day: 27
   midday:
-    intro: "Charles Olson's first book, Call Me Ishmael, was about Melville. From Moby-Dick:"
-    text: "It is not down in any map; true places never are."
-    author: "Herman Melville"
-    source: "Moby-Dick, 1851"
+    text: "Charles Olson was a towering man, well over six and a half feet tall, and a towering teacher: at Black Mountain College his students included poets, painters and musicians who changed American art."
   evening:
-    title: "Moby-Dick"
-    author: "Herman Melville"
-    source: "1851"
-    text: |
-      Say you are in the country; in some high land of lakes. Take almost any path you please, and ten to one it carries you down in a dale, and leaves you there by a pool in the stream. There is magic in it.
+    about: >-
+      Poet, teacher and last rector of Black Mountain College. His essay
+      "Projective Verse" changed how poets thought about the line and the
+      breath, and The Maximus Poems made a whole world of one fishing town,
+      Gloucester.
 
 - month: 12
   day: 28
   midday:
-    intro: For Amos Oz, who argued all his life for peace.
-    text: "Pray for the peace of Jerusalem: they shall prosper that love thee."
-    author: Psalm 122
-    source: King James Version, 1611
+    text: "Amos Oz was born Amos Klausner in Jerusalem. At fourteen he left home for a kibbutz and chose a new last name: Oz, Hebrew for strength."
   evening:
-    title: My Heart Is in the East
-    author: Judah Halevi
-    source: 12th century (translated for Longhand)
-    text: |
-      My heart is in the east, and I am at the far end of the west.
-      How can I taste what I eat? How could it please me?
+    about: >-
+      Israel's best-known novelist wrote for decades from a kibbutz and argued
+      all his life for peace. His memoir, A Tale of Love and Darkness, about his
+      childhood in Jerusalem, is his masterpiece.
 
 - month: 12
   day: 29

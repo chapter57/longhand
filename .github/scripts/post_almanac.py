@@ -10,6 +10,9 @@ posts (today's date in New York time):
   evening  a short poem or passage from _data/social.yml, posted as its quote
            card picture (assets/cards/<month>-<day>.png), with a link to the entry
 
+For a writer still in copyright, both are about the writer instead: a line
+in our own words at midday, and a card with their portrait in the evening.
+
 A platform whose secrets aren't set is skipped.
 
 Settings, all from the environment:
@@ -124,6 +127,10 @@ def morning(e, social):
 
 def midday(e, social):
     q = social["midday"]
+    # A writer still in copyright gets a few words about them instead of a quote.
+    if not q.get("author"):
+        words = curly(str(q["text"]).strip())
+        return {"bluesky": words, "mastodon": words, "card": True}
     # A quote that is already dialogue keeps its own quotation marks.
     quote = curly(q["text"]) if '"' in q["text"] else "“" + curly(q["text"]) + "”"
     words = (q.get("intro", "") + "\n\n" if q.get("intro") else "") + quote
@@ -134,6 +141,8 @@ def midday(e, social):
 def evening(e, social):
     p = social["evening"]
     date = MONTHS[e["month"] - 1] + " " + str(e["day"])
+    if p.get("about"):
+        return about_card(e, p, date)
     top = f"An evening reading for {date}: “{curly(p['title'])},” {curly(p['author'])}."
     alt = curly(str(p["text"]).strip()) + "\n\n— " + curly(p["author"]) + ", " + curly(p["source"])
     return {"bluesky": top + "\n\nToday in the almanac: " + e["url"],
@@ -143,6 +152,20 @@ def evening(e, social):
             "instagram": f"{top}\n\n{alt}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
                          f"\n\n{INSTAGRAM_HASHTAGS}",
             "fallback": curly(str(p["text"]).strip()) + "\n— " + curly(p["author"])}
+
+
+def about_card(e, p, date):
+    """The evening card for a writer still in copyright: their portrait and a
+    few words about them, in place of a quote."""
+    about = curly(" ".join(str(p["about"]).split()))
+    top = f"For {date}: {e['name']}."
+    alt = f"A portrait of {e['name']}, with the words: {about}"
+    return {"bluesky": top + "\n\nToday in the almanac: " + e["url"],
+            "mastodon": top + "\n\nToday in the almanac:",
+            "image": (f"assets/cards/{e['month']}-{e['day']}.png", alt[:1900]),
+            "instagram": f"{top}\n\n{about}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
+                         f"\n\n{INSTAGRAM_HASHTAGS}",
+            "fallback": about}
 
 
 SLOTS = {"morning": morning, "midday": midday, "evening": evening}
