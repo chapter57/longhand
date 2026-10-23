@@ -33,6 +33,38 @@ const hat = (x, y, s = 1) => `<g transform="translate(${x},${y}) scale(${s})"><p
   <path d="M-40 -30 l40 25 M0 -90 l40 30 M30 -40 l25 30" stroke="#ffe600" stroke-width="11"/><circle cx="0" cy="-150" r="20" fill="#ffe600" stroke="#111" stroke-width="5"/></g>`;
 
 const memes = {
+  "10-19": `<div class="cap">me: writes an entire book about urns and dying</div>
+    <img class="cut" src="${pic("10-19")}" style="left:170px;top:160px;width:740px;height:760px;object-position:50% 15%">
+    ${S(hat(540, 300, 1.2) + `<path d="M930 560 l100 -45 M940 610 l110 0 M930 660 l100 45" stroke="#111" stroke-width="7"/>
+      <path d="M100 220 l20 30 M80 520 l30 -10 M960 240 l-20 30 M120 820 l25 20" stroke="#e0461f" stroke-width="10"/>`)}
+    <div class="a sans" style="left:700px;top:820px;font-size:36px;color:#fff;background:#111;padding:6px 12px;transform:rotate(-4deg)">horn noise</div>
+    <div class="a say" style="left:0;top:950px">also me, on my 77th birthday: 💀</div>`,
+  "10-20": `<div class="cap" style="text-align:center;padding-top:30px">arthur rimbaud's career arc</div>
+    <div class="line" style="left:0;right:0;top:110px;height:5px"></div><div class="line" style="left:538px;top:110px;bottom:0;width:5px"></div>
+    <img class="cut" src="${pic("10-20")}" style="left:0;top:115px;width:538px;height:760px;object-position:50% 20%">
+    <div class="a serif" style="left:24px;top:900px;font-size:46px;width:490px">age 17: reinvents poetry</div>
+    ${S(`<path d="M620 380 h300 l-34 300 h-232 z" fill="#fff" stroke="#111" stroke-width="7"/><path d="M920 430 q100 0 80 90 q-17 70 -98 58" fill="none" stroke="#111" stroke-width="8"/>
+      <path d="M690 350 q-20 -45 0 -80 q20 -35 0 -70 M770 350 q-20 -45 0 -80 q20 -35 0 -70 M850 350 q-20 -45 0 -80" fill="none" stroke="#888" stroke-width="6"/>
+      <ellipse cx="770" cy="385" rx="150" ry="20" fill="#5b3415"/>`)}
+    <img src="${pic("10-20")}" style="position:absolute;left:690px;top:470px;width:160px;height:160px;border-radius:50%;object-fit:cover;object-position:50% 25%;transform:rotate(8deg)">
+    <div class="a serif" style="left:566px;top:900px;font-size:46px;width:490px">age 21: "im in coffee now"</div>`,
+  "10-21": `<div class="say" style="padding-top:40px">every other writer: *puts in a new page*</div>
+    <div class="cap" style="padding-top:30px">jack kerouac, 1951:</div>
+    ${S(`<path d="M150 470 C 330 360, 450 570, 630 450 S 900 360, 1100 500" fill="none" stroke="#111" stroke-width="74"/>
+      <path d="M150 470 C 330 360, 450 570, 630 450 S 900 360, 1100 500" fill="none" stroke="#fffbea" stroke-width="66"/>
+      <path d="M210 455 h40 M290 440 h60 M370 480 h50 M480 495 h70 M670 440 h60 M790 420 h50 M900 440 h60" stroke="#666" stroke-width="5"/>
+      <rect x="60" y="490" width="250" height="160" rx="14" fill="#2b2b2b" stroke="#111" stroke-width="6"/><rect x="95" y="650" width="180" height="44" fill="#2b2b2b"/>
+      <g fill="#ddd" stroke="#111" stroke-width="3">${[0, 1, 2, 3, 4].map((i) => `<circle cx="${100 + i * 42}" cy="535" r="13"/>`).join("")}${[0, 1, 2, 3].map((i) => `<circle cx="${121 + i * 42}" cy="578" r="13"/>`).join("")}</g>
+      <path d="M560 650 C 720 720, 880 700, 990 610" fill="none" stroke="#e0161f" stroke-width="7"/><path d="M990 610 l-38 5 M990 610 l-8 34" stroke="#e0161f" stroke-width="7"/>`)}
+    <div class="a sans" style="left:620px;top:720px;font-size:60px;color:#e0161f;transform:rotate(-6deg)">120 FEET</div>
+    <div class="a serif" style="left:280px;top:880px;font-size:40px">(he wrote On the Road in 3 weeks)</div>`,
+  "10-23": `<div class="say" style="padding-top:40px">me at 15: *gets my learner's permit*</div>
+    <div class="cap" style="padding-top:30px">philip lamantia at 15: *gets his poems published by the new york surrealists*</div>
+    ${S(`<g transform="translate(360,620)"><path d="M-170 -120 q170 -60 300 0 q40 120 -20 170 q-30 30 -10 140 q-20 40 -40 0 q0 -90 -50 -110 q-160 20 -180 -60 q-20 -80 0 -140z" fill="#ffe9a8" stroke="#111" stroke-width="7"/>
+      <path d="M-20 -30 v-80 M-20 -30 l70 40" stroke="#111" stroke-width="9"/><circle cx="-20" cy="-30" r="10"/></g>
+      <g transform="translate(800,640)"><path d="M-160 0 q160 -150 320 0 q-160 150 -320 0z" fill="#fff" stroke="#111" stroke-width="7"/><circle r="55" fill="#2c6fbb" stroke="#111" stroke-width="5"/><circle r="22"/></g>
+      <path d="M560 900 q60 -40 120 0 t120 0 t120 0" fill="none" stroke="#e0461f" stroke-width="8"/>`)}
+    <div class="a serif" style="left:60px;top:960px;font-size:36px">(he grew up to read at the six gallery with ginsberg)</div>`,
   "10-24": `<div class="say">me at 12: *does homework*</div>
     <div class="cap" style="padding-top:30px">denise levertov at 12:</div>
     ${S(`<rect x="250" y="300" width="560" height="340" fill="#fff" stroke="#111" stroke-width="7"/>
