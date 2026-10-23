@@ -180,10 +180,11 @@ def meme(e, social):
     m = found[0]
     path = f"assets/memes/{e['month']}-{e['day']}.jpg"
     words = curly(" ".join(str(m["caption"]).split()))
-    return {"bluesky": words + "\n\nToday in the almanac: " + e["url"],
-            "mastodon": words + "\n\nToday in the almanac:",
+    # "From the almanac", so a meme posted on another day still reads right.
+    return {"bluesky": words + "\n\nFrom the almanac: " + e["url"],
+            "mastodon": words + "\n\nFrom the almanac:",
             "image": (path, curly(m["alt"])[:1900]), "size": (1080, 1080),
-            "instagram": f"{words}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
+            "instagram": f"{words}\n\nFrom the almanac: {e['name']}. The link is in our bio, longhandlit.com."
                          f"\n\n{INSTAGRAM_HASHTAGS} #LiteraryMemes #BookMemes",
             "instagram_image": path,
             "fallback": words}
