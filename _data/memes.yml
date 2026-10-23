@@ -1,0 +1,46 @@
+# The almanac's memes, one afternoon post on Bluesky and Instagram for the
+# days that have one. The pictures are assets/memes/<month>-<day>.jpg, drawn
+# by .github/memes/memes.mjs; the photos in them are public-domain portraits.
+#
+#   caption  the post's words
+#   alt      what the picture shows, for people who can't see it
+
+- month: 10
+  day: 24
+  caption: "Denise Levertov never went to school. At twelve she mailed her poems to T. S. Eliot, and he wrote back. Born on this day in 1923."
+  alt: "Homemade meme. 'me at 12: *does homework*' / 'denise levertov at 12:' over a doodled envelope addressed to T. S. Eliot, London, with an arrow saying 'mails them' / 'T. S. Eliot: *actually writes back with pages of advice*'"
+
+- month: 10
+  day: 25
+  caption: "Chaucer planned about 120 Canterbury Tales. He finished 24. He died on this day in 1400, and honestly, relatable."
+  alt: "Homemade meme. 'chaucer's plan: 30 pilgrims tell 4 tales each.' Left, 'the plan': a tall stack of books labeled 120. Right, 'what he finished': a portrait of Chaucer above two books labeled 24."
+
+- month: 10
+  day: 26
+  caption: "Beryl Markham, born on this day in 1902, flew alone across the Atlantic against the wind, then ran out of fuel and landed nose-first in a bog. Then she wrote one of the best memoirs ever."
+  alt: "Homemade meme. 'beryl markham: first woman to fly solo across the atlantic from east to west.' A photo of Markham, smiling. 'the landing:' a doodled plane nose-down in brown mud, 'SPLAT', '(a bog in nova scotia)'."
+
+- month: 10
+  day: 27
+  caption: "Dylan Thomas and Sylvia Plath share a birthday, eighteen years apart. Imagine the party."
+  alt: "Homemade meme. 'october 27 is the birthday of dylan thomas AND sylvia plath. the birthday party:' Dylan Thomas, smoking, in a doodled pink party hat, next to a rain cloud pouring on a birthday cake. '(the candles won't stay lit)'"
+
+- month: 10
+  day: 28
+  caption: "Gulliver's Travels came out on this day in 1726, presented as a true story. Swift told his friend Alexander Pope about one bishop's verdict."
+  alt: "Homemade meme. 'jonathan swift: writes a book about tiny people, giants, a flying island and talking horses.' A portrait of Swift. 'an irish bishop, 1726: \"he hardly believed a word of it\"' (Swift, letter to Pope)."
+
+- month: 10
+  day: 29
+  caption: "James Boswell, born on this day in 1740, spent twenty years writing down everything Samuel Johnson said. The result is still the most famous biography in English."
+  alt: "Homemade meme. 'nobody:' / 'james boswell, 1763–1784: *follows samuel johnson around writing down everything he says*'. A portrait of Boswell beside a doodled notebook and pencil, labeled 'the original stan account'."
+
+- month: 10
+  day: 30
+  caption: "Paul Valéry, born on this day in 1871, gave up poetry in his twenties. A quarter of a century later he came back with a 512-line poem."
+  alt: "Homemade meme. 'paul valéry's poetry career.' Left: a photo of Valéry, 'age 21: quits poetry'. Right: a doodled long page labeled '512 lines', '25 years later: \"ok, one more poem\"'."
+
+- month: 10
+  day: 31
+  caption: "John Keats was born on Halloween, 1795. He asked for no name on his grave. His friends had other ideas."
+  alt: "Homemade meme. 'keats: put no name on my grave, just \"here lies one whose name was writ in water\". his friends:' A portrait of Keats beside a doodled gravestone covered in lines of text, '*adds a whole paragraph about how mean the critics were*'. '(the grave still has no name on it. technically.)'"

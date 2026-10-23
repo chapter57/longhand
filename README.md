@@ -45,7 +45,12 @@ GitHub posts the almanac to Bluesky and Mastodon three times a day, New York tim
 
 - **About 9:45 a.m.:** the day's entry, its short note with a link card to its full page. On Bluesky the card carries the entry's portrait.
 - **About 1 p.m.:** a short quote, with the same link card.
+- **About 3:45 p.m., on days that have one:** a homemade-looking meme, to Bluesky and Instagram.
 - **About 7:30 p.m.:** a short poem or passage, posted as a quote card picture, with a link to the day's entry. The full text goes in the picture's description, for people using screen readers.
+
+When the day's writer is still in copyright, the midday post is a line about them in our own words, and the evening card shows their portrait and a few sentences about them.
+
+The memes' captions are in `_data/memes.yml`, and the pictures in `assets/memes/` are drawn by `.github/memes/memes.mjs` (`npm install playwright`, plus Python's Pillow, then `node .github/memes/memes.mjs`). Each meme is written into that script by hand. The photos in them are public-domain portraits only.
 
 The midday quotes and evening readings are in `_data/social.yml`, one pair per day. Everything in them is in the public domain; "translated for Longhand" marks our own translations. The quote cards are pictures in `assets/cards/`, drawn from that file by `.github/cards/render.mjs` (`npm install playwright js-yaml`, then `node .github/cards/render.mjs`); after changing an evening reading, draw its card again.
 

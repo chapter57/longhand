@@ -10,6 +10,12 @@ posts (today's date in New York time):
   evening  a short poem or passage from _data/social.yml, posted as its quote
            card picture (assets/cards/<month>-<day>.png), with a link to the entry
 
+  meme     on days with one in _data/memes.yml, a homemade-looking meme
+           (assets/memes/<month>-<day>.jpg), to Bluesky and Instagram
+
+For a writer still in copyright, both are about the writer instead: a line
+in our own words at midday, and a card with their portrait in the evening.
+
 A platform whose secrets aren't set is skipped.
 
 Settings, all from the environment:
@@ -124,6 +130,10 @@ def morning(e, social):
 
 def midday(e, social):
     q = social["midday"]
+    # A writer still in copyright gets a few words about them instead of a quote.
+    if not q.get("author"):
+        words = curly(str(q["text"]).strip())
+        return {"bluesky": words, "mastodon": words, "card": True}
     # A quote that is already dialogue keeps its own quotation marks.
     quote = curly(q["text"]) if '"' in q["text"] else "“" + curly(q["text"]) + "”"
     words = (q.get("intro", "") + "\n\n" if q.get("intro") else "") + quote
@@ -134,6 +144,8 @@ def midday(e, social):
 def evening(e, social):
     p = social["evening"]
     date = MONTHS[e["month"] - 1] + " " + str(e["day"])
+    if p.get("about"):
+        return about_card(e, p, date)
     top = f"An evening reading for {date}: “{curly(p['title'])},” {curly(p['author'])}."
     alt = curly(str(p["text"]).strip()) + "\n\n— " + curly(p["author"]) + ", " + curly(p["source"])
     return {"bluesky": top + "\n\nToday in the almanac: " + e["url"],
@@ -145,7 +157,39 @@ def evening(e, social):
             "fallback": curly(str(p["text"]).strip()) + "\n— " + curly(p["author"])}
 
 
-SLOTS = {"morning": morning, "midday": midday, "evening": evening}
+def about_card(e, p, date):
+    """The evening card for a writer still in copyright: their portrait and a
+    few words about them, in place of a quote."""
+    about = curly(" ".join(str(p["about"]).split()))
+    top = f"For {date}: {e['name']}."
+    alt = f"A portrait of {e['name']}, with the words: {about}"
+    return {"bluesky": top + "\n\nToday in the almanac: " + e["url"],
+            "mastodon": top + "\n\nToday in the almanac:",
+            "image": (f"assets/cards/{e['month']}-{e['day']}.png", alt[:1900]),
+            "instagram": f"{top}\n\n{about}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
+                         f"\n\n{INSTAGRAM_HASHTAGS}",
+            "fallback": about}
+
+
+def meme(e, social):
+    """The day's meme from _data/memes.yml, or None if it has none."""
+    found = [m for m in yaml.safe_load(open("_data/memes.yml", encoding="utf-8")) or []
+             if m["month"] == e["month"] and m["day"] == e["day"]]
+    if not found:
+        return None
+    m = found[0]
+    path = f"assets/memes/{e['month']}-{e['day']}.jpg"
+    words = curly(" ".join(str(m["caption"]).split()))
+    return {"bluesky": words + "\n\nToday in the almanac: " + e["url"],
+            "mastodon": words + "\n\nToday in the almanac:",
+            "image": (path, curly(m["alt"])[:1900]), "size": (1080, 1080),
+            "instagram": f"{words}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
+                         f"\n\n{INSTAGRAM_HASHTAGS} #LiteraryMemes #BookMemes",
+            "instagram_image": path,
+            "fallback": words}
+
+
+SLOTS = {"morning": morning, "midday": midday, "evening": evening, "meme": meme}
 
 
 def announcement(name):
@@ -262,11 +306,12 @@ def post_bluesky(e, post, dry):
         record["embed"] = {"$type": "app.bsky.embed.external", "external": card}
     if post.get("image"):
         path, alt = post["image"]
-        blob = upload(open(path, "rb").read(), "image/png")
+        blob = upload(open(path, "rb").read(), "image/jpeg" if path.endswith(".jpg") else "image/png")
         if not blob:
-            raise SystemExit("Bluesky: the quote card didn't upload")
+            raise SystemExit("Bluesky: the picture didn't upload")
+        width, height = post.get("size", (1080, 1350))
         record["embed"] = {"$type": "app.bsky.embed.images", "images": [
-            {"image": blob, "alt": alt, "aspectRatio": {"width": 1080, "height": 1350}}]}
+            {"image": blob, "alt": alt, "aspectRatio": {"width": width, "height": height}}]}
     facets = link_facets(text)
     if facets:
         record["facets"] = facets
@@ -385,7 +430,8 @@ def post_instagram(e, post, dry):
     if not post.get("instagram"):
         return False
     month, day = e["month"], e["day"]
-    image = f"{SITE}/assets/cards/{month}-{day}.jpg"
+    base = os.environ.get("INSTAGRAM_IMAGE_BASE", "").strip() or SITE
+    image = f"{base}/{post.get('instagram_image') or f'assets/cards/{month}-{day}.jpg'}"
     caption = post["instagram"][:2200]
     if dry:
         print(f"--- Instagram ({len(caption)} characters) ---\n{caption}\n[image] {image}")
@@ -477,10 +523,13 @@ def main():
     month, day = (int(x) for x in want.split("-"))
     found = [e for e in read_entries() if e["month"] == month and e["day"] == day]
     social = [s for s in read_social() if s["month"] == month and s["day"] == day]
-    if not found or (slot != "morning" and not social):
+    if not found or (slot not in ("morning", "meme") and not social):
         print(f"Nothing in the almanac for {want} at {slot}; nothing to post.")
         return
     e, post = found[0], SLOTS[slot](found[0], social[0] if social else None)
+    if not post:
+        print(f"No {slot} post for {want}; nothing to post.")
+        return
     posted = os.environ.get("POSTED_DIR", "").strip()
     if posted:
         os.makedirs(posted, exist_ok=True)

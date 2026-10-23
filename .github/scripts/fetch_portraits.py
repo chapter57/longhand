@@ -45,8 +45,12 @@ credits = (yaml.safe_load(open(saved, encoding="utf-8")) or {}) if os.path.exist
 for path in sorted(glob.glob("_almanac/*.md")):
     e = yaml.safe_load(open(path, encoding="utf-8").read().split("---", 2)[1])
     key = f"{e['month']}-{e['day']}"
-    if not e.get("portrait") or (credits.get(key) or {}).get("license"):
+    had = credits.get(key) or {}
+    # Skip a portrait already saved, unless it is of the day's previous writer.
+    if not e.get("portrait") or (had.get("license") and had.get("pictured") == (e.get("pictured") or e["name"])):
         continue
+    if had.get("pictured") != (e.get("pictured") or e["name"]):
+        credits.pop(key, None)
     try:
         summary = json.loads(get("https://en.wikipedia.org/api/rest_v1/page/summary/"
                                  + urllib.parse.quote(e["portrait"], safe="")))
