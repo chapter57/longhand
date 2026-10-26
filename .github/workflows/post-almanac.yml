@@ -1,7 +1,7 @@
 # Posts the day's almanac to Bluesky and Mastodon three times a day: the
 # entry in the morning, a quote at midday and a quote card in the evening,
-# which also goes to Instagram. On days with a meme, it goes to Bluesky and
-# Instagram in the afternoon.
+# which also goes to Instagram. A meme (or a portrait card) goes to Bluesky
+# and Instagram every afternoon, and a reel on Sundays and Wednesdays.
 # The script is .github/scripts/post_almanac.py. The accounts' passwords are
 # kept in the project's Settings → Secrets and variables → Actions.
 name: Post the almanac
@@ -16,6 +16,7 @@ on:
     - cron: "23 15 * * *"   # morning backup
     - cron: "7 17 * * *"    # midday: 1:07 p.m. summer, 12:07 p.m. winter
     - cron: "47 19 * * *"   # meme, on days that have one: 3:47 p.m. summer, 2:47 p.m. winter
+    - cron: "17 22 * * 0,3" # reel, Sundays and Wednesdays: 6:17 p.m. summer, 5:17 p.m. winter
     - cron: "37 23 * * *"   # evening: 7:37 p.m. summer, 6:37 p.m. winter
     - cron: "53 1 * * *"    # evening backup (still the same evening in New York)
   workflow_dispatch:
@@ -61,6 +62,7 @@ jobs:
             "47 13 * * *"|"23 15 * * *") slot=morning ;;
             "7 17 * * *") slot=midday ;;
             "47 19 * * *") slot=meme ;;
+            "17 22 * * 0,3") slot=reel ;;
             "37 23 * * *"|"53 1 * * *") slot=evening ;;
             *) slot="${CHOSEN:-morning}" ;;
           esac
