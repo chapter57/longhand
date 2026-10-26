@@ -64,3 +64,29 @@
   day: 31
   caption: "John Keats was born on Halloween, 1795. He asked for no name on his grave. His friends had other ideas."
   alt: "Homemade meme. 'keats: put no name on my grave, just \"here lies one whose name was writ in water\". his friends:' A portrait of Keats beside a doodled gravestone covered in lines of text, '*adds a whole paragraph about how mean the critics were*'. '(the grave still has no name on it. technically.)'"
+
+# Memes about books in general, not tied to a day. Post one by hand: Actions →
+# Post the almanac → Run workflow, choose "meme" and type its id. They link
+# to the front page.
+
+- id: well-read-quadrant
+  height: 1350
+  caption: "Be honest: which corner are you in?"
+  alt: "Homemade chart: 'How well-read you are vs. how well-read you look.' Actually well-read but looks unread: a guy in a cap with a library card owing $0.40, cracked Penguin paperbacks, drugstore glasses, 61 books read this year. Actually well-read and looks it: reads Proust in French for fun, pencil notes in every margin, owns the whole Loeb Classical Library, has read Ulysses twice. Looks unread and is: 9 hours 41 minutes of screen time, a 0 of 52 reading challenge, 'i watched the movie', last book assigned in 2011. Looks well-read but isn't: a guy in sunglasses with Infinite Jest bookmarked on page 12, shelves sorted by color, a literary magazine tote bag, 312 unread books on his Kindle."
+
+- id: reader-iq-curve
+  height: 1350
+  caption: "The porch guy was right."
+  alt: "Homemade IQ-curve meme, 'The Reader IQ Curve.' Low IQ, a smiling doodle holding a book: 'The book was good. I liked it.' Midwit, a crying doodle in a beanie: 'YOU CAN'T JUST ENJOY A BOOK,' with lines like 'The author is dead, actually' and 'Hasn't finished a novel since 2019.' High IQ, Joshua Reynolds's portrait of Samuel Johnson: 'The book was good. I liked it,' and Johnson's 1757 line, 'The only end of writing is to enable the readers better to enjoy life, or better to endure it.'"
+
+- id: unmask-russian-novel
+  caption: "Every single time."
+  alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE GREAT RUSSIAN NOVEL.' Bottom: underneath is Dostoevsky, labeled 'A GUY IN ST. PETERSBURG WHO HASN'T SLEPT IN FOUR DAYS.'"
+
+- id: unmask-great-american-novel
+  caption: "Old sport, we've figured it out."
+  alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE GREAT AMERICAN NOVEL.' Bottom: underneath is F. Scott Fitzgerald, labeled 'A GUY STARING AT A GREEN LIGHT ACROSS THE WATER.'"
+
+- id: unmask-literary-fiction
+  caption: "We've read this one. We've read all of them."
+  alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'LITERARY FICTION.' Bottom: underneath is a bald doodled man in glasses and a tweed beard, labeled 'A PROFESSOR IN CONNECTICUT HAVING AN AFFAIR.'"

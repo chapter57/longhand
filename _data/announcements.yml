@@ -57,3 +57,25 @@
     Ginsberg's Howl, Kerouac's On the Road, Frank O'Hara's Lunch Poems, Diane di Prima's Revolutionary Letters and Lyn Hejinian's My Life.
 
     All five are on our Bookshop.org list, which supports independent bookstores:
+
+- id: thoreau-best-books
+  link: https://longhandlit.com/
+  title: Longhand Literature
+  description: A writer, a book or a moment from literary history, every day.
+  hashtags: "#Books #Reading #Thoreau"
+  tags: [BookSky, Books, Reading, Literature]
+  bluesky: |
+    "Read the best books first, or you may not have a chance to read them at all."
+
+    Henry David Thoreau wrote that in 1849, in A Week on the Concord and Merrimack Rivers. It's the whole idea behind Longhand: one writer worth your time, every day.
+
+- id: keats-negative-capability
+  link: https://longhandlit.com/
+  title: Longhand Literature
+  description: A writer, a book or a moment from literary history, every day.
+  hashtags: "#Poetry #Keats #Writing"
+  tags: [BookSky, Poetry, Writing, Literature]
+  bluesky: |
+    In a letter to his brothers in December 1817, John Keats named what he thought great writers share: "Negative Capability," being "capable of being in uncertainties, Mysteries, doubts, without any irritable reaching after fact & reason."
+
+    He was 22. Worth practicing.

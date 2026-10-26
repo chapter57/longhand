@@ -14,8 +14,10 @@ import { fileURLToPath } from "url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const P = path.join(root, ".github/instagram/portraits");
 const pic = (key) => {
-  const f = fs.readdirSync(P).find((n) => n.startsWith(key + "."));
-  return `data:image/${f.endsWith("png") ? "png" : "jpeg"};base64,` + fs.readFileSync(path.join(P, f)).toString("base64");
+  // A portrait by its day (from the almanac's portraits) or by name (kept here).
+  const own = path.join(root, ".github/memes", key + ".jpg");
+  const f = fs.existsSync(own) ? own : path.join(P, fs.readdirSync(P).find((n) => n.startsWith(key + ".")));
+  return `data:image/${f.endsWith("png") ? "png" : "jpeg"};base64,` + fs.readFileSync(f).toString("base64");
 };
 const only = process.argv.slice(2);
 
@@ -28,7 +30,40 @@ svg.d{position:absolute;left:0;top:0;width:1080px;height:1080px;filter:url(#w)}
 img.cut{position:absolute;object-fit:cover}`;
 // Lines look drawn with a mouse.
 const wob = `<svg width=0 height=0 style="position:absolute"><filter id="w"><feTurbulence baseFrequency="0.03" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="7"/></filter></svg>`;
-const S = (inner) => `<svg class="d" viewBox="0 0 1080 1080">${inner}</svg>`;
+const S = (inner, h = 1080) => `<svg class="d" viewBox="0 0 1080 ${h}" style="height:${h}px">${inner}</svg>`;
+// A doodled head, in our own scribbly style. o: hair (cap, beanie, swoop, bald,
+// none), eyes (dots, shades, tired, wide, cry), mouth (smile, flat, grin, yell), smoke.
+function head(x, y, o = {}) {
+  const k = "#111", w = 'stroke="#111" stroke-width="6"';
+  const hair = {
+    cap: `<path d="M${x - 78} ${y - 20} q0 -90 78 -90 q78 0 78 90 z" fill="#6d7d5a" ${w}/><path d="M${x + 60} ${y - 22} h70 q10 14 -8 20 h-62" fill="#6d7d5a" ${w}/>`,
+    beanie: `<path d="M${x - 80} ${y - 10} q0 -105 80 -105 q80 0 80 105 z" fill="#2b2b2b" ${w}/><rect x="${x - 84}" y="${y - 28}" width="168" height="28" fill="#2b2b2b" ${w}/>`,
+    swoop: `<path d="M${x - 78} ${y - 5} q-10 -100 80 -98 q90 4 70 70 q-60 -50 -150 28z" fill="#e3c26a" ${w}/>`,
+    curly: `<path d="M${x - 80} ${y} q-30 -60 0 -90 q20 -40 60 -30 q30 -30 70 0 q40 10 30 60 q20 30 -10 60 q-60 -50 -150 0z" fill="#3b2a1e" ${w}/>`,
+    bald: ``, none: ``,
+  }[o.hair || "none"];
+  const eyes = {
+    dots: `<circle cx="${x - 28}" cy="${y + 10}" r="7" fill="${k}"/><circle cx="${x + 28}" cy="${y + 10}" r="7" fill="${k}"/>`,
+    shades: `<path d="M${x - 70} ${y} h140" ${w}/><rect x="${x - 66}" y="${y - 2}" width="56" height="30" rx="10" fill="${k}"/><rect x="${x + 10}" y="${y - 2}" width="56" height="30" rx="10" fill="${k}"/>`,
+    tired: `<path d="M${x - 48} ${y + 8} q20 -12 40 0 M${x + 8} ${y + 8} q20 -12 40 0" fill="none" ${w}/><path d="M${x - 48} ${y + 22} q20 10 40 0 M${x + 8} ${y + 22} q20 10 40 0" fill="none" stroke="#8a6d9c" stroke-width="5"/><circle cx="${x - 28}" cy="${y + 12}" r="5"/><circle cx="${x + 28}" cy="${y + 12}" r="5"/>`,
+    wide: `<circle cx="${x - 30}" cy="${y + 6}" r="22" fill="#fff" ${w}/><circle cx="${x + 30}" cy="${y + 6}" r="22" fill="#fff" ${w}/><circle cx="${x - 30}" cy="${y + 8}" r="7"/><circle cx="${x + 30}" cy="${y + 8}" r="7"/>`,
+    cry: `<path d="M${x - 50} ${y} q22 16 44 0 M${x + 6} ${y} q22 16 44 0" fill="none" ${w}/><path d="M${x - 40} ${y + 12} q-8 50 6 80 M${x + 40} ${y + 12} q8 50 -6 80" fill="none" stroke="#4aa3ff" stroke-width="12"/><rect x="${x - 60}" y="${y - 14}" width="50" height="34" rx="8" fill="none" ${w}/><rect x="${x + 10}" y="${y - 14}" width="50" height="34" rx="8" fill="none" ${w}/><path d="M${x - 10} ${y} h20" ${w}/>`,
+  }[o.eyes || "dots"];
+  const mouth = {
+    smile: `<path d="M${x - 30} ${y + 52} q30 24 60 0" fill="none" ${w}/>`,
+    flat: `<path d="M${x - 24} ${y + 58} h48" ${w}/>`,
+    grin: `<path d="M${x - 40} ${y + 46} q40 40 80 0 z" fill="#fff" ${w}/>`,
+    yell: `<ellipse cx="${x}" cy="${y + 62}" rx="34" ry="26" fill="#5a0f0f" ${w}/>`,
+    smirk: `<path d="M${x - 26} ${y + 58} q30 6 52 -14" fill="none" ${w}/>`,
+  }[o.mouth || "flat"];
+  const smoke = o.smoke ? `<path d="M${x + 22} ${y + 60} l50 16" stroke="#eee" stroke-width="10"/><path d="M${x + 22} ${y + 60} l50 16" fill="none" stroke="#111" stroke-width="2"/><path d="M${x + 80} ${y + 66} q10 -20 0 -40 q-10 -20 0 -40" fill="none" stroke="#999" stroke-width="4"/>` : "";
+  const stubble = o.stubble ? Array.from({ length: 14 }, (_, i) => `<circle cx="${x - 40 + (i * 37) % 80}" cy="${y + 48 + (i * 13) % 30}" r="2"/>`).join("") : "";
+  const body = `<path d="M${x - 95} ${y + 200} q0 -100 95 -100 q95 0 95 100 z" fill="${o.shirt || "#5b7fa6"}" ${w}/>`;
+  return `${body}<ellipse cx="${x}" cy="${y + 20}" rx="80" ry="92" fill="#fbfbf7" ${w}/>${hair}${eyes}${mouth}${stubble}${smoke}`;
+}
+// A little "sticker": a white card with a border, like a screenshot pasted in.
+const tag = (x, y, w, html, rot = 0, size = 26) =>
+  `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;font:${size}px/1.2 'Liberation Sans';background:#fff;border:3px solid #111;padding:10px 12px;transform:rotate(${rot}deg);box-shadow:4px 4px 0 #bbb">${html}</div>`;
 const hat = (x, y, s = 1) => `<g transform="translate(${x},${y}) scale(${s})"><path d="M-80 0 L0 -150 L90 0 Z" fill="#ff3fa4" stroke="#111" stroke-width="6"/>
   <path d="M-40 -30 l40 25 M0 -90 l40 30 M30 -40 l25 30" stroke="#ffe600" stroke-width="11"/><circle cx="0" cy="-150" r="20" fill="#ffe600" stroke="#111" stroke-width="5"/></g>`;
 
@@ -128,11 +163,98 @@ const memes = {
     <div class="a serif" style="left:40px;top:800px;font-size:36px;width:360px">(the grave still has no name on it. technically.)</div>`,
 };
 
+
+// Memes about books in general, not tied to a day; posted by name.
+// A face cut from a portrait: the portrait scaled by zoom, centered on the
+// face at (fx, fy), as fractions of its width and height (portraits are 4:5).
+const faceCut = (src, x, y, w, h, zoom, fx, fy) => {
+  const iw = w * zoom, ih = iw * 1.25;
+  return `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;overflow:hidden;border-radius:46% 46% 42% 42%;border:5px solid #111">
+    <img src="${src}" style="position:absolute;width:${iw}px;height:${ih}px;left:${w / 2 - fx * iw}px;top:${h / 2 - fy * ih}px"></div>`;
+};
+// The "unmasking" meme, drawn from scratch: a hand pulls the sheet off a tied-up
+// ghost labeled one thing, and underneath is another.
+const yellow = (x, y, w, text, size = 46) =>
+  `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;text-align:center;font:bold ${size}px/1.08 'Liberation Sans';color:#ffd84a;-webkit-text-stroke:1.5px #111;text-shadow:3px 3px 0 #111,-2px -2px 0 #111,2px -2px 0 #111,-2px 2px 0 #111;text-transform:uppercase">${text}</div>`;
+const unmask = (mask, reveal, under) => ({ h: 1080, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:540px;background:#29406b"></div><div class="a" style="left:0;top:540px;width:1080px;height:540px;background:#29406b"></div>
+    <div class="line" style="left:0;right:0;top:537px;height:7px"></div>
+    ${S(`<path d="M150 530 q-30 -260 80 -360 q100 -70 190 0 q100 90 80 360 z" fill="#f2f2f2" stroke="#111" stroke-width="7"/>
+      <ellipse cx="290" cy="250" rx="18" ry="12" fill="#111"/><ellipse cx="370" cy="250" rx="18" ry="12" fill="#111"/>
+      <path d="M165 400 q170 30 330 0 M160 455 q175 30 340 0 M158 505 q178 25 344 0" fill="none" stroke="#5a4426" stroke-width="18"/>
+      ${head(860, 210, { hair: "swoop", eyes: "dots", mouth: "smirk", shirt: "#f2f2f2" })}<path d="M820 315 l40 40 l40 -40 z" fill="#e8742a" stroke="#111" stroke-width="5"/>
+      <path d="M780 360 C 700 330, 560 200, 470 175" fill="none" stroke="#111" stroke-width="44"/><path d="M780 360 C 700 330, 560 200, 470 175" fill="none" stroke="#f2f2f2" stroke-width="34"/>
+      <ellipse cx="450" cy="170" rx="44" ry="30" fill="#fde2c8" stroke="#111" stroke-width="6"/>
+      <path d="M150 1070 q-20 -200 70 -250 l210 0 q90 50 70 250 z" fill="#d9d9d9" stroke="#111" stroke-width="7"/>
+      <path d="M160 940 q170 30 330 0 M155 995 q175 30 340 0 M152 1048 q178 25 344 0" fill="none" stroke="#5a4426" stroke-width="18"/>
+      ${head(860, 750, { hair: "swoop", eyes: "dots", mouth: "smirk", shirt: "#f2f2f2" })}<path d="M820 855 l40 40 l40 -40 z" fill="#e8742a" stroke="#111" stroke-width="5"/>
+      <path d="M780 900 C 730 880, 690 820, 650 760" fill="none" stroke="#111" stroke-width="44"/><path d="M780 900 C 730 880, 690 820, 650 760" fill="none" stroke="#f2f2f2" stroke-width="34"/>
+      <path d="M600 640 q60 -20 100 10 q20 80 -10 160 q-50 20 -90 -10 q-30 -80 0 -160z" fill="#f2f2f2" stroke="#111" stroke-width="6"/>
+      <ellipse cx="635" cy="690" rx="11" ry="7" fill="#111"/><ellipse cx="670" cy="690" rx="11" ry="7" fill="#111"/>
+      <ellipse cx="655" cy="760" rx="40" ry="28" fill="#fde2c8" stroke="#111" stroke-width="6"/>`, 1080)}
+    ${under}
+    ${yellow(40, 300, 560, mask)}
+    ${yellow(30, 870, 580, reveal, 40)}` });
+
+Object.assign(memes, {
+  "well-read-quadrant": { h: 1350, html: `
+    <div class="cap" style="text-align:center;font-size:47px;letter-spacing:-1.5px;padding:30px 10px 0;white-space:nowrap">How well-read you are vs. how well-read you look</div>
+    ${S(`<path d="M540 170 V1330 M30 760 H1050" stroke="#111" stroke-width="7"/><path d="M540 150 l-18 34 h36z M540 1345 l-18 -34 h36z M20 760 l34 -18 v36z M1060 760 l-34 -18 v36z" fill="#111"/>
+      ${head(130, 260, { hair: "cap", eyes: "dots", mouth: "smile", shirt: "#7a5c3e" })}
+      ${head(950, 260, { hair: "bald", eyes: "dots", mouth: "smirk", shirt: "#222" })}
+      ${head(130, 850, { hair: "beanie", eyes: "tired", mouth: "flat", shirt: "#333", smoke: true, stubble: true })}
+      ${head(950, 850, { hair: "swoop", eyes: "shades", mouth: "smirk", shirt: "#c9b28b" })}`, 1350)}
+    <div class="a sans" style="left:560px;top:150px;font-size:30px">Actually Well-Read</div><div class="a sans" style="left:560px;top:1300px;font-size:30px">Actually Unread</div>
+    <div class="a sans" style="left:30px;top:705px;font-size:30px">Looks Unread</div><div class="a sans" style="right:30px;top:705px;font-size:30px;white-space:nowrap">Looks Well-Read</div>
+    ${tag(240, 220, 270, "<b>LIBRARY CARD</b><br>fines owed: $0.40", -3)}
+    ${tag(40, 480, 230, "drugstore reading glasses, 3 pairs", 2, 24)}
+    ${tag(280, 400, 230, "6 paperbacks with cracked spines, all Penguin", -1, 24)}
+    ${tag(260, 560, 250, "Books read this year:<br><b style='font-size:40px;color:#2a8a3a'>61</b> ▲", 3)}
+    ${tag(580, 220, 220, "reads Proust in French. for fun", 3, 24)}
+    ${tag(600, 380, 260, "pencil notes in every margin", -2, 24)}
+    ${tag(580, 520, 240, "owns <b>the whole Loeb Classical Library</b>", 2, 24)}
+    ${tag(830, 470, 200, "has read Ulysses <b>twice</b>", -4, 24)}
+    ${tag(250, 800, 260, "Screen time: <b>9h 41m</b>", 3)}
+    ${tag(40, 1080, 250, "Reading challenge:<br><b style='font-size:40px;color:#c0392b'>0 / 52</b>", -2)}
+    ${tag(300, 1000, 220, "“i watched the movie”", 2, 24)}
+    ${tag(300, 1150, 210, "last book: assigned in 2011", -3, 24)}
+    ${tag(580, 820, 210, "<b>Infinite Jest</b><br>bookmark on p. 12", -3, 24)}
+    ${tag(570, 980, 230, "shelves sorted <b>by color</b>", 2, 24)}
+    ${tag(830, 1080, 220, "tote bag from a literary magazine", 3, 24)}
+    ${tag(580, 1140, 230, "Kindle: <b>312 unread</b>", -2, 24)}` },
+
+  "reader-iq-curve": { h: 1350, html: `
+    <div class="cap" style="text-align:center;font:bold 66px/1 'Liberation Serif';letter-spacing:-1px;padding-top:22px">THE READER IQ CURVE</div>
+    <div class="line" style="left:0;right:0;top:100px;height:5px"></div><div class="line" style="left:0;right:0;top:500px;height:5px"></div><div class="line" style="left:0;right:0;top:920px;height:5px"></div><div class="line" style="left:440px;top:100px;bottom:0;width:5px"></div>
+    ${S(`${head(220, 220, { hair: "bald", eyes: "dots", mouth: "grin", shirt: "#fff" })}<rect x="300" y="360" width="80" height="110" fill="#2c6fbb" stroke="#111" stroke-width="6" transform="rotate(-8 340 410)"/>
+      ${head(220, 630, { hair: "beanie", eyes: "cry", mouth: "yell", shirt: "#3e6b4f" })}`, 1350)}
+    <img class="cut" src="${pic("samuel-johnson")}" style="left:0;top:925px;width:440px;height:425px;object-position:50% 18%">
+    <div class="a" style="left:470px;top:120px;right:20px"><div style="font:bold 54px 'Liberation Serif'">LOW IQ <span style="font:30px 'Liberation Serif'">| ~85</span></div>
+      <div style="font:bold 34px/1.2 'Liberation Serif';margin:8px 0 10px">"The book was good. I liked it."</div>
+      <div style="font:26px/1.35 'Liberation Serif'">• Read it on the porch.<br>• Cried at the end.<br>• Lent it to a friend.<br>• Didn't think too hard about it.</div></div>
+    <div class="a" style="left:470px;top:515px;right:20px"><div style="font:bold 54px 'Liberation Serif'">MIDWIT <span style="font:30px 'Liberation Serif'">| ~115</span></div>
+      <div style="font:bold 32px/1.15 'Liberation Sans';color:#a8201a;margin:6px 0 10px">"YOU CAN'T JUST <i>ENJOY</i> A BOOK."</div>
+      <div style="font:24px/1.32 'Liberation Serif'">• "The author is dead, actually."<br>• "Have you read the theory first?"<br>• "The canon is a construct."<br>• "That ending is deeply problematic."<br>• "What's the subtext of the subtext?"<br>• "I only read it ironically."<br>• Hasn't finished a novel since 2019.</div></div>
+    <div class="a" style="left:470px;top:935px;right:20px"><div style="font:bold 54px 'Liberation Serif'">HIGH IQ <span style="font:30px 'Liberation Serif'">| ~145</span></div>
+      <div style="font:bold 34px/1.2 'Liberation Serif';margin:8px 0 10px">"The book was good. I liked it."</div>
+      <div style="font:24px/1.32 'Liberation Serif'">• Samuel Johnson, 1757: "The only end of writing is to enable the readers better to enjoy life, or better to endure it."<br>• Has read everything. Still reads for pleasure.<br>• <b>The porch guy was right.</b></div></div>` },
+
+  "unmask-literary-fiction": unmask("Literary fiction", "A professor in Connecticut having an affair",
+    S(head(325, 640, { hair: "bald", eyes: "dots", mouth: "smirk", shirt: "#8a6a45" }) + `<circle cx="297" cy="650" r="24" fill="none" stroke="#111" stroke-width="5"/><circle cx="353" cy="650" r="24" fill="none" stroke="#111" stroke-width="5"/><path d="M321 650 h8" stroke="#111" stroke-width="5"/><path d="M262 700 q63 70 126 0 q-10 60 -63 70 q-53 -10 -63 -70z" fill="#8a7a6a" stroke="#111" stroke-width="5"/>`, 1080)),
+  "unmask-russian-novel": unmask("The great Russian novel", "A guy in St. Petersburg who hasn't slept in four days",
+    faceCut(pic("11-11"), 205, 560, 240, 290, 4.2, 0.51, 0.29)),
+  "unmask-great-american-novel": unmask("The great American novel", "A guy staring at a green light across the water",
+    faceCut(pic("12-21"), 205, 560, 240, 290, 2.0, 0.475, 0.37)),
+});
+
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
-for (const [key, html] of Object.entries(memes)) {
+for (const [key, made] of Object.entries(memes)) {
   if (only.length && !only.includes(key)) continue;
-  await tab.setContent(`<!doctype html><meta charset=utf-8><style>${css}</style>${wob}<div class="m">${html}</div>`);
+  // A meme is its html, or { h, html } for one taller than square.
+  const { h = 1080, html } = typeof made === "string" ? { html: made } : made;
+  await tab.setViewportSize({ width: 1080, height: h });
+  await tab.setContent(`<!doctype html><meta charset=utf-8><style>${css}</style>${wob}<div class="m" style="height:${h}px">${html}</div>`);
   const raw = path.join(root, "assets/memes", key + ".png");
   await tab.locator(".m").screenshot({ path: raw });
   execFileSync("python3", [path.join(root, ".github/memes/crunch.py"), raw, raw.replace(/png$/, "jpg")]);

@@ -171,20 +171,21 @@ def about_card(e, p, date):
             "fallback": about}
 
 
-def meme(e, social):
-    """The day's meme from _data/memes.yml, or None if it has none."""
+def meme(e, social, name=""):
+    """The day's meme from _data/memes.yml, or the one called name, or None."""
     found = [m for m in yaml.safe_load(open("_data/memes.yml", encoding="utf-8")) or []
-             if m["month"] == e["month"] and m["day"] == e["day"]]
+             if (m.get("id") == name if name else (m.get("month"), m.get("day")) == (e["month"], e["day"]))]
     if not found:
         return None
     m = found[0]
-    path = f"assets/memes/{e['month']}-{e['day']}.jpg"
+    path = f"assets/memes/{m.get('id') or str(e['month']) + '-' + str(e['day'])}.jpg"
     words = curly(" ".join(str(m["caption"]).split()))
     # "From the almanac", so a meme posted on another day still reads right.
-    return {"bluesky": words + "\n\nFrom the almanac: " + e["url"],
-            "mastodon": words + "\n\nFrom the almanac:",
-            "image": (path, curly(m["alt"])[:1900]), "size": (1080, 1080),
-            "instagram": f"{words}\n\nFrom the almanac: {e['name']}. The link is in our bio, longhandlit.com."
+    lead, where = ("", "Every day at longhandlit.com.") if name else ("From the almanac: ", f"From the almanac: {e['name']}.")
+    return {"bluesky": words + "\n\n" + lead + e["url"],
+            "mastodon": words + "\n\n" + (lead or "Longhand Literature:"),
+            "image": (path, curly(m["alt"])[:1900]), "size": (1080, m.get("height", 1080)),
+            "instagram": f"{words}\n\n{where} The link is in our bio, longhandlit.com."
                          f"\n\n{INSTAGRAM_HASHTAGS} #LiteraryMemes #BookMemes",
             "instagram_image": path,
             "fallback": words}
@@ -514,6 +515,15 @@ def main():
     if slot == "announcement":
         e, post = announcement(os.environ.get("ANNOUNCEMENT", "").strip())
         for send in (post_bluesky, post_mastodon):
+            send(e, post, dry)
+        return
+    if slot == "meme" and os.environ.get("ANNOUNCEMENT", "").strip():
+        # A meme that isn't tied to a day links to the front page.
+        e = {"url": SITE + "/", "name": "Longhand Literature", "note": "", "month": 0, "day": 0}
+        post = meme(e, None, os.environ["ANNOUNCEMENT"].strip())
+        if not post:
+            raise SystemExit("No meme called " + os.environ["ANNOUNCEMENT"] + " in _data/memes.yml.")
+        for send in (post_bluesky, post_mastodon, post_instagram):
             send(e, post, dry)
         return
     if slot == "instagram":
