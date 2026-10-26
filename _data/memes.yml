@@ -137,3 +137,9 @@
   pool: true
   caption: "In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature and turned it down."
   alt: "An ink-and-color drawing of Jean-Paul Sartre, in round black glasses with a pipe, on a pink background. Below: 'In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature, and turned it down. A writer, he said, shouldn't let himself be turned into an institution.'"
+
+- id: portrait-rimbaud
+  height: 1350
+  pool: true
+  caption: "\"For I is someone else.\" Arthur Rimbaud, at sixteen, in a letter of May 1871. Our translation."
+  alt: "An ink-and-color drawing of the young Arthur Rimbaud, with a mop of uncombed dark hair, pale eyes and a loose cravat, on a red background. Below, the quote: 'For I is someone else.' Arthur Rimbaud, letter, May 1871, translated for Longhand."

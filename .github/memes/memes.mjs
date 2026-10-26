@@ -331,6 +331,7 @@ const portraitCard = (name, bg, text, by, quote = true) => ({ h: 1350, clean: tr
 Object.assign(memes, {
   "portrait-melville": portraitCard("melville", "#45b3c4", "It is not down in any map; true places never are.", "Herman Melville · Moby-Dick, 1851"),
   "portrait-sontag": portraitCard("sontag", "#f2c230", "Susan Sontag kept a journal from the age of fourteen and read like it was oxygen. Her first book of essays, Against Interpretation, came out in 1966. She was 33.", "Susan Sontag · 1933–2004", false),
+  "portrait-rimbaud": portraitCard("rimbaud", "#e4572e", "For I is someone else.", "Arthur Rimbaud · letter, May 1871 · translated for Longhand"),
   "portrait-sartre": portraitCard("sartre", "#ef8fa8", "In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature, and turned it down. A writer, he said, shouldn't let himself be turned into an institution.", "Jean-Paul Sartre · 1905–1980", false),
 });
 

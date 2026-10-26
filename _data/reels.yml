@@ -7,6 +7,7 @@
 #   text      the quote, which arrives a word at a time (public domain only)
 #   by        who said it, and where
 #   seconds   how long the reel runs
+#   music     optional: a piece in assets/music/, played by .github/reels/music.py
 #   caption   the post's words
 
 - id: melville-map
@@ -19,3 +20,21 @@
     "It is not down in any map; true places never are." Herman Melville, Moby-Dick, 1851.
 
     A writer, a book or a moment from literary history, every day. The link is in our bio, longhandlit.com.
+
+- id: rimbaud-bohemia
+  portrait: assets/portraits/rimbaud.jpg
+  bg: "#e4572e"
+  text: "I went off, my fists in my torn pockets; my overcoat, too, was becoming ideal; I walked beneath the sky, Muse, and I was yours."
+  by: Arthur Rimbaud · "My Bohemia," 1870 · translated for Longhand
+  seconds: 19
+  per: 0.24
+  music: gymnopedie-1
+  caption: |
+    "I went off, my fists in my torn pockets; my overcoat, too, was becoming ideal; I walked beneath the sky, Muse, and I was yours."
+
+    Arthur Rimbaud wrote "My Bohemia" in 1870, at sixteen, after running away from home. Our translation.
+
+    Music: Erik Satie, Gymnopédie No. 1 (1888), played for Longhand.
+
+    A writer, a book or a moment from literary history, every day. The link is in our bio, longhandlit.com.
+  bluesky: "\"I walked beneath the sky, Muse, and I was yours.\" Arthur Rimbaud wrote \"My Bohemia\" at sixteen, in 1870. Our translation, with Satie's Gymnopédie No. 1."
