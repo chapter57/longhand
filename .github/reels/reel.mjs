@@ -4,6 +4,7 @@
 // frame is drawn in the browser, then ffmpeg makes the video.
 //
 //   npm install playwright js-yaml   (once; ffmpeg must be installed)
+//   python .github/reels/music.py      (first, for reels with music)
 //   node .github/reels/reel.mjs [id ...]
 import { chromium } from "playwright";
 import yaml from "js-yaml";
@@ -30,7 +31,7 @@ html, body { margin: 0; }
 #s { width: 1080px; height: 1920px; position: relative; overflow: hidden; background: ${r.bg}; }
 #pic { position: absolute; left: 0; width: 1080px; height: 1350px; top: 0; background: url(${img(r.portrait)}) 50% 0 / 1080px auto no-repeat; }
 #card { position: absolute; left: 60px; right: 60px; top: 1030px; min-height: 0; background: #fbf7ee; border: 7px solid #16130f; box-shadow: 14px 14px 0 #16130f; padding: 60px 64px; box-sizing: border-box; }
-#q { font: italic 86px/1.22 L; color: #16130f; }
+#q { font: italic ${r.text.length > 90 ? 62 : 86}px/1.24 L; color: #16130f; }
 #q span { display: inline-block; margin-right: .26em; }
 #by { font: 500 34px/1.3 M; letter-spacing: .08em; text-transform: uppercase; color: #16130f; margin-top: 40px; }
 #tag { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font: 500 30px M; letter-spacing: .2em; color: #16130f; }
@@ -74,9 +75,12 @@ for (const r of reels) {
     await tab.evaluate((t) => window.at(t), f / FPS);
     await tab.locator("#s").screenshot({ path: path.join(dir, String(f).padStart(4, "0") + ".jpg"), type: "jpeg", quality: 90 });
   }
-  // Instagram wants H.264 with an audio track, so a silent one goes in.
+  // Instagram wants H.264 with an audio track: the reel's music
+  // (assets/music/, played by .github/reels/music.py), or else silence.
+  const audio = r.music ? ["-i", path.join(root, "assets/music", r.music + ".m4a"), "-af", `afade=t=out:st=${r.seconds - 1.5}:d=1.5`, "-t", String(r.seconds)]
+    : ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-shortest"];
   execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(dir, "%04d.jpg"),
-    "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-shortest",
+    ...audio,
     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-profile:v", "high", "-crf", "20", "-movflags", "+faststart",
     "-c:a", "aac", "-b:a", "96k", path.join(root, "assets/reels", r.id + ".mp4")]);
   fs.rmSync(dir, { recursive: true });
