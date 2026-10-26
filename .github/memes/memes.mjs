@@ -316,17 +316,37 @@ Object.assign(memes, {
     <div class="a sans" style="left:24px;top:960px;font-size:30px;color:#8a1020">Bram Stoker, 1897</div>` },
 });
 
+// Portrait cards: one of our drawn portraits (assets/portraits/) with a quote,
+// or, for a writer still in copyright, a line about them in our own words.
+const portrait = (name) => "data:image/jpeg;base64," + fs.readFileSync(path.join(root, "assets/portraits", name + ".jpg")).toString("base64");
+const portraitCard = (name, bg, text, by, quote = true) => ({ h: 1350, clean: true, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:1350px;background:${bg}"></div>
+    <div class="a" style="left:0;top:0;width:1080px;height:900px;background:url(${portrait(name)}) 50% 24% / 1080px auto no-repeat"></div>
+    <div class="a" style="left:54px;right:54px;top:880px;bottom:60px;background:#fbf7ee;border:6px solid #16130f;box-shadow:12px 12px 0 #16130f;padding:44px 50px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
+      <div style="font:${quote ? "italic " : ""}${text.length > 110 ? 44 : 58}px/1.22 'Liberation Serif';color:#16130f">${quote ? "“" + text + "”" : text}</div>
+      <div style="font:bold 26px/1.3 'Liberation Sans';letter-spacing:.06em;text-transform:uppercase;margin-top:26px;color:#16130f">${by}</div>
+    </div>
+    <div class="a" style="right:64px;top:28px;font:bold 22px 'Liberation Sans';letter-spacing:.14em;color:#16130f">LONGHAND LITERATURE</div>` });
+
+Object.assign(memes, {
+  "portrait-melville": portraitCard("melville", "#45b3c4", "It is not down in any map; true places never are.", "Herman Melville · Moby-Dick, 1851"),
+  "portrait-sontag": portraitCard("sontag", "#f2c230", "Susan Sontag kept a journal from the age of fourteen and read like it was oxygen. Her first book of essays, Against Interpretation, came out in 1966. She was 33.", "Susan Sontag · 1933–2004", false),
+  "portrait-sartre": portraitCard("sartre", "#ef8fa8", "In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature, and turned it down. A writer, he said, shouldn't let himself be turned into an institution.", "Jean-Paul Sartre · 1905–1980", false),
+});
+
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
 for (const [key, made] of Object.entries(memes)) {
   if (only.length && !only.includes(key)) continue;
   // A meme is its html, or { h, html } for one taller than square.
-  const { h = 1080, html } = typeof made === "string" ? { html: made } : made;
+  // Portrait cards are kept crisp ("clean"); memes get crunched.
+  const { h = 1080, html, clean } = typeof made === "string" ? { html: made } : made;
   await tab.setViewportSize({ width: 1080, height: h });
   await tab.setContent(`<!doctype html><meta charset=utf-8><style>${css}</style>${wob}<div class="m" style="height:${h}px">${html}</div>`);
   const raw = path.join(root, "assets/memes", key + ".png");
   await tab.locator(".m").screenshot({ path: raw });
-  execFileSync("python3", [path.join(root, ".github/memes/crunch.py"), raw, raw.replace(/png$/, "jpg")]);
+  if (clean) await tab.locator(".m").screenshot({ path: raw.replace(/png$/, "jpg"), type: "jpeg", quality: 92 });
+  else execFileSync("python3", [path.join(root, ".github/memes/crunch.py"), raw, raw.replace(/png$/, "jpg")]);
   fs.unlinkSync(raw);
   console.log("drew", key);
 }

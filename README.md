@@ -50,6 +50,10 @@ GitHub posts the almanac to Bluesky and Mastodon three times a day, New York tim
 
 When the day's writer is still in copyright, the midday post is a line about them in our own words, and the evening card shows their portrait and a few sentences about them.
 
+Days without a meme of their own take one from a rotating pool: the memes and portrait cards marked `pool: true` in `_data/memes.yml`. The portraits are drawn in code by `.github/portraits/draw.mjs` into `assets/portraits/`.
+
+Reels (short videos, for Instagram and Bluesky) are in `_data/reels.yml`, made into `assets/reels/<id>.mp4` by `.github/reels/reel.mjs` (it needs ffmpeg), and posted by hand: Actions → Post the almanac → Run workflow, choose "reel" and type its id.
+
 The memes' captions are in `_data/memes.yml`, and the pictures in `assets/memes/` are drawn by `.github/memes/memes.mjs` (`npm install playwright`, plus Python's Pillow, then `node .github/memes/memes.mjs`). Each meme is written into that script by hand. The photos in them are public-domain portraits only.
 
 The midday quotes and evening readings are in `_data/social.yml`, one pair per day. Everything in them is in the public domain; "translated for Longhand" marks our own translations. The quote cards are pictures in `assets/cards/`, drawn from that file by `.github/cards/render.mjs` (`npm install playwright js-yaml`, then `node .github/cards/render.mjs`); after changing an evening reading, draw its card again.

@@ -173,8 +173,15 @@ def about_card(e, p, date):
 
 def meme(e, social, name=""):
     """The day's meme from _data/memes.yml, or the one called name, or None."""
-    found = [m for m in yaml.safe_load(open("_data/memes.yml", encoding="utf-8")) or []
-             if (m.get("id") == name if name else (m.get("month"), m.get("day")) == (e["month"], e["day"]))]
+    memes = yaml.safe_load(open("_data/memes.yml", encoding="utf-8")) or []
+    found = [m for m in memes if (m.get("id") == name if name else (m.get("month"), m.get("day")) == (e["month"], e["day"]))]
+    if not found and not name:
+        # No meme for the day: the next one from the pool, taking turns by date.
+        pool = [m for m in memes if m.get("pool")]
+        if pool:
+            n = datetime.date(2026, e["month"], e["day"]).toordinal()
+            found = [pool[n % len(pool)]]
+            name = found[0]["id"]
     if not found:
         return None
     m = found[0]
@@ -265,7 +272,7 @@ def link_facets(text):
 def post_bluesky(e, post, dry):
     text = post["bluesky"]
     if dry:
-        extra = "[card] " + e["url"] if post.get("card") else "[image] " + post["image"][0]
+        extra = "[card] " + e["url"] if post.get("card") else "[video] " + post["video"] if post.get("video") else "[image] " + post["image"][0]
         print(f"--- Bluesky ({len(text)} characters) ---\n{text}\n{extra}")
         return
     handle, password = os.environ.get("BLUESKY_HANDLE"), os.environ.get("BLUESKY_APP_PASSWORD")
@@ -314,6 +321,9 @@ def post_bluesky(e, post, dry):
         width, height = post.get("size", (1080, 1350))
         record["embed"] = {"$type": "app.bsky.embed.images", "images": [
             {"image": blob, "alt": alt, "aspectRatio": {"width": width, "height": height}}]}
+    if post.get("video"):
+        record["embed"] = {"$type": "app.bsky.embed.video", "video": bluesky_video(api, session, auth, post["video"]),
+                           "alt": post.get("alt", "")[:1000], "aspectRatio": {"width": 1080, "height": 1920}}
     facets = link_facets(text)
     if facets:
         record["facets"] = facets
@@ -321,6 +331,37 @@ def post_bluesky(e, post, dry):
                   {"repo": session["did"], "collection": "app.bsky.feed.post", "record": record}, auth)
     print("Bluesky: posted", out.get("uri"))
     return True
+
+
+def bluesky_video(api, session, auth, path):
+    """Uploads a video through Bluesky's video service, which prepares it for
+    playback, and returns its blob once it's ready."""
+    pds = next(s["serviceEndpoint"] for s in session["didDoc"]["service"] if s["id"].endswith("atproto_pds"))
+    aud = "did:web:" + urllib.parse.urlparse(pds).hostname
+    svc = request(api + "com.atproto.server.getServiceAuth?" + urllib.parse.urlencode(
+        {"aud": aud, "lxm": "com.atproto.repo.uploadBlob", "exp": int(time.time()) + 1800}), headers=auth)["token"]
+    data = open(path, "rb").read()
+    req = urllib.request.Request("https://video.bsky.app/xrpc/app.bsky.video.uploadVideo?" + urllib.parse.urlencode(
+        {"did": session["did"], "name": os.path.basename(path)}), data=data, method="POST",
+        headers={"Authorization": "Bearer " + svc, "Content-Type": "video/mp4", "User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            job = json.loads(r.read())
+    except urllib.error.HTTPError as err:
+        body = err.read().decode(errors="replace")
+        if err.code == 409 and "jobId" in body:  # already uploaded
+            job = json.loads(body)
+        else:
+            raise SystemExit(f"Bluesky: the video didn't upload ({err.code}): {body[:300]}")
+    job_id = job.get("jobId") or job.get("jobStatus", {}).get("jobId")
+    for _ in range(60):
+        st = request("https://video.bsky.app/xrpc/app.bsky.video.getJobStatus?jobId=" + job_id)["jobStatus"]
+        if st.get("blob"):
+            return st["blob"]
+        if st.get("state") == "JOB_STATE_FAILED":
+            raise SystemExit("Bluesky: the video service couldn't use the video: " + str(st.get("error")))
+        time.sleep(5)
+    raise SystemExit("Bluesky: the video took too long to process")
 
 
 def mastodon_media(instance, token, path, alt):
@@ -431,6 +472,8 @@ def instagram_token():
 def post_instagram(e, post, dry):
     if not post.get("instagram"):
         return False
+    if post.get("video"):
+        return post_instagram_reel(post, dry)
     month, day = e["month"], e["day"]
     base = os.environ.get("INSTAGRAM_IMAGE_BASE", "").strip() or SITE
     image = f"{base}/{post.get('instagram_image') or f'assets/cards/{month}-{day}.jpg'}"
@@ -461,6 +504,53 @@ def post_instagram(e, post, dry):
     out = instagram_call(f"{user}/media_publish", {"creation_id": container}, token, post=True)
     print(f"Instagram: posted {out.get('id')} as @{me.get('username')}")
     return True
+
+
+def post_instagram_reel(post, dry):
+    """Posts a video as a reel, shared to the feed too."""
+    base = os.environ.get("INSTAGRAM_IMAGE_BASE", "").strip() or SITE
+    video = f"{base}/{post['video']}"
+    caption = post["instagram"][:2200]
+    if dry:
+        print(f"--- Instagram reel ({len(caption)} characters) ---\n{caption}\n[video] {video}")
+        return
+    if not os.environ.get("INSTAGRAM_TOKEN"):
+        print("Instagram: no token set, skipping.")
+        return False
+    token = instagram_token()
+    me = instagram_call("me", {"fields": "user_id,username"}, token)
+    user = me["user_id"]
+    recent = instagram_call(f"{user}/media", {"fields": "caption", "limit": 5}, token)
+    if any((m.get("caption") or "").strip() == caption.strip() for m in recent.get("data", [])):
+        print("Instagram: already posted, skipping.")
+        return True
+    container = instagram_call(f"{user}/media", {"media_type": "REELS", "video_url": video, "caption": caption,
+                                                 "share_to_feed": "true"}, token, post=True)["id"]
+    # Instagram fetches and processes the video first; that can take a few minutes.
+    for _ in range(60):
+        status = instagram_call(container, {"fields": "status_code"}, token).get("status_code")
+        if status == "FINISHED":
+            break
+        if status == "ERROR":
+            raise SystemExit("Instagram: couldn't use the video at " + video)
+        time.sleep(10)
+    out = instagram_call(f"{user}/media_publish", {"creation_id": container}, token, post=True)
+    print(f"Instagram: posted reel {out.get('id')} as @{me.get('username')}")
+    return True
+
+
+def reel(name):
+    """A reel from _data/reels.yml, as (entry-like link, post)."""
+    found = [r for r in yaml.safe_load(open("_data/reels.yml", encoding="utf-8")) if r["id"] == name]
+    if not found:
+        raise SystemExit(f"No reel called {name!r} in _data/reels.yml.")
+    r = found[0]
+    words = curly(r["caption"].strip())
+    link = {"url": SITE + "/", "name": "Longhand Literature", "note": "", "month": 0, "day": 0}
+    bsky = curly(fit(r.get("bluesky", r["caption"].split("\n")[0]), 240)) + "\n\n" + SITE + "/"
+    return link, {"bluesky": bsky, "mastodon": bsky, "video": f"assets/reels/{name}.mp4",
+                  "alt": f"An animation: a drawing of the writer, then the words \"{r['text']}\" and \"{r['by']}\".",
+                  "instagram": words + f"\n\n{INSTAGRAM_HASHTAGS}", "fallback": words}
 
 
 def post_instagram_carousel(name, dry):
@@ -515,6 +605,11 @@ def main():
     if slot == "announcement":
         e, post = announcement(os.environ.get("ANNOUNCEMENT", "").strip())
         for send in (post_bluesky, post_mastodon):
+            send(e, post, dry)
+        return
+    if slot == "reel":
+        e, post = reel(os.environ.get("ANNOUNCEMENT", "").strip())
+        for send in (post_bluesky, post_instagram):
             send(e, post, dry)
         return
     if slot == "meme" and os.environ.get("ANNOUNCEMENT", "").strip():

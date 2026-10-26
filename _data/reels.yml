@@ -1,0 +1,21 @@
+# Instagram reels (and Bluesky videos), drawn by .github/reels/reel.mjs into
+# assets/reels/<id>.mp4. Post one by hand: Actions → Post the almanac → Run
+# workflow, choose "reel" and type its id.
+#
+#   portrait  one of our drawn portraits, in assets/portraits/
+#   bg        the color behind it
+#   text      the quote, which arrives a word at a time (public domain only)
+#   by        who said it, and where
+#   seconds   how long the reel runs
+#   caption   the post's words
+
+- id: melville-map
+  portrait: assets/portraits/melville.jpg
+  bg: "#45b3c4"
+  text: "It is not down in any map; true places never are."
+  by: Herman Melville · Moby-Dick, 1851
+  seconds: 12
+  caption: |
+    "It is not down in any map; true places never are." Herman Melville, Moby-Dick, 1851.
+
+    A writer, a book or a moment from literary history, every day. The link is in our bio, longhandlit.com.
