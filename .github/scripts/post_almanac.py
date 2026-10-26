@@ -541,7 +541,12 @@ def post_instagram_reel(post, dry):
 
 def reel(name):
     """A reel from _data/reels.yml, as (entry-like link, post)."""
-    found = [r for r in yaml.safe_load(open("_data/reels.yml", encoding="utf-8")) if r["id"] == name]
+    reels = yaml.safe_load(open("_data/reels.yml", encoding="utf-8"))
+    found = [r for r in reels if r["id"] == name]
+    if not name and reels:
+        # A scheduled reel: the next one in turn, by date.
+        found = [reels[datetime.date.today().toordinal() // 3 % len(reels)]]
+        name = found[0]["id"]
     if not found:
         raise SystemExit(f"No reel called {name!r} in _data/reels.yml.")
     r = found[0]
