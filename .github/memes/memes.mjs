@@ -247,17 +247,106 @@ Object.assign(memes, {
     faceCut(pic("12-21"), 205, 560, 240, 290, 2.0, 0.475, 0.37)),
 });
 
+// Halloween.
+const creature = (x, y) => `<path d="M${x - 95} ${y + 200} q0 -100 95 -100 q95 0 95 100 z" fill="#3b3b3b" stroke="#111" stroke-width="6"/>
+  <ellipse cx="${x}" cy="${y + 20}" rx="80" ry="92" fill="#e9dc9a" stroke="#111" stroke-width="6"/>
+  <path d="M${x - 82} ${y + 30} q-10 -120 82 -118 q92 -2 82 118 q-20 -70 -82 -72 q-62 2 -82 72z" fill="#141414" stroke="#111" stroke-width="5"/>
+  <path d="M${x - 50} ${y - 20} l100 10 M${x - 40} ${y - 30} v20 M${x - 10} ${y - 27} v20 M${x + 20} ${y - 24} v20" stroke="#111" stroke-width="4"/>
+  <circle cx="${x - 28}" cy="${y + 20}" r="7"/><circle cx="${x + 28}" cy="${y + 20}" r="7"/><path d="M${x - 24} ${y + 66} q24 10 48 0" fill="none" stroke="#111" stroke-width="6"/>`;
+const vamp = (x, y, s = 1) => `<g transform="translate(${x},${y}) scale(${s})"><path d="M-130 220 L-60 60 L0 110 L60 60 L130 220 z" fill="#111" stroke="#111" stroke-width="6"/>
+  <path d="M-90 70 L-130 -10 L-60 40 M90 70 L130 -10 L60 40" fill="#8a1020" stroke="#111" stroke-width="6"/>
+  <ellipse cx="0" cy="10" rx="70" ry="85" fill="#eef0ea" stroke="#111" stroke-width="6"/>
+  <path d="M-72 -10 q0 -90 72 -88 q72 -2 72 88 q-30 -40 -72 -10 q-42 -30 -72 10z" fill="#111"/>
+  <path d="M-40 0 l26 8 M40 0 l-26 8" stroke="#111" stroke-width="6"/><circle cx="-26" cy="16" r="6" fill="#8a1020"/><circle cx="26" cy="16" r="6" fill="#8a1020"/>
+  <path d="M-24 50 q24 14 48 0" fill="none" stroke="#111" stroke-width="5"/><path d="M-14 54 l5 14 l5 -12 M6 56 l5 12 l5 -14" fill="#fff" stroke="#111" stroke-width="3"/></g>`;
+const row = (y, icon, name, how) => `${S(icon, 1350)}<div class="a" style="left:250px;top:${y}px;width:800px"><div style="font:bold 40px 'Liberation Sans'">${name}</div>
+  <div style="font:31px/1.2 'Liberation Serif';margin-top:4px">${how}</div></div>`;
+
+Object.assign(memes, {
+  "literary-costumes": { h: 1350, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:120px;background:#ef7d1a"></div>
+    <div class="cap" style="position:relative;text-align:center;font-size:48px;padding-top:12px;color:#111">literary halloween costumes,<br>ranked by effort</div>
+    ${S(`<path d="M60 150 V1320" stroke="#111" stroke-width="8"/><path d="M60 1335 l-22 -40 h44z" fill="#111"/>`, 1350)}
+    <div class="a sans" style="left:80px;top:140px;font-size:22px;color:#777;transform:rotate(-90deg) translate(-150px,-60px);transform-origin:left top"></div>
+    ${row(150, `<rect x="110" y="170" width="110" height="70" fill="#9aa" stroke="#111" stroke-width="5"/><path d="M120 240 v40 M210 240 v40" stroke="#111" stroke-width="6"/><path d="M150 150 l15 25 l15 -25" fill="#2c6fbb" stroke="#111" stroke-width="4"/>`,
+      "Bartleby <span style='font-weight:normal;font-size:26px'>(Melville, 1853)</span>", "wear your work clothes. whenever anyone asks you to do anything: “I would prefer not to.”")}
+    ${row(345, `<ellipse cx="165" cy="400" rx="60" ry="38" fill="#6b4a2b" stroke="#111" stroke-width="6"/><path d="M115 380 l-25 -30 M135 372 l-15 -38 M165 368 v-40 M195 372 l15 -38 M215 380 l25 -30" stroke="#111" stroke-width="5"/>`,
+      "Gregor Samsa <span style='font-weight:normal;font-size:26px'>(Kafka, 1915)</span>", "lie on your back on the floor. wave your arms a little. your family will stop visiting.")}
+    ${row(530, `<path d="M165 540 a32 32 0 1 1 0.1 0 M120 660 q0 -70 45 -70 q45 0 45 70" fill="none" stroke="#999" stroke-width="5" stroke-dasharray="10 9"/>`,
+      "The Invisible Man <span style='font-weight:normal;font-size:26px'>(H. G. Wells, 1897)</span>", "don’t come.")}
+    ${row(700, `<path d="M165 830 l-40 -90 M165 830 l0 -95 M165 830 l40 -90" stroke="#3e8e41" stroke-width="6"/><circle cx="125" cy="735" r="22" fill="#e0461f" stroke="#111" stroke-width="4"/><circle cx="165" cy="725" r="22" fill="#ffd84a" stroke="#111" stroke-width="4"/><circle cx="205" cy="735" r="22" fill="#d86fb0" stroke="#111" stroke-width="4"/>`,
+      "Mrs. Dalloway <span style='font-weight:normal;font-size:26px'>(Woolf, 1925)</span>", "go buy the flowers yourself. that’s it. that’s the costume.")}
+    ${row(880, `<path d="M120 1010 q45 -130 90 0 z" fill="#f4efe0" stroke="#111" stroke-width="5"/><circle cx="165" cy="905" r="34" fill="#fff" stroke="#111" stroke-width="5"/><path d="M165 905 v-22 M165 905 l14 8" stroke="#111" stroke-width="4"/>`,
+      "Miss Havisham <span style='font-weight:normal;font-size:26px'>(Dickens, 1861)</span>", "your old wedding dress. one shoe. stop every clock in the house at twenty to nine. stay like that for decades.")}
+    ${row(1090, `<path d="M90 1130 q55 -50 110 0 q-10 32 -50 32 q-45 0 -60 -32z" fill="#c9d6e8" stroke="#111" stroke-width="5"/><path d="M200 1130 l22 -18 v36z" fill="#c9d6e8" stroke="#111" stroke-width="5"/><path d="M150 1215 v90" stroke="#e8dcc0" stroke-width="16"/><path d="M150 1215 v90" stroke="#111" stroke-width="3" fill="none"/>`,
+      "Captain Ahab <span style='font-weight:normal;font-size:26px'>(Melville, 1851)</span>", "one leg made of whalebone. yell about a whale until the party asks you to leave. do not leave.")}` },
+
+  "frankenstein-iq-curve": { h: 1350, html: `
+    <div class="cap" style="text-align:center;font:bold 60px/1 'Liberation Serif';letter-spacing:-1px;padding-top:24px">THE FRANKENSTEIN IQ CURVE</div>
+    <div class="line" style="left:0;right:0;top:100px;height:5px"></div><div class="line" style="left:0;right:0;top:500px;height:5px"></div><div class="line" style="left:0;right:0;top:920px;height:5px"></div><div class="line" style="left:440px;top:100px;bottom:0;width:5px"></div>
+    ${S(`${head(220, 220, { hair: "bald", eyes: "dots", mouth: "grin", shirt: "#ef7d1a" })}
+      <g transform="translate(330,420)"><ellipse rx="52" ry="42" fill="#ef7d1a" stroke="#111" stroke-width="6"/><path d="M0 -42 q6 -20 18 -24" fill="none" stroke="#3e8e41" stroke-width="8"/><path d="M-22 -8 l10 -12 l10 12z M2 -8 l10 -12 l10 12z M-24 14 q24 18 48 0" fill="#111" stroke="#111" stroke-width="3"/></g>
+      ${head(220, 630, { hair: "beanie", eyes: "cry", mouth: "yell", shirt: "#3e6b4f" })}
+      ${creature(220, 1080)}`, 1350)}
+    <div class="a" style="left:470px;top:120px;right:20px"><div style="font:bold 54px 'Liberation Serif'">LOW IQ <span style="font:30px 'Liberation Serif'">| ~85</span></div>
+      <div style="font:bold 36px/1.2 'Liberation Serif';margin:8px 0 10px">"Frankenstein is the monster."</div>
+      <div style="font:26px/1.35 'Liberation Serif'">• Saw the movie.<br>• Big guy, scary.<br>• Dressed up as him in third grade.</div></div>
+    <div class="a" style="left:470px;top:515px;right:20px"><div style="font:bold 54px 'Liberation Serif'">MIDWIT <span style="font:30px 'Liberation Serif'">| ~115</span></div>
+      <div style="font:bold 31px/1.15 'Liberation Sans';color:#a8201a;margin:6px 0 10px">"ACTUALLY, FRANKENSTEIN IS THE <i>DOCTOR</i>."</div>
+      <div style="font:24px/1.32 'Liberation Serif'">• "The creature doesn't even have a name."<br>• "He reads Milton, Plutarch and Goethe."<br>• "The neck bolts aren't in the book."<br>• "Technically Victor was a student."<br>• "Have you read the 1818 text?"<br>• Says this at every Halloween party.</div></div>
+    <div class="a" style="left:470px;top:935px;right:20px"><div style="font:bold 54px 'Liberation Serif'">HIGH IQ <span style="font:30px 'Liberation Serif'">| ~145</span></div>
+      <div style="font:bold 36px/1.2 'Liberation Serif';margin:8px 0 10px">"Frankenstein is the monster."</div>
+      <div style="font:24px/1.32 'Liberation Serif'">• Victor makes a life, then runs from it.<br>• Abandons it. Lies. Lets others hang for it.<br>• <b>The name was on the right one all along.</b></div></div>` },
+
+  "unmask-raven": unmask("The raven's deep supernatural meaning", "A bird that knows one word",
+    S(`<ellipse cx="325" cy="720" rx="110" ry="125" fill="#1b1b1b" stroke="#111" stroke-width="6"/><path d="M215 720 l-90 20 l90 18z" fill="#444" stroke="#111" stroke-width="6"/>
+      <circle cx="270" cy="690" r="18" fill="#fff" stroke="#111" stroke-width="4"/><circle cx="266" cy="692" r="7"/><path d="M300 600 l20 -40 l14 42" fill="#1b1b1b" stroke="#111" stroke-width="5"/>`, 1080)
+    + `<div class="a sans" style="left:40px;top:560px;font-size:30px;color:#fff;background:#111;padding:4px 10px;transform:rotate(-5deg)">"nevermore"</div>`),
+
+  "dracula-bed": { h: 1080, html: `
+    <div class="line" style="left:538px;top:0;bottom:0;width:5px"></div>
+    <div class="a" style="left:24px;top:24px;width:490px;font:bold 40px/1.12 'Liberation Sans'">count dracula: undead nobleman, master of wolves, terror of the carpathians</div>
+    <div class="a" style="left:566px;top:24px;width:490px;font:bold 40px/1.12 'Liberation Sans'">also count dracula:</div>
+    ${S(vamp(270, 520, 1.25) + `
+      <rect x="600" y="640" width="440" height="160" fill="#f4f4f4" stroke="#111" stroke-width="6"/><rect x="600" y="800" width="440" height="40" fill="#6b4a2b" stroke="#111" stroke-width="6"/><path d="M610 840 v60 M1030 840 v60" stroke="#111" stroke-width="10"/>
+      <rect x="620" y="610" width="130" height="60" rx="25" fill="#fff" stroke="#111" stroke-width="6"/>` + vamp(860, 400, 0.9) + `
+      <path d="M760 560 q-30 30 -70 40 M960 560 q30 30 60 60" fill="none" stroke="#111" stroke-width="8"/>`)}
+    <div class="a serif" style="left:566px;top:120px;width:490px;font-size:36px;line-height:1.2">*makes the guest's bed himself, serves him dinner, drives the coach*</div>
+    <div class="a serif" style="left:566px;top:930px;width:490px;font-size:28px;color:#444">(this is really in the book. no servants. he does everything himself.)</div>
+    <div class="a sans" style="left:24px;top:960px;font-size:30px;color:#8a1020">Bram Stoker, 1897</div>` },
+});
+
+// Portrait cards: one of our drawn portraits (assets/portraits/) with a quote,
+// or, for a writer still in copyright, a line about them in our own words.
+const portrait = (name) => "data:image/jpeg;base64," + fs.readFileSync(path.join(root, "assets/portraits", name + ".jpg")).toString("base64");
+const portraitCard = (name, bg, text, by, quote = true) => ({ h: 1350, clean: true, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:1350px;background:${bg}"></div>
+    <div class="a" style="left:0;top:0;width:1080px;height:900px;background:url(${portrait(name)}) 50% 24% / 1080px auto no-repeat"></div>
+    <div class="a" style="left:54px;right:54px;top:880px;bottom:60px;background:#fbf7ee;border:6px solid #16130f;box-shadow:12px 12px 0 #16130f;padding:44px 50px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
+      <div style="font:${quote ? "italic " : ""}${text.length > 110 ? 44 : 58}px/1.22 'Liberation Serif';color:#16130f">${quote ? "“" + text + "”" : text}</div>
+      <div style="font:bold 26px/1.3 'Liberation Sans';letter-spacing:.06em;text-transform:uppercase;margin-top:26px;color:#16130f">${by}</div>
+    </div>
+    <div class="a" style="right:64px;top:28px;font:bold 22px 'Liberation Sans';letter-spacing:.14em;color:#16130f">LONGHAND LITERATURE</div>` });
+
+Object.assign(memes, {
+  "portrait-melville": portraitCard("melville", "#45b3c4", "It is not down in any map; true places never are.", "Herman Melville · Moby-Dick, 1851"),
+  "portrait-sontag": portraitCard("sontag", "#f2c230", "Susan Sontag kept a journal from the age of fourteen and read like it was oxygen. Her first book of essays, Against Interpretation, came out in 1966. She was 33.", "Susan Sontag · 1933–2004", false),
+  "portrait-sartre": portraitCard("sartre", "#ef8fa8", "In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature, and turned it down. A writer, he said, shouldn't let himself be turned into an institution.", "Jean-Paul Sartre · 1905–1980", false),
+});
+
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
 for (const [key, made] of Object.entries(memes)) {
   if (only.length && !only.includes(key)) continue;
   // A meme is its html, or { h, html } for one taller than square.
-  const { h = 1080, html } = typeof made === "string" ? { html: made } : made;
+  // Portrait cards are kept crisp ("clean"); memes get crunched.
+  const { h = 1080, html, clean } = typeof made === "string" ? { html: made } : made;
   await tab.setViewportSize({ width: 1080, height: h });
   await tab.setContent(`<!doctype html><meta charset=utf-8><style>${css}</style>${wob}<div class="m" style="height:${h}px">${html}</div>`);
   const raw = path.join(root, "assets/memes", key + ".png");
   await tab.locator(".m").screenshot({ path: raw });
-  execFileSync("python3", [path.join(root, ".github/memes/crunch.py"), raw, raw.replace(/png$/, "jpg")]);
+  if (clean) await tab.locator(".m").screenshot({ path: raw.replace(/png$/, "jpg"), type: "jpeg", quality: 92 });
+  else execFileSync("python3", [path.join(root, ".github/memes/crunch.py"), raw, raw.replace(/png$/, "jpg")]);
   fs.unlinkSync(raw);
   console.log("drew", key);
 }

@@ -177,3 +177,69 @@
       text: "capable of being in uncertainties, Mysteries, doubts, without any irritable reaching after fact & reason"
       by: John Keats · letter, December 1817
     - kind: end
+
+- id: frankenstein-diodati
+  caption: |
+    June 1816. A cold, rainy summer on Lake Geneva. Lord Byron challenges his guests: "We will each write a ghost story." Days later, eighteen-year-old Mary Godwin (soon Mary Shelley) lies awake and sees "the pale student of unhallowed arts kneeling beside the thing he had put together."
+
+    Frankenstein came out on January 1, 1818. It has never been out of print.
+
+    Both quotes are from her introduction to the 1831 edition. The almanac is at the link in our bio.
+
+    #Frankenstein #MaryShelley #Halloween #GothicLiterature #ClassicBooks #Bookstagram #SpookySeason
+  slides:
+    - kind: text
+      title: June 1816, Lake Geneva.
+      body: The summer was so cold and wet that it was called the year without a summer. Lord Byron, the poet Percy Shelley and eighteen-year-old Mary Godwin were stuck indoors at the Villa Diodati, reading ghost stories aloud.
+    - kind: quote
+      text: "We will each write a ghost story."
+      by: Lord Byron, as Mary Shelley remembered it · 1831
+    - kind: text
+      title: For days, she had nothing.
+      body: Then, one night, after the others had talked until past midnight about whether life could be made, she lay in bed with her eyes shut and couldn't sleep.
+    - kind: quote
+      text: "I saw the pale student of unhallowed arts kneeling beside the thing he had put together."
+      by: Mary Shelley, introduction to Frankenstein · 1831
+    - kind: text
+      title: She was eighteen.
+      body: Frankenstein; or, The Modern Prometheus came out on January 1, 1818, with no name on it. Byron soon gave up on his ghost story. Hers is often called the first science fiction novel.
+    - kind: end
+
+- id: halloween-shelf
+  caption: |
+    The Halloween Shelf: five classics that are still genuinely scary. Gothic castles, a haunted house, a raven, and a family poisoned down to two.
+
+    All five are on our Bookshop.org shelf, which supports independent bookstores. The link is in our bio.
+
+    #Halloween #SpookySeason #GothicLiterature #HorrorBooks #Bookstagram #ClassicBooks #Bookshop
+  slides:
+    - kind: shelf
+      title: The Halloween Shelf
+      sub: Five classics that are still genuinely scary.
+    - kind: book
+      n: "1 of 5"
+      title: Frankenstein
+      by: Mary Shelley · 1818
+      body: Written by an eighteen-year-old on a dare. Still the best book ever written about making something and running from it.
+    - kind: book
+      n: "2 of 5"
+      title: Dracula
+      by: Bram Stoker · 1897
+      body: Told in letters, diaries and newspaper clippings, like a found-footage film a century early.
+    - kind: book
+      n: "3 of 5"
+      title: The Fall of the House of Usher
+      by: Edgar Allan Poe · 1839
+      body: A crumbling house, a sick twin, a crack running down the wall. Poe's tales, including "The Raven," in one book.
+    - kind: book
+      n: "4 of 5"
+      title: The Haunting of Hill House
+      by: Shirley Jackson · 1959
+      body: The haunted-house novel every haunted-house story since has been trying to be.
+    - kind: book
+      n: "5 of 5"
+      title: We Have Always Lived in the Castle
+      by: Shirley Jackson · 1962
+      body: Two sisters, a big house, and the arsenic in the sugar bowl. Jackson's last finished novel, and her best.
+    - kind: end
+      lines: ["Save this for Halloween night", "Send it to someone who loves a scare", "All five are at the link in our bio"]

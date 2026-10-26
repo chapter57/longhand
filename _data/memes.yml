@@ -67,26 +67,73 @@
 
 # Memes about books in general, not tied to a day. Post one by hand: Actions →
 # Post the almanac → Run workflow, choose "meme" and type its id. They link
-# to the front page.
+# to the front page. Those marked "pool: true" also fill the afternoon post,
+# in rotation, on days that have no meme of their own.
 
 - id: well-read-quadrant
+  pool: true
   height: 1350
   caption: "Be honest: which corner are you in?"
   alt: "Homemade chart: 'How well-read you are vs. how well-read you look.' Actually well-read but looks unread: a guy in a cap with a library card owing $0.40, cracked Penguin paperbacks, drugstore glasses, 61 books read this year. Actually well-read and looks it: reads Proust in French for fun, pencil notes in every margin, owns the whole Loeb Classical Library, has read Ulysses twice. Looks unread and is: 9 hours 41 minutes of screen time, a 0 of 52 reading challenge, 'i watched the movie', last book assigned in 2011. Looks well-read but isn't: a guy in sunglasses with Infinite Jest bookmarked on page 12, shelves sorted by color, a literary magazine tote bag, 312 unread books on his Kindle."
 
 - id: reader-iq-curve
+  pool: true
   height: 1350
   caption: "The porch guy was right."
   alt: "Homemade IQ-curve meme, 'The Reader IQ Curve.' Low IQ, a smiling doodle holding a book: 'The book was good. I liked it.' Midwit, a crying doodle in a beanie: 'YOU CAN'T JUST ENJOY A BOOK,' with lines like 'The author is dead, actually' and 'Hasn't finished a novel since 2019.' High IQ, Joshua Reynolds's portrait of Samuel Johnson: 'The book was good. I liked it,' and Johnson's 1757 line, 'The only end of writing is to enable the readers better to enjoy life, or better to endure it.'"
 
 - id: unmask-russian-novel
+  pool: true
   caption: "Every single time."
   alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE GREAT RUSSIAN NOVEL.' Bottom: underneath is Dostoevsky, labeled 'A GUY IN ST. PETERSBURG WHO HASN'T SLEPT IN FOUR DAYS.'"
 
 - id: unmask-great-american-novel
+  pool: true
   caption: "Old sport, we've figured it out."
   alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE GREAT AMERICAN NOVEL.' Bottom: underneath is F. Scott Fitzgerald, labeled 'A GUY STARING AT A GREEN LIGHT ACROSS THE WATER.'"
 
 - id: unmask-literary-fiction
+  pool: true
   caption: "We've read this one. We've read all of them."
   alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'LITERARY FICTION.' Bottom: underneath is a bald doodled man in glasses and a tweed beard, labeled 'A PROFESSOR IN CONNECTICUT HAVING AN AFFAIR.'"
+
+# Halloween.
+
+- id: literary-costumes
+  height: 1350
+  caption: "Last-minute literary Halloween costumes, ranked by how much effort they take. The Invisible Man is the move."
+  alt: "Homemade chart, 'literary halloween costumes, ranked by effort,' from least to most. Bartleby (Melville, 1853): wear your work clothes; whenever anyone asks you to do anything, 'I would prefer not to.' Gregor Samsa (Kafka, 1915): lie on your back on the floor and wave your arms a little; your family will stop visiting. The Invisible Man (H. G. Wells, 1897): don't come. Mrs. Dalloway (Woolf, 1925): go buy the flowers yourself. Miss Havisham (Dickens, 1861): your old wedding dress, one shoe, stop every clock at twenty to nine and stay like that for decades. Captain Ahab (Melville, 1851): one leg made of whalebone; yell about a whale until the party asks you to leave; do not leave."
+
+- id: frankenstein-iq-curve
+  height: 1350
+  caption: "Every Halloween, the same argument. Every Halloween, the guy on the bottom wins."
+  alt: "Homemade IQ-curve meme, 'The Frankenstein IQ Curve.' Low IQ, a grinning doodle with a jack-o'-lantern: 'Frankenstein is the monster.' Midwit, a crying doodle in a beanie: 'ACTUALLY, FRANKENSTEIN IS THE DOCTOR,' with lines like 'The creature doesn't even have a name' and 'Says this at every Halloween party.' High IQ, a calm doodle of the stitched creature: 'Frankenstein is the monster. Victor makes a life, then runs from it. Abandons it. Lies. Lets others hang for it. The name was on the right one all along.'"
+
+- id: unmask-raven
+  caption: "Quoth the raven: the one word he knows."
+  alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE RAVEN'S DEEP SUPERNATURAL MEANING.' Bottom: underneath is a black bird saying 'nevermore,' labeled 'A BIRD THAT KNOWS ONE WORD.'"
+
+- id: dracula-bed
+  caption: "Dracula has no servants. In the book he drives the coach, serves Jonathan Harker's dinner, and Harker catches him making the bed. Terror of the Carpathians, fully self-employed."
+  alt: "Homemade two-panel meme. Left, a doodled vampire: 'count dracula: undead nobleman, master of wolves, terror of the carpathians.' Right, the same vampire making a bed: 'also count dracula: *makes the guest's bed himself, serves him dinner, drives the coach*' and '(this is really in the book. no servants. he does everything himself.)' Bram Stoker, 1897."
+
+# Portrait cards: our drawn portraits (assets/portraits/), with a quote, or
+# a line about a writer still in copyright.
+
+- id: portrait-melville
+  height: 1350
+  pool: true
+  caption: "\"It is not down in any map; true places never are.\" Herman Melville, Moby-Dick, 1851."
+  alt: "An ink-and-color drawing of Herman Melville, with his swept-back brown hair and full reddish beard, on a sea-blue background. Below, the quote: 'It is not down in any map; true places never are.' Herman Melville, Moby-Dick, 1851."
+
+- id: portrait-sontag
+  height: 1350
+  pool: true
+  caption: "Susan Sontag kept a journal from the age of fourteen. Her first book of essays, Against Interpretation, came out in 1966, when she was 33."
+  alt: "An ink-and-color drawing of Susan Sontag, with long black hair and her white streak, on a yellow background. Below: 'Susan Sontag kept a journal from the age of fourteen and read like it was oxygen. Her first book of essays, Against Interpretation, came out in 1966. She was 33.'"
+
+- id: portrait-sartre
+  height: 1350
+  pool: true
+  caption: "In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature and turned it down."
+  alt: "An ink-and-color drawing of Jean-Paul Sartre, in round black glasses with a pipe, on a pink background. Below: 'In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature, and turned it down. A writer, he said, shouldn't let himself be turned into an institution.'"
