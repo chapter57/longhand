@@ -90,3 +90,23 @@
 - id: unmask-literary-fiction
   caption: "We've read this one. We've read all of them."
   alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'LITERARY FICTION.' Bottom: underneath is a bald doodled man in glasses and a tweed beard, labeled 'A PROFESSOR IN CONNECTICUT HAVING AN AFFAIR.'"
+
+# Halloween.
+
+- id: literary-costumes
+  height: 1350
+  caption: "Last-minute literary Halloween costumes, ranked by how much effort they take. The Invisible Man is the move."
+  alt: "Homemade chart, 'literary halloween costumes, ranked by effort,' from least to most. Bartleby (Melville, 1853): wear your work clothes; whenever anyone asks you to do anything, 'I would prefer not to.' Gregor Samsa (Kafka, 1915): lie on your back on the floor and wave your arms a little; your family will stop visiting. The Invisible Man (H. G. Wells, 1897): don't come. Mrs. Dalloway (Woolf, 1925): go buy the flowers yourself. Miss Havisham (Dickens, 1861): your old wedding dress, one shoe, stop every clock at twenty to nine and stay like that for decades. Captain Ahab (Melville, 1851): one leg made of whalebone; yell about a whale until the party asks you to leave; do not leave."
+
+- id: frankenstein-iq-curve
+  height: 1350
+  caption: "Every Halloween, the same argument. Every Halloween, the guy on the bottom wins."
+  alt: "Homemade IQ-curve meme, 'The Frankenstein IQ Curve.' Low IQ, a grinning doodle with a jack-o'-lantern: 'Frankenstein is the monster.' Midwit, a crying doodle in a beanie: 'ACTUALLY, FRANKENSTEIN IS THE DOCTOR,' with lines like 'The creature doesn't even have a name' and 'Says this at every Halloween party.' High IQ, a calm doodle of the stitched creature: 'Frankenstein is the monster. Victor makes a life, then runs from it. Abandons it. Lies. Lets others hang for it. The name was on the right one all along.'"
+
+- id: unmask-raven
+  caption: "Quoth the raven: the one word he knows."
+  alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE RAVEN'S DEEP SUPERNATURAL MEANING.' Bottom: underneath is a black bird saying 'nevermore,' labeled 'A BIRD THAT KNOWS ONE WORD.'"
+
+- id: dracula-bed
+  caption: "Dracula has no servants. In the book he drives the coach, serves Jonathan Harker's dinner, and Harker catches him making the bed. Terror of the Carpathians, fully self-employed."
+  alt: "Homemade two-panel meme. Left, a doodled vampire: 'count dracula: undead nobleman, master of wolves, terror of the carpathians.' Right, the same vampire making a bed: 'also count dracula: *makes the guest's bed himself, serves him dinner, drives the coach*' and '(this is really in the book. no servants. he does everything himself.)' Bram Stoker, 1897."
