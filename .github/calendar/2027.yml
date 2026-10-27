@@ -7,7 +7,8 @@
 # its lead picture from Wikimedia Commons (or the Commons file named in
 # "commons", to pick a different one). .github/calendar/fetch.py downloads
 # them, with each picture's maker and license, into .github/calendar/portraits/.
-# "focus" moves the crop (CSS object-position, e.g. "50% 20%").
+# "focus" moves the crop (CSS object-position, e.g. "50% 20%"), and "zoom"
+# enlarges the picture around that point, for a face in a full-length picture.
 year: 2027
 holidays:
   "1-1": New Year's Day
@@ -46,6 +47,8 @@ months:
     days: [Langston Hughes, James Joyce, Gertrude Stein, Betty Friedan, William S. Burroughs, Ugo Foscolo, Charles Dickens, Jules Verne, Alice Walker, Bertolt Brecht, † Sylvia Plath, Judy Blume, Georges Simenon, Frederick Douglass, Art Spiegelman, Richard Ford, Chaim Potok, Toni Morrison, Carson McCullers, Richard Matheson, W. H. Auden, Edna St. Vincent Millay, Samuel Pepys, Wilhelm Grimm, Anthony Burgess, Victor Hugo, John Steinbeck, Michel de Montaigne]
   - name: March
     portrait: browning
+    focus: "50% 12%"
+    zoom: 1.6
     wiki: Elizabeth_Barrett_Browning
     color: "#ef8fa8"
     dark: "#a83d5c"
@@ -112,6 +115,8 @@ months:
     days: [Herman Melville, James Baldwin, P. D. James, Percy Bysshe Shelley, Guy de Maupassant, "Alfred, Lord Tennyson", † Rabindranath Tagore, Sara Teasdale, Tove Jansson, Jorge Amado, Alex Haley, Robert Southey, † H. G. Wells, John Galsworthy, Sir Walter Scott, Charles Bukowski, V. S. Naipaul, † Honoré de Balzac, Ogden Nash, H. P. Lovecraft, X. J. Kennedy, Dorothy Parker, Edgar Lee Masters, Jorge Luis Borges, Martin Amis, Julio Cortázar, Theodore Dreiser, Goethe, Oliver Wendell Holmes, Mary Shelley, William Saroyan]
   - name: September
     portrait: tolstoy
+    focus: "30% 14%"
+    zoom: 2.2
     wiki: Leo_Tolstoy
     color: "#d9a227"
     dark: "#7e5a00"
@@ -145,6 +150,8 @@ months:
     days: [Stephen Crane, Lady Chatterley acquitted, William Cullen Bryant, † Wilfred Owen, Ida Tarbell, Robert Musil, Albert Camus, Bram Stoker, Ivan Turgenev, † Arthur Rimbaud, Fyodor Dostoevsky · Kurt Vonnegut, Michael Ende, Robert Louis Stevenson, Moby-Dick published in America, Marianne Moore, Chinua Achebe, Joost van den Vondel, Margaret Atwood, Joanne Kyger, Don DeLillo, Voltaire, George Eliot, Paul Celan, Laurence Sterne · Carlo Collodi, Shelagh Delaney, Carroll gives Alice her book, James Agee, William Blake, Louisa May Alcott · C. S. Lewis, Mark Twain · Jonathan Swift]
   - name: December
     portrait: dickinson
+    focus: "50% 20%"
+    zoom: 1.7
     wiki: Emily_Dickinson
     color: "#b4a7d6"
     dark: "#5a4a8a"

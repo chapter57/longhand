@@ -17,11 +17,11 @@ const C = yaml.load(fs.readFileSync(DATA, "utf8")), Y = C.year;
 const font = (f) => "data:font/woff2;base64," + fs.readFileSync(`fonts/${f}`).toString("base64");
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const credits = yaml.load(fs.readFileSync(`${PICS}/credits.yml`, "utf8"));
-const focus = Object.fromEntries(C.months.map((m) => [m.portrait, m.focus || "50% 25%"]));
+const look = Object.fromEntries(C.months.map((m) => [m.portrait, { focus: m.focus || "50% 25%", zoom: m.zoom || 1 }]));
 // A portrait filling its box, cropped around the face.
 function portrait(k) {
   const f = credits[k].file, type = f.endsWith(".png") ? "png" : "jpeg";
-  return `<img src="data:image/${type};base64,${fs.readFileSync(`${PICS}/${f}`).toString("base64")}" style="object-position:${focus[k]}">`;
+  return `<img src="data:image/${type};base64,${fs.readFileSync(`${PICS}/${f}`).toString("base64")}" style="object-position:${look[k].focus};transform:scale(${look[k].zoom});transform-origin:${look[k].focus}">`;
 }
 // "Photograph by Étienne Carjat, 1872. Public domain." The date is left out when Commons has none worth printing.
 function credit(k) {
@@ -42,7 +42,8 @@ const css = `
 body{margin:0;background:#fbf7ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .page{width:1080px;height:840px;position:relative;overflow:hidden;background:#fbf7ee;page-break-after:always;color:#16130f}
 .art{display:grid;grid-template-columns:582px minmax(0,1fr)}
-.pic{height:840px;background:#16130f}
+.pic{height:840px;background:#16130f;overflow:hidden}
+.tiles>div{overflow:hidden}
 img{width:100%;height:100%;object-fit:cover;display:block}
 .cr{font:500 10px/1.4 M;letter-spacing:.04em;color:#999;margin-top:8px}
 .side{padding:66px 60px 92px 50px;display:flex;flex-direction:column}
