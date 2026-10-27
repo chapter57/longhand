@@ -79,10 +79,9 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 
 ## The wall calendar
 
-*The Longhand Almanac 2027* is a wall calendar for printing on Lulu (11 × 8.5 in, wire-bound). It has one writer a month, with an ink portrait, a quotation and a few lines, and a writer in every day of the grid. All of it is in `.github/calendar/2027.yml`. To make the print PDF (26 pages, each 11.25 × 8.75 in with bleed), draw the portraits as SVG and then build:
+*The Longhand Almanac 2027* is a wall calendar for printing on Lulu (11 × 8.5 in, wire-bound). It has one writer a month, with a portrait, a quotation and a few lines, and a writer in every day of the grid. All of it is in `.github/calendar/2027.yml`. The portraits are public-domain and Creative Commons pictures from Wikimedia Commons; the **Fetch portraits** workflow downloads them into `.github/calendar/portraits/` with each one's maker and license, which the calendar prints. To make the print PDF (26 pages, each 11.25 × 8.75 in with bleed):
 
-    node .github/portraits/draw.mjs /tmp/svg
-    PREVIEW=1 node .github/calendar/calendar.mjs .github/calendar/2027.yml /tmp/svg /tmp/calendar
+    PREVIEW=1 node .github/calendar/calendar.mjs .github/calendar/2027.yml /tmp/calendar
 
 ## What's where
 

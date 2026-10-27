@@ -3,26 +3,31 @@
 // Page order: front cover, then for each month an art page (it hangs on top)
 // and a grid page (below it), then the back cover. 26 pages.
 //
-// The portraits go in as vector SVG, so they print sharp at any size. Draw
-// them first:
-//   node .github/portraits/draw.mjs <svg-dir>
-//   node .github/calendar/calendar.mjs .github/calendar/2027.yml <svg-dir> <out-dir>
+// The portraits are pictures from Wikimedia Commons, downloaded by the Fetch
+// portraits workflow (.github/calendar/fetch.py) into .github/calendar/portraits/
+// with their makers and licenses, which are printed with them.
+//   node .github/calendar/calendar.mjs .github/calendar/2027.yml <out-dir>
 // Writes <out-dir>/longhand-almanac-<year>.pdf, plus a JPG of every page
 // (for proofing and shop listings) when PREVIEW=1.
 import { chromium } from "playwright";
 import yaml from "js-yaml";
 import fs from "fs";
-const [DATA, SVGS, OUT] = process.argv.slice(2);
+const [DATA, OUT] = process.argv.slice(2), PICS = ".github/calendar/portraits";
 const C = yaml.load(fs.readFileSync(DATA, "utf8")), Y = C.year;
 const font = (f) => "data:font/woff2;base64," + fs.readFileSync(`fonts/${f}`).toString("base64");
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
-// A portrait cropped to a box of the given shape, centered on the face.
-function portrait(k, w, h, zoom = 1) {
-  const svg = fs.readFileSync(`${SVGS}/${k}.svg`, "utf8");
-  const vh = 1350 / zoom, vw = Math.min(1080, vh * w / h), x = (1080 - vw) / 2, y = (1350 - vh) * .35;
-  // Each portrait reuses short ids (clip paths); prefix them so twelve can share a page.
-  return svg.replace(/viewBox="[^"]*" width="\d+" height="\d+"/, `viewBox="${x} ${y} ${vw} ${vh}" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"`)
-    .replace(/id="([^"]+)"/g, `id="${k}-$1"`).replace(/url\(#([^)]+)\)/g, `url(#${k}-$1)`);
+const credits = yaml.load(fs.readFileSync(`${PICS}/credits.yml`, "utf8"));
+const focus = Object.fromEntries(C.months.map((m) => [m.portrait, m.focus || "50% 25%"]));
+// A portrait filling its box, cropped around the face.
+function portrait(k) {
+  const f = credits[k].file, type = f.endsWith(".png") ? "png" : "jpeg";
+  return `<img src="data:image/${type};base64,${fs.readFileSync(`${PICS}/${f}`).toString("base64")}" style="object-position:${focus[k]}">`;
+}
+// "Photograph by Étienne Carjat, 1872. Public domain." The date is left out when Commons has none worth printing.
+function credit(k) {
+  const c = credits[k], year = (c.date || "").match(/\b(1[5-9]\d\d)\b/);
+  const artist = !c.artist || /unknown/i.test(c.artist) ? "Unknown maker" : c.artist;
+  return `${esc(artist)}${year ? `, ${year[1]}` : ""}. ${esc(c.license)}, via Wikimedia Commons`;
 }
 const DOW = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 // Bleed is 12px (0.125 in at 96px/in) on every side. The wire binding takes
@@ -37,7 +42,9 @@ const css = `
 body{margin:0;background:#fbf7ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .page{width:1080px;height:840px;position:relative;overflow:hidden;background:#fbf7ee;page-break-after:always;color:#16130f}
 .art{display:grid;grid-template-columns:582px minmax(0,1fr)}
-.pic{height:840px}
+.pic{height:840px;background:#16130f}
+img{width:100%;height:100%;object-fit:cover;display:block}
+.cr{font:500 10px/1.4 M;letter-spacing:.04em;color:#999;margin-top:8px}
 .side{padding:66px 60px 92px 50px;display:flex;flex-direction:column}
 .k{font:500 15px M;letter-spacing:.2em}
 h1{font:600 104px/1 L;margin:18px 0 30px;letter-spacing:-.02em}
@@ -56,22 +63,22 @@ h1{font:600 104px/1 L;margin:18px 0 30px;letter-spacing:-.02em}
 .c.x{background:repeating-linear-gradient(45deg,transparent 0 8px,rgba(0,0,0,.05) 8px 9px)}
 .key{display:flex;justify-content:space-between;font:500 11px M;letter-spacing:.1em;color:#777;padding-top:8px}
 .cover{background:#16130f;color:#fbf7ee}
-.tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:1fr 1fr}
+.tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:300px 300px;row-gap:240px}
 .band{position:absolute;left:0;right:0;top:300px;height:240px;background:#fbf7ee;color:#16130f;display:flex;flex-direction:column;align-items:center;justify-content:center;border-top:6px solid #16130f;border-bottom:6px solid #16130f}
 .band .t{font:600 76px/1 L;letter-spacing:-.02em}.band .s{font:500 18px M;letter-spacing:.3em;margin-top:18px}
 .back{padding:80px 120px 100px;display:flex;flex-direction:column}
 .back h3{font:600 40px L;margin:0 0 6px}.back p{font:19px/1.55 L;color:#333;margin:0 0 14px;max-width:760px}
-.cast{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 40px;font:500 13px/1.9 M;letter-spacing:.06em;margin-top:18px}
+.cast{display:grid;grid-template-columns:1fr 1fr;gap:6px 40px;font:500 11px/1.45 M;letter-spacing:.03em;margin-top:14px;color:#444}
 .back .foot{margin-top:auto;font-size:14px}
 `;
 const pages = [];
-pages.push(`<div class="page cover"><div class="tiles">${C.months.map((m) => `<div>${portrait(m.portrait, 180, 420, 1.15)}</div>`).join("")}</div>
+pages.push(`<div class="page cover"><div class="tiles">${C.months.map((m) => `<div>${portrait(m.portrait)}</div>`).join("")}</div>
   <div class="band"><div class="t">The Longhand Almanac ${Y}</div><div class="s">A WRITER FOR EVERY DAY</div></div></div>`);
 C.months.forEach((m, i) => {
-  pages.push(`<div class="page art"><div class="pic">${portrait(m.portrait, 582, 840, 1.3)}</div><div class="side">
+  pages.push(`<div class="page art"><div class="pic">${portrait(m.portrait)}</div><div class="side">
     <div class="k" style="color:${m.dark}">THE LONGHAND ALMANAC · ${Y}</div><h1 style="font-size:${[104, 104, 104, 104, 104, 104, 104, 96, 84, 76][m.name.length]}px">${m.name}</h1>
     <div class="q" style="border-color:${m.color}">${esc(m.quote).replace(" / ", "<br>")}</div><div class="by">${esc(m.by)}</div>
-    <div class="bio">${esc(m.bio)}</div><div class="foot">LONGHANDLIT.COM</div></div></div>`);
+    <div class="bio">${esc(m.bio)}</div><div class="foot">LONGHANDLIT.COM</div><div class="cr">Portrait: ${credit(m.portrait)}</div></div></div>`);
   const first = new Date(Y, i, 1).getDay(), n = new Date(Y, i + 1, 0).getDate(), rows = Math.ceil((first + n) / 7);
   let cells = "";
   for (let j = 0; j < rows * 7; j++) {
@@ -87,8 +94,8 @@ C.months.forEach((m, i) => {
 });
 pages.push(`<div class="page back"><h3>The Longhand Almanac</h3>
   <p>Longhand is a literary almanac. Every day at longhandlit.com, one new entry opens: a writer, a book, or a moment in literary history. You can read everything that came before. Tomorrow is still in the pen.</p>
-  <p>This calendar puts a writer in every day of ${Y}, and one on your wall every month. The portraits were drawn for Longhand in ink and flat color. The quotations are in the public domain or are our own translations.</p>
-  <div class="cast">${C.months.map((m) => `<div><span style="color:${m.dark}">${m.name.slice(0, 3).toUpperCase()}</span> · ${esc(m.by.split(" · ")[0])}</div>`).join("")}</div>
+  <p>This calendar puts a writer in every day of ${Y}, and one on your wall every month. The quotations are in the public domain or are our own translations. The portraits come from Wikimedia Commons:</p>
+  <div class="cast">${C.months.map((m) => `<div><span style="color:${m.dark}">${m.name.slice(0, 3).toUpperCase()}</span> · ${esc(m.by.split(" · ")[0])}: ${credit(m.portrait)} (${esc(credits[m.portrait].commons)})</div>`).join("")}</div>
   <div class="foot">LONGHANDLIT.COM · LONGHANDLIT.SUBSTACK.COM</div></div>`);
 const html = `<!doctype html><meta charset="utf-8"><style>${css}</style>${pages.join("\n")}`;
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});

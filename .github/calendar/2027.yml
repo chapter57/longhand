@@ -2,6 +2,12 @@
 # quote, a few lines), and a writer in every day of the grid. "†" means the
 # writer died that day; anything else is a birthday or a book's anniversary.
 # Quotes are all public domain or our own translations.
+#
+# Portraits: "wiki" is the writer's Wikipedia article, and the calendar uses
+# its lead picture from Wikimedia Commons (or the Commons file named in
+# "commons", to pick a different one). .github/calendar/fetch.py downloads
+# them, with each picture's maker and license, into .github/calendar/portraits/.
+# "focus" moves the crop (CSS object-position, e.g. "50% 20%").
 year: 2027
 holidays:
   "1-1": New Year's Day
@@ -18,6 +24,7 @@ holidays:
 months:
   - name: January
     portrait: poe
+    wiki: Edgar_Allan_Poe
     color: "#8e7cc3"
     dark: "#4b3d82"
     tint: "#ece8f6"
@@ -28,6 +35,7 @@ months:
     days: [J. D. Salinger, Isaac Asimov, J. R. R. Tolkien, Jacob Grimm, Umberto Eco, Kahlil Gibran, Zora Neale Hurston, Wilkie Collins, Simone de Beauvoir, Robinson Jeffers, William James, Jack London, † James Joyce, John Dos Passos, Molière, Susan Sontag, Anne Brontë, A. A. Milne, Edgar Allan Poe, Joy Adamson, † George Orwell, Lord Byron, Stendhal, Edith Wharton, Virginia Woolf · Robert Burns, Philip José Farmer, Lewis Carroll, Colette, Anton Chekhov, Richard Brautigan, Norman Mailer]
   - name: February
     portrait: dickens
+    wiki: Charles_Dickens
     color: "#5fa35a"
     dark: "#2f6a2b"
     tint: "#e6f2e4"
@@ -38,6 +46,7 @@ months:
     days: [Langston Hughes, James Joyce, Gertrude Stein, Betty Friedan, William S. Burroughs, Ugo Foscolo, Charles Dickens, Jules Verne, Alice Walker, Bertolt Brecht, † Sylvia Plath, Judy Blume, Georges Simenon, Frederick Douglass, Art Spiegelman, Richard Ford, Chaim Potok, Toni Morrison, Carson McCullers, Richard Matheson, W. H. Auden, Edna St. Vincent Millay, Samuel Pepys, Wilhelm Grimm, Anthony Burgess, Victor Hugo, John Steinbeck, Michel de Montaigne]
   - name: March
     portrait: browning
+    wiki: Elizabeth_Barrett_Browning
     color: "#ef8fa8"
     dark: "#a83d5c"
     tint: "#fbe7ed"
@@ -48,6 +57,7 @@ months:
     days: [Ralph Ellison, Dr. Seuss, Edward Thomas, Alan Sillitoe, Pier Paolo Pasolini, Elizabeth Barrett Browning · Gabriel García Márquez, Bret Easton Ellis, Kenneth Grahame, Mickey Spillane, † Mikhail Bulgakov, Douglas Adams, Jack Kerouac, Hugh Walpole, Horton Foote, Lady Gregory, Alice Hoffman, Kate Greenaway, Wilfred Owen, Philip Roth, Henrik Ibsen, World Poetry Day, Billy Collins, † Stendhal, Lawrence Ferlinghetti, Flannery O'Connor, Robert Frost · Tennessee Williams, Budd Schulberg, Mario Vargas Llosa, Ernst Jünger, Paul Verlaine, Octavio Paz]
   - name: April
     portrait: shakespeare
+    wiki: William_Shakespeare
     color: "#f2c230"
     dark: "#8a6a00"
     tint: "#fdf3d2"
@@ -58,6 +68,7 @@ months:
     days: [Nikolai Gogol, Hans Christian Andersen, Washington Irving, Maya Angelou, Algernon Swinburne, † Isaac Asimov, William Wordsworth, Barbara Kingsolver, Charles Baudelaire, Joseph Pulitzer, † Kurt Vonnegut, Beverly Cleary, Samuel Beckett · Eudora Welty, † Simone de Beauvoir, Henry James, Kingsley Amis, Isak Dinesen, Richard Harding Davis, † Lord Byron, † Bram Stoker, Charlotte Brontë, Vladimir Nabokov, William Shakespeare, Robert Penn Warren, Walter de la Mare, Bernard Malamud, Mary Wollstonecraft, Harper Lee, C. P. Cavafy, Annie Dillard]
   - name: May
     portrait: whitman
+    wiki: Walt_Whitman
     color: "#9bc53d"
     dark: "#4f6e10"
     tint: "#eef6dc"
@@ -68,6 +79,7 @@ months:
     days: [Joseph Heller, Novalis, Niccolò Machiavelli, Amos Oz, Søren Kierkegaard, † Henry David Thoreau, Robert Browning · Rabindranath Tagore, Thomas Pynchon, J. M. Barrie, Barbara Taylor Bradford, Stanley Elkin, Edward Lear, Daphne du Maurier, † August Strindberg, L. Frank Baum, Adrienne Rich, Dorothy Richardson, Bertrand Russell, Lorraine Hansberry, Honoré de Balzac, Alexander Pope, Arthur Conan Doyle, Margaret Fuller, Joseph Brodsky, Ralph Waldo Emerson · Raymond Carver, † Samuel Pepys, Dashiell Hammett, Walker Percy, G. K. Chesterton, Countee Cullen, Walt Whitman]
   - name: June
     portrait: lorca
+    wiki: Federico_García_Lorca
     color: "#f08a24"
     dark: "#9a4a00"
     tint: "#fde9d4"
@@ -78,6 +90,7 @@ months:
     days: [John Masefield, Thomas Hardy, Allen Ginsberg, † Giacomo Casanova, Federico García Lorca, Alexander Pushkin · Thomas Mann, Gwendolyn Brooks, Marguerite Yourcenar, † Charles Dickens, Saul Bellow, Ben Jonson, Anne Frank, W. B. Yeats, Harriet Beecher Stowe, Magna Carta sealed, Bloomsday, John Hersey, Ivan Goncharov, Blaise Pascal, Lillian Hellman, Jean-Paul Sartre, Erich Maria Remarque, Anna Akhmatova, Ambrose Bierce, George Orwell, Pearl S. Buck, Frank O'Hara, Jean-Jacques Rousseau, Antoine de Saint-Exupéry, Czesław Miłosz]
   - name: July
     portrait: kafka
+    wiki: Franz_Kafka
     color: "#7fd1c0"
     dark: "#1f7a68"
     tint: "#e5f6f2"
@@ -88,6 +101,7 @@ months:
     days: [George Sand, Hermann Hesse, Franz Kafka, Nathaniel Hawthorne, Jean Cocteau, † William Faulkner, † Arthur Conan Doyle, Jean de La Fontaine, Ann Radcliffe, Marcel Proust · Alice Munro, E. B. White, Henry David Thoreau · Pablo Neruda, Wole Soyinka, Irving Stone, Iris Murdoch, Anita Brookner, S. Y. Agnon, † Jane Austen, Gottfried Keller, Petrarch, Ernest Hemingway, Emma Lazarus, Raymond Chandler, Alexandre Dumas, † Samuel Taylor Coleridge, George Bernard Shaw · Aldous Huxley, Hilaire Belloc, Gerard Manley Hopkins, Alexis de Tocqueville, Emily Brontë, Primo Levi]
   - name: August
     portrait: melville
+    wiki: Herman_Melville
     color: "#45b3c4"
     dark: "#2f6f80"
     tint: "#e3f3f5"
@@ -98,6 +112,7 @@ months:
     days: [Herman Melville, James Baldwin, P. D. James, Percy Bysshe Shelley, Guy de Maupassant, "Alfred, Lord Tennyson", † Rabindranath Tagore, Sara Teasdale, Tove Jansson, Jorge Amado, Alex Haley, Robert Southey, † H. G. Wells, John Galsworthy, Sir Walter Scott, Charles Bukowski, V. S. Naipaul, † Honoré de Balzac, Ogden Nash, H. P. Lovecraft, X. J. Kennedy, Dorothy Parker, Edgar Lee Masters, Jorge Luis Borges, Martin Amis, Julio Cortázar, Theodore Dreiser, Goethe, Oliver Wendell Holmes, Mary Shelley, William Saroyan]
   - name: September
     portrait: tolstoy
+    wiki: Leo_Tolstoy
     color: "#d9a227"
     dark: "#7e5a00"
     tint: "#f9eed4"
@@ -108,6 +123,7 @@ months:
     days: [Edgar Rice Burroughs, † J. R. R. Tolkien, Sarah Orne Jewett, Richard Wright, Arthur Koestler, Robert M. Pirsig, Edith Sitwell, Siegfried Sassoon, Leo Tolstoy, Mary Oliver, D. H. Lawrence · O. Henry, H. L. Mencken, Roald Dahl, † Dante Alighieri, Agatha Christie, Francis Parkman, William Carlos Williams · Ken Kesey, Samuel Johnson, William Golding, Upton Sinclair, H. G. Wells, Fay Weldon, † Pablo Neruda, F. Scott Fitzgerald, William Faulkner, T. S. Eliot, Louis Auchincloss, † Herman Melville, Miguel de Cervantes, Truman Capote]
   - name: October
     portrait: rimbaud
+    wiki: Arthur_Rimbaud
     color: "#e4572e"
     dark: "#9c2a0c"
     tint: "#fbe3db"
@@ -118,6 +134,7 @@ months:
     days: [Tim O'Brien, Graham Greene · Wallace Stevens, Thomas Wolfe, Anne Rice, Denis Diderot, "† Alfred, Lord Tennyson", † Edgar Allan Poe, Frank Herbert, Ivo Andrić, Harold Pinter, François Mauriac, † Anatole France, Conrad Richter, E. E. Cummings, Italo Calvino, Oscar Wilde, Arthur Miller, Heinrich von Kleist, Sir Thomas Browne, Arthur Rimbaud, Samuel Taylor Coleridge · Ursula K. Le Guin, Doris Lessing, Philip Lamantia, Denise Levertov, † Geoffrey Chaucer, Edwin Markham, Dylan Thomas · Sylvia Plath, Evelyn Waugh, James Boswell, Ezra Pound · Paul Valéry, John Keats]
   - name: November
     portrait: twain
+    wiki: Mark_Twain
     color: "#6fa8dc"
     dark: "#2a5f8f"
     tint: "#e4eef8"
@@ -128,6 +145,7 @@ months:
     days: [Stephen Crane, Lady Chatterley acquitted, William Cullen Bryant, † Wilfred Owen, Ida Tarbell, Robert Musil, Albert Camus, Bram Stoker, Ivan Turgenev, † Arthur Rimbaud, Fyodor Dostoevsky · Kurt Vonnegut, Michael Ende, Robert Louis Stevenson, Moby-Dick published in America, Marianne Moore, Chinua Achebe, Joost van den Vondel, Margaret Atwood, Joanne Kyger, Don DeLillo, Voltaire, George Eliot, Paul Celan, Laurence Sterne · Carlo Collodi, Shelagh Delaney, Carroll gives Alice her book, James Agee, William Blake, Louisa May Alcott · C. S. Lewis, Mark Twain · Jonathan Swift]
   - name: December
     portrait: dickinson
+    wiki: Emily_Dickinson
     color: "#b4a7d6"
     dark: "#5a4a8a"
     tint: "#efecf7"
