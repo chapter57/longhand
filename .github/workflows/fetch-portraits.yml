@@ -1,5 +1,6 @@
 # Downloads the almanac's portraits from Wikimedia Commons into
-# .github/instagram/portraits/, for drawing Instagram slides, and commits them
+# .github/instagram/portraits/, for drawing Instagram slides, and the wall
+# calendar's into .github/calendar/portraits/, and commits them
 # to the branch it runs on. Run it by hand from the Actions tab; it also runs
 # when this file or its script changes on a working branch.
 name: Fetch portraits
@@ -8,7 +9,7 @@ on:
   workflow_dispatch:
   push:
     branches: ["claude/**"]
-    paths: [".github/workflows/fetch-portraits.yml", ".github/scripts/fetch_portraits.py"]
+    paths: [".github/workflows/fetch-portraits.yml", ".github/scripts/fetch_portraits.py", ".github/calendar/fetch.py", ".github/calendar/*.yml"]
 
 permissions:
   contents: write
@@ -23,10 +24,11 @@ jobs:
           python-version: "3.12"
       - run: pip install pyyaml
       - run: python .github/scripts/fetch_portraits.py
+      - run: for f in .github/calendar/[0-9]*.yml; do python .github/calendar/fetch.py "$f"; done
       - name: Commit the portraits
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
-          git add .github/instagram/portraits
+          git add .github/instagram/portraits .github/calendar/portraits
           git diff --cached --quiet || git commit -m "Fetch the almanac portraits from Wikimedia Commons"
           git push
