@@ -1,0 +1,96 @@
+browning:
+  artist: ''
+  commons: File:Elizabeth_Barrett_Browning.jpg
+  date: ''
+  file: browning.jpg
+  license: Public domain
+  pictured: Elizabeth Barrett Browning
+  size: 711 wide
+dickens:
+  artist: Jeremiah Gurney
+  commons: File:Dickens_Gurney_head.jpg
+  date: between 1867 and 1868date QS:P,+1867-00-00T00:00:00Z/8,P1319,+1867-00-00T00:00:00Z/9,P1326,+1868-00-00T00:00:00Z/9
+  file: dickens.jpg
+  license: Public domain
+  pictured: Charles Dickens
+  size: 814 wide
+dickinson:
+  artist: Unknown authorUnknown author
+  commons: File:Black-white_photograph_of_Emily_Dickinson2.png
+  date: between 1846 and 1847date QS:P,+1846-00-00T00:00:00Z/8,P1319,+1846-00-00T00:00:00Z/9,P1326,+1847-00-00T00:00:00Z/9
+  file: dickinson.png
+  license: Public domain
+  pictured: Emily Dickinson
+  size: 1574 wide
+kafka:
+  artist: Unknown photographer
+  commons: File:Franz_Kafka,_1923.jpg
+  date: between 1923 and 1924date QS:P,+1923-00-00T00:00:00Z/8,P1319,+1923-00-00T00:00:00Z/9,P1326,+1924-00-00T00:00:00Z/9
+  file: kafka.jpg
+  license: Public domain
+  pictured: Franz Kafka
+  size: 1992 wide
+lorca:
+  artist: Unknown authorUnknown author
+  commons: File:Lorca_(1914).jpg
+  date: '1914'
+  file: lorca.jpg
+  license: Public domain
+  pictured: Federico García Lorca
+  size: 545 wide
+melville:
+  artist: Joseph Oriel Eaton
+  commons: File:Herman_Melville_by_Joseph_O_Eaton.jpg
+  date: May 1870date QS:P571,+1870-05-00T00:00:00Z/10
+  file: melville.jpg
+  license: Public domain
+  pictured: Herman Melville
+  size: 1461 wide
+poe:
+  artist: Unknown authorUnknown author; Restored by Yann Forget and Adam Cuerden
+  commons: File:Edgar_Allan_Poe,_circa_1849,_restored,_squared_off.jpg
+  date: 1849-06
+  file: poe.jpg
+  license: Public domain
+  pictured: Edgar Allan Poe
+  size: 1556 wide
+rimbaud:
+  artist: Étienne Carjat
+  commons: File:Rimbaud.PNG
+  date: '1872'
+  file: rimbaud.png
+  license: Public domain
+  pictured: Arthur Rimbaud
+  size: 664 wide
+shakespeare:
+  artist: Attributed to John Taylor
+  commons: File:William_Shakespeare_by_John_Taylor,_edited.jpg
+  date: '1648'
+  file: shakespeare.jpg
+  license: Public domain
+  pictured: William Shakespeare
+  size: 2400 wide
+tolstoy:
+  artist: Sergei Prokudin-Gorskii
+  commons: File:Leo_Tolstoy_1908_Portrait_(3x4_cropped).jpg
+  date: 23 May 1908date QS:P571,+1908-05-23T00:00:00Z/11
+  file: tolstoy.jpg
+  license: Public domain
+  pictured: Leo Tolstoy
+  size: 1470 wide
+twain:
+  artist: A.F. Bradley, New York
+  commons: File:Mark_Twain_by_AF_Bradley_(cropped_2).jpg
+  date: '1907'
+  file: twain.jpg
+  license: Public domain
+  pictured: Mark Twain
+  size: 683 wide
+whitman:
+  artist: George Collins Cox / Adam Cuerden
+  commons: File:Walt_Whitman_-_George_Collins_Cox.jpg
+  date: '1887'
+  file: whitman.jpg
+  license: Public domain
+  pictured: Walt Whitman
+  size: 1983 wide
