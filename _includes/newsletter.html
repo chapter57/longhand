@@ -1,0 +1,14 @@
+{%- comment -%} The newsletter signup: Substack's own form, in a box of ours.
+include.compact makes the smaller version under an almanac entry. {%- endcomment -%}
+{%- if site.newsletter != "" -%}
+<section class="newsletter{% if include.compact %} newsletter-compact{% endif %}" aria-labelledby="nl-h{% if include.compact %}-c{% endif %}">
+  <div class="newsletter-text">
+    <h2 class="{% if include.compact %}label{% else %}band-title{% endif %}" id="nl-h{% if include.compact %}-c{% endif %}">{% if include.compact %}<span>The Longhand Letter</span>{% else %}The Longhand Letter{% endif %}</h2>
+    <p>{% if include.compact %}The week's almanac, a shelf of books worth reading and a few things you won't find here, once a week. Free.{% else %}Once a week, by email: the best of the almanac, a shelf of books worth your time, and a few things you won't find on the site. It's free.{% endif %}</p>
+  </div>
+  <div class="newsletter-form">
+    <iframe src="{{ site.newsletter }}/embed" title="Subscribe to the Longhand Letter" loading="lazy" scrolling="no"></iframe>
+    <p class="fine"><a href="{{ site.newsletter }}">Read past letters on Substack</a></p>
+  </div>
+</section>
+{%- endif -%}

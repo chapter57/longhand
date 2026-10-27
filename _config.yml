@@ -27,6 +27,9 @@ bookshop_id: "130078"
 # The Longhand storefront on Bookshop.org (https://bookshop.org/shop/longhandlit).
 # When set, the front page and the Almanac page link to it as "The Almanac Shelf".
 bookshop_shop: "https://bookshop.org/shop/longhandlit"
+# The weekly newsletter on Substack; its signup box appears on the front page
+# and under each almanac entry. Leave empty to hide it.
+newsletter: "https://longhandlit.substack.com"
 web3forms_key: "7c72d9f4-af8b-4949-98fd-3433f5086676"
 
 # The site's address. The CNAME file next to this one tells GitHub Pages
