@@ -15,6 +15,7 @@ import fs from "fs";
 const [DATA, OUT] = process.argv.slice(2), PICS = ".github/calendar/portraits";
 const C = yaml.load(fs.readFileSync(DATA, "utf8")), Y = C.year;
 const font = (f) => "data:font/woff2;base64," + fs.readFileSync(`fonts/${f}`).toString("base64");
+const logo = "data:image/png;base64," + fs.readFileSync("assets/brand/logo-light-1000.png").toString("base64");
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const credits = yaml.load(fs.readFileSync(`${PICS}/credits.yml`, "utf8"));
 const look = Object.fromEntries(C.months.map((m) => [m.portrait, { focus: m.focus || "50% 25%", zoom: m.zoom || 1 }]));
@@ -65,16 +66,20 @@ h1{font:600 104px/1 L;margin:18px 0 30px;letter-spacing:-.02em}
 .key{display:flex;justify-content:space-between;font:500 11px M;letter-spacing:.1em;color:#777;padding-top:8px}
 .cover{background:#16130f;color:#fbf7ee}
 .tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:300px 300px;row-gap:240px}
-.band{position:absolute;left:0;right:0;top:300px;height:240px;background:#fbf7ee;color:#16130f;display:flex;flex-direction:column;align-items:center;justify-content:center;border-top:6px solid #16130f;border-bottom:6px solid #16130f}
-.band .t{font:600 76px/1 L;letter-spacing:-.02em}.band .s{font:500 18px M;letter-spacing:.3em;margin-top:18px}
-.back{padding:80px 120px 100px;display:flex;flex-direction:column}
+.band{position:absolute;left:0;right:0;top:300px;height:240px;background:#fbf7ee;color:#16130f;display:flex;align-items:center;justify-content:center;gap:34px;border-top:6px solid #16130f;border-bottom:6px solid #16130f}
+.band img{width:150px;height:150px}
+.band .t{font:600 58px/1 L;letter-spacing:-.02em;white-space:nowrap}.band .s{font:500 16px M;letter-spacing:.3em;margin-top:16px}
+.band .p{font:500 12px M;letter-spacing:.3em;margin-top:12px;color:#2F4F78}
+.back{padding:64px 120px 72px;display:flex;flex-direction:column}
 .back h3{font:600 40px L;margin:0 0 6px}.back p{font:19px/1.55 L;color:#333;margin:0 0 14px;max-width:760px}
 .cast{display:grid;grid-template-columns:1fr 1fr;gap:6px 40px;font:500 11px/1.45 M;letter-spacing:.03em;margin-top:14px;color:#444}
-.back .foot{margin-top:auto;font-size:14px}
+.imprint{margin-top:auto;display:flex;align-items:center;gap:20px}
+.imprint img{width:84px;height:84px}
+.imprint b{display:block;font:600 22px L}.imprint span{display:block;font:500 12px/1.7 M;letter-spacing:.12em;color:#666}
 `;
 const pages = [];
 pages.push(`<div class="page cover"><div class="tiles">${C.months.map((m) => `<div>${portrait(m.portrait)}</div>`).join("")}</div>
-  <div class="band"><div class="t">The Longhand Almanac ${Y}</div><div class="s">A WRITER FOR EVERY DAY</div></div></div>`);
+  <div class="band"><img src="${logo}"><div><div class="t">The Longhand Almanac ${Y}</div><div class="s">A WRITER FOR EVERY DAY</div><div class="p">LONGHAND PUBLISHING</div></div></div></div>`);
 C.months.forEach((m, i) => {
   pages.push(`<div class="page art"><div class="pic">${portrait(m.portrait)}</div><div class="side">
     <div class="k" style="color:${m.dark}">THE LONGHAND ALMANAC · ${Y}</div><h1 style="font-size:${[104, 104, 104, 104, 104, 104, 104, 96, 84, 76][m.name.length]}px">${m.name}</h1>
@@ -97,7 +102,7 @@ pages.push(`<div class="page back"><h3>The Longhand Almanac</h3>
   <p>Longhand is a literary almanac. Every day at longhandlit.com, one new entry opens: a writer, a book, or a moment in literary history. You can read everything that came before. Tomorrow is still in the pen.</p>
   <p>This calendar puts a writer in every day of ${Y}, and one on your wall every month. The quotations are in the public domain or are our own translations. The portraits come from Wikimedia Commons:</p>
   <div class="cast">${C.months.map((m) => `<div><span style="color:${m.dark}">${m.name.slice(0, 3).toUpperCase()}</span> · ${esc(m.by.split(" · ")[0])}: ${credit(m.portrait)} (${esc(credits[m.portrait].commons)})</div>`).join("")}</div>
-  <div class="foot">LONGHANDLIT.COM · LONGHANDLIT.SUBSTACK.COM</div></div>`);
+  <div class="imprint"><img src="${logo}"><div><b>Longhand Publishing</b><span>LONGHANDLIT.COM</span><span>CALENDAR DESIGN © ${Y - 1} LONGHAND PUBLISHING</span></div></div></div>`);
 const html = `<!doctype html><meta charset="utf-8"><style>${css}</style>${pages.join("\n")}`;
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 840 } });
