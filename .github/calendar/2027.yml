@@ -1,0 +1,138 @@
+# The Longhand Almanac 2027: a wall calendar. One writer a month (portrait,
+# quote, a few lines), and a writer in every day of the grid. "†" means the
+# writer died that day; anything else is a birthday or a book's anniversary.
+# Quotes are all public domain or our own translations.
+year: 2027
+holidays:
+  "1-1": New Year's Day
+  "1-18": Martin Luther King Jr. Day
+  "2-15": Presidents' Day
+  "5-31": Memorial Day
+  "6-19": Juneteenth
+  "7-4": Independence Day
+  "9-6": Labor Day
+  "10-11": Indigenous Peoples' Day
+  "11-11": Veterans Day
+  "11-25": Thanksgiving
+  "12-25": Christmas
+months:
+  - name: January
+    portrait: poe
+    color: "#8e7cc3"
+    dark: "#4b3d82"
+    tint: "#ece8f6"
+    day: 19
+    quote: "All that we see or seem / Is but a dream within a dream."
+    by: Edgar Allan Poe · “A Dream Within a Dream,” 1849
+    bio: Born January 19, 1809, in Boston, to a pair of traveling actors. He invented the detective story, perfected the horror story, and died at forty in Baltimore, in circumstances no one has ever explained.
+    days: [J. D. Salinger, Isaac Asimov, J. R. R. Tolkien, Jacob Grimm, Umberto Eco, Kahlil Gibran, Zora Neale Hurston, Wilkie Collins, Simone de Beauvoir, Robinson Jeffers, William James, Jack London, † James Joyce, John Dos Passos, Molière, Susan Sontag, Anne Brontë, A. A. Milne, Edgar Allan Poe, Joy Adamson, † George Orwell, Lord Byron, Stendhal, Edith Wharton, Virginia Woolf · Robert Burns, Philip José Farmer, Lewis Carroll, Colette, Anton Chekhov, Richard Brautigan, Norman Mailer]
+  - name: February
+    portrait: dickens
+    color: "#5fa35a"
+    dark: "#2f6a2b"
+    tint: "#e6f2e4"
+    day: 7
+    quote: It was the best of times, it was the worst of times.
+    by: Charles Dickens · A Tale of Two Cities, 1859
+    bio: Born February 7, 1812, in Portsmouth. At twelve he was pasting labels on bottles of boot polish in a blacking factory while his father sat in debtors' prison. He never forgot it, and neither do his readers.
+    days: [Langston Hughes, James Joyce, Gertrude Stein, Betty Friedan, William S. Burroughs, Ugo Foscolo, Charles Dickens, Jules Verne, Alice Walker, Bertolt Brecht, † Sylvia Plath, Judy Blume, Georges Simenon, Frederick Douglass, Art Spiegelman, Richard Ford, Chaim Potok, Toni Morrison, Carson McCullers, Richard Matheson, W. H. Auden, Edna St. Vincent Millay, Samuel Pepys, Wilhelm Grimm, Anthony Burgess, Victor Hugo, John Steinbeck, Michel de Montaigne]
+  - name: March
+    portrait: browning
+    color: "#ef8fa8"
+    dark: "#a83d5c"
+    tint: "#fbe7ed"
+    day: 6
+    quote: How do I love thee? Let me count the ways.
+    by: Elizabeth Barrett Browning · Sonnets from the Portuguese, 1850
+    bio: Born March 6, 1806. The most famous poet in England when Robert Browning wrote to say he loved her verses, “and I love you too.” They married in secret and ran away to Italy.
+    days: [Ralph Ellison, Dr. Seuss, Edward Thomas, Alan Sillitoe, Pier Paolo Pasolini, Elizabeth Barrett Browning · Gabriel García Márquez, Bret Easton Ellis, Kenneth Grahame, Mickey Spillane, † Mikhail Bulgakov, Douglas Adams, Jack Kerouac, Hugh Walpole, Horton Foote, Lady Gregory, Alice Hoffman, Kate Greenaway, Wilfred Owen, Philip Roth, Henrik Ibsen, World Poetry Day, Billy Collins, † Stendhal, Lawrence Ferlinghetti, Flannery O'Connor, Robert Frost · Tennessee Williams, Budd Schulberg, Mario Vargas Llosa, Ernst Jünger, Paul Verlaine, Octavio Paz]
+  - name: April
+    portrait: shakespeare
+    color: "#f2c230"
+    dark: "#8a6a00"
+    tint: "#fdf3d2"
+    day: 23
+    quote: We are such stuff / As dreams are made on.
+    by: William Shakespeare · The Tempest, 1611
+    bio: Baptized April 26, 1564, in Stratford-upon-Avon, and traditionally said to have been born on April 23, the same day of the year he died. Thirty-seven plays, 154 sonnets, and about seventeen hundred words we still use.
+    days: [Nikolai Gogol, Hans Christian Andersen, Washington Irving, Maya Angelou, Algernon Swinburne, † Isaac Asimov, William Wordsworth, Barbara Kingsolver, Charles Baudelaire, Joseph Pulitzer, † Kurt Vonnegut, Beverly Cleary, Samuel Beckett · Eudora Welty, † Simone de Beauvoir, Henry James, Kingsley Amis, Isak Dinesen, Richard Harding Davis, † Lord Byron, † Bram Stoker, Charlotte Brontë, Vladimir Nabokov, William Shakespeare, Robert Penn Warren, Walter de la Mare, Bernard Malamud, Mary Wollstonecraft, Harper Lee, C. P. Cavafy, Annie Dillard]
+  - name: May
+    portrait: whitman
+    color: "#9bc53d"
+    dark: "#4f6e10"
+    tint: "#eef6dc"
+    day: 31
+    quote: I am large, I contain multitudes.
+    by: Walt Whitman · “Song of Myself,” 1855
+    bio: Born May 31, 1819, on Long Island. When no publisher would touch Leaves of Grass, he paid for it himself and set some of the type with his own hands. He spent the rest of his life rewriting it.
+    days: [Joseph Heller, Novalis, Niccolò Machiavelli, Amos Oz, Søren Kierkegaard, † Henry David Thoreau, Robert Browning · Rabindranath Tagore, Thomas Pynchon, J. M. Barrie, Barbara Taylor Bradford, Stanley Elkin, Edward Lear, Daphne du Maurier, † August Strindberg, L. Frank Baum, Adrienne Rich, Dorothy Richardson, Bertrand Russell, Lorraine Hansberry, Honoré de Balzac, Alexander Pope, Arthur Conan Doyle, Margaret Fuller, Joseph Brodsky, Ralph Waldo Emerson · Raymond Carver, † Samuel Pepys, Dashiell Hammett, Walker Percy, G. K. Chesterton, Countee Cullen, Walt Whitman]
+  - name: June
+    portrait: lorca
+    color: "#f08a24"
+    dark: "#9a4a00"
+    tint: "#fde9d4"
+    day: 5
+    quote: Green, how I love you, green.
+    by: Federico García Lorca · “Romance sonámbulo,” 1928 (our translation)
+    bio: Born June 5, 1898, in Fuente Vaqueros, near Granada. Poet, playwright, pianist, puppeteer. He was killed at thirty-eight in the first weeks of the Spanish Civil War, and his grave has never been found.
+    days: [John Masefield, Thomas Hardy, Allen Ginsberg, † Giacomo Casanova, Federico García Lorca, Alexander Pushkin · Thomas Mann, Gwendolyn Brooks, Marguerite Yourcenar, † Charles Dickens, Saul Bellow, Ben Jonson, Anne Frank, W. B. Yeats, Harriet Beecher Stowe, Magna Carta sealed, Bloomsday, John Hersey, Ivan Goncharov, Blaise Pascal, Lillian Hellman, Jean-Paul Sartre, Erich Maria Remarque, Anna Akhmatova, Ambrose Bierce, George Orwell, Pearl S. Buck, Frank O'Hara, Jean-Jacques Rousseau, Antoine de Saint-Exupéry, Czesław Miłosz]
+  - name: July
+    portrait: kafka
+    color: "#7fd1c0"
+    dark: "#1f7a68"
+    tint: "#e5f6f2"
+    day: 3
+    quote: When Gregor Samsa woke one morning from troubled dreams, he found himself changed in his bed into a monstrous insect.
+    by: Franz Kafka · The Metamorphosis, 1915 (our translation)
+    bio: Born July 3, 1883, in Prague. He worked all day at an insurance office and wrote all night. He asked his best friend to burn everything he left behind. His friend said no.
+    days: [George Sand, Hermann Hesse, Franz Kafka, Nathaniel Hawthorne, Jean Cocteau, † William Faulkner, † Arthur Conan Doyle, Jean de La Fontaine, Ann Radcliffe, Marcel Proust · Alice Munro, E. B. White, Henry David Thoreau · Pablo Neruda, Wole Soyinka, Irving Stone, Iris Murdoch, Anita Brookner, S. Y. Agnon, † Jane Austen, Gottfried Keller, Petrarch, Ernest Hemingway, Emma Lazarus, Raymond Chandler, Alexandre Dumas, † Samuel Taylor Coleridge, George Bernard Shaw · Aldous Huxley, Hilaire Belloc, Gerard Manley Hopkins, Alexis de Tocqueville, Emily Brontë, Primo Levi]
+  - name: August
+    portrait: melville
+    color: "#45b3c4"
+    dark: "#2f6f80"
+    tint: "#e3f3f5"
+    day: 1
+    quote: It is not down in any map; true places never are.
+    by: Herman Melville · Moby-Dick, 1851
+    bio: Born August 1, 1819, in New York City. He went to sea at twenty-one, came home with a head full of whales, and wrote a book that almost nobody read in his lifetime.
+    days: [Herman Melville, James Baldwin, P. D. James, Percy Bysshe Shelley, Guy de Maupassant, "Alfred, Lord Tennyson", † Rabindranath Tagore, Sara Teasdale, Tove Jansson, Jorge Amado, Alex Haley, Robert Southey, † H. G. Wells, John Galsworthy, Sir Walter Scott, Charles Bukowski, V. S. Naipaul, † Honoré de Balzac, Ogden Nash, H. P. Lovecraft, X. J. Kennedy, Dorothy Parker, Edgar Lee Masters, Jorge Luis Borges, Martin Amis, Julio Cortázar, Theodore Dreiser, Goethe, Oliver Wendell Holmes, Mary Shelley, William Saroyan]
+  - name: September
+    portrait: tolstoy
+    color: "#d9a227"
+    dark: "#7e5a00"
+    tint: "#f9eed4"
+    day: 9
+    quote: All happy families are alike; each unhappy family is unhappy in its own way.
+    by: Leo Tolstoy · Anna Karenina, 1878
+    bio: Born September 9, 1828, at Yasnaya Polyana, the estate where he lived most of his life. He wrote two of the greatest novels ever written, then gave up his copyrights, dressed like a peasant, and made his own boots.
+    days: [Edgar Rice Burroughs, † J. R. R. Tolkien, Sarah Orne Jewett, Richard Wright, Arthur Koestler, Robert M. Pirsig, Edith Sitwell, Siegfried Sassoon, Leo Tolstoy, Mary Oliver, D. H. Lawrence · O. Henry, H. L. Mencken, Roald Dahl, † Dante Alighieri, Agatha Christie, Francis Parkman, William Carlos Williams · Ken Kesey, Samuel Johnson, William Golding, Upton Sinclair, H. G. Wells, Fay Weldon, † Pablo Neruda, F. Scott Fitzgerald, William Faulkner, T. S. Eliot, Louis Auchincloss, † Herman Melville, Miguel de Cervantes, Truman Capote]
+  - name: October
+    portrait: rimbaud
+    color: "#e4572e"
+    dark: "#9c2a0c"
+    tint: "#fbe3db"
+    day: 20
+    quote: For I is someone else.
+    by: Arthur Rimbaud · letter to Paul Demeny, 1871 (our translation)
+    bio: Born October 20, 1854, in Charleville. He wrote all of his poetry before he was twenty-one, walked away from it, and spent the rest of his short life trading coffee and guns in Africa.
+    days: [Tim O'Brien, Graham Greene · Wallace Stevens, Thomas Wolfe, Anne Rice, Denis Diderot, "† Alfred, Lord Tennyson", † Edgar Allan Poe, Frank Herbert, Ivo Andrić, Harold Pinter, François Mauriac, † Anatole France, Conrad Richter, E. E. Cummings, Italo Calvino, Oscar Wilde, Arthur Miller, Heinrich von Kleist, Sir Thomas Browne, Arthur Rimbaud, Samuel Taylor Coleridge · Ursula K. Le Guin, Doris Lessing, Philip Lamantia, Denise Levertov, † Geoffrey Chaucer, Edwin Markham, Dylan Thomas · Sylvia Plath, Evelyn Waugh, James Boswell, Ezra Pound · Paul Valéry, John Keats]
+  - name: November
+    portrait: twain
+    color: "#6fa8dc"
+    dark: "#2a5f8f"
+    tint: "#e4eef8"
+    day: 30
+    quote: All right, then, I'll go to hell.
+    by: Mark Twain · Adventures of Huckleberry Finn, 1884
+    bio: Born November 30, 1835, two weeks after Halley's Comet passed the sun. He said he came in with the comet and expected to go out with it. He died April 21, 1910, the day after it came back.
+    days: [Stephen Crane, Lady Chatterley acquitted, William Cullen Bryant, † Wilfred Owen, Ida Tarbell, Robert Musil, Albert Camus, Bram Stoker, Ivan Turgenev, † Arthur Rimbaud, Fyodor Dostoevsky · Kurt Vonnegut, Michael Ende, Robert Louis Stevenson, Moby-Dick published in America, Marianne Moore, Chinua Achebe, Joost van den Vondel, Margaret Atwood, Joanne Kyger, Don DeLillo, Voltaire, George Eliot, Paul Celan, Laurence Sterne · Carlo Collodi, Shelagh Delaney, Carroll gives Alice her book, James Agee, William Blake, Louisa May Alcott · C. S. Lewis, Mark Twain · Jonathan Swift]
+  - name: December
+    portrait: dickinson
+    color: "#b4a7d6"
+    dark: "#5a4a8a"
+    tint: "#efecf7"
+    day: 10
+    quote: Hope is the thing with feathers / That perches in the soul.
+    by: Emily Dickinson · poem 314, published 1891
+    bio: Born December 10, 1830, in Amherst, Massachusetts. Fewer than a dozen of her poems were published while she was alive. After she died, her sister found nearly eighteen hundred more in a locked chest.
+    days: [† James Baldwin, Ann Patchett, Joseph Conrad, Rainer Maria Rilke, Christina Rossetti · Joan Didion, † Anthony Trollope, Willa Cather, Horace, John Milton, Emily Dickinson, Naguib Mahfouz, Gustave Flaubert, Kenneth Patchen, Shirley Jackson, Edna O'Brien, Jane Austen, John Greenleaf Whittier, Saki, † Emily Brontë, Sandra Cisneros, † F. Scott Fitzgerald, Kenneth Rexroth, “A Visit from St. Nicholas”, Matthew Arnold, Dorothy Wordsworth, Henry Miller, Charles Olson, † Amos Oz, William Gaddis, Rudyard Kipling, James T. Fields]
