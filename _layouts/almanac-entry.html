@@ -28,6 +28,7 @@ layout: default
       <a class="piece-prev" href="{{ prev.url | relative_url }}" data-almanac-day="{{ prev.month }}-{{ prev.day }}"><span class="piece-nav-label">The day before</span><span class="piece-nav-name">{{ prev.name }}</span></a>
       <a class="piece-next" href="{{ next.url | relative_url }}" data-almanac-day="{{ next.month }}-{{ next.day }}"><span class="piece-nav-label">The day after</span><span class="piece-nav-name">{{ next.name }}</span></a>
     </nav>
+    {% include newsletter.html compact=true %}
     {%- if page.isbn %}
     <p class="fine">The bookstore link goes to Bookshop.org, which shares its profits with independent bookstores. Longhand earns a small commission on what you buy there, at no cost to you.</p>
     {%- endif %}

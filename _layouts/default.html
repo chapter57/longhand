@@ -46,6 +46,7 @@ document.documentElement.classList.add("js");
     <nav class="nav" aria-label="Main">
       <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" or page.collection == "almanac" %} aria-current="page"{% endif %}>Almanac</a>
       <a href="{{ '/reviews/' | relative_url }}"{% if page.url == "/reviews/" or page.collection == "reviews" %} aria-current="page"{% endif %}>Reviews</a>
+      {% if site.newsletter != "" %}<a href="{{ site.newsletter }}">Newsletter</a>{% endif %}
       <a href="{{ '/#contact' | relative_url }}">Write to us</a>
     </nav>
   </div>
@@ -63,6 +64,7 @@ document.documentElement.classList.add("js");
       <li><a href="{{ '/write/' | relative_url }}">The writing app</a></li>
       <li><a href="{{ '/almanac/' | relative_url }}">The Almanac</a></li>
       <li><a href="{{ '/reviews/' | relative_url }}">Reviews</a></li>
+      {% if site.newsletter != "" %}<li><a href="{{ site.newsletter }}">The Longhand Letter</a></li>{% endif %}
       <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
     </ul>
     <p class="fine">Set in Literata and IBM Plex Mono. {{ site.season }}.</p>
