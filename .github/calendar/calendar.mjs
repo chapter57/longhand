@@ -105,13 +105,16 @@ pages.push(`<div class="page back"><h3>The Longhand Almanac</h3>
   <div class="imprint"><img src="${logo}"><div><b>Longhand Publishing</b><span>LONGHANDLIT.COM</span><span>CALENDAR DESIGN © ${Y - 1} LONGHAND PUBLISHING</span></div></div></div>`);
 const html = `<!doctype html><meta charset="utf-8"><style>${css}</style>${pages.join("\n")}`;
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
-const tab = await browser.newPage({ viewport: { width: 1080, height: 840 } });
-await tab.setContent(html, { waitUntil: "load" }); await tab.evaluate(() => document.fonts.ready);
+// Each page is photographed at 300 dpi and the PDF is made of those pictures,
+// so it has no transparency or layers left in it, as Lulu asks ("flattened").
+const tab = await browser.newPage({ viewport: { width: 1080, height: 840 }, deviceScaleFactor: 300 / 96 });
+await tab.setContent(html, { waitUntil: "load", timeout: 0 }); await tab.evaluate(() => document.fonts.ready);
 fs.mkdirSync(OUT, { recursive: true });
+const shots = [];
+for (const el of await tab.locator(".page").all()) shots.push(await el.screenshot({ type: "jpeg", quality: 92 }));
+if (process.env.PREVIEW) shots.forEach((b, i) => fs.writeFileSync(`${OUT}/page-${String(i + 1).padStart(2, "0")}.jpg`, b));
+await tab.setContent(`<!doctype html><style>@page{size:11.25in 8.75in;margin:0}body{margin:0}img{display:block;width:11.25in;height:8.75in;page-break-after:always}img:last-child{page-break-after:auto}</style>`
+  + shots.map((b) => `<img src="data:image/jpeg;base64,${b.toString("base64")}">`).join(""), { waitUntil: "load", timeout: 0 });
 await tab.pdf({ path: `${OUT}/longhand-almanac-${Y}.pdf`, width: "11.25in", height: "8.75in", printBackground: true });
-if (process.env.PREVIEW) {
-  const els = await tab.locator(".page").all();
-  for (const [i, el] of els.entries()) await el.screenshot({ path: `${OUT}/page-${String(i + 1).padStart(2, "0")}.jpg`, type: "jpeg", quality: 85 });
-}
 console.log(`${pages.length} pages`);
 await browser.close();

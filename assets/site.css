@@ -417,3 +417,15 @@ a:hover > .ink-drop, a:focus-visible > .ink-drop { fill: var(--accent); transfor
 @media (prefers-reduced-motion: reduce) {
   .caret, .has-portrait .entry-portrait { animation: none; }
 }
+
+/* ---------- the wall calendar ---------- */
+.cal-hero img, .cal-gallery img, .cal-split img, .cal-promo img { display: block; width: 100%; height: auto; border-radius: 3px; }
+.cal-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(0.75rem, 2vw, 1.5rem); }
+.cal-gallery img { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); }
+.cal-split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; padding-block: clamp(1.5rem, 4vw, 2.5rem); }
+.cal-facts { padding-left: 1.1rem; line-height: 1.7; }
+.cal-promo { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: 1rem clamp(1.5rem, 4vw, 3rem); align-items: center; padding-block: clamp(1rem, 3vw, 2rem); }
+@media (max-width: 40rem) {
+  .cal-gallery, .cal-split, .cal-promo { grid-template-columns: minmax(0, 1fr); }
+  .cal-promo img { max-width: 14rem; }
+}

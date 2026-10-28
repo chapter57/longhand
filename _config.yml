@@ -30,6 +30,8 @@ bookshop_shop: "https://bookshop.org/shop/longhandlit"
 # The weekly newsletter on Substack; its signup box appears on the front page
 # and under each almanac entry. Leave empty to hide it.
 newsletter: "https://longhandlit.substack.com"
+# The wall calendar's shop page (Lulu prints and ships it).
+calendar_shop: "https://www.lulu.com/shop/longhand-lit/the-longhand-almanac-2027/paperback/product-45gv8yv.html"
 web3forms_key: "7c72d9f4-af8b-4949-98fd-3433f5086676"
 
 # The site's address. The CNAME file next to this one tells GitHub Pages

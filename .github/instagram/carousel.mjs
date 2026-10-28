@@ -99,6 +99,12 @@ function slide(s, n, total, id) {
       <div class="kick">${esc(s.kicker)}</div><h1>${esc(s.title)}</h1><div class="sub">${esc(s.sub)}</div>
       <div class="row"><div class="credit">${credit}</div><div class="swipe">Swipe →</div></div></div></div>`;
   }
+  if (s.kind === "picture") {
+    // A finished picture from the site (e.g. assets/calendar/flat-lay.jpg), with an optional line along the bottom.
+    const img = `<img src="data:image/jpeg;base64,${fs.readFileSync(path.join(root, s.file)).toString("base64")}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`;
+    const band = s.title ? `<div style="position:absolute;left:0;right:0;bottom:0;padding:44px 64px 52px;background:linear-gradient(transparent,rgba(16,14,12,.78) 38%);color:#fbf7ee"><div style="font:500 22px/1.4 M;letter-spacing:.16em;text-transform:uppercase;opacity:.85">${esc(s.kicker || "")}</div><div style="font:600 54px/1.15 L;margin-top:10px">${esc(s.title)}</div></div>` : "";
+    return `<div class="s" style="position:relative;overflow:hidden">${img}${band}</div>`;
+  }
   if (s.kind === "quote") {
     return `<div class="s quote">${top}<div class="mid"><div class="mark">“</div>
       <blockquote>${esc(s.text)}</blockquote><div class="by">${esc(s.by)}</div></div>${foot}</div>`;
