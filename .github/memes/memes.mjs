@@ -335,6 +335,152 @@ Object.assign(memes, {
   "portrait-sartre": portraitCard("sartre", "#ef8fa8", "In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature, and turned it down. A writer, he said, shouldn't let himself be turned into an institution.", "Jean-Paul Sartre · 1905–1980", false),
 });
 
+// New formats, drawn from scratch: a character sheet, a forum post, a starter
+// pack, an alignment chart, a tier list, a year-in-review card.
+const bar = (v) => `<span style="display:inline-block;width:240px;height:22px;border:3px solid #111;vertical-align:middle;background:linear-gradient(90deg,${v > 70 ? "#3e8e41" : v > 30 ? "#e3b33a" : "#c0392b"} ${v}%,#fff ${v}%)"></span>`;
+const stat = (name, v, note) => `<div style="display:flex;align-items:center;gap:18px;margin:22px 0"><div style="width:300px;font:bold 30px 'Liberation Sans'">${name}</div>${bar(v)}<div style="font:26px/1.1 'Liberation Serif';width:390px">${note}</div></div>`;
+const comment = (user, pts, text, indent = 0) => `<div style="margin:0 0 22px ${indent}px;border-left:4px solid #ccc;padding-left:18px"><div style="font:bold 24px 'Liberation Sans';color:#555">u/${user} · ${pts} points</div><div style="font:36px/1.25 'Liberation Sans';margin-top:6px">${text}</div></div>`;
+const skull = (x, y, s = 1) => `<g transform="translate(${x},${y}) scale(${s})"><path d="M-90 0 q0 -110 90 -110 q90 0 90 110 q0 40 -30 60 v40 h-120 v-40 q-30 -20 -30 -60z" fill="#f4f0e2" stroke="#111" stroke-width="7"/>
+  <ellipse cx="-38" cy="5" rx="26" ry="30"/><ellipse cx="38" cy="5" rx="26" ry="30"/><path d="M0 40 l-12 26 h24z"/><path d="M-50 100 v-20 M-25 100 v-24 M0 100 v-24 M25 100 v-24 M50 100 v-20" stroke="#111" stroke-width="5"/></g>`;
+const trumpet = (x, y) => `<g transform="translate(${x},${y}) rotate(-12)"><rect x="0" y="-12" width="200" height="24" fill="#e3b33a" stroke="#111" stroke-width="5"/><path d="M200 -12 l90 -50 v124 l-90 -50z" fill="#e3b33a" stroke="#111" stroke-width="5"/><rect x="60" y="-30" width="14" height="22" fill="#e3b33a" stroke="#111" stroke-width="4"/><rect x="90" y="-30" width="14" height="22" fill="#e3b33a" stroke="#111" stroke-width="4"/></g>`;
+const bug = (x, y, s = 1) => `<g transform="translate(${x},${y}) scale(${s})"><ellipse cx="0" cy="0" rx="200" ry="95" fill="#6b4a2b" stroke="#111" stroke-width="7"/>
+  ${[-130, -65, 0, 65, 130].map((dx) => `<path d="M${dx} -60 q0 30 0 120" stroke="#111" stroke-width="5" fill="none"/>`).join("")}
+  ${[-120, -40, 40, 120].map((dx, i) => `<path d="M${dx} -85 q${i % 2 ? 20 : -20} -60 ${i % 2 ? 50 : -50} -80" stroke="#111" stroke-width="7" fill="none"/>`).join("")}
+  <circle cx="-215" cy="-10" r="45" fill="#6b4a2b" stroke="#111" stroke-width="7"/><circle cx="-230" cy="-22" r="8" fill="#fff"/><path d="M-250 -45 q-40 -60 -80 -50 M-235 -50 q-10 -70 -60 -90" stroke="#111" stroke-width="5" fill="none"/></g>`;
+
+Object.assign(memes, {
+  "holmes-stats": { h: 1350, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:1350px;background:#1d2340"></div>
+    <div class="a" style="left:40px;top:40px;right:40px;bottom:40px;background:#f6f1df;border:6px solid #111;box-shadow:10px 10px 0 #000"></div>
+    <div class="a sans" style="left:80px;top:70px;font-size:28px;letter-spacing:.1em;color:#8a1020">CHARACTER SELECT</div>
+    <div class="a sans" style="left:80px;top:110px;font-size:62px">SHERLOCK HOLMES</div>
+    <div class="a serif" style="left:80px;top:190px;font-size:30px;color:#444">class: consulting detective · lvl 99 · 221B</div>
+    <div class="a" style="left:760px;top:70px;width:240px;height:300px;border:5px solid #111;background:#c8d6e5;overflow:hidden">${`<svg viewBox="0 0 240 300" width="240" height="300" style="filter:url(#w)">${head(120, 130, { eyes: "dots", mouth: "flat", shirt: "#6b5a45" })}
+      <path d="M40 110 q80 -110 160 0 z" fill="#a08a64" stroke="#111" stroke-width="6"/><path d="M40 110 l-30 18 M200 110 l30 18" stroke="#111" stroke-width="8"/><path d="M120 30 v-14" stroke="#111" stroke-width="6"/>
+      <path d="M140 190 q30 10 40 30 h22 v-24" fill="none" stroke="#111" stroke-width="7"/></svg>`}</div>
+    <div class="a" style="left:80px;top:400px">
+      ${stat("chemistry", 100, "profound")}
+      ${stat("sensational lit.", 100, "knows every horror of the century")}
+      ${stat("boxing, swords", 92, "expert")}
+      ${stat("violin", 85, "plays well")}
+      ${stat("british law", 70, "good, practical")}
+      ${stat("botany", 45, "poisons yes, gardening no")}
+      ${stat("politics", 12, "feeble")}
+      ${stat("literature", 0, "nil")}
+      ${stat("philosophy", 0, "nil")}
+      ${stat("astronomy", 0, "nil. learns the earth goes round the sun:")}
+    </div>
+    ${tag(180, 1110, 720, `<span style="font:italic 36px/1.25 'Liberation Serif'">"Now that I do know it I shall do my best to forget it."</span><div style="font:bold 22px 'Liberation Sans';margin-top:8px">— A Study in Scarlet, 1887. Watson really made this list.</div>`, -1.5)}` },
+
+  "ahab-aita": { h: 1350, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:1350px;background:#dae0e6"></div>
+    <div class="a" style="left:40px;top:40px;right:40px;background:#fff;border:2px solid #ccc;border-radius:8px;padding:34px 40px">
+      <div style="font:bold 24px 'Liberation Sans';color:#555">r/AITA · posted by u/OneLegCaptain · 1851</div>
+      <div style="font:bold 52px/1.15 'Liberation Sans';margin:14px 0">AITA for nailing a gold coin to the mast and making my whole crew chase the one whale that took my leg?</div>
+      <div style="font:36px/1.35 'Liberation Sans';color:#222">The crew signed on to hunt whales for oil and money. I've decided we're hunting one whale, specifically, forever. My first mate keeps calling it "madness." For the record: I'd strike the sun if it insulted me.</div>
+      <div style="font:bold 24px 'Liberation Sans';color:#878a8c;margin-top:16px">⬆ 1.8k · 💬 135 chapters · share</div>
+    </div>
+    <div class="a" style="left:40px;top:690px;right:40px;background:#fff;border:2px solid #ccc;border-radius:8px;padding:30px 40px 8px">
+      ${comment("Starbuck_FirstMate", "4.2k", "YTA. To be enraged with a dumb thing seems blasphemous.")}
+      ${comment("Ishmael", "2.9k", "Call me Ishmael. Not voting, I'm just here to explain the whale's head for 40 pages", 0)}
+      ${comment("OneLegCaptain", "-312", "thanks everyone. we sail at dawn", 40)}
+      ${comment("WhiteWhale", "9.9k", "ESH", 0)}
+    </div>` },
+
+  "samsa-mondays": `
+    <div class="a" style="left:0;top:0;width:1080px;height:1080px;background:#e9e3d1"></div>
+    ${S(`<rect x="90" y="560" width="900" height="200" fill="#f8f8f8" stroke="#111" stroke-width="7"/><rect x="90" y="760" width="900" height="50" fill="#6b4a2b" stroke="#111" stroke-width="7"/>
+      <path d="M100 810 v110 M980 810 v110" stroke="#111" stroke-width="14"/><rect x="60" y="430" width="50" height="380" fill="#6b4a2b" stroke="#111" stroke-width="7"/>
+      <rect x="120" y="500" width="200" height="90" rx="40" fill="#fff" stroke="#111" stroke-width="6"/>
+      <path d="M300 600 q300 -60 680 0 v140 h-680z" fill="#9bb7d4" stroke="#111" stroke-width="6"/>` + bug(600, 520, .9) + `
+      <g transform="translate(900,250)"><circle r="80" fill="#fff" stroke="#111" stroke-width="7"/><path d="M0 0 v-55 M0 0 v58" stroke="#111" stroke-width="8"/><path d="M-60 -80 l-30 -30 M60 -80 l30 -30" stroke="#111" stroke-width="10"/><path d="M-110 -30 l-30 -10 M110 -30 l30 -10 M-100 20 l-30 10" stroke="#e0161f" stroke-width="7"/></g>`)}
+    <div class="a sans" style="left:40px;top:40px;font-size:96px;color:#8a1020;transform:rotate(-3deg)">#GrrMondays</div>
+    <div class="a serif" style="left:50px;top:180px;width:620px;font-size:38px;line-height:1.2">gregor samsa: wakes up as a giant bug<br>also gregor samsa: <b>"oh no, I've missed the 5 o'clock train to work"</b></div>
+    <div class="a sans" style="left:830px;top:345px;font-size:30px">6:30</div>
+    <div class="a serif" style="left:40px;top:990px;font-size:28px;color:#444">Franz Kafka, The Metamorphosis, 1915. (he really does worry about work first.)</div>`,
+
+  "carraway-deceive": `
+    <div class="cap" style="padding-top:34px">nick carraway, narrator of the great gatsby, chapter 3:</div>
+    ${tag(70, 200, 940, `<span style="font:italic 46px/1.25 'Liberation Serif'">"I am one of the few honest people that I have ever known."</span>`, -1, 26)}
+    ${S(head(300, 560, { hair: "swoop", eyes: "shades", mouth: "smirk", shirt: "#e8e1c8" }) + `<path d="M420 760 l80 -110 h40 l-60 120" fill="#cfe8f2" stroke="#111" stroke-width="6"/><path d="M500 650 q20 -20 40 0" fill="none" stroke="#111" stroke-width="5"/><circle cx="520" cy="680" r="9" fill="#5a8a2f"/>
+      <path d="M180 470 l-40 -30 M420 470 l40 -30" stroke="#111" stroke-width="7"/>`)}
+    <div class="a" style="left:560px;top:430px;width:470px;font:bold 52px/1.1 'Liberation Sans'">why would I deceive you?</div>
+    <div class="a serif" style="left:560px;top:600px;width:470px;font-size:34px;line-height:1.25">*never tells the police who was driving the car*<br>*helps his cousin cheat on her husband*<br>*"old sport" x 40*</div>
+    <div class="a serif" style="left:40px;top:990px;font-size:28px;color:#444">F. Scott Fitzgerald, 1925. every unreliable narrator starts with this exact sentence.</div>`,
+
+  "yorick-doot": `
+    <div class="line" style="left:538px;top:0;bottom:0;width:5px"></div>
+    <div class="a" style="left:24px;top:24px;width:490px;font:bold 40px/1.15 'Liberation Sans'">hamlet: "alas, poor yorick! i knew him, horatio: a fellow of infinite jest"</div>
+    <div class="a" style="left:566px;top:24px;width:490px;font:bold 40px/1.15 'Liberation Sans'">yorick:</div>
+    ${S(head(270, 520, { hair: "curly", eyes: "tired", mouth: "flat", shirt: "#222" }) + `<path d="M330 760 q60 -40 110 -110" fill="none" stroke="#111" stroke-width="10"/>` + skull(450, 620, .55)
+      + skull(760, 560, 1.4) + trumpet(830, 700))}
+    <div class="a sans" style="left:640px;top:250px;font-size:96px;color:#e0461f;transform:rotate(-8deg)">doot</div>
+    <div class="a sans" style="left:800px;top:360px;font-size:96px;color:#e0461f;transform:rotate(6deg)">doot</div>
+    <div class="a serif" style="left:566px;top:990px;font-size:30px;color:#444">Shakespeare, Hamlet, act 5</div>`,
+
+  "russian-starter-pack": `
+    <div class="cap" style="padding-top:30px">"reading a russian novel" starter pack</div>
+    <div class="line" style="left:0;right:0;top:110px;height:5px"></div>
+    ${S(`<rect x="70" y="170" width="140" height="300" fill="#fffbea" stroke="#111" stroke-width="6" transform="rotate(-6 140 320)"/>
+      <path d="M95 220 h90 M95 260 h70 M95 300 h85 M95 340 h60 M95 380 h80" stroke="#666" stroke-width="5" transform="rotate(-6 140 320)"/>
+      <g transform="translate(560,330)"><path d="M-70 -120 h140 l20 160 h-180z" fill="#c9a227" stroke="#111" stroke-width="6"/><circle cy="-140" r="28" fill="#c9a227" stroke="#111" stroke-width="6"/><path d="M90 -40 h60 v30" fill="none" stroke="#111" stroke-width="8"/><rect x="-90" y="40" width="180" height="30" fill="#c9a227" stroke="#111" stroke-width="6"/></g>
+      <g transform="translate(870,320)"><path d="M-110 30 l140 -60 l10 18 l-140 60z" fill="#555" stroke="#111" stroke-width="5"/><path d="M110 30 l-140 -60 l-10 18 l140 60z" fill="#555" stroke="#111" stroke-width="5"/><circle cx="0" cy="-90" r="40" fill="#ffd36b" stroke="#111" stroke-width="5"/></g>
+      <g transform="translate(200,720)">${Array.from({ length: 12 }, (_, i) => `<path d="M${(i * 53) % 260 - 130} ${(i * 37) % 160 - 80} l0 22 M${(i * 53) % 260 - 141} ${(i * 37) % 160 - 69} l22 0" stroke="#7aa6d6" stroke-width="5"/>`).join("")}</g>
+      <g transform="translate(560,720)"><rect x="-140" y="-80" width="280" height="200" fill="#2c6fbb" stroke="#111" stroke-width="6"/><rect x="-120" y="-60" width="240" height="160" fill="none" stroke="#e3b33a" stroke-width="4"/></g>
+      <g transform="translate(880,720)"><rect x="-90" y="-60" width="180" height="110" fill="#8a1020" stroke="#111" stroke-width="6"/><path d="M-70 50 v30 M70 50 v30" stroke="#111" stroke-width="8"/><circle cx="-60" cy="90" r="22" fill="#333"/><circle cx="60" cy="90" r="22" fill="#333"/><path d="M-90 -60 h180" stroke="#111" stroke-width="10"/><path d="M90 -20 q40 -60 80 -40" fill="none" stroke="#999" stroke-width="10"/></g>`)}
+    <div class="a serif" style="left:40px;top:500px;width:260px;font-size:28px;line-height:1.15">the list of names you wrote on your bookmark</div>
+    <div class="a serif" style="left:410px;top:500px;width:300px;font-size:28px;line-height:1.15">a samovar (somebody is always making tea)</div>
+    <div class="a serif" style="left:760px;top:440px;width:280px;font-size:28px;line-height:1.15">a duel at dawn over something said at a party</div>
+    <div class="a serif" style="left:60px;top:830px;width:300px;font-size:28px;line-height:1.15">snow. so much snow.</div>
+    <div class="a serif" style="left:410px;top:870px;width:300px;font-size:28px;line-height:1.15">900 pages, 40 of them an argument about God</div>
+    <div class="a serif" style="left:770px;top:870px;width:280px;font-size:28px;line-height:1.15">a train (be careful around the train)</div>
+    <div class="a sans" style="left:40px;top:985px;font-size:34px;color:#8a1020">Rodion Romanovich Raskolnikov, also called Rodya, also Rodka, also Rodenka</div>`,
+
+  "alignment-chart": { h: 1350, html: `
+    <div class="cap" style="text-align:center;padding-top:30px">the classic literature alignment chart</div>
+    <div class="a" style="left:40px;top:130px;width:1000px;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:378px;border:5px solid #111">
+      ${[["lawful good", "Jane Eyre", "leaves the man she loves because it's the right thing to do", "#dff0d8"],
+        ["neutral good", "Ishmael", "just here to tell you about whales", "#e7f1d0"],
+        ["chaotic good", "Huck Finn", "\"All right, then, I'll go to hell.\"", "#f0f2c8"],
+        ["lawful neutral", "Javert", "chases one man for decades. it started with a loaf of bread", "#e6e6e6"],
+        ["true neutral", "Bartleby", "would prefer not to", "#f2f2f2"],
+        ["chaotic neutral", "Puck", "gives a man a donkey's head, for fun", "#efe6f5"],
+        ["lawful evil", "Uriah Heep", "so very 'umble. robs his boss blind", "#f6dcdc"],
+        ["neutral evil", "Iago", "ruins everyone's life. gives no real reason", "#f3d0d0"],
+        ["chaotic evil", "Heathcliff", "has his dead love's coffin opened, years later, to look", "#eebcbc"]]
+        .map(([al, who, why, bg]) => `<div style="border:3px solid #111;background:${bg};padding:22px;display:flex;flex-direction:column">
+          <div style="font:bold 24px 'Liberation Sans';text-transform:uppercase;letter-spacing:.06em;color:#555">${al}</div>
+          <div style="font:bold 52px/1.05 'Liberation Serif';margin-top:auto">${who}</div>
+          <div style="font:28px/1.2 'Liberation Serif';margin-top:12px;color:#222">${why}</div></div>`).join("")}
+    </div>
+    <div class="a serif" style="left:40px;top:1300px;font-size:26px;color:#555">fight us in the comments</div>` },
+
+  "dinner-tier-list": { h: 1350, html: `
+    <div class="cap" style="padding-top:30px">literary dinner guests, tier list</div>
+    <div class="a" style="left:30px;top:120px;width:1020px">
+      ${[["S", "#ff7f7f", "Mr. Fezziwig", "throws the best christmas party in London. dances all night. pays for everything."],
+        ["A", "#ffbf7f", "Mr. Darcy", "won't dance, insults you on arrival. secretly pays for your sister's wedding."],
+        ["B", "#ffdf7f", "The Mad Hatter", "it's always six o'clock, so it's always tea time. no clean cups."],
+        ["C", "#ffff7f", "Mr. Collins", "will talk about his patroness, Lady Catherine de Bourgh, for three hours."],
+        ["D", "#bfff7f", "Miss Havisham", "the cake has been on the table for decades. she's still in the dress."],
+        ["F", "#7fbfff", "Count Dracula", "\"I have dined already, and I do not sup.\" watches you eat. alone."],
+        ["F−", "#bf7fbf", "Macbeth", "sees a ghost in his own chair. his last guest of honor, the king, did not survive the night."]]
+        .map(([t, c, who, why]) => `<div style="display:flex;border:3px solid #111;margin-bottom:-3px;min-height:150px">
+          <div style="width:150px;background:${c};display:flex;align-items:center;justify-content:center;font:bold 72px 'Liberation Sans';border-right:3px solid #111">${t}</div>
+          <div style="flex:1;padding:16px 24px;background:#1f1f1f;color:#fff"><div style="font:bold 40px 'Liberation Sans'">${who}</div><div style="font:30px/1.2 'Liberation Serif';margin-top:6px;color:#ddd">${why}</div></div></div>`).join("")}
+    </div>` },
+
+  "reading-unwrapped": { h: 1350, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:1350px;background:linear-gradient(160deg,#ff5f6d,#7b2ff7 55%,#1e1e7a)"></div>
+    <div class="a sans" style="left:70px;top:70px;font-size:34px;color:#fff;letter-spacing:.08em">YOUR 2026 READING, UNWRAPPED</div>
+    <div class="a sans" style="left:70px;top:130px;width:940px;font-size:84px;line-height:1;color:#fff">you had a big year (buying books)</div>
+    <div class="a" style="left:70px;top:380px;width:940px;color:#fff">
+      ${[["books bought", "46"], ["books finished", "7"], ["top genre", "\"i'll get to it\""], ["minutes in bookstores", "9,871"], ["minutes reading", "412"], ["most rewatched adaptation", "Pride & Prejudice (2005), 11x"], ["book on the nightstand since March", "still there"]]
+        .map(([k, v]) => `<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid rgba(255,255,255,.5);padding:20px 0"><span style="font:34px 'Liberation Sans'">${k}</span><span style="font:bold 46px 'Liberation Sans'">${v}</span></div>`).join("")}
+    </div>
+    <div class="a sans" style="left:70px;top:1230px;font-size:30px;color:#fff">you're in the top 1% of people who own two copies of the same book</div>` },
+});
+
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
 for (const [key, made] of Object.entries(memes)) {
