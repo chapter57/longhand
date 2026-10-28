@@ -117,6 +117,57 @@
   caption: "Dracula has no servants. In the book he drives the coach, serves Jonathan Harker's dinner, and Harker catches him making the bed. Terror of the Carpathians, fully self-employed."
   alt: "Homemade two-panel meme. Left, a doodled vampire: 'count dracula: undead nobleman, master of wolves, terror of the carpathians.' Right, the same vampire making a bed: 'also count dracula: *makes the guest's bed himself, serves him dinner, drives the coach*' and '(this is really in the book. no servants. he does everything himself.)' Bram Stoker, 1897."
 
+# New formats (a character sheet, a forum post, a starter pack, an alignment
+# chart, a tier list), drawn from scratch.
+
+- id: holmes-stats
+  pool: true
+  height: 1350
+  caption: "Sherlock Holmes, character select. In A Study in Scarlet, Watson really does write up a list of what Holmes knows: Chemistry, profound. Literature, nil. Astronomy, nil. When Watson tells him the earth goes round the sun, Holmes says he'll try to forget it."
+  alt: "Homemade video-game character sheet: 'Character select: Sherlock Holmes. Class: consulting detective, level 99, 221B,' with a doodle of Holmes in a deerstalker and pipe. Stat bars: chemistry, profound; sensational literature, knows every horror of the century; boxing and swords, expert; violin, plays well; British law, good, practical; botany, poisons yes, gardening no; politics, feeble; literature, nil; philosophy, nil; astronomy, nil, learns the earth goes round the sun. A sticker: 'Now that I do know it I shall do my best to forget it.' A Study in Scarlet, 1887."
+
+- id: ahab-aita
+  pool: true
+  height: 1350
+  caption: "Captain Ahab would like the internet's opinion. (Starbuck's comment is nearly word for word from Moby-Dick. So is the bit about the sun.)"
+  alt: "Homemade forum post, 'r/AITA, posted by u/OneLegCaptain, 1851': 'AITA for nailing a gold coin to the mast and making my whole crew chase the one whale that took my leg? The crew signed on to hunt whales for oil and money. I've decided we're hunting one whale, specifically, forever. My first mate keeps calling it madness. For the record: I'd strike the sun if it insulted me.' 135 chapters of comments. Starbuck_FirstMate: 'YTA. To be enraged with a dumb thing seems blasphemous.' Ishmael: 'Call me Ishmael. Not voting, I'm just here to explain the whale's head for 40 pages.' OneLegCaptain: 'thanks everyone. we sail at dawn.' WhiteWhale: 'ESH.'"
+
+- id: carraway-deceive
+  pool: true
+  caption: "Every unreliable narrator starts with this exact sentence. The Great Gatsby, 1925."
+  alt: "Homemade meme. 'Nick Carraway, narrator of The Great Gatsby, chapter 3:' over a sticker reading 'I am one of the few honest people that I have ever known.' Below, a doodled man in sunglasses with a cocktail: 'why would I deceive you?' and '*never tells the police who was driving the car* *helps his cousin cheat on her husband* *\"old sport\" x 40*'."
+
+- id: yorick-doot
+  pool: true
+  caption: "Alas, poor Yorick. A fellow of infinite jest. Still."
+  alt: "Homemade two-panel meme. Left: 'Hamlet: \"Alas, poor Yorick! I knew him, Horatio: a fellow of infinite jest\"' over a doodled Hamlet holding a skull. Right: 'Yorick:' over a big doodled skull playing a trumpet, 'doot doot.' Shakespeare, Hamlet, act 5."
+
+- id: russian-starter-pack
+  pool: true
+  caption: "The Russian novel starter pack. Bring a bookmark, and a pen to write the names on it."
+  alt: "Homemade starter-pack meme, 'reading a Russian novel starter pack': doodles labeled 'the list of names you wrote on your bookmark', 'a samovar (somebody is always making tea)', 'a duel at dawn over something said at a party', 'snow. so much snow.', '900 pages, 40 of them an argument about God', and 'a train (be careful around the train)'. Along the bottom: 'Rodion Romanovich Raskolnikov, also called Rodya, also Rodka, also Rodenka.'"
+
+- id: alignment-chart
+  pool: true
+  height: 1350
+  caption: "The classic literature alignment chart. Fight us in the comments."
+  alt: "Homemade alignment chart of classic characters. Lawful good: Jane Eyre, leaves the man she loves because it's the right thing to do. Neutral good: Ishmael, just here to tell you about whales. Chaotic good: Huck Finn, 'All right, then, I'll go to hell.' Lawful neutral: Javert, chases one man for decades; it started with a loaf of bread. True neutral: Bartleby, would prefer not to. Chaotic neutral: Puck, gives a man a donkey's head, for fun. Lawful evil: Uriah Heep, so very 'umble, robs his boss blind. Neutral evil: Iago, ruins everyone's life, gives no real reason. Chaotic evil: Heathcliff, has his dead love's coffin opened, years later, to look."
+
+- id: dinner-tier-list
+  pool: true
+  height: 1350
+  caption: "Literary dinner guests, ranked. Who are you inviting? (Dracula's line is straight from the book.)"
+  alt: "Homemade tier list, 'literary dinner guests.' S: Mr. Fezziwig, throws the best Christmas party in London, dances all night, pays for everything. A: Mr. Darcy, won't dance, insults you on arrival, secretly pays for your sister's wedding. B: the Mad Hatter, it's always six o'clock, so it's always tea time, no clean cups. C: Mr. Collins, will talk about his patroness, Lady Catherine de Bourgh, for three hours. D: Miss Havisham, the cake has been on the table for decades, she's still in the dress. F: Count Dracula, 'I have dined already, and I do not sup,' watches you eat, alone. F minus: Macbeth, sees a ghost in his own chair; his last guest of honor, the king, did not survive the night."
+
+- id: samsa-mondays
+  caption: "Gregor Samsa wakes up as a giant insect, and his first worry is that he's missed his train to work. #GrrMondays, since 1915."
+  alt: "Homemade meme. '#GrrMondays' in red over a doodle of a giant brown beetle lying in a bed under a blue blanket, with an alarm clock at 6:30. 'Gregor Samsa: wakes up as a giant bug. Also Gregor Samsa: \"oh no, I've missed the 5 o'clock train to work.\"' Franz Kafka, The Metamorphosis, 1915."
+
+- id: reading-unwrapped
+  height: 1350
+  caption: "Your 2026 reading, unwrapped. Be honest: how many of the 46 are still in the bag?"
+  alt: "Homemade year-in-review card on a pink-to-purple gradient: 'Your 2026 reading, unwrapped. You had a big year (buying books).' Books bought: 46. Books finished: 7. Top genre: 'I'll get to it.' Minutes in bookstores: 9,871. Minutes reading: 412. Most rewatched adaptation: Pride & Prejudice (2005), 11 times. Book on the nightstand since March: still there. 'You're in the top 1% of people who own two copies of the same book.'"
+
 # Portrait cards: our drawn portraits (assets/portraits/), with a quote, or
 # a line about a writer still in copyright.
 
