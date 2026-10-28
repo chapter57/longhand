@@ -83,6 +83,8 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 
     PREVIEW=1 node .github/calendar/calendar.mjs .github/calendar/2027.yml /tmp/calendar
 
+`.github/calendar/mockups.mjs` then turns those page pictures into pictures of the printed calendar (hanging over a desk, lying on a table, the cover, a close look at the grid, and a link card), which are in `assets/calendar/` and used on the calendar's page at `/calendar/`, the Instagram carousel `calendar-2027` and the announcement `calendar-2027`. The shop link is `calendar_shop` in `_config.yml`.
+
 ## What's where
 
 - `index.html`: the front page: Today in the Almanac, the call for reviews, "Write to us", and the writing app at the bottom

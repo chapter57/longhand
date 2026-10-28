@@ -6,6 +6,7 @@
 #   words  a heading, big words, and a line under them
 #   quote  a quotation on the blue page
 #   end    the follow-us page
+#   picture  a finished picture ("file", from the repo), with an optional kicker and title over its foot
 - id: 10-19-browne
   slides:
     - kind: cover
@@ -243,3 +244,31 @@
       body: Two sisters, a big house, and the arsenic in the sugar bowl. Jackson's last finished novel, and her best.
     - kind: end
       lines: ["Save this for Halloween night", "Send it to someone who loves a scare", "All five are at the link in our bio"]
+
+- id: calendar-2027
+  caption: |
+    New from Longhand Publishing: The Longhand Almanac 2027, a wall calendar with a writer for every day of the year.
+
+    Twelve great writers lead the months: Poe, Dickens, Elizabeth Barrett Browning, Shakespeare, Whitman, Lorca, Kafka, Melville, Tolstoy, Rimbaud, Twain and Dickinson. Each gets a full-page portrait, one of their most famous lines, and a short account of the life behind it. And every day of the grid has a name on it: a literary birthday or anniversary for all 365.
+
+    11 × 8.5 in, wire-bound, ready to hang. The link is in our bio, or go to longhandlit.com/calendar.
+
+    #LiteraryCalendar #2027Calendar #BookLovers #Bookstagram #ClassicBooks #GiftsForReaders #Literature #Poetry
+  slides:
+    - kind: picture
+      file: assets/calendar/hanging-desk.jpg
+      kicker: New from Longhand Publishing
+      title: The Longhand Almanac 2027
+    - kind: picture
+      file: assets/calendar/cover.jpg
+    - kind: picture
+      file: assets/calendar/flat-lay.jpg
+      kicker: August · Herman Melville
+      title: A portrait, a line, and the life behind it.
+    - kind: picture
+      file: assets/calendar/grid-close.jpg
+    - kind: text
+      title: The twelve writers
+      body: Edgar Allan Poe, Charles Dickens, Elizabeth Barrett Browning, William Shakespeare, Walt Whitman, Federico García Lorca, Franz Kafka, Herman Melville, Leo Tolstoy, Arthur Rimbaud, Mark Twain and Emily Dickinson. One for every month of 2027, with hundreds more in the days between.
+    - kind: end
+      lines: ["Wall calendar, 11 × 8.5 in, wire-bound", "Get yours at the link in our bio", "longhandlit.com/calendar"]
