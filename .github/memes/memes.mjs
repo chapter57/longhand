@@ -481,6 +481,47 @@ Object.assign(memes, {
     <div class="a sans" style="left:70px;top:1230px;font-size:30px;color:#fff">you're in the top 1% of people who own two copies of the same book</div>` },
 });
 
+// "And yet a trace of the true self exists in the false self": three rows,
+// each turning into the next, and the last one is the first one again.
+const arrow = (y) => `<path d="M440 ${y} h180" stroke="#111" stroke-width="10"/><path d="M600 ${y - 26} l40 26 l-40 26z" fill="#111"/>`;
+const trace = (top, rows, bottom) => ({ h: 1350, html: `
+    <div class="a sans" style="left:0;right:0;top:12px;text-align:center;font-size:44px">${top}</div>
+    <div class="line" style="left:0;right:0;top:450px;height:5px"></div><div class="line" style="left:0;right:0;top:900px;height:5px"></div>
+    ${S(rows.map(([a, b], i) => `<g transform="translate(0,${i * 450 + (i === 1 ? 0 : 52)}) scale(${i === 1 ? 1 : .9})">${a}${arrow(240)}${b}</g>`).join(""), 1350)}
+    <div class="a sans" style="left:30px;top:916px;font-size:44px">${bottom}</div>` });
+const book = (x, y, w, h, c, t, ts = 30) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" stroke="#111" stroke-width="7"/><rect x="${x + 14}" y="${y}" width="10" height="${h}" fill="rgba(0,0,0,.25)"/><text x="${x + w / 2 + 6}" y="${y + h / 2 + 10}" text-anchor="middle" font-family="Liberation Serif" font-weight="bold" font-size="${ts}" fill="#f4e7b8">${t}</text>`;
+const bard = `<g transform="translate(220,170)"><path d="M-90 230 q0 -120 90 -120 q90 0 90 120z" fill="#e8e1c8" stroke="#111" stroke-width="6"/><ellipse cx="0" cy="40" rx="62" ry="72" fill="#fbfbf7" stroke="#111" stroke-width="6"/>
+  <path d="M-40 25 h28 M12 25 h28" stroke="#111" stroke-width="6"/><path d="M-50 70 q50 90 100 0 q-10 60 -50 70 q-40 -10 -50 -70z" fill="#ddd" stroke="#111" stroke-width="5"/><ellipse cx="0" cy="88" rx="18" ry="12" fill="#5a0f0f"/>
+  <path d="M90 130 q40 -40 10 -110 M110 130 q50 -50 20 -110 M88 20 h42" fill="none" stroke="#c9a227" stroke-width="8"/>
+  <text x="120" y="-30" font-size="56">🎶</text></g><text x="40" y="410" font-family="Liberation Serif" font-size="32">a poet sings it to a crowd</text>`;
+const scroll = (x, y) => `<g transform="translate(${x},${y})"><rect x="0" y="0" width="230" height="260" fill="#f3e3b5" stroke="#111" stroke-width="6"/><rect x="-20" y="-20" width="270" height="34" rx="16" fill="#c9a227" stroke="#111" stroke-width="6"/><rect x="-20" y="246" width="270" height="34" rx="16" fill="#c9a227" stroke="#111" stroke-width="6"/>
+  ${[40, 80, 120, 160, 200].map((yy) => `<path d="M30 ${yy} h170" stroke="#7a6a4a" stroke-width="5"/>`).join("")}</g>`;
+const phone = `<g transform="translate(790,40)"><rect x="0" y="0" width="200" height="360" rx="28" fill="#222" stroke="#111" stroke-width="6"/><rect x="14" y="30" width="172" height="300" rx="8" fill="#f2f2f2"/>
+  <rect x="44" y="60" width="112" height="112" fill="#7a3b12" stroke="#111" stroke-width="4"/><text x="100" y="128" text-anchor="middle" font-family="Liberation Serif" font-weight="bold" font-size="24" fill="#f4e7b8">ILIAD</text>
+  <text x="100" y="210" text-anchor="middle" font-family="Liberation Sans" font-weight="bold" font-size="20">audiobook</text><text x="100" y="240" text-anchor="middle" font-family="Liberation Sans" font-size="20">15 hr 4 min</text>
+  <path d="M50 280 l0 20 M70 270 l0 40 M90 262 l0 56 M110 274 l0 32 M130 266 l0 48 M150 280 l0 20" stroke="#2c6fbb" stroke-width="7"/></g>
+  <path d="M760 120 q-40 -50 -10 -90 M1020 120 q40 -50 10 -90" fill="none" stroke="#111" stroke-width="7"/><circle cx="752" cy="128" r="16"/><circle cx="1028" cy="128" r="16"/>`;
+const mag = (x, y) => `<g transform="translate(${x},${y})"><rect x="0" y="0" width="240" height="320" fill="#e6dcc2" stroke="#111" stroke-width="6"/><text x="120" y="50" text-anchor="middle" font-family="Liberation Serif" font-weight="bold" font-size="30">PART 14</text>
+  ${[90, 120, 150, 180, 210].map((yy) => `<path d="M24 ${yy} h192" stroke="#777" stroke-width="5"/>`).join("")}<text x="120" y="270" text-anchor="middle" font-family="Liberation Serif" font-style="italic" font-size="26">to be continued...</text><text x="120" y="300" text-anchor="middle" font-family="Liberation Sans" font-size="20">one shilling</text></g>`;
+const syllabus = `<g transform="translate(760,60)"><rect x="0" y="0" width="250" height="330" fill="#fff" stroke="#111" stroke-width="6" transform="rotate(4 125 165)"/><g transform="rotate(4 125 165)"><text x="125" y="50" text-anchor="middle" font-family="Liberation Sans" font-weight="bold" font-size="28">SYLLABUS</text>
+  <text x="24" y="110" font-family="Liberation Serif" font-size="24">wk 1-6: Bleak House</text><text x="24" y="150" font-family="Liberation Serif" font-size="24">(all of it)</text><text x="24" y="200" font-family="Liberation Serif" font-size="24">essay due friday</text><text x="24" y="250" font-family="Liberation Serif" font-size="24" fill="#c0392b">required reading</text></g></g>`;
+const tv = `<g transform="translate(740,50)"><rect x="0" y="0" width="290" height="210" rx="16" fill="#222" stroke="#111" stroke-width="6"/><rect x="16" y="16" width="258" height="178" fill="#1f2b44"/><text x="145" y="80" text-anchor="middle" font-family="Liberation Sans" font-weight="bold" font-size="26" fill="#fff">EPISODE 4</text>
+  <text x="145" y="120" text-anchor="middle" font-family="Liberation Sans" font-size="22" fill="#ffd36b">new episode friday</text><text x="145" y="165" text-anchor="middle" font-family="Liberation Serif" font-style="italic" font-size="24" fill="#fff">to be continued...</text>
+  <path d="M100 210 l-30 60 M190 210 l30 60" stroke="#111" stroke-width="8"/></g>`;
+
+Object.assign(memes, {
+  "trace-homer": trace("And yet a trace of the true self", [
+    [bard, scroll(760, 90)],
+    [scroll(110, 90), book(760, 50, 240, 340, "#7a3b12", "THE ILIAD", 30) + `<text x="880" y="430" text-anchor="middle" font-family="Liberation Serif" font-size="30">700 pages, read in silence</text>`],
+    [book(110, 80, 240, 330, "#7a3b12", "THE ILIAD", 30), phone],
+  ], "Exists in the False Self"),
+  "trace-dickens": trace("And yet a trace of the true self", [
+    [mag(110, 50) + `<text x="40" y="410" font-family="Liberation Serif" font-size="32">dickens, sold in monthly parts</text>`, book(760, 60, 260, 330, "#2e4a3a", "COMPLETE WORKS", 24) + `<text x="890" y="430" text-anchor="middle" font-family="Liberation Serif" font-size="32">a leather-bound classic</text>`],
+    [book(110, 60, 260, 330, "#2e4a3a", "COMPLETE WORKS", 24), syllabus],
+    [syllabus.replace("translate(760,60)", "translate(100,60)"), tv],
+  ], "Exists in the False Self"),
+});
+
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
 for (const [key, made] of Object.entries(memes)) {

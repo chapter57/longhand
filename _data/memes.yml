@@ -159,6 +159,18 @@
   caption: "Literary dinner guests, ranked. Who are you inviting? (Dracula's line is straight from the book.)"
   alt: "Homemade tier list, 'literary dinner guests.' S: Mr. Fezziwig, throws the best Christmas party in London, dances all night, pays for everything. A: Mr. Darcy, won't dance, insults you on arrival, secretly pays for your sister's wedding. B: the Mad Hatter, it's always six o'clock, so it's always tea time, no clean cups. C: Mr. Collins, will talk about his patroness, Lady Catherine de Bourgh, for three hours. D: Miss Havisham, the cake has been on the table for decades, she's still in the dress. F: Count Dracula, 'I have dined already, and I do not sup,' watches you eat, alone. F minus: Macbeth, sees a ghost in his own chair; his last guest of honor, the king, did not survive the night."
 
+- id: trace-homer
+  pool: true
+  height: 1350
+  caption: "The Iliad was made to be heard. It took about 2,700 years, but we got there."
+  alt: "Homemade three-row meme. 'And yet a trace of the true self': a doodled poet with a lyre singing to a crowd, arrow, a scroll. Then the scroll, arrow, a thick book, THE ILIAD, '700 pages, read in silence.' 'Exists in the false self': the book, arrow, a phone with headphones playing the Iliad audiobook, 15 hours 4 minutes."
+
+- id: trace-dickens
+  pool: true
+  height: 1350
+  caption: "Dickens sold his novels in monthly parts, a shilling each, every one ending on a hook. Bleak House came out in 20 of them. Same energy as waiting for Friday's episode."
+  alt: "Homemade three-row meme. 'And yet a trace of the true self': a magazine labeled 'Part 14, to be continued..., one shilling,' 'Dickens, sold in monthly parts,' arrow, a green leather-bound Complete Works, 'a leather-bound classic.' Then the Complete Works, arrow, a syllabus: 'weeks 1 to 6: Bleak House (all of it), essay due Friday, required reading.' 'Exists in the false self': the syllabus, arrow, a TV showing 'Episode 4, new episode Friday, to be continued...'"
+
 - id: samsa-mondays
   caption: "Gregor Samsa wakes up as a giant insect, and his first worry is that he's missed his train to work. #GrrMondays, since 1915."
   alt: "Homemade meme. '#GrrMondays' in red over a doodle of a giant brown beetle lying in a bed under a blue blanket, with an alarm clock at 6:30. 'Gregor Samsa: wakes up as a giant bug. Also Gregor Samsa: \"oh no, I've missed the 5 o'clock train to work.\"' Franz Kafka, The Metamorphosis, 1915."
