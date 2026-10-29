@@ -1,354 +1,528 @@
-// The Lost Pages: a little side-scroller through three books from 1904-1925,
-// all in the public domain. Plain canvas, no libraries. You run, jump, collect
-// a writer's lost pages, and dodge rejection letters and critics.
+// Mrs. Dalloway: an 8-bit game of one day in June, 1923, from Virginia Woolf's
+// novel (1925, now in the public domain). Drawn at the NES's 256 x 240, with
+// its palette, pixel sprites, pixel portraits and a pixel font, then scaled up.
+// Plain canvas and Web Audio, no libraries.
 (() => {
 "use strict";
-const W = 960, H = 540, T = 32, ROWS = 17;
+const W = 256, H = 240, T = 16, ROWS = 15;
 const cv = document.getElementById("game"), cx = cv.getContext("2d");
-const FONT = "Literata, Georgia, serif", MONO = "'IBM Plex Mono', monospace";
+cx.imageSmoothingEnabled = false;
 
-/* ---------- levels ---------- */
-// Each level is drawn on a grid of 32px tiles. "#" is ground, "=" a ledge,
-// "D" a dock board; p = page, c = critic (walks), r = rejection letter (flies),
-// E = the way out.
+/* ---------- the NES palette (the colors we use) ---------- */
+const C = {
+  k: "#000000", K: "#3c3c3c", g: "#7c7c7c", G: "#bcbcbc", w: "#fcfcfc", W: "#f8f8f8",
+  r: "#a80020", R: "#e40058", o: "#f83800", O: "#fca044", y: "#f8b800", Y: "#f8d878", b: "#503000", B: "#ac7c00",
+  n: "#881400", N: "#e45c10", e: "#007800", E: "#00b800", l: "#58d854", L: "#b8f8b8",
+  s: "#0058f8", S: "#3cbcfc", a: "#a4e4fc", u: "#4428bc", U: "#6844fc", v: "#9878f8", V: "#d8b8f8",
+  p: "#f878f8", P: "#f8b8f8", t: "#008888", T: "#00e8d8", f: "#fce0a8", F: "#f0d0b0", h: "#e09868",
+};
+
+/* ---------- a 5 x 7 pixel font ---------- */
+const GLYPHS = {
+  A: [" ### ", "#   #", "#   #", "#####", "#   #", "#   #", "#   #"], B: ["#### ", "#   #", "#   #", "#### ", "#   #", "#   #", "#### "],
+  C: [" ### ", "#   #", "#    ", "#    ", "#    ", "#   #", " ### "], D: ["#### ", "#   #", "#   #", "#   #", "#   #", "#   #", "#### "],
+  E: ["#####", "#    ", "#    ", "#### ", "#    ", "#    ", "#####"], F: ["#####", "#    ", "#    ", "#### ", "#    ", "#    ", "#    "],
+  G: [" ### ", "#   #", "#    ", "# ###", "#   #", "#   #", " ####"], H: ["#   #", "#   #", "#   #", "#####", "#   #", "#   #", "#   #"],
+  I: [" ### ", "  #  ", "  #  ", "  #  ", "  #  ", "  #  ", " ### "], J: ["  ###", "   # ", "   # ", "   # ", "   # ", "#  # ", " ##  "],
+  K: ["#   #", "#  # ", "# #  ", "##   ", "# #  ", "#  # ", "#   #"], L: ["#    ", "#    ", "#    ", "#    ", "#    ", "#    ", "#####"],
+  M: ["#   #", "## ##", "# # #", "# # #", "#   #", "#   #", "#   #"], N: ["#   #", "##  #", "# # #", "#  ##", "#   #", "#   #", "#   #"],
+  O: [" ### ", "#   #", "#   #", "#   #", "#   #", "#   #", " ### "], P: ["#### ", "#   #", "#   #", "#### ", "#    ", "#    ", "#    "],
+  Q: [" ### ", "#   #", "#   #", "#   #", "# # #", "#  # ", " ## #"], R: ["#### ", "#   #", "#   #", "#### ", "# #  ", "#  # ", "#   #"],
+  S: [" ####", "#    ", "#    ", " ### ", "    #", "    #", "#### "], T: ["#####", "  #  ", "  #  ", "  #  ", "  #  ", "  #  ", "  #  "],
+  U: ["#   #", "#   #", "#   #", "#   #", "#   #", "#   #", " ### "], V: ["#   #", "#   #", "#   #", "#   #", "#   #", " # # ", "  #  "],
+  W: ["#   #", "#   #", "#   #", "# # #", "# # #", "# # #", " # # "], X: ["#   #", "#   #", " # # ", "  #  ", " # # ", "#   #", "#   #"],
+  Y: ["#   #", "#   #", " # # ", "  #  ", "  #  ", "  #  ", "  #  "], Z: ["#####", "    #", "   # ", "  #  ", " #   ", "#    ", "#####"],
+  0: [" ### ", "#   #", "#  ##", "# # #", "##  #", "#   #", " ### "], 1: ["  #  ", " ##  ", "  #  ", "  #  ", "  #  ", "  #  ", " ### "],
+  2: [" ### ", "#   #", "    #", "   # ", "  #  ", " #   ", "#####"], 3: ["#####", "   # ", "  #  ", "   # ", "    #", "#   #", " ### "],
+  4: ["   # ", "  ## ", " # # ", "#  # ", "#####", "   # ", "   # "], 5: ["#####", "#    ", "#### ", "    #", "    #", "#   #", " ### "],
+  6: ["  ## ", " #   ", "#    ", "#### ", "#   #", "#   #", " ### "], 7: ["#####", "    #", "   # ", "  #  ", " #   ", " #   ", " #   "],
+  8: [" ### ", "#   #", "#   #", " ### ", "#   #", "#   #", " ### "], 9: [" ### ", "#   #", "#   #", " ####", "    #", "   # ", " ##  "],
+  ".": ["     ", "     ", "     ", "     ", "     ", " ##  ", " ##  "], ",": ["     ", "     ", "     ", "     ", " ##  ", "  #  ", " #   "],
+  "!": ["  #  ", "  #  ", "  #  ", "  #  ", "  #  ", "     ", "  #  "], "?": [" ### ", "#   #", "    #", "   # ", "  #  ", "     ", "  #  "],
+  "'": ["  #  ", "  #  ", " #   ", "     ", "     ", "     ", "     "], '"': [" # # ", " # # ", "     ", "     ", "     ", "     ", "     "],
+  ":": ["     ", " ##  ", " ##  ", "     ", " ##  ", " ##  ", "     "], ";": ["     ", " ##  ", " ##  ", "     ", " ##  ", "  #  ", " #   "],
+  "-": ["     ", "     ", "     ", "#####", "     ", "     ", "     "], "(": ["   # ", "  #  ", " #   ", " #   ", " #   ", "  #  ", "   # "],
+  ")": [" #   ", "  #  ", "   # ", "   # ", "   # ", "  #  ", " #   "], "/": ["    #", "   # ", "   # ", "  #  ", " #   ", " #   ", "#    "],
+  "&": [" ##  ", "#  # ", "# #  ", " #   ", "# # #", "#  # ", " ## #"], "*": [" # # ", "#####", "#####", "#####", " ### ", "  #  ", "     "],
+  "+": ["     ", "  #  ", "  #  ", "#####", "  #  ", "  #  ", "     "], " ": ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
+};
+function text(s, x, y, col = C.w, shadow = C.k) {
+  s = String(s).toUpperCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[—–]/g, "-");
+  for (const pass of shadow ? [shadow, col] : [col]) {
+    cx.fillStyle = pass; let px = x + (pass === shadow && shadow !== col ? 1 : 0), py = y + (pass === shadow && shadow !== col ? 1 : 0);
+    for (const ch of s) {
+      const g = GLYPHS[ch] || GLYPHS[" "];
+      for (let r = 0; r < 7; r++) for (let c = 0; c < 5; c++) if (g[r][c] === "#") cx.fillRect(px + c, py + r, 1, 1);
+      px += 6;
+    }
+  }
+}
+const textW = (s) => String(s).length * 6;
+const center = (s, y, col, sh) => text(s, Math.round((W - textW(s)) / 2), y, col, sh);
+function wrap(s, n) { const out = []; let line = ""; for (const w of s.split(" ")) { if ((line + w).length > n) { out.push(line.trim()); line = ""; } line += w + " "; } out.push(line.trim()); return out; }
+
+/* ---------- sprites, drawn as text ---------- */
+function sprite(rows, pal) {
+  const c = document.createElement("canvas"); c.width = rows[0].length; c.height = rows.length;
+  const g = c.getContext("2d");
+  rows.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== "." && pal[ch]) { g.fillStyle = pal[ch]; g.fillRect(x, y, 1, 1); } }));
+  return c;
+}
+const WOMAN = [
+  "......hhhh......", "....hhhhhhhh....", "...hhhhxhhhhh...", "....gggssss.....", "....ggsssks.....", "....ggsssss.....", ".....gssss......", "......sss.......",
+  ".....dwwwd......", "....dddddddd....", "...ddddddddss...", "...dddddddd.....", "....dddddd......", "....dddddd......", "....ddddddd.....", "...dddddddd.....",
+  "...ddddddddd....", "..dddddddddd....", "..DDDDDDDDDDD...", "..DDDDDDDDDDD...", "...DDDDDDDDD....",
+];
+const WOMAN_FEET = [["....s....s......", "....s....s......", "...kk...kk......"], ["....s...s.......", "...s.....s......", "..kk.....kk....."], [".....s.s........", ".....s.s........", "....kk.kk......."]];
+const MAN = [
+  ".....tttt.......", ".....tttt.......", ".....tttt.......", "....tttttt......", "...tttttttt.....", "....ssssss......", "....ssssks......", "....ssssss......",
+  "....mmmmss......", ".....ssss.......", "....cwwwwc......", "...cccwrcccc....", "..ccccwrcccccc..", "..cccccccccc....", "..ss.cccccc.....", ".....cccccc.....",
+  ".....cccccc.....", ".....pppppp.....", ".....pp..pp.....", ".....pp..pp.....", ".....pp..pp.....",
+];
+const MAN_FEET = [[".....pp..pp.....", ".....pp..pp.....", "....kkk..kkk...."], ["....pp....pp....", "...pp......pp...", "..kkk......kkk.."], [".....pp.pp......", ".....pp.pp......", "....kkkkkk......"]];
+const build = (base, feet, pal) => feet.map((f) => sprite(base.concat(f), pal));
+const PEOPLE = {
+  clarissa: build(WOMAN, WOMAN_FEET, { h: C.U, x: C.P, g: C.G, s: C.F, k: C.k, d: C.v, D: C.U, w: C.w }),
+  hugh: build(MAN, MAN_FEET, { t: C.k, s: C.F, k: C.k, m: C.F, c: C.K, w: C.w, r: C.r, p: C.g }),
+  peter: build(MAN.map((r, i) => i < 5 ? r.replace(/t/g, ".") : r).map((r, i) => i === 4 ? "....bbbbbb......" : r), MAN_FEET, { t: C.b, b: C.b, s: C.F, k: C.k, m: C.b, c: C.b, w: C.w, r: C.e, p: C.b }),
+  septimus: build(MAN.map((r, i) => i < 5 ? (i === 4 ? "....BBBBBB......" : r.replace(/t/g, ".")) : r), MAN_FEET, { B: C.B, s: C.F, k: C.k, m: C.F, c: C.g, w: C.w, r: C.K, p: C.K }),
+  rezia: build(WOMAN, WOMAN_FEET, { h: C.k, x: C.R, g: C.k, s: C.F, k: C.k, d: C.R, D: C.r, w: C.w }),
+  pym: build(WOMAN, WOMAN_FEET, { h: C.G, x: C.G, g: C.G, s: C.F, k: C.k, d: C.e, D: C.e, w: C.w }),
+  richard: build(MAN, MAN_FEET, { t: C.K, s: C.F, k: C.k, m: C.g, c: C.k, w: C.w, r: C.R, p: C.k }),
+  sally: build(WOMAN, WOMAN_FEET, { h: C.r, x: C.y, g: C.b, s: C.F, k: C.k, d: C.R, D: C.r, w: C.w }),
+};
+const PIGEON = [sprite(["...gg...", "..gGkg..", "..gggo..", ".gggg...", "gGGggg..", ".gggg...", "..o.o...", "..o.o..."], { g: C.g, G: C.G, k: C.k, o: C.o }),
+                sprite(["...gg...", "..gGkg..", "..gggo..", ".gggg...", "gGGggg..", ".gggg...", "...oo...", "...oo..."], { g: C.g, G: C.G, k: C.k, o: C.o })];
+const FLOWERS = ["P", "S", "v", "R"].map((col) => sprite(["..pp....", ".pppp...", ".ppypp..", "..ppp...", "...e....", "..ee.e..", "...e....", "...e...."], { p: C[col], y: C.y, e: C.E }));
+const ROSE = sprite(["..rr....", ".rRrr...", ".rrRr...", "..rr....", "...e....", "..ee.e..", "...e....", "...e...."], { r: C.r, R: C.R, e: C.E });
+function car(body) {
+  return sprite([
+    "......kkkkkkkkkk................", ".....kbbbbbbbbbbk...............", "....kbaaabbbaaabbk..............", "...kbbaaabbbaaabbbk.............",
+    "..kbbbbbbbbbbbbbbbbkkkkkkkkk....", ".kbbbbbbbbbbbbbbbbbbbbbbbbbbk...", "kbbbbbbbbbbbbbbbbbbbbbbbbbbbbk..", "kbbbbbbbbbbbbbbbbbbbbbbbbbbbYk..",
+    "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..", "...kkkk...............kkkk......", "..kGGGGk.............kGGGGk.....", "...kkkk...............kkkk......",
+  ], { k: C.k, b: body, a: C.a, G: C.G, Y: C.Y });
+}
+const CARS = [car(C.K), car(C.n), car(C.e)];
+
+/* ---------- pixel portraits, 32 x 32 ---------- */
+function portrait(o) {
+  const c = document.createElement("canvas"); c.width = c.height = 32; const g = c.getContext("2d");
+  const px = (x, y, col) => { g.fillStyle = col; g.fillRect(x, y, 1, 1); };
+  const fill = (x, y, w, h, col) => { g.fillStyle = col; g.fillRect(x, y, w, h); };
+  fill(0, 0, 32, 32, o.bg);
+  for (let y = 0; y < 32; y += 2) for (let x = (y / 2) % 2; x < 32; x += 2) px(x, y, o.bg2 || o.bg); // dither
+  // shoulders and collar
+  for (let y = 24; y < 32; y++) { const w = 10 + (y - 24) * 2; fill(16 - w, y, w * 2, 1, o.coat); }
+  if (o.collar) { fill(13, 24, 6, 2, o.collar); px(16, 26, o.tie || o.collar); px(16, 27, o.tie || o.collar); }
+  fill(14, 21, 5, 4, o.skin); fill(17, 21, 2, 4, o.shade);
+  // face: a pixel oval
+  const fw = o.thin ? 6 : 7, fh = o.long ? 10 : 9, cxm = 16, cym = 14;
+  for (let y = -fh; y <= fh; y++) for (let x = -fw; x <= fw; x++) if ((x * x) / (fw * fw) + (y * y) / (fh * fh) <= 1) px(cxm + x, cym + y, x > fw * 0.35 ? o.shade : o.skin);
+  // hair
+  const H = o.hair, hs = o.hairStyle;
+  if (hs === "bun" || hs === "center") { for (let x = -fw - 1; x <= fw + 1; x++) for (let y = -fh - 1; y < -fh + 5 - Math.abs(x) / 3; y++) px(cxm + x, cym + y, H); fill(cxm - fw - 1, cym - 4, 2, 9, H); fill(cxm + fw, cym - 4, 2, 9, H); px(cxm, cym - fh, o.skin); if (hs === "bun") fill(cxm + fw - 1, cym - 2, 4, 6, H); }
+  if (hs === "short" || hs === "swept") { for (let x = -fw - 1; x <= fw + 1; x++) for (let y = -fh - 1; y < -fh + 4 - (hs === "swept" ? (x + fw) / 5 : 0); y++) px(cxm + x, cym + y, H); fill(cxm - fw - 1, cym - 5, 2, 5, H); fill(cxm + fw, cym - 5, 2, 4, H); }
+  if (hs === "bob") { for (let x = -fw - 2; x <= fw + 2; x++) for (let y = -fh - 1; y < -fh + 5; y++) px(cxm + x, cym + y, H); fill(cxm - fw - 2, cym - 6, 3, 11, H); fill(cxm + fw, cym - 6, 3, 11, H); }
+  if (hs === "white") { for (let x = -fw - 1; x <= fw + 1; x++) for (let y = -fh - 1; y < -fh + 4; y++) px(cxm + x, cym + y, H); fill(cxm - fw - 1, cym - 5, 2, 7, H); fill(cxm + fw, cym - 5, 2, 6, H); }
+  // hats
+  if (o.hat === "top") { fill(cxm - 5, 0, 11, cym - fh + 1, o.hatCol); fill(cxm - 9, cym - fh, 19, 2, o.hatCol); fill(cxm - 5, cym - fh - 3, 11, 1, o.band || C.K); }
+  if (o.hat === "cloche") { for (let x = -fw - 2; x <= fw + 2; x++) for (let y = -fh - 2; y < -fh + 4; y++) if (x * x / ((fw + 2) * (fw + 2)) + (y + fh - 1) * (y + fh - 1) / 25 <= 1.2) px(cxm + x, cym + y, o.hatCol); fill(cxm - fw - 3, cym - fh + 3, fw * 2 + 7, 1, o.hatCol); if (o.flower) { fill(cxm + 4, cym - fh, 3, 3, o.flower); px(cxm + 5, cym - fh + 1, C.y); } }
+  // eyes, brows, nose, mouth
+  const ey = cym - 1 + (o.long ? 1 : 0);
+  fill(cxm - 4, ey, 2, o.bigEyes ? 2 : 1, C.k); fill(cxm + 2, ey, 2, o.bigEyes ? 2 : 1, C.k);
+  if (o.lids) { fill(cxm - 4, ey - 1, 2, 1, o.shade); fill(cxm + 2, ey - 1, 2, 1, o.shade); }
+  fill(cxm - 5, ey - 2, 3, 1, o.brow || H); fill(cxm + 2, ey - 2, 3, 1, o.brow || H);
+  px(cxm + 1, ey + 2, o.shade); px(cxm + 1, ey + 3, o.shade);
+  if (o.glasses) { g.strokeStyle = C.k; g.lineWidth = 1; g.strokeRect(cxm - 5.5, ey - 1.5, 4, 3); g.strokeRect(cxm + 1.5, ey - 1.5, 4, 3); }
+  if (o.moustache) fill(cxm - 3, ey + 5, 7, 1, o.moustache);
+  fill(cxm - 2, ey + 6 + (o.moustache ? 1 : 0), 5, 1, o.lips || C.h); if (o.smile) { px(cxm - 3, ey + 5, o.lips || C.h); px(cxm + 3, ey + 5, o.lips || C.h); }
+  if (o.pearls) for (let x = 11; x <= 21; x += 2) px(x, 25, C.w);
+  if (o.clock) { // Big Ben, the narrator
+    fill(0, 0, 32, 32, C.u); fill(8, 0, 16, 32, C.B); fill(6, 6, 20, 20, C.b); for (let y = -8; y <= 8; y++) for (let x = -8; x <= 8; x++) if (x * x + y * y <= 64) px(16 + x, 16 + y, x * x + y * y > 49 ? C.y : C.W);
+    fill(16, 9, 1, 8, C.k); fill(16, 16, 5, 1, C.k); for (const [x, y] of [[16, 9], [23, 16], [16, 23], [9, 16]]) px(x, y, C.k); fill(14, 0, 4, 4, C.y);
+  }
+  // a thin frame
+  g.strokeStyle = C.w; g.lineWidth = 1; g.strokeRect(0.5, 0.5, 31, 31);
+  return c;
+}
+// Virginia Woolf, drawn by hand: hair parted in the middle and drawn down
+// low over the ears, the long face, the heavy-lidded eyes of her photographs.
+function woolfPortrait() {
+  const rows = [
+    "................................", "................................", "...........bbbbbbbbbb...........", ".........bbbbbbbbbbbbbb.........",
+    "........bbbbbbbbBbbbbbbb........", ".......bbbbbbbbbBbbbbbbbb.......", ".......bbbbbbbbFFbbbbbbbb.......", "......bbbbbbbFFFFFFbbbbbbb......",
+    "......bbbbbFFFFFFFFFFbbbbb......", "......bbbbFFFFFFFFFFFhbbbb......", "......bbbbFFFFFFFFFFFhbbbb......", "......bbbFKKKFFFFFKKKhhbbb......",
+    "......bbbFFFFFFFFFFFFhhbbb......", "......bbbFhkkFFFFhkkhhhbbb......", "......bbbFFFFFFFFFFFFhhbbb......", "......bbbFFFFFFhFFFFFhhbbb......",
+    "......bbbbFFFFFhFFFFhhbbbb......", "......bbbbFFFFFhhFFFhhbbbb......", ".......bbbFFFFFFFFFFhhbbb.......", ".......bbbbFFFrrrrFFhbbbb.......",
+    "........bbbFFFFFFFFFhbbb........", "........bbbbFFFFFFFhhbbb........", ".........bbbbFFFFFhbbbb.........", "..........bbbbFFFFbbbb..........",
+    "...........bbFFFFFFbb...........", "............FFFFFFhh............", "..........GGGFFFFhhGGG..........", "......KKKKKGGGFFFhGGGKKKKK......",
+    "....KKKKKKKKGGGGGGGGKKKKKKKK....", "...KKKKKKKKKKKGGGGKKKKKKKKKKK...", "..KKKKKKKKKKKKKKKKKKKKKKKKKKKK..", "..KKKKKKKKKKKKKKKKKKKKKKKKKKKK..",
+  ];
+  const c = document.createElement("canvas"); c.width = c.height = 32; const g = c.getContext("2d");
+  g.fillStyle = C.t; g.fillRect(0, 0, 32, 32); g.fillStyle = "#007070";
+  for (let y = 0; y < 32; y += 2) for (let x = (y / 2) % 2; x < 32; x += 2) g.fillRect(x, y, 1, 1);
+  g.drawImage(sprite(rows.map((r) => r.padEnd(32, ".").slice(0, 32)), { b: C.b, B: C.n, F: C.F, h: C.h, k: C.k, K: C.K, G: C.G, r: C.h }), 0, 0);
+  g.strokeStyle = C.w; g.strokeRect(0.5, 0.5, 31, 31);
+  return c;
+}
+const PORTRAITS = {
+  woolf: woolfPortrait(),
+  clarissa: portrait({ bg: C.V, bg2: C.v, skin: C.F, shade: C.h, hair: C.G, hairStyle: "white", hat: "cloche", hatCol: C.U, flower: C.P, coat: C.v, pearls: true, lips: C.R, smile: true }),
+  peter: portrait({ bg: C.L, bg2: C.l, skin: C.F, shade: C.h, hair: C.b, hairStyle: "swept", coat: C.b, collar: C.w, tie: C.e, moustache: C.b }),
+  septimus: portrait({ bg: C.a, bg2: C.S, skin: C.F, shade: C.h, hair: C.B, hairStyle: "short", thin: true, bigEyes: true, coat: C.g, collar: C.w, tie: C.K }),
+  rezia: portrait({ bg: C.P, bg2: C.p, skin: C.F, shade: C.h, hair: C.k, hairStyle: "bob", hat: "cloche", hatCol: C.r, flower: C.y, coat: C.R, lips: C.r }),
+  hugh: portrait({ bg: C.l, bg2: C.E, skin: C.F, shade: C.h, hair: C.K, hairStyle: "short", hat: "top", hatCol: C.k, coat: C.K, collar: C.w, tie: C.r, smile: true }),
+  pym: portrait({ bg: C.Y, bg2: C.y, skin: C.F, shade: C.h, hair: C.G, hairStyle: "bun", glasses: true, coat: C.e, collar: C.w, smile: true }),
+  richard: portrait({ bg: C.a, bg2: C.G, skin: C.F, shade: C.h, hair: C.g, hairStyle: "short", coat: C.k, collar: C.w, tie: C.R, moustache: C.g }),
+  sally: portrait({ bg: C.O, bg2: C.N, skin: C.F, shade: C.h, hair: C.b, hairStyle: "bob", coat: C.R, pearls: true, lips: C.r, smile: true }),
+  bigben: portrait({ bg: C.u, skin: C.F, shade: C.h, hair: C.k, coat: C.k, clock: true }),
+};
+const CAST = [["woolf", "WOOLF"], ["clarissa", "CLARISSA"], ["peter", "PETER"], ["septimus", "SEPTIMUS"], ["rezia", "REZIA"],
+  ["hugh", "HUGH"], ["pym", "MISS PYM"], ["richard", "RICHARD"], ["sally", "SALLY"], ["bigben", "BIG BEN"]];
+// The names over the dialogue boxes.
+const NAMES = { woolf: "VIRGINIA WOOLF", clarissa: "CLARISSA DALLOWAY", peter: "PETER WALSH", septimus: "SEPTIMUS WARREN SMITH", rezia: "LUCREZIA (REZIA)", hugh: "HUGH WHITBREAD", pym: "MISS PYM", richard: "RICHARD DALLOWAY", sally: "SALLY SETON", bigben: "BIG BEN" };
+
+/* ---------- sound: a square-wave Big Ben ---------- */
+let audio = null, muted = false;
+function tone(freq, start, dur, vol = 0.08, type = "square") {
+  if (!audio || muted) return;
+  const o = audio.createOscillator(), g = audio.createGain();
+  o.type = type; o.frequency.value = freq; g.gain.setValueAtTime(vol, audio.currentTime + start);
+  g.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + start + dur);
+  o.connect(g).connect(audio.destination); o.start(audio.currentTime + start); o.stop(audio.currentTime + start + dur);
+}
+const NOTE = { E4: 329.6, "F#4": 370, "G#4": 415.3, B3: 246.9, E3: 164.8 };
+function chime(hours) { // the Westminster quarters, then the hour
+  const q = [["G#4", "F#4", "E4", "B3"], ["E4", "G#4", "F#4", "B3"], ["E4", "F#4", "G#4", "E4"], ["G#4", "E4", "F#4", "B3"]];
+  let t = 0; for (const ph of q) { for (const n of ph) { tone(NOTE[n], t, 0.7, 0.06); t += 0.32; } t += 0.25; }
+  for (let i = 0; i < Math.min(hours, 4); i++) tone(NOTE.E3, t + i * 0.8, 1.4, 0.09, "triangle");
+}
+const blip = (f = 880) => tone(f, 0, 0.08, 0.05);
+
+/* ---------- the day, in four parts ---------- */
 function grid(cols) { return Array.from({ length: ROWS }, () => Array(cols).fill(".")); }
-function ground(m, x0, x1, top = 14) { for (let x = x0; x <= x1; x++) for (let y = top; y < ROWS; y++) m[y][x] = "#"; }
-function ledge(m, x, y, w, ch = "=") { for (let i = 0; i < w; i++) m[y][x + i] = ch; }
-function put(m, x, y, ch) { m[y][x] = ch; }
-function pages(m, list) { for (const [x, y] of list) put(m, x, y, "p"); }
-
+function ground(m, x0, x1, top = 12, ch = "#") { for (let x = x0; x <= x1; x++) for (let y = top; y < ROWS; y++) m[y][x] = ch; }
+function block(m, x, y, w, h, ch) { for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) m[y + j][x + i] = ch; }
+function put(m, list, ch) { for (const [x, y] of list) m[y][x] = ch; }
 const LEVELS = [
   {
-    key: "prague", title: "Prague, 1915", book: "Franz Kafka · The Metamorphosis",
-    intro: ["Franz Kafka works all day at an insurance office", "and writes all night. His pages are blowing", "across the rooftops. Get them to the publisher."],
-    outro: ["Kafka asked his best friend, Max Brod, to burn", "every unpublished page he left behind.", "Brod said no. The Trial and The Castle", "exist because of him."],
-    quote: "When Gregor Samsa woke one morning from troubled dreams, he found himself changed in his bed into a monstrous insect.",
-    by: "The Metamorphosis, 1915 (our translation)",
-    sky: ["#2b1e3f", "#7d4a63", "#d98d6a"], tile: ["#5b5560", "#7b7480", "#3a3540"], ledge: "#8a5a3c",
-    exit: "PUBLISHER",
+    key: "westminster", short: "WESTMINSTER", clock: "10:00", title: "WESTMINSTER, 10 A.M.", hours: 10, sky: [C.S, C.a], flower: 0,
+    intro: [["bigben", "BIG BEN STRIKES TEN. JUNE, 1923. THE WAR IS OVER, AND LONDON IS OUT IN THE SUN."],
+            ["clarissa", "MRS. DALLOWAY SAID SHE WOULD BUY THE FLOWERS HERSELF."]],
+    outro: [["bigben", "THE LEADEN CIRCLES DISSOLVED IN THE AIR."]],
     build(m) {
-      ground(m, 0, 22); ground(m, 26, 40, 13); ground(m, 44, 60); ground(m, 64, 66, 12); ground(m, 70, 90, 13);
-      ground(m, 95, 120); ground(m, 124, 128, 11); ground(m, 132, 150); ground(m, 153, 175, 13);
-      ledge(m, 10, 10, 4); ledge(m, 17, 8, 3); ledge(m, 33, 9, 4); ledge(m, 50, 10, 5); ledge(m, 78, 9, 4); ledge(m, 84, 6, 3);
-      ledge(m, 102, 10, 4); ledge(m, 109, 7, 4); ledge(m, 138, 10, 3); ledge(m, 143, 7, 4); ledge(m, 160, 9, 4);
-      pages(m, [[12, 9], [18, 7], [34, 8], [52, 9], [65, 11], [79, 8], [85, 5], [103, 9], [110, 6], [126, 10], [139, 9], [144, 6], [161, 8], [168, 12]]);
-      put(m, 30, 12, "c"); put(m, 55, 13, "c"); put(m, 88, 12, "c"); put(m, 115, 13, "c"); put(m, 146, 13, "c"); put(m, 165, 12, "c");
-      put(m, 40, 8, "r"); put(m, 72, 7, "r"); put(m, 98, 8, "r"); put(m, 130, 6, "r"); put(m, 155, 7, "r");
-      put(m, 172, 12, "E");
+      ground(m, 0, 140);
+      block(m, 14, 10, 2, 2, "B"); block(m, 30, 9, 3, 1, "="); block(m, 44, 11, 2, 1, "B"); block(m, 58, 8, 3, 1, "="); block(m, 62, 10, 3, 1, "=");
+      block(m, 80, 10, 2, 2, "B"); block(m, 96, 9, 3, 1, "="); block(m, 101, 7, 3, 1, "="); block(m, 118, 10, 2, 2, "B");
+      put(m, [[8, 11], [15, 9], [22, 11], [31, 8], [37, 11], [45, 10], [59, 7], [63, 9], [72, 11], [81, 9], [97, 8], [102, 6], [110, 11], [119, 9], [128, 11]], "f");
+      put(m, [[20, 11], [40, 11], [70, 11], [90, 11], [112, 11]], "p");
+      put(m, [[52, 11], [124, 11]], "c");
+      put(m, [[48, 11]], "1");
+      put(m, [[136, 11]], "E");
     },
+    talks: { 1: [["hugh", "GOOD-MORNING TO YOU, CLARISSA!"], ["clarissa", "I LOVE WALKING IN LONDON. REALLY IT'S BETTER THAN WALKING IN THE COUNTRY."],
+                 ["bigben", "HUGH WHITBREAD HAS COME UP TO SEE DOCTORS. EVELYN IS OUT OF SORTS AGAIN."]] },
+    who: { 1: "hugh" }, exitSign: "BOND ST",
   },
   {
-    key: "dublin", title: "Dublin, June 16, 1904", book: "James Joyce · Ulysses",
-    intro: ["Ulysses happens in a single day, June 16, 1904,", "from a tower by the sea to a bed at 2 a.m.", "Cross the city before the day runs out."],
-    outro: ["In 1921 a typist's husband threw pages of", "Ulysses into the fire. Joyce had to piece", "them back together. The book came out in", "Paris on his 40th birthday, February 2, 1922."],
-    quote: "yes I said yes I will Yes.",
-    by: "Ulysses, 1922, the last words",
-    sky: ["#7f97a0", "#b9c2b9", "#e2dcc6"], tile: ["#7a4b3a", "#9b6450", "#4f3026"], ledge: "#3e6b4f",
-    exit: "SHAKESPEARE AND COMPANY",
+    key: "bond", short: "BOND ST", clock: "11:00", title: "BOND STREET, 11 A.M.", hours: 11, sky: [C.a, C.W], flower: 1,
+    intro: [["bigben", "A VIOLENT EXPLOSION IN BOND STREET! EVERYONE STOPS. (IT WAS ONLY A MOTOR CAR.)"],
+            ["bigben", "AND OVERHEAD, AN AEROPLANE IS WRITING LETTERS IN SMOKE. K... R... E... M... O?"]],
+    outro: [["pym", "GOOD MORNING, MRS. DALLOWAY! THE FLOWERS CAME IN THIS MORNING."], ["bigben", "THERE WERE FLOWERS: DELPHINIUMS, SWEET PEAS, BUNCHES OF LILAC; AND CARNATIONS, MASSES OF CARNATIONS."]],
     build(m) {
-      ground(m, 0, 18); ground(m, 22, 34); ground(m, 38, 40, 12); ground(m, 44, 58, 13); ground(m, 62, 80);
-      ground(m, 84, 86, 11); ground(m, 90, 92, 12); ground(m, 96, 115); ground(m, 119, 135, 13); ground(m, 139, 141, 11); ground(m, 145, 175);
-      ledge(m, 8, 10, 3); ledge(m, 26, 10, 4); ledge(m, 48, 9, 3); ledge(m, 53, 6, 3); ledge(m, 68, 10, 4); ledge(m, 74, 7, 3);
-      ledge(m, 100, 10, 3); ledge(m, 106, 7, 3); ledge(m, 112, 4, 3); ledge(m, 124, 9, 4); ledge(m, 150, 10, 4); ledge(m, 158, 7, 3);
-      pages(m, [[9, 9], [27, 9], [39, 11], [49, 8], [54, 5], [69, 9], [75, 6], [85, 10], [91, 11], [101, 9], [107, 6], [113, 3], [125, 8], [140, 10], [151, 9], [159, 6]]);
-      put(m, 15, 13, "c"); put(m, 30, 13, "c"); put(m, 56, 12, "c"); put(m, 72, 13, "c"); put(m, 110, 13, "c"); put(m, 130, 12, "c"); put(m, 155, 13, "c"); put(m, 165, 13, "c");
-      put(m, 20, 8, "r"); put(m, 60, 7, "r"); put(m, 88, 6, "r"); put(m, 117, 7, "r"); put(m, 143, 6, "r"); put(m, 162, 9, "r");
-      put(m, 172, 13, "E");
+      ground(m, 0, 140);
+      block(m, 12, 8, 4, 1, "="); block(m, 22, 10, 2, 2, "B"); block(m, 26, 7, 4, 1, "="); block(m, 60, 10, 2, 2, "B"); block(m, 100, 10, 2, 2, "B"); block(m, 40, 10, 2, 2, "B"); block(m, 50, 8, 4, 1, "="); block(m, 64, 6, 4, 1, "=");
+      block(m, 78, 10, 2, 2, "B"); block(m, 88, 8, 4, 1, "="); block(m, 104, 7, 4, 1, "="); block(m, 116, 10, 2, 2, "B");
+      put(m, [[13, 7], [16, 11], [27, 6], [34, 11], [41, 9], [51, 7], [58, 11], [65, 5], [74, 11], [79, 9], [89, 7], [96, 11], [105, 6], [112, 11], [117, 9], [126, 11]], "f");
+      put(m, [[30, 11], [62, 11], [84, 11], [100, 11], [122, 11]], "c");
+      put(m, [[20, 2], [45, 2], [70, 2], [95, 2], [120, 2]], "s");
+      put(m, [[133, 11]], "E");
     },
+    talks: {}, who: {}, exitSign: "MULBERRY'S",
   },
   {
-    key: "westegg", title: "West Egg, 1922", book: "F. Scott Fitzgerald · The Great Gatsby",
-    intro: ["Gatsby's party is going all night.", "Across the bay a green light burns", "at the end of Daisy's dock. Reach it."],
-    outro: ["When Fitzgerald died in 1940, he thought", "The Great Gatsby had failed. During World War II,", "about 155,000 free copies went to American", "soldiers. It has never stopped selling since."],
-    quote: "So we beat on, boats against the current, borne back ceaselessly into the past.",
-    by: "The Great Gatsby, 1925, the last line",
-    sky: ["#070c22", "#132151", "#24356e"], tile: ["#d8d2c2", "#f2ecdc", "#9e978a"], ledge: "#c9a227",
-    exit: "GREEN",
+    key: "park", short: "REGENT'S PARK", clock: "12:00", title: "REGENT'S PARK, NOON", hours: 12, sky: [C.S, C.L], flower: 2,
+    intro: [["bigben", "NOON. IN REGENT'S PARK, A YOUNG MAN SITS ON A BENCH BESIDE HIS WIFE."]],
+    outro: [["bigben", "PETER WALSH IS BACK FROM INDIA. HE WILL COME TO THE PARTY. EVERYONE WILL."]],
     build(m) {
-      ground(m, 0, 30); ground(m, 34, 36, 12); ground(m, 40, 62, 13); ground(m, 66, 68, 11); ground(m, 72, 74, 9);
-      ground(m, 78, 100); ground(m, 104, 106, 12); ground(m, 110, 112, 10); ground(m, 116, 118, 12);
-      for (let x = 122; x <= 175; x++) put(m, x, 13, "D");
-      for (let x = 122; x <= 175; x += 5) for (let y = 14; y < ROWS; y++) put(m, x, y, "|");
-      ledge(m, 6, 10, 4); ledge(m, 14, 7, 4); ledge(m, 22, 9, 3); ledge(m, 46, 9, 4); ledge(m, 54, 6, 4); ledge(m, 84, 10, 3); ledge(m, 90, 7, 3); ledge(m, 95, 4, 3);
-      ledge(m, 130, 10, 3); ledge(m, 140, 9, 3); ledge(m, 147, 8, 3); ledge(m, 160, 10, 3);
-      pages(m, [[7, 9], [15, 6], [23, 8], [35, 11], [47, 8], [55, 5], [67, 10], [73, 8], [85, 9], [91, 6], [96, 3], [105, 11], [111, 9], [117, 11], [131, 9], [141, 8], [148, 7], [161, 9]]);
-      put(m, 20, 13, "c"); put(m, 26, 13, "c"); put(m, 50, 12, "c"); put(m, 58, 12, "c"); put(m, 82, 13, "c"); put(m, 92, 13, "c"); put(m, 98, 13, "c"); put(m, 136, 12, "c"); put(m, 156, 12, "c");
-      put(m, 32, 8, "r"); put(m, 64, 6, "r"); put(m, 76, 6, "r"); put(m, 108, 7, "r"); put(m, 126, 8, "r"); put(m, 146, 6, "r"); put(m, 166, 7, "r");
-      put(m, 173, 12, "E");
+      ground(m, 0, 30, 12, "g"); ground(m, 34, 58, 12, "g"); ground(m, 62, 64, 10, "g"); ground(m, 68, 100, 12, "g"); ground(m, 104, 106, 10, "g"); ground(m, 110, 140, 12, "g");
+      block(m, 10, 10, 3, 1, "b"); block(m, 22, 9, 3, 1, "="); block(m, 44, 10, 3, 1, "b"); block(m, 50, 8, 3, 1, "="); block(m, 76, 10, 3, 1, "b"); block(m, 84, 8, 3, 1, "="); block(m, 89, 6, 3, 1, "=");
+      block(m, 118, 10, 3, 1, "b"); block(m, 126, 8, 3, 1, "=");
+      put(m, [[11, 9], [23, 8], [32, 9], [45, 9], [51, 7], [60, 8], [63, 9], [66, 8], [77, 9], [85, 7], [90, 5], [102, 8], [105, 9], [108, 8], [119, 9], [127, 7]], "f");
+      put(m, [[18, 11], [40, 11], [56, 11], [72, 11], [96, 11], [114, 11], [132, 11]], "p");
+      put(m, [[28, 11]], "1"); put(m, [[29, 11]], "2"); put(m, [[94, 11]], "3");
+      put(m, [[137, 11]], "E");
     },
+    talks: { 1: [["rezia", "LOOK, LOOK, SEPTIMUS!"], ["septimus", "..."],
+                 ["bigben", "SEPTIMUS WARREN SMITH FOUGHT IN THE WAR. SOME MEN NEVER CAME HOME FROM IT, EVEN WHEN THEY DID."]],
+             3: [["peter", "AND HOW ARE YOU?"], ["bigben", "PETER OPENS HIS POCKET-KNIFE. SHUTS IT. OPENS IT. HE HAS LOVED CLARISSA FOR THIRTY YEARS."]] },
+    who: { 1: "rezia", 2: "septimus", 3: "peter" }, exitSign: "HOME",
+  },
+  {
+    key: "party", short: "THE PARTY", clock: "EVENING", title: "THE PARTY", hours: 0, sky: [C.u, C.k], flower: 3, inside: true,
+    intro: [["richard", "I'VE BROUGHT YOU SOME ROSES. (HE MEANS: I LOVE YOU. HE CAN'T QUITE SAY IT.)"], ["clarissa", "THE GUESTS ARE ARRIVING. GATHER THE ROSES."]],
+    outro: [],
+    build(m) {
+      ground(m, 0, 140, 12, "w");
+      block(m, 10, 10, 4, 2, "B"); block(m, 18, 8, 3, 1, "="); block(m, 26, 9, 3, 1, "="); block(m, 36, 11, 2, 1, "B"); block(m, 38, 10, 2, 2, "B"); block(m, 40, 9, 2, 3, "B"); block(m, 42, 8, 2, 4, "B");
+      block(m, 46, 6, 6, 1, "="); block(m, 56, 8, 3, 1, "="); block(m, 66, 10, 4, 2, "B"); block(m, 76, 8, 3, 1, "="); block(m, 82, 6, 3, 1, "="); block(m, 90, 9, 3, 1, "=");
+      block(m, 100, 11, 2, 1, "B"); block(m, 102, 10, 2, 2, "B"); block(m, 104, 9, 2, 3, "B"); block(m, 106, 8, 6, 4, "B");
+      put(m, [[11, 9], [19, 7], [27, 8], [33, 11], [43, 7], [48, 5], [57, 7], [62, 11], [67, 9], [77, 7], [83, 5], [91, 8], [97, 11], [108, 7], [116, 11], [124, 11]], "f");
+      put(m, [[30, 11]], "1"); put(m, [[72, 11]], "2"); put(m, [[133, 11]], "3");
+    },
+    talks: { 1: [["sally", "CLARISSA! IT'S SALLY! SALLY SETON! I HAVE FIVE ENORMOUS BOYS NOW."]],
+             2: [["hugh", "A WONDERFUL PARTY, CLARISSA. THE PRIME MINISTER IS COMING, I HEAR."]],
+             3: [["peter", "I WILL COME. WHAT IS THIS TERROR? WHAT IS THIS ECSTASY?"], ["peter", "IT IS CLARISSA, HE SAID."], ["bigben", "FOR THERE SHE WAS."]] },
+    who: { 1: "sally", 2: "hugh", 3: "peter" }, last: 3,
   },
 ];
 
 /* ---------- input ---------- */
 const keys = {}, pressed = {};
-const map = { ArrowLeft: "l", KeyA: "l", ArrowRight: "r", KeyD: "r", ArrowUp: "j", KeyW: "j", Space: "j", KeyZ: "j", Enter: "go" };
-addEventListener("keydown", (e) => { const k = map[e.code]; if (k) { if (!keys[k]) pressed[k] = true; keys[k] = true; e.preventDefault(); } });
-addEventListener("keyup", (e) => { const k = map[e.code]; if (k) { keys[k] = false; e.preventDefault(); } });
+const KEYMAP = { ArrowLeft: "l", KeyA: "l", ArrowRight: "r", KeyD: "r", ArrowUp: "j", KeyW: "j", Space: "j", KeyZ: "j", KeyX: "j", Enter: "a", KeyM: "m" };
+addEventListener("keydown", (e) => { const k = KEYMAP[e.code]; if (k) { if (!keys[k]) pressed[k] = true; keys[k] = true; e.preventDefault(); } });
+addEventListener("keyup", (e) => { const k = KEYMAP[e.code]; if (k) { keys[k] = false; e.preventDefault(); } });
 for (const b of document.querySelectorAll("[data-key]")) {
   const k = b.dataset.key;
-  const on = (e) => { e.preventDefault(); if (!keys[k]) pressed[k] = true; keys[k] = true; if (k !== "go") pressed.go = true; };
+  const on = (e) => { e.preventDefault(); if (!keys[k]) pressed[k] = true; keys[k] = true; pressed.a = true; wake(); };
   const off = (e) => { e.preventDefault(); keys[k] = false; };
   b.addEventListener("pointerdown", on); b.addEventListener("pointerup", off); b.addEventListener("pointercancel", off); b.addEventListener("pointerleave", off);
 }
-cv.addEventListener("pointerdown", () => { pressed.go = true; });
+cv.addEventListener("pointerdown", () => { pressed.a = true; wake(); });
+addEventListener("keydown", wake);
+function wake() { if (!audio) { try { audio = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { audio = null; } } }
+const mute = document.getElementById("mute");
+if (mute) mute.addEventListener("click", () => { muted = !muted; mute.textContent = muted ? "SOUND: OFF" : "SOUND: ON"; });
 
 /* ---------- state ---------- */
-let state = "title", li = 0, lvl, tiles, cols, ents, P, cam = 0, got = 0, total = 0, t = 0, score = 0, cardT = 0;
-const solid = (ch) => ch === "#" || ch === "=" || ch === "D";
-const at = (x, y) => (y < 0 || y >= ROWS || x < 0 || x >= cols) ? (y >= ROWS ? "." : "#") : tiles[y][x];
+let state = "title", li = 0, lvl, tiles, cols, ents, P, cam = 0, got = 0, total = 0, t = 0, talk = null, talkI = 0, talkT = 0, afterTalk = null, allGot = 0, allTotal = 0;
+const SOLID = "#gwB=b";
+const at = (x, y) => (y < 0 || y >= ROWS || x < 0 || x >= cols) ? (y >= ROWS ? "." : (x < 0 ? "#" : ".")) : tiles[y][x];
+const solid = (ch) => SOLID.includes(ch) && ch !== ".";
 
 function load(i) {
-  li = i; lvl = LEVELS[i]; cols = 180;
+  li = i; lvl = LEVELS[i]; cols = 142;
   const m = grid(cols); lvl.build(m);
   ents = []; total = 0; got = 0;
   for (let y = 0; y < ROWS; y++) for (let x = 0; x < cols; x++) {
     const ch = m[y][x];
-    if (ch === "p") { ents.push({ k: "page", x: x * T + 8, y: y * T + 4, w: 16, h: 22, by: y * T + 4 }); total++; m[y][x] = "."; }
-    if (ch === "c") { ents.push({ k: "critic", x: x * T + 4, y: y * T + 2, w: 24, h: 30, vx: -1 }); m[y][x] = "."; }
-    if (ch === "r") { ents.push({ k: "letter", x: x * T, y: y * T, w: 30, h: 20, x0: x * T, y0: y * T, ph: x }); m[y][x] = "."; }
-    if (ch === "E") { ents.push({ k: "exit", x: x * T - 8, y: (y - 2) * T, w: 48, h: 3 * T }); m[y][x] = "."; }
+    if (ch === "f") { ents.push({ k: "flower", x: x * T + 4, y: y * T + 6, w: 8, h: 8, by: y * T + 6 }); total++; }
+    else if (ch === "p") ents.push({ k: "pigeon", x: x * T + 4, y: y * T + 8, w: 8, h: 8, vx: -0.4 });
+    else if (ch === "c") ents.push({ k: "car", x: x * T, y: y * T + 4, w: 30, h: 12, x0: x * T, look: CARS[(x + y) % 3] });
+    else if (ch === "s") ents.push({ k: "smoke", x: x * T, y: y * T, w: 6, h: 7, x0: x * T, y0: y * T, ch: "KREMO"[(x / 25 | 0) % 5], ph: x });
+    else if ("123".includes(ch)) ents.push({ k: "npc", id: +ch, who: lvl.who[ch], x: x * T + 2, y: y * T - 8, w: 16, h: 24, talked: !lvl.talks[ch] });
+    else if (ch === "E") ents.push({ k: "exit", x: x * T, y: (y - 2) * T, w: 32, h: 48 });
+    else continue;
+    m[y][x] = ".";
   }
   tiles = m;
-  P = { x: 2 * T, y: 10 * T, w: 18, h: 30, vx: 0, vy: 0, on: false, coyote: 0, face: 1, hp: 3, hurt: 0, safe: [2 * T, 10 * T], step: 0 };
+  P = { x: 2 * T, y: 9 * T, w: 10, h: 22, vx: 0, vy: 0, on: false, coyote: 0, face: 1, hp: 3, hurt: 0, safe: [2 * T, 9 * T], step: 0 };
   cam = 0;
 }
+function say(lines, then) { talk = lines; talkI = 0; talkT = 0; afterTalk = then; blip(660); }
 
 /* ---------- physics ---------- */
-function hitsSolid(x, y, w, h) {
+function hits(x, y, w, h) {
   for (let ty = Math.floor(y / T); ty <= Math.floor((y + h - 1) / T); ty++)
     for (let tx = Math.floor(x / T); tx <= Math.floor((x + w - 1) / T); tx++) if (solid(at(tx, ty))) return true;
   return false;
 }
 function move(o, dx, dy) {
-  o.x += dx;
-  if (hitsSolid(o.x, o.y, o.w, o.h)) { o.x = dx > 0 ? Math.floor((o.x + o.w) / T) * T - o.w : Math.floor(o.x / T + 1) * T; o.bumpX = true; }
+  o.bumpX = false; o.x += dx;
+  if (hits(o.x, o.y, o.w, o.h)) { o.x = dx > 0 ? Math.floor((o.x + o.w) / T) * T - o.w : Math.floor(o.x / T + 1) * T; o.bumpX = true; }
   o.y += dy; o.on = false;
-  if (hitsSolid(o.x, o.y, o.w, o.h)) {
-    if (dy > 0) { o.y = Math.floor((o.y + o.h) / T) * T - o.h; o.on = true; } else o.y = Math.floor(o.y / T + 1) * T;
-    o.vy = 0;
-  }
+  if (hits(o.x, o.y, o.w, o.h)) { if (dy > 0) { o.y = Math.floor((o.y + o.h) / T) * T - o.h; o.on = true; } else o.y = Math.floor(o.y / T + 1) * T; o.vy = 0; }
 }
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
-
-function hurt() {
-  if (P.hurt > 0) return;
-  P.hp--; P.hurt = 90; P.vy = -7; P.vx = -P.face * 4;
-  if (P.hp <= 0) { state = "fail"; cardT = 0; }
-}
-function fell() {
-  P.hp--; if (P.hp <= 0) { state = "fail"; cardT = 0; return; }
-  P.x = P.safe[0]; P.y = P.safe[1] - 40; P.vx = P.vy = 0; P.hurt = 90;
-}
+function hurt() { if (P.hurt > 0) return; P.hp--; P.hurt = 90; P.vy = -3.5; P.vx = -P.face * 2; tone(150, 0, 0.25, 0.08); if (P.hp <= 0) { state = "fail"; t = 0; } }
+function fell() { P.hp--; tone(120, 0, 0.3, 0.08); if (P.hp <= 0) { state = "fail"; return; } P.x = P.safe[0]; P.y = P.safe[1] - 20; P.vx = P.vy = 0; P.hurt = 90; }
 
 function update() {
   t++;
-  if (state !== "play") {
-    cardT++;
-    if (pressed.go || pressed.j) {
-      if (state === "title") { load(0); state = "intro"; cardT = 0; }
-      else if (state === "intro" && cardT > 20) state = "play";
-      else if (state === "done" && cardT > 30) { if (li + 1 < LEVELS.length) { load(li + 1); state = "intro"; cardT = 0; } else { state = "win"; cardT = 0; } }
-      else if (state === "fail" && cardT > 30) { load(li); state = "intro"; cardT = 0; }
-      else if (state === "win" && cardT > 60) { state = "title"; score = 0; cardT = 0; }
-    }
-    for (const k in pressed) delete pressed[k];
-    return;
+  if (pressed.m) { muted = !muted; if (mute) mute.textContent = muted ? "SOUND: OFF" : "SOUND: ON"; }
+  const go = pressed.a || pressed.j;
+  if (talk) {
+    talkT++;
+    if (go && talkT > 12) { talkI++; talkT = 0; blip(); if (talkI >= talk.length) { talk = null; const f = afterTalk; afterTalk = null; if (f) f(); } }
+    for (const k in pressed) delete pressed[k]; return;
   }
-  // the writer
+  if (state === "title") { if (go) { allGot = allTotal = 0; load(0); state = "play"; chime(lvl.hours); say(lvl.intro); } for (const k in pressed) delete pressed[k]; return; }
+  if (state === "fail") { if (go && t > 40) { load(li); state = "play"; say(lvl.intro.slice(-1)); } for (const k in pressed) delete pressed[k]; return; }
+  if (state === "cast") { if (go && t > 90) state = "title"; for (const k in pressed) delete pressed[k]; return; }
+  // Clarissa
   const dir = (keys.r ? 1 : 0) - (keys.l ? 1 : 0);
-  if (dir) { P.vx += dir * 0.7; P.face = dir; } else P.vx *= 0.75;
-  P.vx = Math.max(-4.2, Math.min(4.2, P.vx));
+  if (dir) { P.vx += dir * 0.25; P.face = dir; } else P.vx *= 0.7;
+  P.vx = Math.max(-1.7, Math.min(1.7, P.vx));
   P.coyote = P.on ? 6 : P.coyote - 1;
-  if (pressed.j && P.coyote > 0) { P.vy = -12.5; P.coyote = 0; }
-  if (!keys.j && P.vy < -4) P.vy = -4;
-  P.vy = Math.min(P.vy + 0.55, 12);
+  if (pressed.j && P.coyote > 0) { P.vy = -6.4; P.coyote = 0; tone(520, 0, 0.1, 0.04); tone(780, 0.05, 0.08, 0.03); }
+  if (!keys.j && P.vy < -2) P.vy = -2;
+  P.vy = Math.min(P.vy + 0.3, 5.5);
   move(P, P.vx, P.vy);
-  if (P.on) { P.safe = [Math.round(P.x), P.y]; }
-  if (Math.abs(P.vx) > 0.5 && P.on) P.step += Math.abs(P.vx) * 0.12;
+  if (P.on) P.safe = [Math.round(P.x), P.y];
+  if (Math.abs(P.vx) > 0.3 && P.on) P.step += Math.abs(P.vx) * 0.08;
   if (P.x < 0) P.x = 0;
-  if (P.y > ROWS * T + 40) fell();
+  if (P.y > ROWS * T + 20) fell();
   if (P.hurt > 0) P.hurt--;
-  // everyone else
   for (const e of ents) {
     if (e.dead) continue;
-    if (e.k === "page") { e.y = e.by + Math.sin((t + e.x) / 18) * 4; if (overlap(P, e)) { e.dead = true; got++; score += 100; } }
-    if (e.k === "critic") {
-      e.vy = Math.min((e.vy || 0) + 0.55, 12); e.bumpX = false;
-      move(e, e.vx, e.vy);
-      const ahead = Math.floor((e.vx > 0 ? e.x + e.w + 2 : e.x - 2) / T), below = Math.floor((e.y + e.h + 4) / T);
+    if (e.k === "flower") { e.y = e.by + Math.round(Math.sin((t + e.x) / 16)); if (overlap(P, e)) { e.dead = true; got++; tone(990, 0, 0.06, 0.05); tone(1320, 0.06, 0.08, 0.05); } }
+    if (e.k === "pigeon") {
+      e.vy = Math.min((e.vy || 0) + 0.3, 5); move(e, e.vx, e.vy);
+      const ahead = Math.floor((e.vx > 0 ? e.x + e.w + 1 : e.x - 1) / T), below = Math.floor((e.y + e.h + 2) / T);
       if (e.bumpX || (e.on && !solid(at(ahead, below)))) e.vx = -e.vx;
     }
-    if (e.k === "letter") { e.x = e.x0 + Math.sin((t + e.ph * 30) / 70) * 90; e.y = e.y0 + Math.sin((t + e.ph * 10) / 25) * 20; }
-    if ((e.k === "critic" || e.k === "letter") && overlap(P, e)) {
-      if (P.vy > 1 && P.y + P.h - e.y < 16) { e.dead = true; P.vy = -8; score += 50; }
-      else hurt();
+    if (e.k === "car") { e.x -= 1.6; if (e.x < e.x0 - 22 * T) e.x = e.x0 + 6 * T; }
+    if (e.k === "smoke") { e.y += 0.45; e.x = e.x0 + Math.sin((t + e.ph * 7) / 40) * 20; if (e.y > 12 * T) { e.y = e.y0; } }
+    if ((e.k === "pigeon") && overlap(P, e)) { if (P.vy > 0.5 && P.y + P.h - e.y < 8) { e.dead = true; P.vy = -3.5; tone(300, 0, 0.1, 0.06); } else hurt(); }
+    if ((e.k === "car" || e.k === "smoke") && overlap(P, e)) hurt();
+    if (e.k === "npc" && !e.talked && overlap(P, e)) {
+      e.talked = true; P.vx = 0;
+      const last = lvl.last === e.id;
+      say(lvl.talks[e.id], last ? () => { allGot += got; allTotal += total; state = "cast"; t = 0; chime(0); } : null);
     }
-    if (e.k === "exit" && overlap(P, e)) { state = "done"; cardT = 0; score += got * 10; }
+    if (e.k === "exit" && overlap(P, e)) {
+      e.dead = true; allGot += got; allTotal += total;
+      say(lvl.outro.length ? lvl.outro : [["bigben", "ON SHE WENT."]], () => { load(li + 1); chime(lvl.hours); say(lvl.intro); });
+    }
   }
-  cam += (Math.max(0, Math.min(cols * T - W, P.x - W * 0.4)) - cam) * 0.12;
+  cam += (Math.max(0, Math.min(cols * T - W, P.x - W * 0.4)) - cam) * 0.15;
   for (const k in pressed) delete pressed[k];
 }
 
 /* ---------- drawing ---------- */
-const rect = (c, x, y, w, h) => { cx.fillStyle = c; cx.fillRect(Math.round(x), Math.round(y), w, h); };
-function sky() {
-  const g = cx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, lvl.sky[0]); g.addColorStop(0.6, lvl.sky[1]); g.addColorStop(1, lvl.sky[2]);
-  cx.fillStyle = g; cx.fillRect(0, 0, W, H);
-}
+const rect = (col, x, y, w, h) => { cx.fillStyle = col; cx.fillRect(Math.round(x), Math.round(y), w, h); };
 function backdrop() {
-  sky();
-  const far = -cam * 0.2, near = -cam * 0.5;
-  if (lvl.key === "prague") {
-    rect("#f3d7a8", 760 + far * 0.2, 70, 0, 0); cx.fillStyle = "rgba(255,230,180,.75)"; cx.beginPath(); cx.arc(780 + far * 0.1, 90, 34, 0, 7); cx.fill();
-    for (let i = -1; i < 12; i++) { // castle hill and spires
-      const x = ((i * 260 + far) % 3120 + 3120) % 3120 - 260;
-      cx.fillStyle = "#3b2a4a"; cx.fillRect(x, 300, 260, 300);
-      cx.fillRect(x + 40, 210, 34, 100); cx.beginPath(); cx.moveTo(x + 36, 212); cx.lineTo(x + 57, 140); cx.lineTo(x + 78, 212); cx.fill();
-      cx.fillRect(x + 150, 240, 50, 70); cx.beginPath(); cx.moveTo(x + 146, 242); cx.lineTo(x + 175, 180); cx.lineTo(x + 204, 242); cx.fill();
+  const [top, bot] = lvl.sky;
+  for (let y = 0; y < H; y += 8) rect(y < 120 ? top : bot, 0, y, W, 8);
+  for (let y = 112; y < 136; y += 2) for (let x = (y / 2) % 2 * 2; x < W; x += 4) rect(bot, x, y, 2, 2); // a dithered horizon
+  const far = Math.round(-cam * 0.25), near = Math.round(-cam * 0.5);
+  if (lvl.key === "westminster") {
+    for (let i = -1; i < 6; i++) { // the Houses of Parliament and Big Ben
+      const x = ((i * 300 + far) % 1800 + 1800) % 1800 - 300;
+      rect(C.B, x, 120, 220, 72); for (let k = 0; k < 11; k++) { rect(C.b, x + 4 + k * 20, 112, 6, 10); rect(C.b, x + 8 + k * 20, 134, 4, 10); rect(C.b, x + 8 + k * 20, 156, 4, 10); }
+      rect(C.B, x + 240, 60, 24, 132); rect(C.b, x + 240, 60, 24, 3); rect(C.Y, x + 244, 72, 16, 16); rect(C.b, x + 251, 74, 2, 7); rect(C.b, x + 251, 80, 6, 2);
+      for (let k = 0; k < 10; k++) rect(C.B, x + 246 + Math.floor(k / 2), 50 - k, 12 - k, 1); rect(C.y, x + 251, 38, 2, 4);
     }
-    for (let i = -1; i < 14; i++) { // rooftops
-      const x = ((i * 180 + near) % 2520 + 2520) % 2520 - 180;
-      cx.fillStyle = "#24182e"; cx.beginPath(); cx.moveTo(x, 400); cx.lineTo(x + 90, 330); cx.lineTo(x + 180, 400); cx.lineTo(x + 180, 540); cx.lineTo(x, 540); cx.fill();
-      rect("#24182e", x + 120, 330, 16, 40); rect("#ffcf7a", x + 60, 420, 12, 16); rect("#ffcf7a", x + 110, 430, 12, 16);
+    for (let i = -1; i < 9; i++) { const x = ((i * 120 + near) % 1080 + 1080) % 1080 - 120; rect(C.G, x + 20, 150, 6, 42); rect(C.k, x + 18, 148, 10, 4); rect(C.Y, x + 19, 142, 8, 6); } // lamp posts
+  } else if (lvl.key === "bond") {
+    const awn = [C.r, C.e, C.u, C.n];
+    for (let i = -1; i < 9; i++) { // shopfronts
+      const x = ((i * 128 + near) % 1152 + 1152) % 1152 - 128;
+      rect(i % 2 ? C.G : C.Y, x, 96, 126, 96); rect(C.k, x, 96, 126, 2);
+      for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) rect(C.s, x + 10 + c * 28, 104 + r * 22, 16, 14);
+      rect(C.a, x + 12, 162, 44, 30); rect(C.k, x + 70, 158, 20, 34);
+      for (let k = 0; k < 8; k++) rect(k % 2 ? C.w : awn[(i + 9) % 4], x + 8 + k * 7, 150, 7, 8);
     }
-  } else if (lvl.key === "dublin") {
-    for (let i = -1; i < 10; i++) {
-      const x = ((i * 340 + far) % 3400 + 3400) % 3400 - 340;
-      cx.fillStyle = "#8d9a93"; cx.fillRect(x, 330, 340, 300);
-      if (i % 3 === 0) { cx.fillRect(x + 60, 230, 90, 110); rect("#7c8983", x + 54, 222, 102, 14); } // a Martello tower
-      for (let s = 0; s < 4; s++) rect("#7c8983", x + 180 + s * 36, 300 - (s % 2) * 20, 22, 40);
+    const ax = ((t * 0.6) % 600) - 100; // the aeroplane, writing in smoke
+    rect(C.w, ax, 24, 18, 3); rect(C.w, ax + 6, 20, 4, 11); rect(C.w, ax - 2, 22, 3, 7);
+    text("KREEMO", ax - 50, 22, C.G, null);
+  } else if (lvl.key === "park") {
+    for (let i = -1; i < 8; i++) { // trees
+      const x = ((i * 150 + far) % 1200 + 1200) % 1200 - 150;
+      rect(C.b, x + 40, 130, 10, 62); for (let r = 0; r < 4; r++) rect(r % 2 ? C.e : C.E, x + 14 + r * 4, 92 + r * 10, 62 - r * 8, 12);
+      rect(C.b, x + 112, 150, 8, 42); rect(C.e, x + 96, 120, 40, 34); rect(C.E, x + 100, 116, 30, 8);
     }
-    const doors = ["#c0392b", "#2c6fbb", "#e3b33a", "#3e8e41", "#7d3c98"];
-    for (let i = -1; i < 14; i++) {
-      const x = ((i * 150 + near) % 2100 + 2100) % 2100 - 150;
-      rect(i % 2 ? "#8b4a39" : "#9a5743", x, 300, 150, 300); rect("#5b2e22", x, 292, 150, 10);
-      for (let r = 0; r < 3; r++) { rect("#2b2f36", x + 20, 320 + r * 50, 22, 32); rect("#2b2f36", x + 108, 320 + r * 50, 22, 32); }
-      rect(doors[(i + 20) % 5], x + 62, 440, 26, 50); cx.fillStyle = "#f1e3b3"; cx.beginPath(); cx.arc(x + 75, 440, 13, Math.PI, 0); cx.fill();
+    for (let i = -1; i < 10; i++) { const x = ((i * 110 + near) % 1100 + 1100) % 1100 - 110; for (let k = 0; k < 10; k++) rect(C.k, x + k * 6, 178, 1, 14); rect(C.k, x, 180, 60, 1); } // railings
+  } else { // inside: wallpaper, windows onto the night, chandeliers
+    for (let x = 0; x < W; x += 16) for (let y = 0; y < 192; y += 16) { rect(C.r, x, y, 16, 16); rect(C.n, x + 7, y, 2, 16); rect(C.y, x + 3, y + 7, 2, 2); }
+    for (let i = -1; i < 7; i++) {
+      const x = ((i * 180 + near) % 1260 + 1260) % 1260 - 180;
+      rect(C.Y, x + 20, 40, 48, 72); rect(C.k, x + 24, 44, 40, 64); rect(C.Y, x + 43, 44, 2, 64); rect(C.Y, x + 24, 74, 40, 2); rect(C.w, x + 30, 52, 1, 1); rect(C.w, x + 54, 60, 1, 1);
+      rect(C.y, x + 120, 0, 2, 30); rect(C.y, x + 104, 30, 34, 4); for (let k = 0; k < 5; k++) { rect(C.w, x + 105 + k * 7, 24, 2, 6); if ((t >> 3) % 2 === k % 2) rect(C.Y, x + 105 + k * 7, 21, 2, 3); }
     }
-  } else {
-    cx.fillStyle = "#fff"; for (let i = 0; i < 60; i++) cx.fillRect((i * 157 + far * 0.3) % W + (i % 2 ? 0 : W) % W, (i * 71) % 260, 2, 2);
-    for (let i = -1; i < 8; i++) { // Gatsby's mansion, all its windows lit
-      const x = ((i * 520 + far) % 4160 + 4160) % 4160 - 520;
-      cx.fillStyle = "#0f1838"; cx.fillRect(x + 40, 250, 420, 200); cx.beginPath(); cx.moveTo(x + 20, 252); cx.lineTo(x + 250, 170); cx.lineTo(x + 480, 252); cx.fill();
-      cx.fillRect(x + 220, 140, 60, 50);
-      for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) rect((r + c + i) % 3 ? "#ffd36b" : "#ffe9ad", x + 66 + c * 48, 270 + r * 50, 20, 28);
-    }
-    const g = cx.createLinearGradient(0, 430, 0, H); g.addColorStop(0, "#0d1a3a"); g.addColorStop(1, "#050a1c");
-    cx.fillStyle = g; cx.fillRect(0, 430, W, 110);
-    for (let i = 0; i < 30; i++) rect("rgba(255,211,107,.25)", ((i * 97 + near) % W + W) % W, 450 + (i * 13) % 80, 30, 2);
   }
 }
 function drawTiles() {
-  const x0 = Math.floor(cam / T), x1 = x0 + Math.ceil(W / T) + 1;
+  const x0 = Math.floor(cam / T), x1 = x0 + W / T + 1, ox = Math.round(cam);
   for (let y = 0; y < ROWS; y++) for (let x = x0; x <= x1; x++) {
-    const ch = at(x, y), sx = x * T - cam, sy = y * T;
-    if (ch === "#") {
-      const top = at(x, y - 1) !== "#";
-      rect(lvl.tile[0], sx, sy, T, T); rect(lvl.tile[2], sx, sy + T - 3, T, 3); rect(lvl.tile[2], sx + ((x + y) % 2 ? 0 : 15), sy, 2, T);
-      if (top) { rect(lvl.tile[1], sx, sy, T, 8); rect(lvl.tile[2], sx, sy + 8, T, 2); }
-    } else if (ch === "=") { rect(lvl.ledge, sx, sy, T, 12); rect("rgba(0,0,0,.3)", sx, sy + 10, T, 2); rect("rgba(255,255,255,.25)", sx, sy, T, 2); }
-    else if (ch === "D") { rect("#6b4a2b", sx, sy, T, 12); rect("#4a321c", sx + T - 2, sy, 2, 12); }
-    else if (ch === "|") rect("#3b2716", sx + 12, sy, 8, T);
-  }
-  if (lvl.key === "westegg") { // the bay, under the dock
-    cx.fillStyle = "rgba(10,25,60,.85)"; cx.fillRect(0, 15 * T, W, 2 * T);
-  }
-}
-function drawPage(e) {
-  const x = e.x - cam, y = e.y;
-  cx.save(); cx.translate(x + 8, y + 11); cx.rotate(Math.sin((t + e.x) / 25) * 0.15);
-  rect("rgba(0,0,0,.25)", -6, -9, 16, 22); rect("#fbf7ee", -8, -11, 16, 22);
-  for (let i = 0; i < 4; i++) rect("#6d6a63", -5, -7 + i * 4, 10 - (i === 3 ? 4 : 0), 1);
-  cx.restore();
-}
-function drawCritic(e) {
-  const x = e.x - cam, y = e.y, f = e.vx > 0 ? 1 : -1;
-  rect("#1d1b22", x + 2, y + 12, 20, 18);                       // coat
-  rect("#f0d6bd", x + 4, y + 2, 16, 12);                        // face
-  rect("#1d1b22", x + 1, y - 6, 22, 4); rect("#1d1b22", x + 5, y - 14, 14, 9); // top hat
-  rect("#111", x + (f > 0 ? 13 : 6), y + 6, 3, 3);              // eye
-  cx.strokeStyle = "#c9a227"; cx.lineWidth = 2; cx.beginPath(); cx.arc(x + (f > 0 ? 15 : 8), y + 7, 4, 0, 7); cx.stroke(); // monocle
-  rect("#111", x + 4 + (Math.floor(t / 8) % 2) * 4, y + 28, 5, 3); rect("#111", x + 14 - (Math.floor(t / 8) % 2) * 4, y + 28, 5, 3);
-}
-function drawLetter(e) {
-  const x = e.x - cam, y = e.y, flap = Math.sin(t / 5) * 3;
-  rect("rgba(0,0,0,.2)", x + 3, y + 3, 30, 20); rect("#f4ead2", x, y, 30, 20);
-  cx.strokeStyle = "#8a7a5a"; cx.lineWidth = 1.5; cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x + 15, y + 11 + flap); cx.lineTo(x + 30, y); cx.stroke();
-  cx.save(); cx.translate(x + 15, y + 15); cx.rotate(-0.2); cx.fillStyle = "#c0392b"; cx.font = `bold 7px ${MONO}`; cx.textAlign = "center"; cx.fillText("REJECTED", 0, 0); cx.restore();
-}
-function drawExit(e) {
-  const x = e.x - cam, y = e.y;
-  if (lvl.exit === "GREEN") {
-    rect("#3b2716", x + 20, y + 30, 8, 66);
-    const glow = 0.6 + Math.sin(t / 15) * 0.3;
-    const g = cx.createRadialGradient(x + 24, y + 22, 2, x + 24, y + 22, 70);
-    g.addColorStop(0, `rgba(120,255,140,${glow})`); g.addColorStop(1, "rgba(120,255,140,0)");
-    cx.fillStyle = g; cx.fillRect(x - 50, y - 50, 150, 150); rect("#b8ffb8", x + 17, y + 15, 14, 14);
-  } else {
-    rect("#3b2716", x, y + 6, 48, 90); rect("#6b4a2b", x + 6, y + 14, 36, 82); rect("#e3b33a", x + 34, y + 54, 4, 4);
-    cx.font = `600 13px ${MONO}`; const w = cx.measureText(lvl.exit).width + 16;
-    rect("#fbf7ee", x + 24 - w / 2, y - 20, w, 22); rect("#1e2227", x + 24 - w / 2, y - 20, w, 2);
-    cx.fillStyle = "#1e2227"; cx.textAlign = "center"; cx.fillText(lvl.exit, x + 24, y - 4);
+    const ch = at(x, y), sx = x * T - ox, sy = y * T, top = at(x, y - 1) !== ch;
+    if (ch === "#") { // pavement and kerb
+      if (top) { rect(C.G, sx, sy, T, 4); rect(C.w, sx, sy, T, 1); rect(C.g, sx, sy + 4, T, 12); rect(C.K, sx, sy + 15, T, 1); rect(C.K, sx + 15, sy, 1, 16); }
+      else { rect(C.K, sx, sy, T, T); rect(C.k, sx + ((x * 7) % 12), sy + 6, 3, 1); }
+    } else if (ch === "g") {
+      if (top) { rect(C.E, sx, sy, T, 5); rect(C.l, sx, sy, T, 1); for (let k = 0; k < 4; k++) rect(C.e, sx + k * 4 + 1, sy + 4, 2, 2); rect(C.b, sx, sy + 6, T, 10); rect(C.B, sx + 3 + (x % 3) * 3, sy + 10, 2, 2); }
+      else { rect(C.b, sx, sy, T, T); rect(C.B, sx + (x * 5) % 12, sy + 6, 2, 2); }
+    } else if (ch === "w") { // floorboards
+      rect(top ? C.N : C.n, sx, sy, T, T); rect(C.b, sx, sy + 7, T, 1); rect(C.b, sx + ((x + y) % 2 ? 4 : 11), sy, 1, T); if (top) rect(C.O, sx, sy, T, 1);
+    } else if (ch === "B") { // crates, carts, sideboards
+      const col = lvl.inside ? C.b : C.B; rect(col, sx, sy, T, T); rect(C.k, sx, sy, T, 1); rect(C.k, sx, sy, 1, T); rect(C.k, sx + 15, sy, 1, T); rect(C.k, sx, sy + 15, T, 1);
+      if (lvl.inside) { rect(C.B, sx + 2, sy + 2, 12, 5); rect(C.y, sx + 7, sy + 9, 2, 2); } else { rect(C.b, sx + 2, sy + 7, 12, 1); rect(C.b, sx + 7, sy + 2, 1, 12); }
+    } else if (ch === "=") { // awnings, ledges, shelves
+      const col = lvl.key === "bond" ? C.r : lvl.inside ? C.b : C.g; rect(col, sx, sy, T, 6); rect(C.k, sx, sy + 6, T, 1);
+      if (lvl.key === "bond") for (let k = 0; k < 4; k++) rect(C.w, sx + k * 4, sy, 2, 6); else rect(C.w, sx, sy, T, 1);
+    } else if (ch === "b") { // a park bench
+      rect(C.e, sx, sy + 2, T, 3); rect(C.e, sx, sy - 4, T, 2); rect(C.k, sx + 2, sy + 5, 2, 11); rect(C.k, sx + 12, sy + 5, 2, 11);
+    }
   }
 }
-function drawWriter() {
-  if (P.hurt > 0 && Math.floor(P.hurt / 5) % 2) return;
-  const x = Math.round(P.x - cam), y = Math.round(P.y), f = P.face, run = P.on ? Math.floor(P.step) % 2 : 1;
-  rect("#2f4f78", x + 2, y + 12, 15, 13);                  // jacket
-  rect("#f0d6bd", x + 3, y + 2, 13, 11);                   // face
-  rect("#1e2227", x + 1, y - 1, 17, 4); rect("#1e2227", x + 4, y - 5, 11, 5); // hat
-  rect("#1e2227", x + (f > 0 ? 11 : 5), y + 6, 2, 2);      // eye
-  rect("#fbf7ee", x + (f > 0 ? 16 : -4), y + 14, 7, 9);     // pages under one arm
-  rect("#1e2227", x + 3 + (run ? 0 : 4), y + 25, 5, 5); rect("#1e2227", x + 11 - (run ? 0 : 4), y + 25, 5, 5);
+function drawEnts(cars) {
+  const ox = Math.round(cam);
+  for (const e of ents) {
+    if (e.dead || (e.k === "car") !== cars) continue;
+    const sx = Math.round(e.x) - ox, sy = Math.round(e.y);
+    if (sx < -40 || sx > W + 40) continue;
+    if (e.k === "flower") cx.drawImage(lvl.inside ? ROSE : FLOWERS[(e.x / 16 | 0) % 4], sx, sy);
+    if (e.k === "pigeon") { cx.save(); if (e.vx > 0) { cx.translate(sx + 8, sy); cx.scale(-1, 1); cx.drawImage(PIGEON[(t >> 4) % 2], 0, 0); } else cx.drawImage(PIGEON[(t >> 4) % 2], sx, sy); cx.restore(); }
+    if (e.k === "car") { cx.drawImage(e.look, sx, sy); if ((t >> 2) % 2) rect(C.G, sx + 30, sy + 8, 2, 1); }
+    if (e.k === "smoke") { rect("rgba(255,255,255,.55)", sx - 2, sy - 2, 10, 11); text(e.ch, sx, sy, C.g, null); }
+    if (e.k === "npc") {
+      const frames = PEOPLE[e.who]; cx.save(); cx.translate(sx + 16, sy); cx.scale(-1, 1); cx.drawImage(frames[0], 0, 0); cx.restore();
+      if (e.id === 1 && e.who === "rezia") { const s = PEOPLE.septimus[0]; cx.save(); cx.translate(sx + 30, sy); cx.scale(-1, 1); cx.drawImage(s, 0, 0); cx.restore(); }
+      if (!e.talked && (t >> 4) % 2) { rect(C.w, sx + 4, sy - 12, 9, 9); text("!", sx + 6, sy - 11, C.k, null); }
+    }
+    if (e.k === "exit") {
+      const sign = lvl.exitSign || ""; const w = textW(sign) + 6;
+      rect(C.b, sx + 14, sy + 12, 3, 36); rect(C.k, sx + 15 - w / 2, sy - 2, w, 12); rect(C.w, sx + 16 - w / 2, sy - 1, w - 2, 10); text(sign, sx + 18 - w / 2, sy + 1, C.k, null);
+      if ((t >> 4) % 2) text(">", sx + 16 + w / 2, sy + 1, C.w);
+    }
+  }
+}
+function drawClarissa() {
+  if (P.hurt > 0 && (P.hurt >> 2) % 2) return;
+  const f = PEOPLE.clarissa[P.on ? (Math.abs(P.vx) > 0.3 ? 1 + (Math.floor(P.step) % 2) : 0) : 1];
+  const sx = Math.round(P.x - cam) - 3, sy = Math.round(P.y) - 2;
+  cx.save(); if (P.face < 0) { cx.translate(sx + 16, sy); cx.scale(-1, 1); cx.drawImage(f, 0, 0); } else cx.drawImage(f, sx, sy); cx.restore();
 }
 function hud() {
-  rect("rgba(16,14,20,.55)", 0, 0, W, 38);
-  cx.fillStyle = "#fbf7ee"; cx.textAlign = "left"; cx.font = `600 18px ${FONT}`; cx.fillText(lvl.title, 16, 25);
-  cx.textAlign = "right"; cx.font = `500 15px ${MONO}`;
-  cx.fillText(`PAGES ${got}/${total}   ${"♥".repeat(Math.max(0, P.hp))}${"♡".repeat(3 - Math.max(0, P.hp))}   ${String(score).padStart(5, "0")}`, W - 16, 25);
+  rect(C.k, 0, 0, W, 14);
+  text(lvl.clock, 4, 4, C.Y, null);
+  cx.drawImage(lvl.inside ? ROSE : FLOWERS[lvl.flower], 72, 3); text(`${got}/${total}`, 84, 4, C.w, null);
+  for (let i = 0; i < 3; i++) text("*", 140 + i * 8, 4, i < P.hp ? C.R : C.K, null);
+  text(lvl.short, W - 4 - textW(lvl.short), 4, C.G, null);
 }
-function card(lines, title, sub, hint, extra) {
-  rect("rgba(10,10,16,.72)", 0, 0, W, H);
-  const bw = 720, bh = 380, bx = (W - bw) / 2, by = (H - bh) / 2;
-  rect("#16130f", bx + 10, by + 10, bw, bh); rect("#fbf7ee", bx, by, bw, bh); rect("#2f4f78", bx, by, bw, 8);
-  cx.textAlign = "center"; cx.fillStyle = "#2f4f78"; cx.font = `500 14px ${MONO}`; cx.fillText(sub.toUpperCase(), W / 2, by + 50);
-  cx.fillStyle = "#16130f"; cx.font = `600 38px ${FONT}`; cx.fillText(title, W / 2, by + 100);
-  cx.font = `400 20px ${FONT}`; lines.forEach((l, i) => cx.fillText(l, W / 2, by + 150 + i * 30));
-  if (extra) extra(by);
-  if (Math.floor(t / 30) % 2) { cx.fillStyle = "#2f4f78"; cx.font = `500 15px ${MONO}`; cx.fillText(hint, W / 2, by + bh - 28); }
+function box(x, y, w, h) { rect(C.k, x, y, w, h); rect(C.w, x + 2, y + 2, w - 4, 1); rect(C.w, x + 2, y + h - 3, w - 4, 1); rect(C.w, x + 2, y + 2, 1, h - 4); rect(C.w, x + w - 3, y + 2, 1, h - 4); }
+function drawTalk() {
+  const [who, line] = talk[talkI];
+  box(4, 166, W - 8, 70); cx.drawImage(PORTRAITS[who], 12, 176);
+  text(NAMES[who] || "", 52, 174, C.Y, null);
+  const shown = Math.min(line.length, talkT * 2);
+  wrap(line.slice(0, shown), 32).slice(0, 6).forEach((l, i) => text(l, 52, 186 + i * 9, C.w, null));
+  if (shown >= line.length && (t >> 4) % 2) text("+", W - 16, 226, C.Y, null);
 }
-function wrap(text, width) {
-  const out = []; let line = "";
-  for (const w of text.split(" ")) { if (cx.measureText(line + w).width > width) { out.push(line.trim()); line = ""; } line += w + " "; }
-  out.push(line.trim()); return out;
-}
-const tap = () => (matchMedia("(pointer: coarse)").matches ? "TAP" : "PRESS ENTER");
-
 function draw() {
   if (state === "title") {
-    lvl = LEVELS[Math.floor(t / 400) % 3]; cam = (t * 0.6) % 3000; backdrop();
-    rect("rgba(10,10,16,.45)", 0, 0, W, H);
-    cx.textAlign = "center"; cx.fillStyle = "#fbf7ee";
-    cx.font = `500 16px ${MONO}`; cx.fillText("LONGHAND PRESENTS", W / 2, 150);
-    cx.font = `600 76px ${FONT}`; cx.fillText("The Lost Pages", W / 2, 240);
-    cx.font = `italic 400 24px ${FONT}`; cx.fillText("Three cities. Three books. Get the pages to the printer.", W / 2, 290);
-    cx.font = `500 15px ${MONO}`; cx.fillText("← → TO RUN · ↑ OR SPACE TO JUMP · LAND ON CRITICS", W / 2, 360);
-    if (Math.floor(t / 30) % 2) { cx.fillStyle = "#ffd36b"; cx.font = `500 18px ${MONO}`; cx.fillText(`${tap()} TO START`, W / 2, 420); }
+    lvl = LEVELS[0]; cam = (t * 0.4) % 1800; backdrop();
+    rect("rgba(0,0,0,.55)", 0, 0, W, H);
+    cx.save(); cx.translate(96, 26); cx.scale(2, 2); cx.drawImage(PORTRAITS.woolf, 0, 0); cx.restore();
+    center("VIRGINIA WOOLF'S", 98, C.G);
+    cx.save(); cx.scale(2, 2); text("MRS. DALLOWAY", 25, 55, C.Y); cx.restore();
+    center("ONE DAY IN JUNE. A PARTY TONIGHT.", 140, C.w);
+    center("BUY THE FLOWERS. MIND THE MOTOR CARS.", 152, C.G);
+    if ((t >> 5) % 2) center(matchMedia("(pointer: coarse)").matches ? "TAP TO START" : "PRESS ENTER", 180, C.Y);
+    center("A LONGHAND GAME", 222, C.g, null);
     return;
   }
-  backdrop(); drawTiles();
-  for (const e of ents) if (!e.dead) ({ page: drawPage, critic: drawCritic, letter: drawLetter, exit: drawExit })[e.k](e);
-  drawWriter(); hud();
-  if (state === "intro") card(lvl.intro, lvl.title, `Level ${li + 1} of 3 · ${lvl.book}`, `${tap()} TO PLAY`);
-  if (state === "fail") card(["The critics got you this time.", "Every writer gets rejected. Try again."], "Rejected", lvl.title, `${tap()} TO TRY AGAIN`);
-  if (state === "done") card(lvl.outro, got === total ? "Every page saved" : `${got} of ${total} pages saved`, `${lvl.title} · ${lvl.book}`, `${tap()} TO GO ON`);
-  if (state === "win") card([], "You made it", "The Lost Pages", `${tap()} TO PLAY AGAIN`, (by) => {
-    cx.font = `italic 400 22px ${FONT}`; cx.fillStyle = "#16130f";
-    wrap(`“${LEVELS[2].quote}”`, 600).forEach((l, i) => cx.fillText(l, W / 2, by + 160 + i * 32));
-    cx.font = `500 13px ${MONO}`; cx.fillStyle = "#555"; cx.fillText(LEVELS[2].by.toUpperCase(), W / 2, by + 240);
-    cx.font = `600 22px ${FONT}`; cx.fillStyle = "#2f4f78"; cx.fillText(`Final score: ${score}`, W / 2, by + 290);
-  });
+  if (state === "cast") {
+    rect(C.k, 0, 0, W, H);
+    center("THE END", 10, C.Y); center(`FLOWERS GATHERED: ${allGot} OF ${allTotal}`, 22, C.w);
+    CAST.forEach(([k, name], i) => { const x = 6 + (i % 5) * 50, y = 40 + Math.floor(i / 5) * 76; cx.drawImage(PORTRAITS[k], x + 9, y); wrap(name, 8).forEach((l, j) => text(l, x + 25 - textW(l) / 2, y + 38 + j * 9, C.G, null)); });
+    center("VIRGINIA WOOLF, 1925", 196, C.g, null);
+    if (t > 90 && (t >> 5) % 2) center("PRESS ENTER", 218, C.Y);
+    return;
+  }
+  backdrop(); drawEnts(true); drawTiles(); drawEnts(false); drawClarissa(); hud();
+  if (state === "fail") { box(28, 80, 200, 70); center("OH DEAR.", 96, C.Y); center("SHE MUST BEGIN AGAIN.", 112, C.w); if ((t >> 5) % 2) center("PRESS ENTER", 132, C.G); }
+  if (talk) drawTalk();
 }
 
 /* ---------- loop ---------- */
@@ -358,9 +532,9 @@ function frame(now) {
   while (acc >= 1000 / 60) { update(); acc -= 1000 / 60; }
   draw(); requestAnimationFrame(frame);
 }
-// Jump straight to a level for testing: /play/?level=2
 const q = new URLSearchParams(location.search).get("level");
-if (q) { load(Math.max(0, Math.min(2, q - 1))); state = "intro"; }
-document.fonts.ready.then(() => requestAnimationFrame(frame));
-window.__game = { get state() { return state; }, get P() { return P; }, get got() { return got; } };
+if (q) { load(Math.max(0, Math.min(3, q - 1))); state = "play"; say(lvl.intro); }
+if (new URLSearchParams(location.search).has("cast")) { load(3); state = "cast"; t = 0; }
+requestAnimationFrame(frame);
+window.__game = { get state() { return state; }, get P() { return P; }, get talk() { return talk; }, get li() { return li; }, LEVELS, PORTRAITS };
 })();

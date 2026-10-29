@@ -1,17 +1,17 @@
 ---
 layout: null
-title: The Lost Pages
+title: Mrs. Dalloway, the game
 ---
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Lost Pages · A Longhand game</title>
-<meta name="description" content="A little side-scroller through three books from 1904 to 1925: Kafka's Prague, Joyce's Dublin and Gatsby's West Egg. Collect the lost pages, dodge the critics.">
-<meta property="og:title" content="The Lost Pages · A Longhand game">
-<meta property="og:description" content="Run through Kafka's Prague, Joyce's Dublin and Gatsby's West Egg. Collect the lost pages, dodge the critics.">
-<meta property="og:image" content="{{ '/assets/cards/lost-pages.png' | absolute_url }}">
+<title>Mrs. Dalloway: an 8-bit game · Longhand</title>
+<meta name="description" content="An 8-bit game of Virginia Woolf's Mrs. Dalloway: one day in June 1923, from Westminster to Bond Street to Regent's Park to the party. Buy the flowers, mind the motor cars.">
+<meta property="og:title" content="Mrs. Dalloway: an 8-bit game">
+<meta property="og:description" content="Mrs. Dalloway said she would buy the flowers herself. Now you can help.">
+<meta property="og:image" content="{{ '/assets/cards/dalloway-game.png' | absolute_url }}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="icon" href="{{ '/assets/icons/favicon.svg' | relative_url }}" type="image/svg+xml">
@@ -26,8 +26,10 @@ html,body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Litera
 .top{display:flex;justify-content:space-between;align-items:baseline;max-width:960px;margin:0 auto;padding:14px 16px;font:500 13px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase}
 .top a{color:var(--ink);text-decoration:none}.top a:hover{color:var(--accent)}
 .stage{max-width:960px;margin:0 auto;padding:0 16px}
-canvas{display:block;width:100%;aspect-ratio:16/9;background:#000;border:3px solid #fbf7ee;image-rendering:pixelated;touch-action:none}
-.pad{display:none;justify-content:space-between;gap:12px;margin:14px 0}
+canvas{display:block;width:100%;max-width:768px;margin:0 auto;aspect-ratio:16/15;background:#000;border:4px solid #fbf7ee;image-rendering:pixelated;image-rendering:crisp-edges;touch-action:none}
+.tools{display:flex;justify-content:flex-end;max-width:768px;margin:8px auto 0}
+.tools button{background:none;border:2px solid #fbf7ee;color:#fbf7ee;font:500 12px "IBM Plex Mono",monospace;letter-spacing:.1em;padding:6px 10px;cursor:pointer}
+.pad{display:none;justify-content:space-between;gap:12px;margin:14px auto;max-width:768px}
 .pad div{display:flex;gap:12px}
 .pad button{width:76px;height:76px;border-radius:50%;border:3px solid var(--ink);background:rgba(255,255,255,.08);color:var(--ink);font:600 30px "IBM Plex Mono",monospace;touch-action:none}
 .pad button:active{background:rgba(255,211,107,.35)}
@@ -37,12 +39,13 @@ canvas{display:block;width:100%;aspect-ratio:16/9;background:#000;border:3px sol
 </style>
 </head>
 <body>
-<div class="top"><a href="/">← Longhand</a><span>The Lost Pages</span></div>
+<div class="top"><a href="/">← Longhand</a><span>Mrs. Dalloway · the game</span></div>
 <div class="stage">
-  <canvas id="game" width="960" height="540" aria-label="The Lost Pages, a side-scrolling game"></canvas>
+  <canvas id="game" width="256" height="240" aria-label="Mrs. Dalloway, an 8-bit side-scrolling game"></canvas>
+  <div class="tools"><button id="mute" type="button">SOUND: ON</button></div>
   <div class="pad" aria-hidden="true"><div><button data-key="l">◀</button><button data-key="r">▶</button></div><button data-key="j">▲</button></div>
 </div>
-<p class="about">Three books, all now in the public domain: Kafka's <i>The Metamorphosis</i> (1915), Joyce's <i>Ulysses</i> (1922) and Fitzgerald's <i>The Great Gatsby</i> (1925). Run with the arrow keys (or the buttons, on a phone), jump with the up arrow or space, and land on the critics to knock them out. Every day, a new writer opens in <a href="/almanac/">the Longhand Almanac</a>.</p>
+<p class="about">From Virginia Woolf's <i>Mrs. Dalloway</i> (1925, now in the public domain): one day in June 1923, from Westminster to Bond Street to Regent's Park, and the party that night. Run with the arrow keys (or the buttons, on a phone), jump with the up arrow or space, and hop on the pigeons. Walk up to people to talk. Every day, a new writer opens in <a href="/almanac/">the Longhand Almanac</a>.</p>
 <script src="game.js"></script>
 </body>
 </html>
