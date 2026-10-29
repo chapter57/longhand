@@ -272,3 +272,40 @@
       body: Edgar Allan Poe, Charles Dickens, Elizabeth Barrett Browning, William Shakespeare, Walt Whitman, Federico García Lorca, Franz Kafka, Herman Melville, Leo Tolstoy, Arthur Rimbaud, Mark Twain and Emily Dickinson. One for every month of 2027, with hundreds more in the days between.
     - kind: end
       lines: ["Wall calendar, 11 × 8.5 in, wire-bound", "Get yours at the link in our bio", "longhandlit.com/calendar"]
+
+- id: dalloway-game
+  caption: |
+    We made an 8-bit video game of Mrs. Dalloway. 🌸
+
+    One day in June, 1923. Big Ben strikes the hours. Clarissa crosses London to buy the flowers herself: Westminster at ten, Bond Street at eleven (mind the motor cars, and the skywriting aeroplane), Regent's Park at noon, and the party that night.
+
+    Pixel portraits of the whole cast, a chiptune Big Ben, and every line from the 1925 novel. Free to play on your phone or computer: longhandlit.com/play (link in bio).
+
+    #MrsDalloway #VirginiaWoolf #PixelArt #8bit #RetroGaming #Bookstagram #ClassicBooks #IndieGame
+  slides:
+    - kind: picture
+      file: assets/play/shot-1.jpg
+      kicker: New · free to play
+      title: Mrs. Dalloway, the 8-bit game
+    - kind: picture
+      file: assets/play/shot-2.jpg
+      kicker: Westminster, 10 a.m.
+      title: Big Ben strikes. Hugh Whitbread says good morning.
+    - kind: picture
+      file: assets/play/shot-3.jpg
+      kicker: Bond Street, 11 a.m.
+      title: Mind the motor cars. And the skywriting.
+    - kind: picture
+      file: assets/play/shot-4.jpg
+      kicker: Regent's Park, noon
+      title: "\"Look, look, Septimus!\""
+    - kind: picture
+      file: assets/play/shot-5.jpg
+      kicker: The party
+      title: "\"For there she was.\""
+    - kind: picture
+      file: assets/play/shot-6.jpg
+      kicker: The cast
+      title: Ten pixel portraits, one for everyone.
+    - kind: end
+      lines: ["Play free at longhandlit.com/play", "On a phone or a computer", "Link in our bio"]
