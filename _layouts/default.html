@@ -18,16 +18,28 @@ document.documentElement.classList.add("js");
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 {%- assign page_title = page.title %}{% if page.collection == "almanac" %}{% assign page_title = page.name %}{% elsif page.collection == "reviews" %}{% assign page_title = page.book | append: ", reviewed by " | append: page.reviewer %}{% endif %}
-<title>{% if page_title %}{{ page_title }} · {% endif %}{{ site.title }}</title>
+{%- if page.collection == "almanac" %}
+{%- comment %} What people search for: "Bram Stoker, born November 8, 1847". {% endcomment %}
+{%- capture entry_date %}{{ "2000-" | append: page.month | append: "-01" | date: "%B" }} {{ page.day }}, {% if page.year < 0 %}{{ page.year | abs }} BC{% else %}{{ page.year }}{% endif %}{% endcapture %}
+{%- assign entry_kind = page.kind | downcase %}
+<title>{{ page.name }}, {{ entry_kind }} {{ entry_date }} · The Longhand Almanac</title>
+{%- else %}
+<title>{% if page.url == "/" %}The Longhand Almanac · A writer for every day of the year{% else %}{% if page_title %}{{ page_title }} · {% endif %}{{ site.title }}{% endif %}</title>
+{%- endif %}
+<link rel="canonical" href="{{ page.url | absolute_url }}">
 {%- assign description = page.dek | default: page.description | default: page.note | default: site.description | strip_newlines | strip %}
 <meta name="description" content="{{ description | escape }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:title" content="{{ page_title | default: site.title | escape }}">
 <meta property="og:description" content="{{ description | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-{%- if page.image %}
-<meta property="og:image" content="{{ page.image | absolute_url }}">
+{%- assign share_image = page.image %}{% if page.collection == "almanac" %}{% assign share_image = "/assets/cards/" | append: page.month | append: "-" | append: page.day | append: ".jpg" %}{% endif %}
+{%- if share_image %}
+<meta property="og:image" content="{{ share_image | absolute_url }}">
 <meta name="twitter:card" content="summary_large_image">
+{%- endif %}
+{%- if page.collection == "almanac" %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":{{ page.name | append: ", " | append: entry_kind | append: " " | append: entry_date | jsonify }},"description":{{ page.note | jsonify }},"image":{{ share_image | absolute_url | jsonify }},"url":{{ page.url | absolute_url | jsonify }},"about":{"@type":"Thing","name":{{ page.pictured | default: page.name | jsonify }}{% if page.wiki %},"sameAs":{{ page.wiki | jsonify }}{% endif %}},"publisher":{"@type":"Organization","name":"Longhand","url":{{ site.url | jsonify }}}}</script>
 {%- endif %}
 <link rel="icon" href="{{ '/assets/icons/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="icon" href="{{ '/assets/icons/favicon-32.png' | relative_url }}" sizes="32x32" type="image/png">
