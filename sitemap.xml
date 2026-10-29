@@ -9,6 +9,7 @@ permalink: /sitemap.xml
   <url><loc>{{ "/calendar/" | absolute_url }}</loc></url>
   <url><loc>{{ "/reviews/" | absolute_url }}</loc></url>
   <url><loc>{{ "/write/" | absolute_url }}</loc></url>
+  <url><loc>{{ "/play/" | absolute_url }}</loc></url>
   {%- for e in site.almanac %}
   <url><loc>{{ e.url | absolute_url }}</loc></url>
   {%- endfor %}

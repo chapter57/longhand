@@ -59,6 +59,7 @@ document.documentElement.classList.add("js");
       <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" or page.collection == "almanac" %} aria-current="page"{% endif %}>Almanac</a>
       <a href="{{ '/reviews/' | relative_url }}"{% if page.url == "/reviews/" or page.collection == "reviews" %} aria-current="page"{% endif %}>Reviews</a>
       <a href="{{ '/calendar/' | relative_url }}"{% if page.url == "/calendar/" %} aria-current="page"{% endif %}>Calendar</a>
+      <a href="{{ '/play/' | relative_url }}">Play</a>
       {% if site.newsletter != "" %}<a href="{{ site.newsletter }}">Newsletter</a>{% endif %}
       <a href="{{ '/#contact' | relative_url }}">Write to us</a>
     </nav>
@@ -78,6 +79,7 @@ document.documentElement.classList.add("js");
       <li><a href="{{ '/almanac/' | relative_url }}">The Almanac</a></li>
       <li><a href="{{ '/reviews/' | relative_url }}">Reviews</a></li>
       <li><a href="{{ '/calendar/' | relative_url }}">The 2027 calendar</a></li>
+      <li><a href="{{ '/play/' | relative_url }}">Mrs. Dalloway, the game</a></li>
       {% if site.newsletter != "" %}<li><a href="{{ site.newsletter }}">The Longhand Letter</a></li>{% endif %}
       <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
     </ul>
