@@ -522,6 +522,54 @@ Object.assign(memes, {
   ], "Exists in the False Self"),
 });
 
+// Halloween, 2026: a house listing and a candy tier list.
+const tierRow = ([t, c, who, why]) => `<div style="display:flex;border:3px solid #111;margin-bottom:-3px;min-height:140px">
+  <div style="width:150px;background:${c};display:flex;align-items:center;justify-content:center;font:bold 68px 'Liberation Sans';border-right:3px solid #111">${t}</div>
+  <div style="flex:1;padding:14px 22px;background:#1f1f1f;color:#fff"><div style="font:bold 38px 'Liberation Sans'">${who}</div><div style="font:29px/1.2 'Liberation Serif';margin-top:6px;color:#ddd">${why}</div></div></div>`;
+const usher = `<g transform="translate(540,470)">
+  <path d="M-380 260 h760 v40 h-760z" fill="#3b4a3a"/>
+  <rect x="-300" y="-60" width="600" height="320" fill="#6b6460" stroke="#111" stroke-width="7"/>
+  <path d="M-330 -60 L0 -230 L330 -60 Z" fill="#3a3533" stroke="#111" stroke-width="7"/>
+  <rect x="-250" y="-200" width="50" height="110" fill="#3a3533" stroke="#111" stroke-width="6"/><rect x="200" y="-190" width="50" height="100" fill="#3a3533" stroke="#111" stroke-width="6"/>
+  ${[-220, -110, 70, 180].map((x) => `<rect x="${x}" y="0" width="60" height="80" fill="#1b1b1b" stroke="#111" stroke-width="5"/><circle cx="${x + 30}" cy="40" r="10" fill="#6d6"/>`).join("")}
+  ${[-220, 180].map((x) => `<rect x="${x}" y="130" width="60" height="80" fill="#1b1b1b" stroke="#111" stroke-width="5"/>`).join("")}
+  <rect x="-45" y="120" width="90" height="140" fill="#2a1d14" stroke="#111" stroke-width="6"/>
+  <path d="M-20 -150 l14 40 l-20 30 l24 40 l-16 40 l20 50 l-12 50 l18 60 l-10 60 l14 40" fill="none" stroke="#111" stroke-width="5"/>
+  <path d="M-420 300 q200 -30 420 0 t420 0 v70 h-840z" fill="#1d2a2a"/>
+  <path d="M-20 300 l-8 40 l12 30" fill="none" stroke="#111" stroke-width="4"/>
+  <path d="M-360 -260 q30 -20 60 0 M300 -280 q30 -20 60 0 M220 -320 q20 -14 40 0" fill="none" stroke="#111" stroke-width="5"/>
+</g>`;
+
+Object.assign(memes, {
+  "usher-listing": { h: 1350, html: `
+    <div class="a" style="left:0;top:0;width:1080px;height:1350px;background:#f4f4f4"></div>
+    <div class="a" style="left:0;top:0;width:1080px;height:90px;background:#1277e1"></div>
+    <div class="a sans" style="left:34px;top:22px;font-size:40px;color:#fff">home·finder</div>
+    <div class="a" style="left:40px;top:120px;width:1000px;height:560px;background:#8f9aa3;border:3px solid #111;overflow:hidden">${`<svg viewBox="0 0 1080 700" width="1000" height="560" style="filter:url(#w)"><rect width="1080" height="700" fill="#8a929b"/>${usher}</svg>`}</div>
+    <div class="a sans" style="left:60px;top:150px;font-size:26px;color:#fff;background:#d23;padding:6px 12px">NEW LISTING · MOTIVATED SELLER</div>
+    <div class="a" style="left:40px;top:700px;width:1000px">
+      <div style="font:bold 60px 'Liberation Sans'">$0 <span style="font:32px 'Liberation Sans';color:#555">(family must go)</span></div>
+      <div style="font:bold 32px 'Liberation Sans';margin-top:6px">3 bd · 1 crypt · 1 tarn · 1 crack</div>
+      <div style="font:28px 'Liberation Sans';color:#555;margin-top:4px">The House of Usher, somewhere dreary · Est. many centuries</div>
+      <div style="font:35px/1.35 'Liberation Serif';margin-top:20px">Ancestral home with original features: <i>vacant eye-like windows</i>, a <i>black and lurid tarn</i>, and a <i>barely perceptible fissure</i> running zigzag from the roof down into the water. Owner (hypersensitive, plays guitar) seeks quiet buyer. Sister in the vault. Probably.</div>
+      <div style="font:bold 28px 'Liberation Sans';color:#d23;margin-top:18px">⚠ Listing status: sank into the tarn, 1839</div>
+    </div>
+    <div class="a serif" style="left:40px;top:1290px;font-size:26px;color:#666">Edgar Allan Poe, "The Fall of the House of Usher," 1839</div>` },
+
+  "gothic-candy": { h: 1350, html: `
+    <div class="cap" style="padding-top:28px">gothic classics as halloween candy</div>
+    <div class="a" style="left:30px;top:112px;width:1020px">
+      ${[["S", "#ff7f7f", "Dracula (1897)", "the full-size candy bar. everyone remembers which house."],
+        ["A", "#ffbf7f", "Frankenstein (1818)", "the homemade popcorn ball. assembled from parts. your parents warned you. it's great."],
+        ["A", "#ffbf7f", "Sleepy Hollow (1820)", "the plastic pumpkin pail. comes with a head."],
+        ["B", "#ffdf7f", "Jekyll and Hyde (1886)", "the two-flavor lollipop. one side is fine."],
+        ["C", "#ffff7f", "\"The Raven\" (1845)", "candy corn. says the same thing over and over. people have opinions."],
+        ["D", "#bfff7f", "The Turn of the Screw (1898)", "the unwrapped mystery candy. was it ever real? you'll argue forever."],
+        ["F", "#7fbfff", "The Castle of Otranto (1764)", "raisins. technically first. no one is excited."]].map(tierRow).join("")}
+    </div>
+    <div class="a serif" style="left:34px;top:1268px;font-size:36px">what did you get in your pillowcase?</div>` },
+});
+
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
 for (const [key, made] of Object.entries(memes)) {

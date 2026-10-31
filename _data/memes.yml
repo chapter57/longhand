@@ -120,6 +120,16 @@
 # New formats (a character sheet, a forum post, a starter pack, an alignment
 # chart, a tier list), drawn from scratch.
 
+- id: usher-listing
+  height: 1350
+  caption: "Just listed: charming ancestral home with original features. Some structural notes. Happy Halloween from Poe's \"The Fall of the House of Usher\" (1839). 🏚️"
+  alt: "Homemade real-estate listing on a site called home-finder: a doodled gloomy grey manor with green-lit windows, a crack running down its front, and crows overhead, tagged 'New listing, motivated seller.' '$0 (family must go). 3 bd, 1 crypt, 1 tarn, 1 crack. The House of Usher, somewhere dreary, est. many centuries. Ancestral home with original features: vacant eye-like windows, a black and lurid tarn, and a barely perceptible fissure running zigzag from the roof down into the water. Owner (hypersensitive, plays guitar) seeks quiet buyer. Sister in the vault. Probably.' In red: 'Listing status: sank into the tarn, 1839.'"
+
+- id: gothic-candy
+  height: 1350
+  caption: "Gothic classics as Halloween candy, ranked. Happy Halloween! 🎃 What did you get in your pillowcase?"
+  alt: "Homemade tier list, 'gothic classics as Halloween candy.' S: Dracula (1897), the full-size candy bar; everyone remembers which house. A: Frankenstein (1818), the homemade popcorn ball; assembled from parts; your parents warned you; it's great. A: Sleepy Hollow (1820), the plastic pumpkin pail; comes with a head. B: Jekyll and Hyde (1886), the two-flavor lollipop; one side is fine. C: 'The Raven' (1845), candy corn; says the same thing over and over; people have opinions. D: The Turn of the Screw (1898), the unwrapped mystery candy; was it ever real? F: The Castle of Otranto (1764), raisins; technically first; no one is excited. 'What did you get in your pillowcase?'"
+
 - id: holmes-stats
   pool: true
   height: 1350
