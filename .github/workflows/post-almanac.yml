@@ -16,9 +16,10 @@ on:
     - cron: "23 15 * * *"   # morning backup
     - cron: "7 17 * * *"    # midday: 1:07 p.m. summer, 12:07 p.m. winter
     - cron: "47 19 * * *"   # meme, on days that have one: 3:47 p.m. summer, 2:47 p.m. winter
-    - cron: "17 22 * * 0,3" # reel, Sundays and Wednesdays: 6:17 p.m. summer, 5:17 p.m. winter
-    - cron: "37 23 * * *"   # evening: 7:37 p.m. summer, 6:37 p.m. winter
-    - cron: "53 1 * * *"    # evening backup (still the same evening in New York)
+    - cron: "17 18 * * 0,3" # reel, Sundays and Wednesdays: 2:17 p.m. summer, 1:17 p.m. winter
+    - cron: "37 20 * * *"   # evening: 4:37 p.m. summer, 3:37 p.m. winter (GitHub has been
+                            # starting these hours late, so it posts in the evening anyway)
+    - cron: "53 22 * * *"   # evening backup
   workflow_dispatch:
     inputs:
       slot:
@@ -62,8 +63,8 @@ jobs:
             "47 13 * * *"|"23 15 * * *") slot=morning ;;
             "7 17 * * *") slot=midday ;;
             "47 19 * * *") slot=meme ;;
-            "17 22 * * 0,3") slot=reel ;;
-            "37 23 * * *"|"53 1 * * *") slot=evening ;;
+            "17 18 * * 0,3") slot=reel ;;
+            "37 20 * * *"|"53 22 * * *") slot=evening ;;
             *) slot="${CHOSEN:-morning}" ;;
           esac
           # A scheduled evening run that GitHub starts after midnight in New
