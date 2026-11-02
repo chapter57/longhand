@@ -208,9 +208,12 @@ def announcement(name):
     if not found:
         raise SystemExit(f"No announcement called {name!r} in _data/announcements.yml.")
     a = found[0]
-    link = {"url": a["link"], "name": a["title"], "note": a["description"], "image_file": a.get("image")}
+    # plain: true posts the words alone, with no link card or picture.
+    plain = bool(a.get("plain"))
+    link = {"url": a.get("link", "https://longhandlit.com/"), "name": a.get("title", "Longhand"),
+            "note": a.get("description", ""), "image_file": a.get("image")}
     return link, {"bluesky": a["bluesky"].strip(), "mastodon": a.get("mastodon", a["bluesky"]).strip(),
-                  "card": True, "card_title": a["title"],
+                  "card": not plain, "card_title": a.get("title"),
                   "hashtags": a.get("hashtags", "#Books #Reading #Literature"),
                   "tags": a.get("tags", ["BookSky", "Books", "Reading", "Literature", "Writing"])}
 
@@ -273,7 +276,8 @@ def link_facets(text):
 def post_bluesky(e, post, dry):
     text = post["bluesky"]
     if dry:
-        extra = "[card] " + e["url"] if post.get("card") else "[video] " + post["video"] if post.get("video") else "[image] " + post["image"][0]
+        extra = ("[card] " + e["url"] if post.get("card") else "[video] " + post["video"] if post.get("video")
+                 else "[image] " + post["image"][0] if post.get("image") else "[words only]")
         print(f"--- Bluesky ({len(text)} characters) ---\n{text}\n{extra}")
         return
     handle, password = os.environ.get("BLUESKY_HANDLE"), os.environ.get("BLUESKY_APP_PASSWORD")

@@ -159,3 +159,57 @@
     "Not yesterday I learned to know
     The love of bare November days
     Before the coming of the snow"
+
+# ---- Plain-text posts: the words alone, no card or picture ----
+
+- id: camus-born
+  plain: true
+  tags: [BookSky, Camus, Books, Literature]
+  bluesky: |
+    Albert Camus was born on this day in 1913 in Algeria. His father was killed in the First World War before Albert turned one.
+
+    When he won the Nobel Prize in 1957, one of the first letters he wrote went to Louis Germain, the schoolteacher who got a poor boy from Algiers into high school.
+
+- id: dorothy-day-born
+  plain: true
+  tags: [BookSky, DorothyDay, Books, Writing]
+  bluesky: |
+    Dorothy Day was born on this day in 1897 in Brooklyn.
+
+    A reporter before anything else, she started The Catholic Worker in 1933 with Peter Maurin and sold it on the street for a penny a copy. It still costs a penny. Then they opened their doors to anyone who needed a meal and a bed.
+
+- id: dylan-thomas-died
+  plain: true
+  tags: [BookSky, DylanThomas, Poetry]
+  bluesky: |
+    Dylan Thomas died on this day in 1953 in New York, at thirty-nine, in the middle of a reading tour.
+
+    In his last years he wrote in a shed above an estuary in Wales, and he read his poems aloud like no one before him. If you've never heard his recordings, tonight is a good night.
+
+- id: armistice-hemingway
+  plain: true
+  tags: [BookSky, VeteransDay, Hemingway, Books]
+  bluesky: |
+    At 11 a.m. on November 11, 1918, the guns stopped.
+
+    Hemingway had been badly wounded on the Italian front that summer, at eighteen. Ten years later he wrote A Farewell to Arms:
+
+    "I was always embarrassed by the words sacred, glorious, and sacrifice and the expression in vain."
+
+- id: tolstoy-astapovo
+  plain: true
+  tags: [BookSky, Tolstoy, Books, Literature]
+  bluesky: |
+    Leo Tolstoy died on this day in 1910, at eighty-two, in the stationmaster's house at Astapovo, a small railway stop. Ten days earlier he had left home in the night, without saying goodbye.
+
+    "Happy families are all alike; every unhappy family is unhappy in its own way."
+
+- id: marcus-thanks
+  plain: true
+  tags: [BookSky, Thanksgiving, Gratitude, Books]
+  bluesky: |
+    The first book of Marcus Aurelius's Meditations is a thank-you list: one person at a time, and what each one taught him.
+
+    "From my grandfather Verus I learned good morals and the government of my temper."
+
+    Who would be first on yours?
