@@ -465,3 +465,52 @@
       by: William Shakespeare · Twelfth Night
     - kind: end
       lines: ["Happy Thanksgiving from Longhand", "Thank you for reading along", "A new entry every day at longhandlit.com"]
+
+- id: frost-november-guest
+  caption: |
+    Robert Frost's "My November Guest" comes from his first book, A Boy's Will, published in 1913 when he was thirty-nine and living with his family in a cottage in England. His guest is his own Sorrow. She loves the rain, the bare trees and the mist, and she thinks he has no eye for them. He does. He just won't tell her.
+
+    A poem for the gray days before the snow. Swipe for all four stanzas.
+
+    Which November poem do you come back to?
+
+    #RobertFrost #Poetry #November #AutumnPoetry #ClassicPoetry #Bookstagram #PoetryCommunity
+  slides:
+    - kind: text
+      title: "\"My November Guest\""
+      body: Robert Frost, from his first book, A Boy's Will (1913). His guest is his own Sorrow, and she loves the dark days of autumn more than anyone.
+    - kind: poem
+      title: I
+      text: |
+        My Sorrow, when she's here with me,
+        Thinks these dark days of autumn rain
+        Are beautiful as days can be;
+        She loves the bare, the withered tree;
+        She walks the sodden pasture lane.
+    - kind: poem
+      title: II
+      text: |
+        Her pleasure will not let me stay.
+        She talks and I am fain to list:
+        She's glad the birds are gone away,
+        She's glad her simple worsted gray
+        Is silver now with clinging mist.
+    - kind: poem
+      title: III
+      text: |
+        The desolate, deserted trees,
+        The faded earth, the heavy sky,
+        The beauties she so truly sees,
+        She thinks I have no eye for these,
+        And vexes me for reason why.
+    - kind: poem
+      title: IV
+      text: |
+        Not yesterday I learned to know
+        The love of bare November days
+        Before the coming of the snow,
+        But it were vain to tell her so,
+        And they are better for her praise.
+      by: Robert Frost · A Boy's Will, 1913
+    - kind: end
+      lines: ["Save it for the next gray day", "Send it to someone who loves November", "A writer every day at longhandlit.com"]
