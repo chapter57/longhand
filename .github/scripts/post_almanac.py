@@ -6,7 +6,7 @@ posts (today's date in New York time):
 
   morning  the almanac entry from _almanac/: its short note, with a link card
            to the entry's page and its portrait
-  midday   a short quote from _data/social.yml, with the same link card
+  midday   a short quote from _data/social.yml, as plain words (no picture)
   evening  a short poem or passage from _data/social.yml, posted as its quote
            card picture (assets/cards/<month>-<day>.png), with a link to the entry
 
@@ -133,12 +133,13 @@ def midday(e, social):
     # A writer still in copyright gets a few words about them instead of a quote.
     if not q.get("author"):
         words = curly(str(q["text"]).strip())
-        return {"bluesky": words, "mastodon": words, "card": True}
+        return {"bluesky": words, "mastodon": words}
     # A quote that is already dialogue keeps its own quotation marks.
     quote = curly(q["text"]) if '"' in q["text"] else "“" + curly(q["text"]) + "”"
     words = (q.get("intro", "") + "\n\n" if q.get("intro") else "") + quote
     by = "— " + curly(q["author"]) + ", " + curly(q["source"])
-    return {"bluesky": words + "\n" + by, "mastodon": words + "\n" + by, "card": True}
+    # Plain words, no link card: the morning post already shows the portrait.
+    return {"bluesky": words + "\n" + by, "mastodon": words + "\n" + by}
 
 
 def evening(e, social):
