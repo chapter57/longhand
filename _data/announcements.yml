@@ -131,3 +131,17 @@
     One June day in 1923, struck out by Big Ben: Westminster, Bond Street (mind the motor cars), Regent's Park, and the party. Pixel portraits of the whole cast, a chiptune Westminster chime, and every line from Woolf's novel.
 
     Free to play:
+
+- id: gifts-for-readers
+  link: https://longhandlit.com/gifts/
+  title: Gifts for readers · The Longhand gift guide
+  description: Classic books for everyone on your list, from a long winter novel to a stocking-sized classic. Every link supports independent bookstores.
+  image: assets/cards/gifts.png
+  hashtags: "#Books #GiftIdeas #ClassicBooks #ShopIndie"
+  tags: [BookSky, Books, GiftIdeas, ClassicBooks, ShopIndie]
+  bluesky: |
+    The Longhand gift guide is here: twenty classic books for every reader on your list.
+
+    Middlemarch for the long winter. Rilke for the poet. West with the Night for the traveler. Little Women to read aloud. A Child's Christmas in Wales for the stocking.
+
+    Every link supports independent bookstores.

@@ -369,3 +369,99 @@
       by: Wilfred Owen · from the preface he drafted for his poems, 1918
     - kind: end
       lines: ["Remembered on November 4", "Wilfred Owen, 1893–1918", "The almanac is at the link in our bio"]
+
+- id: gifts-for-readers
+  caption: |
+    The Longhand gift guide is here: classic books for every reader on your list, from a long winter novel to a stocking-sized classic.
+
+    For the long winter: Middlemarch, Moby-Dick, Crime and Punishment. For the poetry lover: Keats, Dickinson, Rilke's Letters to a Young Poet. For the traveler: Beryl Markham's West with the Night. For young readers: Little Women, Treasure Island, Alice. Short and perfect: A Child's Christmas in Wales, The Fire Next Time, Candide.
+
+    Every book links to Bookshop.org, which supports independent bookstores. The whole guide is at longhandlit.com/gifts (link in bio).
+
+    #GiftsForReaders #BookGifts #HolidayGiftGuide #ClassicBooks #Bookstagram #ShopIndie #Bookshop
+  slides:
+    - kind: shelf
+      title: Gifts for readers.
+      sub: The Longhand gift guide, 2026. Classic books for everyone on your list.
+    - kind: book
+      n: For the long winter
+      title: Middlemarch
+      by: George Eliot, 1871–72
+      body: A whole English town, and the best novel about marriage, money and ambition ever written. Virginia Woolf called it one of the few English novels written for grown-up people.
+    - kind: book
+      n: For the poetry lover
+      title: Letters to a Young Poet
+      by: Rainer Maria Rilke
+      body: Ten letters of advice to a young writer, and to anyone trying to live a creative life. Small enough for a stocking, good for a lifetime.
+    - kind: book
+      n: For the traveler
+      title: West with the Night
+      by: Beryl Markham, 1942
+      body: A pilot's memoir of Kenya and of flying the Atlantic alone, from east to west. Hemingway admired it enormously.
+    - kind: book
+      n: For young readers
+      title: Little Women
+      by: Louisa May Alcott, 1868
+      body: Four sisters, a hard winter, and Jo, who wants to be a writer. To read aloud, and then alone.
+    - kind: book
+      n: Short, and perfect
+      title: A Child's Christmas in Wales
+      by: Dylan Thomas
+      body: The most beautiful thing ever written about Christmas, in about thirty pages. Read it aloud on Christmas Eve.
+    - kind: end
+      lines: ["Twenty books in the full guide", "longhandlit.com/gifts", "Link in our bio"]
+
+- id: hale-thanksgiving
+  caption: |
+    Thanksgiving has an author. Sarah Josepha Hale wrote "Mary Had a Little Lamb," edited one of the most popular magazines in nineteenth-century America for forty years, and spent seventeen years writing to governors, senators and five presidents, asking for one national day of thanks.
+
+    On October 3, 1863, in the middle of the Civil War, Abraham Lincoln proclaimed it.
+
+    #Thanksgiving #SarahJosephaHale #LiteraryHistory #WomenWriters #History #Gratitude
+  slides:
+    - kind: text
+      title: Thanksgiving has an author.
+      body: Her name was Sarah Josepha Hale, and you already know one of her poems. In 1830 she published "Mary Had a Little Lamb."
+    - kind: text
+      title: The editor
+      body: For forty years she edited Godey's Lady's Book, one of the most popular magazines in nineteenth-century America. She used it to campaign for women's education, and for a holiday.
+    - kind: text
+      title: One day for everyone
+      body: In her time, Thanksgiving was kept on different days in different states, or not at all. Hale wanted one national day of thanks, on the last Thursday of November.
+    - kind: text
+      title: Seventeen years of letters
+      body: She wrote editorials every year, and letters to governors, senators and five presidents, Taylor, Fillmore, Pierce, Buchanan and Lincoln.
+    - kind: text
+      title: October 3, 1863
+      body: In the middle of the Civil War, Abraham Lincoln answered. He proclaimed a national day of Thanksgiving for the last Thursday in November, and it has been kept every year since.
+    - kind: quote
+      text: to set apart and observe the last Thursday of November next, as a day of Thanksgiving and Praise to our beneficent Father who dwelleth in the Heavens.
+      by: Abraham Lincoln · Thanksgiving Proclamation, October 3, 1863
+    - kind: end
+      lines: ["Happy Thanksgiving from Longhand", "Save this for the table", "Send it to someone you're thankful for"]
+
+- id: thanks-in-their-words
+  caption: |
+    Happy Thanksgiving from Longhand. Four writers on gratitude: Walt Whitman, Lydia Maria Child (yes, it was grandfather's house), Henry David Thoreau and William Shakespeare.
+
+    We're thankful for you, for reading along every day.
+
+    #Thanksgiving #Gratitude #Poetry #WaltWhitman #Thoreau #Shakespeare #ClassicBooks
+  slides:
+    - kind: text
+      title: Thanks, in their words.
+      body: Four writers on gratitude, for Thanksgiving Day.
+    - kind: quote
+      text: Thanks in old age—thanks ere I go, for health, the midday sun, the impalpable air—for life, mere life.
+      by: Walt Whitman · "Thanks in Old Age," 1888
+    - kind: quote
+      text: Over the river, and through the wood, to grandfather's house we go.
+      by: Lydia Maria Child · "The New-England Boy's Song about Thanksgiving Day," 1844
+    - kind: quote
+      text: I am grateful for what I am and have. My thanksgiving is perpetual.
+      by: Henry David Thoreau · letter to a friend, December 1856
+    - kind: quote
+      text: I can no other answer make but thanks, and thanks, and ever thanks.
+      by: William Shakespeare · Twelfth Night
+    - kind: end
+      lines: ["Happy Thanksgiving from Longhand", "Thank you for reading along", "A new entry every day at longhandlit.com"]

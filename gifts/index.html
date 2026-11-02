@@ -1,0 +1,72 @@
+---
+layout: default
+title: Gifts for readers
+description: "The Longhand gift guide: classic books for every kind of reader, from a long winter novel to a stocking-sized classic, chosen from the almanac."
+image: /assets/cards/gifts.png
+---
+{%- assign shop = "https://bookshop.org/a/" | append: site.bookshop_id | append: "/" -%}
+<section class="lead wrap">
+  <div class="lead-copy">
+    <p class="kicker">The Longhand gift guide · 2026</p>
+    <h1>Gifts for readers.</h1>
+    <p class="dek">Classic books for every reader on your list, chosen from the almanac. Every link goes to Bookshop.org, which sends money to independent bookstores (and a little to Longhand, which keeps the almanac free).</p>
+  </div>
+</section>
+
+{%- capture shelves -%}
+For the long winter|Big books that take a season, and give back a lifetime.
+9780141439549|Middlemarch|George Eliot|A whole English town, and the best novel about marriage, money and ambition ever written. Virginia Woolf called it one of the few English novels written for grown-up people.
+9780142437247|Moby-Dick|Herman Melville|An adventure, a tragedy and an encyclopedia of whales. It sold poorly for the rest of Melville's life. Make up for it.
+9780679734505|Crime and Punishment|Fyodor Dostoevsky|A feverish student, an axe, and six hundred pages of conscience. Perfect for a snowed-in week.
+~
+For the poetry lover|Small books that last for years.
+9780140422108|The Complete Poems|John Keats|Everything he wrote before he died at twenty-five, including the odes.
+9780674018242|The Poems of Emily Dickinson|Emily Dickinson|Nearly eighteen hundred poems, found in a chest after she died.
+9780141192321|Letters to a Young Poet|Rainer Maria Rilke|Ten letters of advice to a young writer, and to anyone trying to live a creative life.
+9780811201803|One Hundred Poems from the Chinese|Kenneth Rexroth|Clear, quiet translations of Du Fu and the Song poets. A lovely thing to give.
+~
+For the traveler|Books to read before a trip, or instead of one.
+9780865477636|West with the Night|Beryl Markham|A pilot's memoir of Kenya and of flying the Atlantic alone. Hemingway admired it enormously.
+9780140283297|On the Road|Jack Kerouac|Typed on one long roll of paper in about three weeks.
+9780141439495|Gulliver's Travels|Jonathan Swift|Tiny people, giants, a flying island, and talking horses who are better than us.
+~
+For young readers (and the young at heart)|Classics to read aloud, and then alone.
+9780140390698|Little Women|Louisa May Alcott|Four sisters, a hard winter, and Jo, who wants to be a writer.
+9780140437683|Treasure Island|Robert Louis Stevenson|It began as a map drawn on a rainy holiday.
+9780141439761|Alice's Adventures in Wonderland|Lewis Carroll|Told on a boat trip, written down as a gift for a girl named Alice.
+9780140386332|The Neverending Story|Michael Ende|A boy reads a book and ends up inside it.
+~
+Short, and perfect|Stocking-sized classics you can read in an evening.
+9780811226226|A Child's Christmas in Wales|Dylan Thomas|The most beautiful thing ever written about Christmas, in about thirty pages.
+9780679744726|The Fire Next Time|James Baldwin|Two letters, one of them to his nephew, and they still burn.
+9780140455106|Candide|Voltaire|War, earthquake, shipwreck, and the advice to cultivate our garden.
+9780143106494|Madame Bovary|Gustave Flaubert|A woman who believed in novels, and the novel that made realism.
+{%- endcapture -%}
+
+{%- assign groups = shelves | split: "~" -%}
+{%- for g in groups -%}
+{%- assign lines = g | strip | newline_to_br | split: "<br />" -%}
+{%- assign head = lines[0] | strip | split: "|" %}
+<section class="dept wrap gifts">
+  <h2 class="label"><span>{{ head[0] }}</span><span class="label-note">{{ head[1] }}</span></h2>
+  <ul class="gift-list">
+  {%- for l in lines offset: 1 -%}
+    {%- assign b = l | strip | split: "|" -%}
+    {%- if b.size == 4 %}
+    <li><a class="gift" href="{{ shop }}{{ b[0] }}"><span class="gift-title">{{ b[1] }}</span><span class="gift-by">{{ b[2] }}</span><span class="gift-why">{{ b[3] }}</span><span class="gift-buy">Buy from an independent bookstore →</span></a></li>
+    {%- endif -%}
+  {%- endfor %}
+  </ul>
+</section>
+{%- endfor %}
+
+<section class="dept wrap gifts">
+  <h2 class="label"><span>From Longhand</span><span class="label-note">made here</span></h2>
+  <div class="cal-promo">
+    <a href="{{ '/calendar/' | relative_url }}"><img src="{{ '/assets/calendar/hanging-desk.jpg' | relative_url }}" alt="The Longhand Almanac 2027 wall calendar, hanging above a desk." width="1080" height="1350" loading="lazy"></a>
+    <div>
+      <p class="dept-title">The Longhand Almanac 2027, a wall calendar with a great writer for every month and a literary birthday for every day.</p>
+      <p class="actions"><a class="button" href="{{ '/calendar/' | relative_url }}">See the calendar</a><a class="text-link" href="{{ '/play/' | relative_url }}">Or give them our free Mrs. Dalloway game</a></p>
+    </div>
+  </div>
+</section>
