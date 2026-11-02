@@ -309,3 +309,63 @@
       title: Ten pixel portraits, one for everyone.
     - kind: end
       lines: ["Play free at longhandlit.com/play", "On a phone or a computer", "Link in our bio"]
+
+- id: chatterley-verdict
+  caption: |
+    November 2, 1960. After three hours, a jury of nine men and three women at the Old Bailey found Penguin Books not guilty, and D. H. Lawrence's last novel could be sold in full in Britain for the first time, thirty years after his death.
+
+    The trial is often remembered for one question the prosecutor put to the jury: would they want their wives or their servants to read it? The defense called thirty-five witnesses, among them E. M. Forster and a bishop.
+
+    When the book went on sale a week later, the first printing sold out in a day. Today in the almanac; the link is in our bio.
+
+    #DHLawrence #LadyChatterley #BannedBooks #LiteraryHistory #FreedomToRead #ClassicBooks #Bookstagram
+  slides:
+    - kind: cover
+      portrait: 11-2
+      kicker: November 2, 1960
+      title: Not guilty.
+      sub: The day a London jury freed Lady Chatterley's Lover.
+    - kind: text
+      title: Thirty years in hiding
+      body: D. H. Lawrence finished the novel in 1928 and had it printed privately in Florence. In Britain it could be sold only in cut versions. He died in 1930, without ever seeing it published in full at home.
+    - kind: text
+      title: Penguin printed 200,000 copies
+      body: In 1960, under a new obscenity law that let a book be defended for its literary merit, Penguin set out to publish the whole text. Before a single copy went on sale, the publisher was charged.
+    - kind: text
+      title: Thirty-five witnesses
+      body: The trial began at the Old Bailey on October 20. Novelists, critics, teachers and a bishop testified for the book. The prosecutor asked the jury whether they would want their wives or servants to read it.
+    - kind: text
+      title: The verdict
+      body: On November 2 the jury of nine men and three women found Penguin not guilty. When the book went on sale a week later, the first printing sold out in a day. Penguin dedicated the next edition to the twelve jurors.
+    - kind: quote
+      text: Ours is essentially a tragic age, so we refuse to take it tragically.
+      by: D. H. Lawrence · the first line of Lady Chatterley's Lover, 1928
+    - kind: end
+
+- id: owen-november-4
+  caption: |
+    On November 4, 1918, the poet Wilfred Owen was killed leading his men across the Sambre–Oise Canal, near the village of Ors in northern France. He was twenty-five. The war ended one week later. His mother received the telegram on Armistice Day, as the church bells were ringing for peace.
+
+    Only five of his poems were published while he was alive. His friend Siegfried Sassoon gathered the rest, and they changed how the English-speaking world wrote about war.
+
+    "My subject is War, and the pity of War. The Poetry is in the pity."
+
+    #WilfredOwen #WarPoets #Remembrance #ArmisticeDay #Poetry #LiteraryHistory
+  slides:
+    - kind: text
+      title: November 4, 1918
+      body: Wilfred Owen was killed leading his men across the Sambre–Oise Canal, near the village of Ors in northern France. He was twenty-five years old.
+    - kind: text
+      title: One week later, the war ended.
+      body: His mother received the telegram on Armistice Day, November 11, as the church bells were ringing for peace.
+    - kind: text
+      title: Five poems
+      body: Only five of his poems were published while he was alive. His friend Siegfried Sassoon gathered the rest, among them "Dulce et Decorum Est" and "Anthem for Doomed Youth." They came out in 1920.
+    - kind: quote
+      text: What passing-bells for these who die as cattle? Only the monstrous anger of the guns.
+      by: Wilfred Owen · "Anthem for Doomed Youth"
+    - kind: quote
+      text: My subject is War, and the pity of War. The Poetry is in the pity.
+      by: Wilfred Owen · from the preface he drafted for his poems, 1918
+    - kind: end
+      lines: ["Remembered on November 4", "Wilfred Owen, 1893–1918", "The almanac is at the link in our bio"]
