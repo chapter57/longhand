@@ -87,6 +87,35 @@ builds it and opens it without installing.
 - The playlist is whatever the search box is showing. Search for an artist
   and press Play to hear just them.
 
+## The icon
+
+The icon lives in `icon/`:
+
+- `icon.svg` is the artwork.
+- `icon-1024.png` is the artwork rendered at 1024 x 1024.
+- `CapsulePlayer.icns` is the Mac icon file built from that PNG.
+
+`make` copies the `.icns` into the app.
+
+**To use your own picture:** make a square PNG, ideally 1024 x 1024 with a
+transparent background. Save it as `icon/icon-1024.png`, then run:
+
+```bash
+pip3 install pillow
+```
+
+```bash
+make icon install
+```
+
+**Quicker, for just your Mac:** open any image in Preview and press
+Cmd-A, Cmd-C. In the Finder, select CapsulePlayer and choose
+**File > Get Info**. Click the small icon at the top left of the Info window
+and press Cmd-V. This change is lost the next time you run `make install`.
+
+If the Dock or Finder still shows the old icon, it's the Finder's icon cache.
+Log out and back in, or restart the Mac.
+
 ## Formats
 
 MP3, AAC/M4A (not DRM-protected iTunes Store `.m4p` files), WAV and AIFF.

@@ -6,6 +6,8 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>CapsulePlayer</string>
+	<key>CFBundleIconFile</key>
+	<string>CapsulePlayer.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>local.capsuleplayer</string>
 	<key>CFBundleInfoDictionaryVersion</key>

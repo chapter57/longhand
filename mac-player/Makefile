@@ -21,8 +21,11 @@ LIBS     = -framework Cocoa -framework AudioToolbox
 
 all: $(APP)
 
-$(APP): $(BIN) Info.plist
+ICON     = icon/CapsulePlayer.icns
+
+$(APP): $(BIN) Info.plist $(ICON)
 	cp Info.plist $(APP)/Contents/Info.plist
+	cp $(ICON) $(APP)/Contents/Resources/
 	touch $(APP)
 
 $(BIN): $(SOURCES) $(HEADERS)
@@ -36,7 +39,11 @@ install: all
 	rm -rf /Applications/$(APP)
 	cp -R $(APP) /Applications/
 
+# Rebuild the .icns after editing icon/icon-1024.png (needs: pip3 install pillow).
+icon:
+	python3 icon/make_icns.py icon/icon-1024.png $(ICON)
+
 clean:
 	rm -rf $(APP)
 
-.PHONY: all run install clean
+.PHONY: all run install clean icon
