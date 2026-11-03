@@ -69,3 +69,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  - mac-player
