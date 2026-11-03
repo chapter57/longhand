@@ -8,6 +8,8 @@
 
 // ---- small helpers ---------------------------------------------------------
 
+#define APP_NAME @"Mp3 Player"
+
 static NSString *U(const char *utf8) { return [NSString stringWithUTF8String:utf8]; }
 
 static NSString *FormatTime(double s)
@@ -157,6 +159,11 @@ static BOOL SameTrack(NSDictionary *a, NSDictionary *b)
 
 - (void)applicationWillFinishLaunching:(NSNotification *)n
 {
+    // Use our icon in the Dock straight away, even if the Finder still has
+    // an old blank one cached for this app.
+    NSString *iconPath = [[NSBundle mainBundle] pathForResource:@"AppIcon" ofType:@"icns"];
+    NSImage *icon = iconPath ? [[[NSImage alloc] initWithContentsOfFile:iconPath] autorelease] : nil;
+    if (icon) [NSApp setApplicationIconImage:icon];
     [self buildMenus];
 }
 
@@ -242,14 +249,14 @@ static NSMenuItem *AddItem(NSMenu *menu, NSString *title, SEL action, NSString *
     NSUInteger cmd = NSCommandKeyMask;
     NSMenu *bar = [[[NSMenu alloc] initWithTitle:@"MainMenu"] autorelease];
 
-    NSMenu *app = AddSubmenu(bar, @"CapsulePlayer");
-    AddItem(app, @"About CapsulePlayer", @selector(orderFrontStandardAboutPanel:), @"", 0, nil);
+    NSMenu *app = AddSubmenu(bar, APP_NAME);
+    AddItem(app, [@"About " stringByAppendingString:APP_NAME], @selector(orderFrontStandardAboutPanel:), @"", 0, nil);
     [app addItem:[NSMenuItem separatorItem]];
-    AddItem(app, @"Hide CapsulePlayer", @selector(hide:), @"h", cmd, nil);
+    AddItem(app, [@"Hide " stringByAppendingString:APP_NAME], @selector(hide:), @"h", cmd, nil);
     AddItem(app, @"Hide Others", @selector(hideOtherApplications:), @"h", cmd | NSAlternateKeyMask, nil);
     AddItem(app, @"Show All", @selector(unhideAllApplications:), @"", 0, nil);
     [app addItem:[NSMenuItem separatorItem]];
-    AddItem(app, @"Quit CapsulePlayer", @selector(terminate:), @"q", cmd, nil);
+    AddItem(app, [@"Quit " stringByAppendingString:APP_NAME], @selector(terminate:), @"q", cmd, nil);
 
     NSMenu *file = AddSubmenu(bar, @"File");
     AddItem(file, @"Choose Music Folder...", @selector(chooseFolder:), @"o", cmd, self);
@@ -324,7 +331,7 @@ static NSTableColumn *AddColumn(NSTableView *table, NSString *ident, NSString *t
                                                     NSMiniaturizableWindowMask | NSResizableWindowMask)
                                            backing:NSBackingStoreBuffered
                                              defer:NO];
-    [window setTitle:@"CapsulePlayer"];
+    [window setTitle:APP_NAME];
     [window setMinSize:NSMakeSize(620, 380)];
     [window setReleasedWhenClosed:NO];
     [window center];
@@ -509,7 +516,7 @@ static NSTableColumn *AddColumn(NSTableView *table, NSString *ident, NSString *t
     double dur = active ? [engine duration] : 0;
     double pos = active ? [engine currentTime] : 0;
 
-    NSString *title = t ? [self displayName:t] : @"CapsulePlayer";
+    NSString *title = t ? [self displayName:t] : APP_NAME;
     if (t && !loadingTrack && dur > 0) title = [NSString stringWithFormat:@"%@  (%@)", title, FormatTime(dur)];
     if (![[titleField stringValue] isEqualToString:title]) [titleField setStringValue:title];
 
@@ -525,7 +532,7 @@ static NSTableColumn *AddColumn(NSTableView *table, NSString *ident, NSString *t
     [seekSlider setMaxValue:(dur > 0 ? dur : 1)];
     [seekSlider setDoubleValue:pos];
 
-    NSString *wt = t ? [self displayName:t] : @"CapsulePlayer";
+    NSString *wt = t ? [self displayName:t] : APP_NAME;
     if (![[window title] isEqualToString:wt]) [window setTitle:wt];
 }
 
@@ -1037,7 +1044,7 @@ static NSTableColumn *AddColumn(NSTableView *table, NSString *ident, NSString *t
         NSAlert *alert = [[[NSAlert alloc] init] autorelease];
         [alert setMessageText:@"Connect to your Time Capsule in the Finder"];
         [alert setInformativeText:@"In the Finder choose Go > Connect to Server (or click your Time Capsule under "
-                                  @"Shared in the sidebar), then click Rescan. After that, CapsulePlayer will "
+                                  @"Shared in the sidebar), then click Rescan. After that, Mp3 Player will "
                                   @"remember how to reconnect on its own."];
         [alert runModal];
         return;

@@ -1,4 +1,4 @@
-# CapsulePlayer
+# Mp3 Player
 
 A small, fast Winamp-style MP3 player for the Mac that plays your music
 straight off an AirPort Time Capsule (or any network share).
@@ -9,7 +9,7 @@ PowerPC Mac running **Mac OS X 10.5 Leopard** up to current macOS.
 ## Why it doesn't stutter
 
 Network shares are slow and bursty, and a Time Capsule's disk spins down when
-idle. CapsulePlayer never streams audio directly off the network:
+idle. Mp3 Player never streams audio directly off the network:
 
 - **Each song is copied into memory before it plays.** A Wi-Fi hiccup halfway
   through a song can't cause a dropout.
@@ -19,7 +19,7 @@ idle. CapsulePlayer never streams audio directly off the network:
 - **Reads that fail are retried** with growing pauses (up to about 15 seconds),
   which is enough for a sleeping Time Capsule disk to spin up.
 - **If the share drops off** (after sleep, say), it is **mounted again
-  automatically**. CapsulePlayer remembers the server address from the first
+  automatically**. Mp3 Player remembers the server address from the first
   time you connect.
 - **Bad files are skipped** rather than stopping playback.
 - **The library index is cached on your Mac**, so thousands of songs show up
@@ -34,21 +34,19 @@ You need Apple's compiler:
   (or Xcode 3.x from developer.apple.com).
 - **Lion and later:** run `xcode-select --install` in Terminal.
 
-Then, in Terminal:
+Then, in Terminal, go into this folder (`Mp3Player` if you downloaded the
+zip, `mac-player` in the repository) and build and install:
 
 ```bash
-cd mac-player
-```
-
-```bash
-make
+cd ~/Downloads/Mp3Player
 ```
 
 ```bash
 make install
 ```
 
-The last step copies **CapsulePlayer.app** into /Applications. `make run`
+The last step copies **Mp3 Player.app** into /Applications (and removes
+the older CapsulePlayer.app, if it's there). `make run`
 builds it and opens it without installing.
 
 ## First run
@@ -57,7 +55,7 @@ builds it and opens it without installing.
    the sidebar, or choose **Go > Connect to Server** and enter
    `afp://Your-Time-Capsule.local`. Tick "Remember this password in my
    keychain".
-2. Open CapsulePlayer and choose your **music folder** on the Time Capsule.
+2. Open Mp3 Player and choose your **music folder** on the Time Capsule.
    Pick the music folder itself, not the whole disk.
 3. The first scan reads the tags of every song over the network. With
    thousands of songs it can take a few minutes, and you can play music
@@ -93,7 +91,7 @@ The icon lives in `icon/`:
 
 - `icon.svg` is the artwork.
 - `icon-1024.png` is the artwork rendered at 1024 x 1024.
-- `CapsulePlayer.icns` is the Mac icon file built from that PNG.
+- `AppIcon.icns` is the Mac icon file built from that PNG.
 
 `make` copies the `.icns` into the app.
 
@@ -109,7 +107,7 @@ make icon install
 ```
 
 **Quicker, for just your Mac:** open any image in Preview and press
-Cmd-A, Cmd-C. In the Finder, select CapsulePlayer and choose
+Cmd-A, Cmd-C. In the Finder, select Mp3 Player and choose
 **File > Get Info**. Click the small icon at the top left of the Info window
 and press Cmd-V. This change is lost the next time you run `make install`.
 
@@ -132,5 +130,6 @@ supported.
 - `src/AppController.m`: the window, playlist and controls
 
 Settings live in the app's preferences. The library cache is
-`~/Library/Application Support/CapsulePlayer/Library.plist`; delete it to
+`~/Library/Application Support/CapsulePlayer/Library.plist` (it keeps the
+app's original name, so earlier scans carry over); delete it to
 force a full rescan.

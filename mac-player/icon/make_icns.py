@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Turn a 1024x1024 PNG into a Mac .icns icon file.
 
-    python3 icon/make_icns.py icon/icon-1024.png icon/CapsulePlayer.icns
+    python3 icon/make_icns.py icon/icon-1024.png icon/AppIcon.icns
 
 Needs Pillow (pip3 install pillow). Writes both the old icon formats that
 Mac OS X 10.5 Leopard reads and the PNG-based sizes (up to 1024px Retina)

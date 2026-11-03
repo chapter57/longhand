@@ -5,23 +5,23 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>CapsulePlayer</string>
+	<string>Mp3Player</string>
 	<key>CFBundleIconFile</key>
-	<string>CapsulePlayer.icns</string>
+	<string>AppIcon.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>local.capsuleplayer</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>CapsulePlayer</string>
+	<string>Mp3 Player</string>
 	<key>CFBundleDisplayName</key>
-	<string>CapsulePlayer</string>
+	<string>Mp3 Player</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.5</string>
 	<key>NSPrincipalClass</key>
