@@ -6,7 +6,8 @@
 //
 // The index is cached in ~/Library/Application Support/CapsulePlayer, so
 // it shows up instantly at launch; rescans only read tags from new or
-// changed files.
+// changed files. While scanning, songs appear as they're found (named by
+// their folders), then get their real titles as the tags are read.
 @interface Library : NSObject {
     id delegate;
     NSString *rootPath;
@@ -14,6 +15,7 @@
     BOOL scanning;
     BOOL rescanWhenDone;
     NSInteger generation;
+    NSTimeInterval lastSave;
 }
 - (id)initWithDelegate:(id)d;
 - (NSString *)rootPath;

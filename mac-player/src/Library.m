@@ -23,12 +23,12 @@ static BOOL ShouldSkipFolder(NSString *name)
 
 static NSString *OrEmpty(NSString *s) { return s ? s : @""; }
 
-static NSDictionary *MakeTrack(NSString *full, NSString *rel, NSNumber *size, NSNumber *mtime)
+// Builds a track entry. `tags` may be nil (not read yet): then the names
+// come from the folder layout, Artist/Album/01 Song.mp3, and the entry is
+// marked untagged so the tags get read later.
+static NSDictionary *MakeTrack(NSString *full, NSString *rel, NSNumber *size, NSNumber *mtime,
+                               NSDictionary *tags, BOOL tagged)
 {
-    NSString *ext = [[full pathExtension] lowercaseString];
-    NSDictionary *tags = [ext isEqualToString:@"mp3"] ? [TagReader tagsForFile:full] : nil;
-
-    // Fall back on the folder layout: Artist/Album/01 Song.mp3
     NSArray *parts = [rel pathComponents];
     NSUInteger n = [parts count];
     NSString *stem = [[parts lastObject] stringByDeletingPathExtension];
@@ -52,8 +52,21 @@ static NSDictionary *MakeTrack(NSString *full, NSString *rel, NSNumber *size, NS
             size, @"size",
             mtime, @"mtime",
             search, @"search",
+            [NSNumber numberWithBool:tagged], @"tagged",
             nil];
 }
+
+// Entries cached before the "tagged" key existed were all fully read.
+static BOOL IsTagged(NSDictionary *t)
+{
+    NSNumber *n = [t objectForKey:@"tagged"];
+    return n == nil || [n boolValue];
+}
+
+@interface Library (Private)
+- (void)postPartial:(NSArray *)found generation:(NSNumber *)gen status:(NSString *)status;
+- (void)saveCache;
+@end
 
 @implementation Library
 
@@ -127,6 +140,7 @@ static NSDictionary *MakeTrack(NSString *full, NSString *rel, NSNumber *size, NS
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
     NSString *root = [job objectForKey:@"root"];
+    NSNumber *gen = [job objectForKey:@"generation"];
     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithDictionary:job];
 
     // Old entries by path, so unchanged files don't need re-reading.
@@ -142,10 +156,13 @@ static NSDictionary *MakeTrack(NSString *full, NSString *rel, NSNumber *size, NS
         NSString *url = [VolumeHelper remountURLForPath:root];
         if (url) [result setObject:url forKey:@"serverURL"];
 
+        // Pass 1: list every song quickly (no file is opened), so the
+        // whole library shows up within seconds, named by its folders.
         NSMutableArray *found = [NSMutableArray array];
+        NSMutableArray *needTags = [NSMutableArray array]; // {index, rel}
         NSDirectoryEnumerator *en = [fm enumeratorAtPath:root];
         NSString *rel;
-        NSUInteger seen = 0, fresh = 0;
+        NSTimeInterval lastPost = [NSDate timeIntervalSinceReferenceDate];
         NSAutoreleasePool *inner = [[NSAutoreleasePool alloc] init];
         while ((rel = [en nextObject])) {
             NSString *name = [rel lastPathComponent];
@@ -162,34 +179,109 @@ static NSDictionary *MakeTrack(NSString *full, NSString *rel, NSNumber *size, NS
             NSNumber *size = [NSNumber numberWithUnsignedLongLong:[attrs fileSize]];
             NSNumber *mtime = [NSNumber numberWithDouble:[[attrs fileModificationDate] timeIntervalSinceReferenceDate]];
             NSDictionary *prev = [old objectForKey:full];
-            if (prev && [[prev objectForKey:@"size"] isEqual:size] && [[prev objectForKey:@"mtime"] isEqual:mtime]) {
+            if (prev && IsTagged(prev) && [[prev objectForKey:@"size"] isEqual:size] &&
+                [[prev objectForKey:@"mtime"] isEqual:mtime]) {
                 [found addObject:prev];
             } else {
-                [found addObject:MakeTrack(full, rel, size, mtime)];
-                fresh++;
+                BOOL mp3 = [[[name pathExtension] lowercaseString] isEqualToString:@"mp3"];
+                [found addObject:MakeTrack(full, rel, size, mtime, nil, !mp3)];
+                if (mp3) [needTags addObject:[NSArray arrayWithObjects:
+                                              [NSNumber numberWithUnsignedInteger:[found count] - 1], rel, nil]];
             }
-            seen++;
-            if (seen % 200 == 0) {
-                NSString *msg = [NSString stringWithFormat:@"Scanning library... %lu songs (%lu new)",
-                                 (unsigned long)seen, (unsigned long)fresh];
-                [self performSelectorOnMainThread:@selector(postStatus:) withObject:msg waitUntilDone:NO];
+
+            NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
+            if (now - lastPost > 1.5) {
+                lastPost = now;
+                [self postPartial:found generation:gen
+                           status:[NSString stringWithFormat:@"Finding songs... %lu so far",
+                                   (unsigned long)[found count]]];
                 [inner release];
                 inner = [[NSAutoreleasePool alloc] init];
             }
         }
         [inner release];
 
-        // If the share vanished mid-scan the listing is incomplete: keep
-        // the old index rather than throwing songs away.
         if (![fm fileExistsAtPath:root]) {
+            // The share vanished mid-listing, so the list is incomplete:
+            // put the previous library back rather than losing songs.
             [result setObject:@"Lost the connection while scanning; kept the previous library" forKey:@"error"];
+            [result setObject:[NSNumber numberWithBool:YES] forKey:@"restore"];
         } else {
+            NSUInteger total = [needTags count], done = 0;
+            if (total) {
+                [self postPartial:found generation:gen
+                           status:[NSString stringWithFormat:@"Found %lu songs. Reading song details: 0 of %lu",
+                                   (unsigned long)[found count], (unsigned long)total]];
+            }
+
+            // Pass 2: read the real titles / artists from the new songs.
+            // (Indexed loop: the autorelease pool is drained as we go, so
+            // nothing created inside it may outlive one stretch of songs.)
+            inner = [[NSAutoreleasePool alloc] init];
+            NSUInteger k;
+            for (k = 0; k < total; k++) {
+                NSArray *job2 = [needTags objectAtIndex:k];
+                NSUInteger idx = [[job2 objectAtIndex:0] unsignedIntegerValue];
+                NSDictionary *entry = [found objectAtIndex:idx];
+                NSDictionary *tags = [TagReader tagsForFile:[entry objectForKey:@"path"]];
+                if (!tags && ![fm fileExistsAtPath:root]) {
+                    // Connection gone. Keep what we have; the rest stay
+                    // marked untagged and get read on the next scan.
+                    [result setObject:@"Lost the connection; the remaining song details will be read next scan"
+                               forKey:@"error"];
+                    break;
+                }
+                if (tags) {
+                    [found replaceObjectAtIndex:idx withObject:MakeTrack([entry objectForKey:@"path"],
+                                                                         [job2 objectAtIndex:1],
+                                                                         [entry objectForKey:@"size"],
+                                                                         [entry objectForKey:@"mtime"], tags, YES)];
+                }
+                done++;
+                NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
+                if (now - lastPost > 3.0) {
+                    lastPost = now;
+                    [self postPartial:found generation:gen
+                               status:[NSString stringWithFormat:@"Reading song details: %lu of %lu",
+                                       (unsigned long)done, (unsigned long)total]];
+                    [inner release];
+                    inner = [[NSAutoreleasePool alloc] init];
+                }
+            }
+            [inner release];
             [result setObject:found forKey:@"tracks"];
         }
     }
 
     [self performSelectorOnMainThread:@selector(scanFinished:) withObject:result waitUntilDone:NO];
     [pool release];
+}
+
+// Called from the scan thread: hands a snapshot of the list so far to the
+// main thread.
+- (void)postPartial:(NSArray *)found generation:(NSNumber *)gen status:(NSString *)status
+{
+    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSArray arrayWithArray:found], @"tracks", gen, @"generation", status, @"status", nil];
+    [self performSelectorOnMainThread:@selector(partialResults:) withObject:info waitUntilDone:NO];
+}
+
+- (void)saveCache
+{
+    NSDictionary *cache = [NSDictionary dictionaryWithObjectsAndKeys:rootPath, @"root", tracks, @"tracks", nil];
+    [cache writeToFile:[Library cachePath] atomically:YES];
+    lastSave = [NSDate timeIntervalSinceReferenceDate];
+}
+
+- (void)partialResults:(NSDictionary *)info
+{
+    if ([[info objectForKey:@"generation"] integerValue] != generation) return;
+    [tracks release];
+    tracks = [[info objectForKey:@"tracks"] retain];
+    [delegate libraryChanged:self];
+    [delegate library:self status:[info objectForKey:@"status"]];
+    // Save progress now and then, so quitting mid-scan loses little.
+    if ([NSDate timeIntervalSinceReferenceDate] - lastSave > 15.0) [self saveCache];
 }
 
 - (void)scanFinished:(NSDictionary *)result
@@ -200,17 +292,16 @@ static NSDictionary *MakeTrack(NSString *full, NSString *rel, NSNumber *size, NS
 
     if ([[result objectForKey:@"generation"] integerValue] == generation) {
         NSArray *found = [result objectForKey:@"tracks"];
+        NSString *error = [result objectForKey:@"error"];
+        if ([result objectForKey:@"restore"]) found = [result objectForKey:@"old"];
         if (found) {
             [tracks release];
             tracks = [found retain];
-            NSDictionary *cache = [NSDictionary dictionaryWithObjectsAndKeys:rootPath, @"root", tracks, @"tracks", nil];
-            [cache writeToFile:[Library cachePath] atomically:YES];
+            [self saveCache];
             [delegate libraryChanged:self];
-            [delegate library:self status:[NSString stringWithFormat:@"Library up to date: %lu songs",
-                                           (unsigned long)[tracks count]]];
-        } else {
-            [delegate library:self status:[result objectForKey:@"error"]];
         }
+        [delegate library:self status:error ? error :
+            [NSString stringWithFormat:@"Library up to date: %lu songs", (unsigned long)[tracks count]]];
     } else {
         rescanWhenDone = YES; // the folder changed while we were scanning
     }
