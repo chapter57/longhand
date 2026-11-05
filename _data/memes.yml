@@ -71,28 +71,38 @@
 # in rotation, on days that have no meme of their own.
 
 - id: well-read-quadrant
+  month: 11
+  day: 21
   pool: true
   height: 1350
   caption: "Be honest: which corner are you in?"
   alt: "Homemade chart: 'How well-read you are vs. how well-read you look.' Actually well-read but looks unread: a guy in a cap with a library card owing $0.40, cracked Penguin paperbacks, drugstore glasses, 61 books read this year. Actually well-read and looks it: reads Proust in French for fun, pencil notes in every margin, owns the whole Loeb Classical Library, has read Ulysses twice. Looks unread and is: 9 hours 41 minutes of screen time, a 0 of 52 reading challenge, 'i watched the movie', last book assigned in 2011. Looks well-read but isn't: a guy in sunglasses with Infinite Jest bookmarked on page 12, shelves sorted by color, a literary magazine tote bag, 312 unread books on his Kindle."
 
 - id: reader-iq-curve
+  month: 11
+  day: 23
   pool: true
   height: 1350
   caption: "The porch guy was right."
   alt: "Homemade IQ-curve meme, 'The Reader IQ Curve.' Low IQ, a smiling doodle holding a book: 'The book was good. I liked it.' Midwit, a crying doodle in a beanie: 'YOU CAN'T JUST ENJOY A BOOK,' with lines like 'The author is dead, actually' and 'Hasn't finished a novel since 2019.' High IQ, Joshua Reynolds's portrait of Samuel Johnson: 'The book was good. I liked it,' and Johnson's 1757 line, 'The only end of writing is to enable the readers better to enjoy life, or better to endure it.'"
 
 - id: unmask-russian-novel
+  month: 11
+  day: 28
   pool: true
   caption: "Every single time."
   alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE GREAT RUSSIAN NOVEL.' Bottom: underneath is Dostoevsky, labeled 'A GUY IN ST. PETERSBURG WHO HASN'T SLEPT IN FOUR DAYS.'"
 
 - id: unmask-great-american-novel
+  month: 11
+  day: 25
   pool: true
   caption: "Old sport, we've figured it out."
   alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'THE GREAT AMERICAN NOVEL.' Bottom: underneath is F. Scott Fitzgerald, labeled 'A GUY STARING AT A GREEN LIGHT ACROSS THE WATER.'"
 
 - id: unmask-literary-fiction
+  month: 11
+  day: 24
   pool: true
   caption: "We've read this one. We've read all of them."
   alt: "Homemade unmasking meme. Top: a doodled guy pulls the sheet off a tied-up ghost labeled 'LITERARY FICTION.' Bottom: underneath is a bald doodled man in glasses and a tweed beard, labeled 'A PROFESSOR IN CONNECTICUT HAVING AN AFFAIR.'"
@@ -131,57 +141,77 @@
   alt: "Homemade tier list, 'gothic classics as Halloween candy.' S: Dracula (1897), the full-size candy bar; everyone remembers which house. A: Frankenstein (1818), the homemade popcorn ball; assembled from parts; your parents warned you; it's great. A: Sleepy Hollow (1820), the plastic pumpkin pail; comes with a head. B: Jekyll and Hyde (1886), the two-flavor lollipop; one side is fine. C: 'The Raven' (1845), candy corn; says the same thing over and over; people have opinions. D: The Turn of the Screw (1898), the unwrapped mystery candy; was it ever real? F: The Castle of Otranto (1764), raisins; technically first; no one is excited. 'What did you get in your pillowcase?'"
 
 - id: holmes-stats
+  month: 11
+  day: 6
   pool: true
   height: 1350
   caption: "Sherlock Holmes, character select. In A Study in Scarlet, Watson really does write up a list of what Holmes knows: Chemistry, profound. Literature, nil. Astronomy, nil. When Watson tells him the earth goes round the sun, Holmes says he'll try to forget it."
   alt: "Homemade video-game character sheet: 'Character select: Sherlock Holmes. Class: consulting detective, level 99, 221B,' with a doodle of Holmes in a deerstalker and pipe. Stat bars: chemistry, profound; sensational literature, knows every horror of the century; boxing and swords, expert; violin, plays well; British law, good, practical; botany, poisons yes, gardening no; politics, feeble; literature, nil; philosophy, nil; astronomy, nil, learns the earth goes round the sun. A sticker: 'Now that I do know it I shall do my best to forget it.' A Study in Scarlet, 1887."
 
 - id: ahab-aita
+  month: 11
+  day: 7
   pool: true
   height: 1350
   caption: "Captain Ahab would like the internet's opinion. (Starbuck's comment is nearly word for word from Moby-Dick. So is the bit about the sun.)"
   alt: "Homemade forum post, 'r/AITA, posted by u/OneLegCaptain, 1851': 'AITA for nailing a gold coin to the mast and making my whole crew chase the one whale that took my leg? The crew signed on to hunt whales for oil and money. I've decided we're hunting one whale, specifically, forever. My first mate keeps calling it madness. For the record: I'd strike the sun if it insulted me.' 135 chapters of comments. Starbuck_FirstMate: 'YTA. To be enraged with a dumb thing seems blasphemous.' Ishmael: 'Call me Ishmael. Not voting, I'm just here to explain the whale's head for 40 pages.' OneLegCaptain: 'thanks everyone. we sail at dawn.' WhiteWhale: 'ESH.'"
 
 - id: carraway-deceive
+  month: 11
+  day: 8
   pool: true
   caption: "Every unreliable narrator starts with this exact sentence. The Great Gatsby, 1925."
   alt: "Homemade meme. 'Nick Carraway, narrator of The Great Gatsby, chapter 3:' over a sticker reading 'I am one of the few honest people that I have ever known.' Below, a doodled man in sunglasses with a cocktail: 'why would I deceive you?' and '*never tells the police who was driving the car* *helps his cousin cheat on her husband* *\"old sport\" x 40*'."
 
 - id: yorick-doot
+  month: 11
+  day: 9
   pool: true
   caption: "Alas, poor Yorick. A fellow of infinite jest. Still."
   alt: "Homemade two-panel meme. Left: 'Hamlet: \"Alas, poor Yorick! I knew him, Horatio: a fellow of infinite jest\"' over a doodled Hamlet holding a skull. Right: 'Yorick:' over a big doodled skull playing a trumpet, 'doot doot.' Shakespeare, Hamlet, act 5."
 
 - id: russian-starter-pack
+  month: 11
+  day: 12
   pool: true
   caption: "The Russian novel starter pack. Bring a bookmark, and a pen to write the names on it."
   alt: "Homemade starter-pack meme, 'reading a Russian novel starter pack': doodles labeled 'the list of names you wrote on your bookmark', 'a samovar (somebody is always making tea)', 'a duel at dawn over something said at a party', 'snow. so much snow.', '900 pages, 40 of them an argument about God', and 'a train (be careful around the train)'. Along the bottom: 'Rodion Romanovich Raskolnikov, also called Rodya, also Rodka, also Rodenka.'"
 
 - id: alignment-chart
+  month: 11
+  day: 14
   pool: true
   height: 1350
   caption: "The classic literature alignment chart. Fight us in the comments."
   alt: "Homemade alignment chart of classic characters. Lawful good: Jane Eyre, leaves the man she loves because it's the right thing to do. Neutral good: Ishmael, just here to tell you about whales. Chaotic good: Huck Finn, 'All right, then, I'll go to hell.' Lawful neutral: Javert, chases one man for decades; it started with a loaf of bread. True neutral: Bartleby, would prefer not to. Chaotic neutral: Puck, gives a man a donkey's head, for fun. Lawful evil: Uriah Heep, so very 'umble, robs his boss blind. Neutral evil: Iago, ruins everyone's life, gives no real reason. Chaotic evil: Heathcliff, has his dead love's coffin opened, years later, to look."
 
 - id: dinner-tier-list
+  month: 11
+  day: 17
   pool: true
   height: 1350
   caption: "Literary dinner guests, ranked. Who are you inviting? (Dracula's line is straight from the book.)"
   alt: "Homemade tier list, 'literary dinner guests.' S: Mr. Fezziwig, throws the best Christmas party in London, dances all night, pays for everything. A: Mr. Darcy, won't dance, insults you on arrival, secretly pays for your sister's wedding. B: the Mad Hatter, it's always six o'clock, so it's always tea time, no clean cups. C: Mr. Collins, will talk about his patroness, Lady Catherine de Bourgh, for three hours. D: Miss Havisham, the cake has been on the table for decades, she's still in the dress. F: Count Dracula, 'I have dined already, and I do not sup,' watches you eat, alone. F minus: Macbeth, sees a ghost in his own chair; his last guest of honor, the king, did not survive the night."
 
 - id: trace-homer
+  month: 11
+  day: 18
   pool: true
   height: 1350
   caption: "The Iliad was made to be heard. It took about 2,700 years, but we got there."
   alt: "Homemade three-row meme. 'And yet a trace of the true self': a doodled poet with a lyre singing to a crowd, arrow, a scroll. Then the scroll, arrow, a thick book, THE ILIAD, '700 pages, read in silence.' 'Exists in the false self': the book, arrow, a phone with headphones playing the Iliad audiobook, 15 hours 4 minutes."
 
 - id: trace-dickens
+  month: 11
+  day: 15
   pool: true
   height: 1350
   caption: "Dickens sold his novels in monthly parts, a shilling each, every one ending on a hook. Bleak House came out in 20 of them. Same energy as waiting for Friday's episode."
   alt: "Homemade three-row meme. 'And yet a trace of the true self': a magazine labeled 'Part 14, to be continued..., one shilling,' 'Dickens, sold in monthly parts,' arrow, a green leather-bound Complete Works, 'a leather-bound classic.' Then the Complete Works, arrow, a syllabus: 'weeks 1 to 6: Bleak House (all of it), essay due Friday, required reading.' 'Exists in the false self': the syllabus, arrow, a TV showing 'Episode 4, new episode Friday, to be continued...'"
 
 - id: samsa-mondays
+  month: 11
+  day: 16
   caption: "Gregor Samsa wakes up as a giant insect, and his first worry is that he's missed his train to work. #GrrMondays, since 1915."
   alt: "Homemade meme. '#GrrMondays' in red over a doodle of a giant brown beetle lying in a bed under a blue blanket, with an alarm clock at 6:30. 'Gregor Samsa: wakes up as a giant bug. Also Gregor Samsa: \"oh no, I've missed the 5 o'clock train to work.\"' Franz Kafka, The Metamorphosis, 1915."
 
@@ -190,28 +220,68 @@
   caption: "Your 2026 reading, unwrapped. Be honest: how many of the 46 are still in the bag?"
   alt: "Homemade year-in-review card on a pink-to-purple gradient: 'Your 2026 reading, unwrapped. You had a big year (buying books).' Books bought: 46. Books finished: 7. Top genre: 'I'll get to it.' Minutes in bookstores: 9,871. Minutes reading: 412. Most rewatched adaptation: Pride & Prejudice (2005), 11 times. Book on the nightstand since March: still there. 'You're in the top 1% of people who own two copies of the same book.'"
 
+# No meme on these days.
+
+- month: 11
+  day: 11
+  skip: true   # Veterans Day / Armistice Day
+
+- month: 11
+  day: 26
+  skip: true   # Thanksgiving
+
+# Fall, after the clocks go back. Each has its own day.
+
+- id: keats-autumn
+  month: 11
+  day: 5
+  height: 1350
+  caption: "Keats, September 1819: \"Season of mists and mellow fruitfulness.\" Us, the first week of November: season of it being pitch dark before dinner."
+  alt: "Homemade two-part meme. Top: 'john keats, autumn 1819:' beside a portrait of Keats, his chin on his hand, and the quote 'Season of mists and mellow fruitfulness' with three drawn autumn leaves. Bottom: 'me, the week the clocks go back:' a tired doodled face in a black beanie, a night window with a crescent moon and a red clock reading 4:52. 'season of it being pitch dark before dinner.' John Keats, 'To Autumn,' written September 1819."
+
+- id: dickinson-slant
+  month: 11
+  day: 10
+  height: 1350
+  caption: "Emily Dickinson knew about the 4 p.m. sunset in 1861: \"There's a certain Slant of light, / Winter Afternoons.\""
+  alt: "Homemade meme. Top: a daguerreotype of Emily Dickinson beside 'emily dickinson, 1861, describing november at 4 p.m.:' and the lines 'There's a certain Slant of light, Winter Afternoons – That oppresses, like the Heft Of Cathedral Tunes –'. Bottom: two panels. '4:15 p.m.:' an orange sky with a long slant of light and the sun on the horizon, 'the certain slant of light.' '4:16 p.m.:' a dark night sky with stars and a crescent moon, 'night. it is night now.'"
+
+- id: november-reader-pack
+  month: 11
+  day: 13
+  caption: "The November reader starter pack. Which one is you?"
+  alt: "Homemade starter-pack meme, 'the november reader starter pack', six doodles: a plaid blanket ('the same blanket since october 1'), a mug with a tea bag ('tea, steeping since the last chapter, now cold'), a lamp ('the lamp: on at 4:30 p.m.'), a thick blue book marked 900 pp. ('the long novel you started \"for fall\" in september'), a night window over a clock reading 4:47 ('the sky, already over it'), and autumn leaves ('leaves pressed between pages 212 and 213'). Bonus: 'just one more chapter' at 9 p.m., which feels like 2 a.m."
+
 # Portrait cards: our drawn portraits (assets/portraits/), with a quote, or
 # a line about a writer still in copyright.
 
 - id: portrait-melville
+  month: 11
+  day: 19
   height: 1350
   pool: true
   caption: "\"It is not down in any map; true places never are.\" Herman Melville, Moby-Dick, 1851."
   alt: "An ink-and-color drawing of Herman Melville, with his swept-back brown hair and full reddish beard, on a sea-blue background. Below, the quote: 'It is not down in any map; true places never are.' Herman Melville, Moby-Dick, 1851."
 
 - id: portrait-sontag
+  month: 11
+  day: 20
   height: 1350
   pool: true
   caption: "Susan Sontag kept a journal from the age of fourteen. Her first book of essays, Against Interpretation, came out in 1966, when she was 33."
   alt: "An ink-and-color drawing of Susan Sontag, with long black hair and her white streak, on a yellow background. Below: 'Susan Sontag kept a journal from the age of fourteen and read like it was oxygen. Her first book of essays, Against Interpretation, came out in 1966. She was 33.'"
 
 - id: portrait-sartre
+  month: 11
+  day: 22
   height: 1350
   pool: true
   caption: "In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature and turned it down."
   alt: "An ink-and-color drawing of Jean-Paul Sartre, in round black glasses with a pipe, on a pink background. Below: 'In 1964 Jean-Paul Sartre was awarded the Nobel Prize in Literature, and turned it down. A writer, he said, shouldn't let himself be turned into an institution.'"
 
 - id: portrait-rimbaud
+  month: 11
+  day: 27
   height: 1350
   pool: true
   caption: "\"For I is someone else.\" Arthur Rimbaud, at sixteen, in a letter of May 1871. Our translation."
