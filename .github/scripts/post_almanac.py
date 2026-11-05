@@ -183,7 +183,8 @@ def meme(e, social, name=""):
             n = datetime.date(2026, e["month"], e["day"]).toordinal()
             found = [pool[n % len(pool)]]
             name = found[0]["id"]
-    if not found:
+    if not found or found[0].get("skip"):
+        # skip: true keeps a day meme-free (a day of mourning, a holiday).
         return None
     m = found[0]
     path = f"assets/memes/{m.get('id') or str(e['month']) + '-' + str(e['day'])}.jpg"
