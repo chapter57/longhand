@@ -160,6 +160,20 @@
     The love of bare November days
     Before the coming of the snow"
 
+- id: calendar-gift
+  link: https://longhandlit.com/calendar/
+  title: The Longhand Almanac 2027 · a wall calendar
+  description: Twelve great writers, one for every month, and a writer for every day of 2027. A gift for the reader on your list.
+  image: assets/cards/calendar-gift.png
+  hashtags: "#Books #Calendar #GiftIdeas #ClassicBooks"
+  tags: [BookSky, Books, Calendar, GiftIdeas, ClassicBooks]
+  bluesky: |
+    A gift idea for the reader on your list: The Longhand Almanac 2027.
+
+    Poe opens January. Dickinson closes December. In between: Dickens, Shakespeare, Whitman, Kafka, Melville and Twain, each with a portrait, a famous line and their story.
+
+    And every day of the year has a writer on it.
+
 # ---- Plain-text posts: the words alone, no card or picture ----
 
 - id: camus-born
