@@ -191,7 +191,13 @@ def meme(e, social, name=""):
     words = curly(" ".join(str(m["caption"]).split()))
     # "From the almanac", so a meme posted on another day still reads right.
     lead, where = ("", "Every day at longhandlit.com.") if name else ("From the almanac: ", f"From the almanac: {e['name']}.")
-    return {"bluesky": words + "\n\n" + lead + e["url"],
+    # Bluesky allows 300 characters: drop the lead-in, then trim the caption, before the link.
+    sky = words + "\n\n" + lead + e["url"]
+    if len(sky) > 300:
+        sky = words + "\n\n" + e["url"]
+    if len(sky) > 300:
+        sky = fit(words, 300 - len(e["url"]) - 2) + "\n\n" + e["url"]
+    return {"bluesky": sky,
             "mastodon": words + "\n\n" + (lead or "Longhand Literature:"),
             "image": (path, curly(m["alt"])[:1900]), "size": (1080, m.get("height", 1080)),
             "instagram": f"{words}\n\n{where} The link is in our bio, longhandlit.com."
