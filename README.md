@@ -22,6 +22,8 @@ The calendar currently runs from October 17 to December 31. Entries repeat every
 
 **Bookstore links.** An entry with a `buy` (the book's title) and an `isbn` (the 13-digit ISBN of an edition) links to that book on Bookshop.org, using Longhand's affiliate ID (`bookshop_id` in `_config.yml`). Bookshop.org shares its profits with independent bookstores, and Longhand earns a small commission on sales; the page says so under the link. Entries without an ISBN have no bookstore link. Reviews work the same way, with `isbn`. Once `bookshop_shop` in `_config.yml` holds the address of the Longhand storefront on Bookshop.org, the front page and the Almanac page link to it as the Almanac Shelf.
 
+**A writer with two days** (a birthday and a death day, say) gets two different entries. The later one links back to the earlier one ("We met Arthur Rimbaud on his birthday, October 20...") and tells a different part of the life, and the two days use different quotes and poems. Rimbaud (October 20 and November 10) is the example.
+
 ## Editing the calendar (the easy way)
 
 The site is set up for **Pages CMS**, a free editor. Its settings are in `.pages.yml`.
