@@ -433,3 +433,12 @@ a:hover > .ink-drop, a:focus-visible > .ink-drop { fill: var(--accent); transfor
   .cal-gallery, .cal-split, .cal-promo { grid-template-columns: minmax(0, 1fr); }
   .cal-promo img { max-width: 14rem; }
 }
+
+/* ---------- the gift guide ---------- */
+.gift-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 1rem; }
+.gift { display: flex; flex-direction: column; gap: 0.35rem; height: 100%; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--rule, rgba(0,0,0,.15)); border-radius: 3px; text-decoration: none; color: inherit; background: var(--accent-wash); }
+.gift:hover { border-color: var(--accent); }
+.gift-title { font-size: 1.25rem; line-height: 1.2; font-style: italic; }
+.gift-by { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.gift-why { line-height: 1.5; margin-top: 0.25rem; }
+.gift-buy { margin-top: auto; padding-top: 0.6rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }

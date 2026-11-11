@@ -183,14 +183,21 @@ def meme(e, social, name=""):
             n = datetime.date(2026, e["month"], e["day"]).toordinal()
             found = [pool[n % len(pool)]]
             name = found[0]["id"]
-    if not found:
+    if not found or found[0].get("skip"):
+        # skip: true keeps a day meme-free (a day of mourning, a holiday).
         return None
     m = found[0]
     path = f"assets/memes/{m.get('id') or str(e['month']) + '-' + str(e['day'])}.jpg"
     words = curly(" ".join(str(m["caption"]).split()))
     # "From the almanac", so a meme posted on another day still reads right.
     lead, where = ("", "Every day at longhandlit.com.") if name else ("From the almanac: ", f"From the almanac: {e['name']}.")
-    return {"bluesky": words + "\n\n" + lead + e["url"],
+    # Bluesky allows 300 characters: drop the lead-in, then trim the caption, before the link.
+    sky = words + "\n\n" + lead + e["url"]
+    if len(sky) > 300:
+        sky = words + "\n\n" + e["url"]
+    if len(sky) > 300:
+        sky = fit(words, 300 - len(e["url"]) - 2) + "\n\n" + e["url"]
+    return {"bluesky": sky,
             "mastodon": words + "\n\n" + (lead or "Longhand Literature:"),
             "image": (path, curly(m["alt"])[:1900]), "size": (1080, m.get("height", 1080)),
             "instagram": f"{words}\n\n{where} The link is in our bio, longhandlit.com."
@@ -208,9 +215,12 @@ def announcement(name):
     if not found:
         raise SystemExit(f"No announcement called {name!r} in _data/announcements.yml.")
     a = found[0]
-    link = {"url": a["link"], "name": a["title"], "note": a["description"], "image_file": a.get("image")}
+    # plain: true posts the words alone, with no link card or picture.
+    plain = bool(a.get("plain"))
+    link = {"url": a.get("link", "https://longhandlit.com/"), "name": a.get("title", "Longhand"),
+            "note": a.get("description", ""), "image_file": a.get("image")}
     return link, {"bluesky": a["bluesky"].strip(), "mastodon": a.get("mastodon", a["bluesky"]).strip(),
-                  "card": True, "card_title": a["title"],
+                  "card": not plain, "card_title": a.get("title"),
                   "hashtags": a.get("hashtags", "#Books #Reading #Literature"),
                   "tags": a.get("tags", ["BookSky", "Books", "Reading", "Literature", "Writing"])}
 
@@ -273,7 +283,8 @@ def link_facets(text):
 def post_bluesky(e, post, dry):
     text = post["bluesky"]
     if dry:
-        extra = "[card] " + e["url"] if post.get("card") else "[video] " + post["video"] if post.get("video") else "[image] " + post["image"][0]
+        extra = ("[card] " + e["url"] if post.get("card") else "[video] " + post["video"] if post.get("video")
+                 else "[image] " + post["image"][0] if post.get("image") else "[words only]")
         print(f"--- Bluesky ({len(text)} characters) ---\n{text}\n{extra}")
         return
     handle, password = os.environ.get("BLUESKY_HANDLE"), os.environ.get("BLUESKY_APP_PASSWORD")

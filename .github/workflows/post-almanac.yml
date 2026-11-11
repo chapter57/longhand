@@ -15,7 +15,9 @@ on:
     - cron: "47 13 * * *"   # morning: 9:47 a.m. summer, 8:47 a.m. winter
     - cron: "23 15 * * *"   # morning backup
     - cron: "7 17 * * *"    # midday: 1:07 p.m. summer, 12:07 p.m. winter
-    # The daily meme (47 19 * * *) is paused for now; memes can still be posted by hand.
+    - cron: "41 18 * * *"   # midday backup
+    - cron: "47 19 * * *"   # meme: 3:47 p.m. summer, 2:47 p.m. winter
+    - cron: "11 21 * * *"   # meme backup
     - cron: "17 18 * * 0,3" # reel, Sundays and Wednesdays: 2:17 p.m. summer, 1:17 p.m. winter
     - cron: "37 20 * * *"   # evening: 4:37 p.m. summer, 3:37 p.m. winter (GitHub has been
                             # starting these hours late, so it posts in the evening anyway)
@@ -61,8 +63,8 @@ jobs:
           echo "date=$(TZ=America/New_York date +%F)" >> "$GITHUB_OUTPUT"
           case "$SCHEDULE" in
             "47 13 * * *"|"23 15 * * *") slot=morning ;;
-            "7 17 * * *") slot=midday ;;
-            "47 19 * * *") slot=meme ;;
+            "7 17 * * *"|"41 18 * * *") slot=midday ;;
+            "47 19 * * *"|"11 21 * * *") slot=meme ;;
             "17 18 * * 0,3") slot=reel ;;
             "37 20 * * *"|"53 22 * * *") slot=evening ;;
             *) slot="${CHOSEN:-morning}" ;;
