@@ -100,6 +100,7 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 - `assets/icons/`, `favicon.ico`: the site icon (a blue ink drop); `assets/brand/`: the banner and round logo for social profiles
 - `fonts/`: Literata and IBM Plex Mono, both under the SIL Open Font License (see `fonts/OFL.txt`)
 - `write/`: the Longhand writing app
+- `day/`: A Quiet Day, the writing game (see below)
 - `.github/`: the daily posting to Bluesky and Mastodon
 - `sw.js`: retires the offline copy that older installs of the app kept at the site's main address
 
@@ -137,3 +138,12 @@ Keys (on Windows, use Ctrl where these say ⌘, and Shift for ⇧):
 - Esc brings the buttons back while you're writing.
 
 The app's files are in `write/`: `index.html` (page and styling), `app.js` (editor and saving), `export.js` (Word, Markdown and plain-text exports), `sw.js` (offline support; bump `VERSION` there whenever an app file changes), and `manifest.webmanifest` with `icons/` (what Chrome needs to install it).
+
+## A Quiet Day
+
+A small game at `/day/` about a writer's day at home: walk around the house, make coffee, feed and walk Juniper the dog, light the fire, play a record, look out the window, then sit down at the desk and write. The desk opens the Longhand writing app (`/write/`) in a frame, so it's real writing: the same pieces, saved the same way in the browser, with the same Export. The game counts the words added at each sitting and shows the day's total when you go to bed.
+
+The clock runs a game minute every second while you walk around, and slowly (two game minutes a real minute) while you write. The light, the sky in the windows and the weather (clear or rain) change through the day, and the day ends at midnight or when you go to bed. Progress is kept in the browser (`localStorage`, key `longhand.quietday`); the writing itself is only ever in Longhand.
+
+Everything is drawn in code, with no image files, and the sound (rain, birds, the kettle, the fire, a record) is made with Web Audio. The files are `day/index.html` (the page, the cards and the desk) and `day/game.js` (the house, the art, the dog, the light and the sound). The writing app tells the game its word count through `window.longhand` in `write/app.js`. Adding `?debug` to the address exposes the game's state as `window.__qd`, for testing.
+
