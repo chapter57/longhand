@@ -1,0 +1,28 @@
+{%- comment -%} One of the site's plates (_data/plates.yml). Each spot passes a
+different slot, so the spots show different plates; they all move on a day at
+a time. Without JavaScript, the slot's own plate stays. {%- endcomment -%}
+{%- assign slot = include.slot | default: 0 -%}
+{%- assign n = site.data.plates.size -%}
+{%- assign i = slot | times: 5 | modulo: n -%}
+{%- assign p = site.data.plates[i] -%}
+<figure class="plate{% if include.class %} {{ include.class }}{% endif %}" data-plate="{{ slot }}">
+  <img src="{{ '/assets/plates/' | append: p.file | relative_url }}" alt="{{ p.alt | escape }}" loading="lazy" decoding="async">
+  <figcaption>{{ p.caption }}</figcaption>
+</figure>
+{%- unless plates_script_done %}
+{%- assign plates_script_done = true %}
+<script>
+(function () {
+  var plates = {{ site.data.plates | jsonify }}, base = {{ '/assets/plates/' | relative_url | jsonify }};
+  var now = new Date(), day = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(now.getFullYear(), 0, 0)) / 864e5);
+  function fill() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-plate]"), function (fig) {
+      var p = plates[(day + (+fig.getAttribute("data-plate")) * 5) % plates.length];
+      var img = fig.querySelector("img");
+      if (img.getAttribute("src") !== base + p.file) { img.src = base + p.file; img.alt = p.alt; fig.querySelector("figcaption").innerHTML = p.caption; }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fill); else fill();
+})();
+</script>
+{%- endunless %}

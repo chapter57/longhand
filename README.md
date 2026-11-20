@@ -102,6 +102,7 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 - `assets/icons/`, `favicon.ico`: the site icon (a blue ink drop); `assets/brand/`: the banner and round logo for social profiles
 - `fonts/`: Newsreader (the site) and Literata (the calendar and cards) and IBM Plex Mono, all under the SIL Open Font License (see `fonts/OFL.txt`)
 - `write/`: the writing app's retirement page, which lets anyone who used the app download what they wrote (still saved in their browser); `write/sw.js` clears installed copies. The app itself is archived in `_archive/write/`.
+- `assets/plates/`, `_data/plates.yml`, `_includes/plate.html`: the plates, public-domain 19th-century prints (Doré, Tenniel, Bewick, Audubon) printed on the page; a different one each day in each spot (front page, almanac, reviews, 404). To add one: put a search in `.github/art/wanted.yml`, push, and the **Fetch portraits** workflow saves what it finds in `.github/art/found/`; ink the chosen print (grayscale, paper turned white, trimmed, 1000px) into `assets/plates/` and add it to `_data/plates.yml`
 - `courses/index.html`: Great Reads 2027, the 2027 courses: the reading list and the waitlist form (sign-ups are emailed through Web3Forms, to the same address as reviews; each arrives as "Great Reads waitlist: <name>")
 - `play/`: sends old links to the Mrs. Dalloway game to Great Reads 2027; the game is archived in `_archive/play/`
 - `_archive/day/`: A Quiet Day, the writing game, archived (see below)

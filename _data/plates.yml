@@ -1,0 +1,44 @@
+# The site's plates: public-domain 19th-century prints from Wikimedia Commons,
+# inked for the page (grayscale, paper turned white, trimmed) and kept in
+# assets/plates/. They take turns, a different one each day in each spot
+# (_includes/plate.html). The originals and their full credits are in
+# .github/art/found/; add a search to .github/art/wanted.yml to find more.
+- file: dore-quixote-reading.jpg
+  alt: "Don Quixote in his armchair, a book in his lap, surrounded by the knights, monsters and ladies of his reading"
+  caption: "Gustave Doré, Don Quixote in his library, <cite>Don Quixote</cite>, 1863"
+- file: tenniel-tea-party.jpg
+  alt: "Alice at the long table of the Mad Tea-Party, with the March Hare, the Dormouse and the Hatter"
+  caption: "John Tenniel, \"A Mad Tea-Party,\" <cite>Alice's Adventures in Wonderland</cite>, 1865"
+- file: audubon-great-horned-owl.jpg
+  alt: "Two great horned owls on a branch"
+  caption: "John James Audubon, Great Horned Owl, <cite>The Birds of America</cite>, 1829"
+- file: dore-raven.jpg
+  alt: "A man draws back a heavy curtain as a raven flies in"
+  caption: "Gustave Doré, for Edgar Allan Poe's <cite>The Raven</cite>, 1884"
+- file: bewick-woodcock.jpg
+  alt: "A woodcock in the undergrowth, in wood engraving"
+  caption: "Thomas Bewick, Woodcock, <cite>A History of British Birds</cite>, 1804"
+- file: dore-whitechapel.jpg
+  alt: "A crowded street of tenements in Whitechapel, London"
+  caption: "Gustave Doré, Wentworth Street, Whitechapel, <cite>London: A Pilgrimage</cite>, 1872"
+- file: lindley-iris.jpg
+  alt: "Iris flowers and long leaves, a botanical plate"
+  caption: "An iris, Plate 1, <cite>Edwards's Botanical Register</cite>, 1840"
+- file: tenniel-caterpillar.jpg
+  alt: "The Caterpillar on a mushroom, smoking a hookah, with Alice below"
+  caption: "John Tenniel, \"Advice from a Caterpillar,\" <cite>Alice's Adventures in Wonderland</cite>, 1865"
+- file: dore-quixote-sancho.jpg
+  alt: "Don Quixote on his horse and Sancho Panza on his donkey, riding out"
+  caption: "Gustave Doré, Don Quixote and Sancho Panza, <cite>Don Quixote</cite>, 1863"
+- file: bewick-yellowhammer.jpg
+  alt: "A yellowhammer on a branch, in wood engraving"
+  caption: "Thomas Bewick, Yellowhammer, <cite>A History of British Birds</cite>, 1797"
+- file: audubon-wild-turkey.jpg
+  alt: "A wild turkey among cane stalks"
+  caption: "John James Audubon, Wild Turkey, Plate 1, <cite>The Birds of America</cite>, 1827"
+- file: bewick-farmyard.jpg
+  alt: "A farmyard with cottages, haystacks and chickens, in wood engraving"
+  caption: "Thomas Bewick, a farmyard, wood engraving, 1804"
+- file: audubon-barred-owl.jpg
+  alt: "A barred owl swooping on a squirrel"
+  caption: "John James Audubon, Barred Owl, <cite>The Birds of America</cite>, 1828"
