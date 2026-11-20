@@ -570,6 +570,55 @@ Object.assign(memes, {
     <div class="a serif" style="left:34px;top:1268px;font-size:36px">what did you get in your pillowcase?</div>` },
 });
 
+
+// Fall, after the clocks go back.
+const win = (x, y, night) => `<g transform="translate(${x},${y})"><rect x="0" y="0" width="240" height="200" fill="${night ? "#141a33" : "#9fd0f0"}" stroke="#111" stroke-width="7"/><path d="M120 0 v200 M0 100 h240" stroke="#111" stroke-width="7"/>${night ? `<circle cx="180" cy="50" r="24" fill="#f4e7b8"/><circle cx="192" cy="44" r="22" fill="#141a33"/><circle cx="50" cy="40" r="4" fill="#fff"/><circle cx="80" cy="150" r="3" fill="#fff"/><circle cx="200" cy="160" r="4" fill="#fff"/>` : `<circle cx="60" cy="50" r="28" fill="#ffd36b"/>`}</g>`;
+const clock = (x, y, t) => `<g transform="translate(${x},${y})"><rect x="-110" y="-46" width="220" height="92" rx="14" fill="#222" stroke="#111" stroke-width="6"/><text x="0" y="22" text-anchor="middle" font-family="Liberation Mono" font-weight="bold" font-size="58" fill="#ff3b30">${t}</text></g>`;
+// A maple leaf: five points and a stem.
+const leaf = (x, y, r, c) => `<g transform="translate(${x},${y}) rotate(${r}) scale(1.1)"><path d="M0 -55 l12 26 l22 -10 l-6 24 l28 4 l-20 18 l10 18 l-28 -6 l-6 24 l-12 -16 l-12 16 l-6 -24 l-28 6 l10 -18 l-20 -18 l28 -4 l-6 -24 l22 10z" fill="${c}" stroke="#111" stroke-width="5" stroke-linejoin="round"/><path d="M0 -20 v70" stroke="#111" stroke-width="5"/></g>`;
+Object.assign(memes, {
+  "keats-autumn": { h: 1350, html: `
+    <div class="line" style="left:0;right:0;top:672px;height:5px"></div>
+    <img class="cut" src="${pic("10-31")}" style="left:40px;top:40px;width:400px;height:590px;object-position:50% 25%;border:5px solid #111">
+    <div class="a" style="left:480px;top:70px;width:560px;font:bold 44px/1.15 'Liberation Sans'">john keats, autumn 1819:</div>
+    ${tag(480, 200, 540, `<span style="font:italic 50px/1.2 'Liberation Serif'">"Season of mists and mellow fruitfulness"</span>`, -2)}
+    ${S(leaf(560, 520, 20, "#d9822b") + leaf(700, 560, -30, "#c0392b") + leaf(860, 500, 50, "#e3b33a"), 1350)}
+    <div class="a" style="left:40px;top:700px;width:1000px;font:bold 44px/1.15 'Liberation Sans'">me, the week the clocks go back:</div>
+    ${S(win(640, 800, true) + clock(760, 1080, "4:52") + head(300, 900, { hair: "beanie", eyes: "tired", mouth: "flat", shirt: "#8a5a3b" }), 1350)}
+    <div class="a serif" style="left:40px;top:1160px;width:560px;font-size:44px;line-height:1.15">"season of it being pitch dark before dinner"</div>
+    <div class="a serif" style="left:40px;top:1290px;font-size:28px;color:#444">John Keats, "To Autumn," written September 1819.</div>` },
+
+  "dickinson-slant": { h: 1350, html: `
+    <img class="cut" src="${pic("12-10")}" style="left:40px;top:40px;width:360px;height:470px;object-position:50% 20%;border:5px solid #111">
+    <div class="a" style="left:440px;top:60px;width:610px;font:bold 40px/1.15 'Liberation Sans'">emily dickinson, 1861, describing november at&nbsp;4&nbsp;p.m.:</div>
+    ${tag(440, 240, 590, `<span style="font:italic 46px/1.25 'Liberation Serif'">"There's a certain Slant of light,<br>Winter Afternoons –<br>That oppresses, like the Heft<br>Of Cathedral Tunes –"</span>`, -1)}
+    <div class="line" style="left:0;right:0;top:560px;height:5px"></div>
+    <div class="a sans" style="left:40px;top:590px;font-size:40px">4:15 p.m.:</div>
+    <div class="a sans" style="left:560px;top:590px;font-size:40px">4:16 p.m.:</div>
+    ${S(`<rect x="40" y="660" width="480" height="420" fill="#f2b766" stroke="#111" stroke-width="7"/><circle cx="380" cy="1010" r="70" fill="#e85d2a" stroke="#111" stroke-width="6"/><path d="M40 1010 h480" stroke="#111" stroke-width="7"/>
+      <path d="M90 700 l400 260" stroke="#fff3c4" stroke-width="40" opacity=".7"/>
+      <rect x="560" y="660" width="480" height="420" fill="#141a33" stroke="#111" stroke-width="7"/><circle cx="960" cy="740" r="34" fill="#f4e7b8"/><circle cx="974" cy="732" r="32" fill="#141a33"/>
+      <circle cx="640" cy="720" r="4" fill="#fff"/><circle cx="760" cy="800" r="3" fill="#fff"/><circle cx="880" cy="880" r="4" fill="#fff"/><circle cx="700" cy="960" r="3" fill="#fff"/>`, 1350)}
+    <div class="a sans" style="left:70px;top:1110px;width:460px;font-size:34px;line-height:1.15">the certain slant of light</div>
+    <div class="a sans" style="left:590px;top:1110px;width:460px;font-size:34px;line-height:1.15">night. it is night now.</div>
+    <div class="a serif" style="left:40px;top:1290px;font-size:28px;color:#444">Emily Dickinson, "There's a certain Slant of light," about 1861.</div>` },
+
+  "november-reader-pack": `
+    <div class="cap" style="padding-top:30px">the november reader starter pack</div>
+    <div class="line" style="left:0;right:0;top:110px;height:5px"></div>
+    ${S(`<g transform="translate(160,320)"><rect x="-120" y="-110" width="240" height="220" rx="20" fill="#b5523b" stroke="#111" stroke-width="6"/><path d="M-120 -40 h240 M-120 30 h240 M-40 -110 v220 M40 -110 v220" stroke="#e8c27a" stroke-width="10"/></g>
+      <g transform="translate(540,330)"><path d="M-70 -80 h140 l-14 150 h-112z" fill="#fff" stroke="#111" stroke-width="6"/><path d="M70 -50 q50 0 50 40 q0 40 -56 40" fill="none" stroke="#111" stroke-width="8"/><path d="M-30 -110 q10 -20 0 -40 M10 -110 q10 -20 0 -40" fill="none" stroke="#999" stroke-width="5"/><rect x="-6" y="-80" width="4" height="70" fill="#111"/><rect x="-22" y="-14" width="34" height="26" fill="#c9a227" stroke="#111" stroke-width="3"/></g>
+      <g transform="translate(880,330)"><path d="M-80 60 l40 -150 h80 l40 150z" fill="#f2d16b" stroke="#111" stroke-width="6"/><path d="M0 60 v80 M-60 140 h120" stroke="#111" stroke-width="10"/><path d="M-110 -60 l-30 -20 M110 -60 l30 -20 M-120 0 h-30 M120 0 h30" stroke="#e3b33a" stroke-width="7"/></g>`)}
+    ${S(`<g transform="translate(160,730)">${book(-80, -110, 160, 230, "#2c6fbb", "900 pp.", 34)}<rect x="-80" y="-30" width="160" height="20" fill="#e85d2a"/></g>` + win(440, 630, true) + clock(560, 880, "4:47") + leaf(800, 680, 10, "#d9822b") + leaf(900, 740, -40, "#c0392b") + leaf(840, 820, 70, "#e3b33a") + leaf(960, 640, 30, "#8a5a3b"))}
+    <div class="a serif" style="left:40px;top:470px;width:280px;font-size:28px;line-height:1.15">the same blanket since october 1</div>
+    <div class="a serif" style="left:410px;top:470px;width:300px;font-size:28px;line-height:1.15">tea, steeping since the last chapter, now cold</div>
+    <div class="a serif" style="left:770px;top:490px;width:280px;font-size:28px;line-height:1.15">the lamp: on at 4:30 p.m.</div>
+    <div class="a serif" style="left:40px;top:870px;width:300px;font-size:28px;line-height:1.15">the long novel you started "for fall" in september</div>
+    <div class="a serif" style="left:420px;top:940px;width:300px;font-size:28px;line-height:1.15">the sky, already over it</div>
+    <div class="a serif" style="left:770px;top:870px;width:280px;font-size:28px;line-height:1.15">leaves pressed between pages 212 and 213</div>
+    <div class="a sans" style="left:40px;top:1000px;font-size:34px;color:#8a1020">bonus: "just one more chapter" at 9 p.m., which feels like 2 a.m.</div>`,
+});
+
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const tab = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
 for (const [key, made] of Object.entries(memes)) {

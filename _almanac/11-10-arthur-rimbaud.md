@@ -12,9 +12,9 @@ buy: "Illuminations"
 isbn: "9780811201841"
 wiki: "https://en.wikipedia.org/wiki/Arthur_Rimbaud"
 ---
-Arthur Rimbaud wrote nearly all of his poems before he was twenty. He was a schoolboy genius from Charleville, in northeastern France, who ran away to Paris, scandalized it in the company of the poet Paul Verlaine, and turned French poetry inside out with "The Drunken Boat," *A Season in Hell* and the prose poems of *Illuminations*. Then, at about twenty, he stopped. As far as anyone knows, he never wrote another poem.
+We met Arthur Rimbaud [on his birthday, October 20](/almanac/10-20-arthur-rimbaud/): the schoolboy from Charleville who ran away to Paris, ran off with Paul Verlaine, and turned French poetry inside out before he was twenty. Then he stopped. As far as anyone knows, he never wrote another poem. Today is the other half of his story.
 
-What came next is one of the strangest second lives in literature. Rimbaud walked across Europe, joined the Dutch colonial army and deserted in Java, worked as a foreman in a quarry on Cyprus, and finally went to Aden, on the Red Sea, and then to Harar, in what is now Ethiopia. There he became a trader in coffee, hides and, eventually, guns. His letters home from Africa are about prices, caravans and money. They never mention poetry.
+What came after the poems is one of the strangest second lives in literature. Rimbaud walked across Europe, joined the Dutch colonial army and deserted in Java, worked as a foreman in a quarry on Cyprus, and finally went to Aden, on the Red Sea, and then to Harar, in what is now Ethiopia. There he became a trader in coffee, hides and, eventually, guns. His letters home from Africa are about prices, caravans and money. They never mention poetry.
 
 Meanwhile, back in Paris, his poems were becoming famous without him. Verlaine wrote about him as one of the "accursed poets" in 1884, and published *Illuminations* in 1886, and young poets began to treat Rimbaud as a legend. He seems to have known little about it, and to have cared less.
 

@@ -6,10 +6,12 @@ permalink: /sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>{{ "/" | absolute_url }}</loc></url>
   <url><loc>{{ "/almanac/" | absolute_url }}</loc></url>
+  <url><loc>{{ "/courses/" | absolute_url }}</loc></url>
   <url><loc>{{ "/calendar/" | absolute_url }}</loc></url>
   <url><loc>{{ "/reviews/" | absolute_url }}</loc></url>
   <url><loc>{{ "/write/" | absolute_url }}</loc></url>
   <url><loc>{{ "/play/" | absolute_url }}</loc></url>
+  <url><loc>{{ "/gifts/" | absolute_url }}</loc></url>
   {%- for e in site.almanac %}
   <url><loc>{{ e.url | absolute_url }}</loc></url>
   {%- endfor %}
