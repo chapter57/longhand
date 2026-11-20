@@ -80,7 +80,7 @@ p { text-wrap: pretty; }
 /* Section labels: a heavy rule, then small capitals */
 .label {
   display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem;
-  margin: 0 0 1.25rem; padding-top: 0.6rem; border-top: 3px solid var(--ink);
+  margin: 0 0 0.9rem; padding-top: 0.5rem; border-top: 3px solid var(--ink);
   text-transform: uppercase; color: var(--ink);
 }
 .label-note { text-transform: none; letter-spacing: 0.02em; font-weight: 400; color: var(--ink-soft); }
@@ -115,7 +115,7 @@ a.label-note:hover { color: var(--accent); }
 /* ---------- page lead ---------- */
 .lead {
   display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1.5rem clamp(1.5rem, 5vw, 4rem); align-items: end;
-  padding-block: clamp(2.25rem, 6vw, 4rem) clamp(1.75rem, 4vw, 2.75rem); margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  padding-block: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 1.75rem); margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
 }
 .lead:has(> .lead-copy:only-child) { grid-template-columns: minmax(0, 1fr); }
 .lead h1 { font-size: clamp(2.6rem, 6.4vw, 5rem); line-height: 0.98; letter-spacing: -0.035em; margin: 0; max-width: 16ch; font-variation-settings: "opsz" 72; }
@@ -123,10 +123,10 @@ a.label-note:hover { color: var(--accent); }
 .lead-art { max-width: 30rem; justify-self: end; width: 100%; }
 
 /* ---------- sections ---------- */
-.dept { padding-block: 0 clamp(1.5rem, 4vw, 2.5rem); }
+.dept { padding-block: 0 clamp(1rem, 2.5vw, 1.75rem); }
 .dept-title { font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.1; margin: 0 0 0.75rem; letter-spacing: -0.02em; font-weight: 500; }
 .dept p { max-width: var(--measure); }
-.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.4rem; margin-top: 1.4rem; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.4rem; margin-top: 1.1rem; }
 
 .button {
   display: inline-block; text-transform: uppercase; text-decoration: none;
@@ -135,13 +135,13 @@ a.label-note:hover { color: var(--accent); }
 .button:hover { background: var(--accent); color: var(--accent-ink); }
 
 /* ---------- front page ---------- */
-.front { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); margin-top: clamp(1.5rem, 3vw, 2rem); }
+.front { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); margin-top: clamp(1rem, 2.5vw, 1.5rem); }
 /* A rule under a .wrap block, the width of its text column */
 .front { background: linear-gradient(var(--ink), var(--ink)) 50% 100% / calc(100% - 2 * var(--gutter)) 1px no-repeat; }
-.front-lead { padding: 0 clamp(1.25rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2rem) 0; border-right: 1px solid var(--ink); }
+.front-lead { padding: 0 clamp(1.25rem, 3vw, 2.25rem) clamp(1.1rem, 2.5vw, 1.5rem) 0; border-right: 1px solid var(--ink); }
 .front-kicker { display: flex; flex-wrap: wrap; gap: 0.25rem 0.8rem; }
 .front-kicker span + span::before { content: "·"; margin-right: 0.8rem; }
-.front-side { padding: 0 0 clamp(1.5rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2rem); display: flex; flex-direction: column; gap: 1.75rem; }
+.front-side { padding: 0 0 clamp(1.1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem); display: flex; flex-direction: column; gap: 1.25rem; }
 
 /* Today's entry as the lead story: a headline, a standfirst, a press photo. */
 .front .entry-feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(8rem, 13rem); gap: 0.5rem clamp(1.25rem, 3vw, 2rem); align-items: start; }
@@ -172,7 +172,7 @@ a.label-note:hover { color: var(--accent); }
 .the-line-by cite { font-style: normal; }
 
 /* Earlier this week: a row of columns under the lead */
-.week-row { padding-top: clamp(1.5rem, 3vw, 2rem); padding-bottom: clamp(1rem, 3vw, 1.5rem); }
+.week-row { padding-top: clamp(1rem, 2.5vw, 1.4rem); padding-bottom: clamp(0.5rem, 2vw, 1rem); }
 .week-cols { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); border-bottom: 1px solid var(--ink); }
 .week-cols li { border-left: 1px solid var(--rule); }
 .week-cols li:first-child { border-left: 0; }
@@ -226,11 +226,11 @@ a.label-note:hover { color: var(--accent); }
 .week-day.is-today .week-day-label { color: var(--accent); border-top-color: var(--accent); }
 
 /* Almanac page: every entry */
-.calendar { padding-bottom: clamp(3rem, 7vw, 5rem); }
-.cal-month { max-width: 56rem; margin-bottom: 2.5rem; }
+.calendar { padding-bottom: clamp(1.5rem, 4vw, 2.5rem); }
+.cal-month { max-width: 56rem; margin-bottom: 1.75rem; }
 .cal-month-name { font-weight: 500; font-size: clamp(2.2rem, 4vw, 3rem); letter-spacing: -0.03em; margin: 0 0 0.25rem; padding-top: 0.4rem; border-top: 3px solid var(--ink); }
 .cal-list { list-style: none; margin: 0; padding: 0; }
-.cal-row { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--rule); scroll-margin-top: 1rem; }
+.cal-row { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; padding-block: 0.85rem; border-bottom: 1px solid var(--rule); scroll-margin-top: 1rem; }
 .cal-day { margin: 0; display: flex; flex-direction: column; gap: 0.3rem; }
 .cal-day-n { font-size: 2.4rem; line-height: 0.9; font-weight: 400; color: var(--ink); font-variant-numeric: lining-nums tabular-nums; }
 .cal-today { display: none; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
@@ -258,7 +258,7 @@ a.label-note:hover { color: var(--accent); }
 .piece-body > p:first-child::first-letter { float: left; font-size: 4.2em; line-height: 0.82; padding: 0.06em 0.08em 0 0; font-weight: 500; }
 .piece-body blockquote { margin: 1.5em 0; padding-left: 1.25rem; border-left: 3px solid var(--accent); font-style: italic; }
 .piece-foot { max-width: var(--measure); padding-top: 1.25rem; border-top: 1px solid var(--ink); }
-.piece-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 2rem 0 1.5rem; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.piece-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 1.5rem 0 1.1rem; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .piece-nav a { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.9rem 1rem 1rem 0; text-decoration: none; color: var(--ink); }
 .piece-nav a:hover .piece-nav-name { color: var(--accent); }
 .piece-next { text-align: right; padding-left: 1rem !important; padding-right: 0 !important; border-left: 1px solid var(--rule); }
@@ -271,8 +271,8 @@ a.label-note:hover { color: var(--accent); }
 .js .cal-row:not(.is-open), .js .cal-month:not(.has-open), .js [data-almanac-piece]:not(.is-open) { display: none; }
 
 /* ---------- reviews ---------- */
-.review-call { padding-top: clamp(1rem, 3vw, 1.5rem); }
-.review-call-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2rem clamp(1.5rem, 5vw, 4rem); align-items: start; padding-bottom: clamp(1rem, 3vw, 2rem); }
+.review-call { padding-top: 0; }
+.review-call-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1.5rem clamp(1.5rem, 5vw, 4rem); align-items: start; padding-bottom: clamp(0.5rem, 2vw, 1.25rem); }
 .review-call .dept-title { font-size: clamp(2rem, 4vw, 2.8rem); }
 .review-call p { max-width: var(--measure); }
 .review-list { list-style: none; margin: 0; padding: 0; max-width: 56rem; border-top: 1px solid var(--ink); }
@@ -302,7 +302,7 @@ a.label-note:hover { color: var(--accent); }
 
 /* ---------- the newsletter ---------- */
 .newsletter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); gap: 1rem clamp(1.5rem, 5vw, 3.5rem); align-items: center;
-  border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); padding-block: clamp(1.25rem, 3vw, 1.75rem); margin-block: clamp(1.5rem, 4vw, 2.5rem); }
+  border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); padding-block: clamp(1rem, 2.5vw, 1.4rem); margin-block: clamp(1rem, 3vw, 1.75rem); }
 .newsletter .band-title { font-size: clamp(1.8rem, 3.4vw, 2.4rem); line-height: 1.05; letter-spacing: -0.025em; font-weight: 500; margin: 0; }
 .newsletter p { margin: 0.5rem 0 0; max-width: var(--measure); }
 .newsletter iframe { display: block; width: 100%; height: 150px; border: 1px solid var(--ink); background: #fff; }
@@ -315,7 +315,7 @@ a.label-note:hover { color: var(--accent); }
 .cal-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(0.75rem, 2vw, 1.5rem); }
 .cal-split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; padding-block: clamp(1.5rem, 4vw, 2.5rem); }
 .cal-facts { padding-left: 1.1rem; line-height: 1.7; }
-.cal-promo { display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); gap: 1rem clamp(1.5rem, 4vw, 3rem); align-items: start; padding-block: 0 clamp(1.5rem, 4vw, 2.5rem); }
+.cal-promo { display: grid; grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); gap: 1rem clamp(1.5rem, 4vw, 3rem); align-items: start; padding-block: 0 clamp(1rem, 3vw, 1.75rem); }
 .cal-promo .label { border-top-width: 1px; }
 
 /* ---------- Great Reads 2027 ---------- */
@@ -324,7 +324,7 @@ a.label-note:hover { color: var(--accent); }
 .course-how { list-style: none; padding: 0; margin: 0 0 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.25rem 2rem; max-width: 64rem; }
 .course-how li { border-top: 1px solid var(--ink); padding-top: 0.6rem; line-height: 1.5; }
 .course-how b { display: block; font-weight: 600; font-size: 1.2rem; margin-bottom: 0.25rem; }
-.season-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.75rem 2.25rem; margin-bottom: 1.25rem; }
+.season-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem 2.25rem; margin-bottom: 1.25rem; }
 .season-block { border-top: 1px solid var(--ink); padding-top: 0.75rem; }
 .season-block .kicker { margin-bottom: 0.4rem; }
 .season-block .dept-title { font-size: 1.7rem; }
@@ -342,7 +342,7 @@ a.label-note:hover { color: var(--accent); }
 .gift-buy { margin-top: auto; padding-top: 0.6rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 
 /* ---------- colophon ---------- */
-.colophon { margin-top: clamp(2rem, 5vw, 3.5rem); }
+.colophon { margin-top: clamp(1.5rem, 3.5vw, 2.25rem); }
 .colophon-inner { max-width: calc(76rem - 2 * var(--gutter)); margin-inline: auto; padding-block: 1.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 3px double var(--ink); color: var(--ink-soft); font-size: 1rem; }
 .colophon-inner p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .colophon-mark { font-size: 1.8rem; font-weight: 500; letter-spacing: -0.03em; color: var(--ink); }
