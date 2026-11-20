@@ -8,7 +8,17 @@ layout: default
     <div data-almanac-today>
       <p class="soon">Today's entry appears here. You can also browse <a href="{{ '/almanac/' | relative_url }}">the whole almanac</a>.</p>
     </div>
-    {% include plate.html slot=4 class="plate-lead" %}
+    <section class="archive" data-archive hidden aria-labelledby="archive-h">
+      <p class="kicker" id="archive-h">From the archive</p>
+      <p class="archive-title"></p>
+      <blockquote class="archive-text"></blockquote>
+      <p class="archive-by"></p>
+      <p class="archive-link"><a class="text-link" href="#"></a></p>
+    </section>
+    <section class="week-brief" aria-labelledby="strip-h">
+      <h2 class="label" id="strip-h"><span>Earlier this week</span><a class="label-note" href="{{ '/almanac/' | relative_url }}">Every entry so far →</a></h2>
+      <ul class="week-list-brief" data-almanac-strip></ul>
+    </section>
   </div>
   <aside class="front-side">
     <a class="course-box" href="{{ '/courses/' | relative_url }}">
@@ -32,10 +42,6 @@ layout: default
   </aside>
 </section>
 
-<section class="wrap week-row" aria-labelledby="strip-h">
-  <h2 class="label" id="strip-h"><span>Earlier this week</span><a class="label-note" href="{{ '/almanac/' | relative_url }}">Every entry so far →</a></h2>
-  <ul class="week-cols" data-almanac-strip></ul>
-</section>
 
 <div class="wrap">{% include newsletter.html %}</div>
 
@@ -82,6 +88,35 @@ layout: default
     var esc = function (t) { var x = document.createElement("span"); x.textContent = t; return x.innerHTML; };
     box.querySelector("blockquote").innerHTML = "“" + esc(hit[2].replace(/^["“]|["”]$/g, "")) + "”";
     box.querySelector(".the-line-by").innerHTML = esc(hit[3]) + (hit[4] ? ", " + esc(hit[4].replace(/^["“]|["”]$/g, "")) : "");
+  })();
+</script>
+
+<script>
+  // From the archive: a short public-domain poem or passage (the evening
+  // readings in _data/social.yml) by a writer the almanac has already
+  // featured, a different one each day, linking back to that day's entry.
+  (function () {
+    var pieces = [
+    {%- for d in site.data.social %}{% if d.evening.text %}{% assign e = site.almanac | where: "month", d.month | where: "day", d.day | first %}{% if e %}
+      {"m": {{ d.month }}, "d": {{ d.day }}, "title": {{ d.evening.title | jsonify }}, "author": {{ d.evening.author | jsonify }}, "source": {{ d.evening.source | jsonify }}, "text": {{ d.evening.text | jsonify }}, "url": {{ e.url | relative_url | jsonify }}, "name": {{ e.name | jsonify }}},
+    {%- endif %}{% endif %}{% endfor %}
+    ];
+    var box = document.querySelector("[data-archive]"), now = new Date();
+    if (!box) return;
+    var past = pieces.filter(function (p) {
+      var today = p.m === now.getMonth() + 1 && p.d === now.getDate();
+      return !today && (!window.longhandOpen || window.longhandOpen(p.m, p.d));
+    });
+    if (!past.length) return;
+    var day = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(2026, 0, 1)) / 864e5);
+    var p = past[(day * 7) % past.length];
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    box.querySelector(".archive-title").textContent = p.title;
+    box.querySelector(".archive-text").textContent = String(p.text).trim();
+    box.querySelector(".archive-by").textContent = p.author + (p.source ? ", " + p.source : "");
+    var a = box.querySelector(".archive-link a");
+    a.href = p.url; a.textContent = "From the almanac, " + months[p.m - 1] + " " + p.d + ": " + p.name + " →";
+    box.hidden = false;
   })();
 </script>
 
