@@ -50,6 +50,8 @@ GitHub posts the almanac to Bluesky and Mastodon three times a day, New York tim
 - **About 3:45 p.m., on days that have one:** a homemade-looking meme, to Bluesky and Instagram.
 - **About 7:30 p.m.:** a short poem or passage, posted as a quote card picture, with a link to the day's entry. The full text goes in the picture's description, for people using screen readers.
 
+From January 2027 the almanac mixes in more critics, philosophers, essayists and historians (William James, Burke, Montesquieu, Bacon, Sontag, Tuchman, Merton): literary nonfiction, and the thinkers literature argues with. If a book has no ISBN in its entry, the bookstore link searches Bookshop.org for it instead.
+
 When the day's writer is still in copyright, the midday post is a line about them in our own words, and the evening card shows their portrait and a few sentences about them.
 
 Days without a meme of their own take one from a rotating pool: the memes and portrait cards marked `pool: true` in `_data/memes.yml`. The portraits are drawn in code by `.github/portraits/draw.mjs` into `assets/portraits/`.

@@ -1072,3 +1072,331 @@
       Ring, happy bells, across the snow:
       The year is going, let him go;
       Ring out the false, ring in the true.
+
+
+- month: 1
+  day: 1
+  midday:
+    text: "Only connect! That was the whole of her sermon. Only connect the prose and the passion, and both will be exalted, and human love will be seen at its height."
+    author: "E. M. Forster"
+    source: "Howards End, 1910"
+  evening:
+    title: "Aspects of the Novel"
+    author: "E. M. Forster"
+    source: "1927"
+    text: |
+      "The king died and then the queen died" is a story. "The king died, and then the queen died of grief" is a plot.
+
+- month: 1
+  day: 2
+  midday:
+    text: "Isaac Asimov wrote or edited around five hundred books, and he is one of the few authors with books in nearly every major section of the library."
+  evening:
+    about: "The great explainer: chemist, novelist of robots and galactic empires, and the author of hundreds of books that made science clear to ordinary readers."
+
+- month: 1
+  day: 3
+  midday:
+    text: "J. R. R. Tolkien wrote the first line of The Hobbit on the blank page of an exam he was grading. He didn't know yet what a hobbit was."
+  evening:
+    about: "An Oxford scholar of Old English who invented languages, and then a world for them to be spoken in: Middle-earth, The Hobbit and The Lord of the Rings."
+
+- month: 1
+  day: 4
+  midday:
+    text: "April is the cruellest month, breeding / Lilacs out of the dead land, mixing / Memory and desire, stirring / Dull roots with spring rain."
+    author: "T. S. Eliot"
+    source: "The Waste Land, 1922"
+  evening:
+    title: "The Love Song of J. Alfred Prufrock"
+    author: "T. S. Eliot"
+    source: "1915"
+    text: |
+      Let us go then, you and I,
+      When the evening is spread out against the sky
+      Like a patient etherized upon a table;
+      Let us go, through certain half-deserted streets,
+      The muttering retreats
+      Of restless nights in one-night cheap hotels
+
+- month: 1
+  day: 5
+  midday:
+    text: "Umberto Eco owned some fifty thousand books. A library, he said, isn't the books you've read; it's the ones you haven't, a reminder of all you don't yet know."
+  evening:
+    about: "Professor of signs and symbols, essayist on James Bond and Superman, and the author of The Name of the Rose, a murder mystery in a medieval library."
+
+- month: 1
+  day: 6
+  midday:
+    text: "Work is love made visible."
+    author: "Kahlil Gibran"
+    source: "The Prophet, 1923"
+  evening:
+    title: "On Children"
+    author: "Kahlil Gibran"
+    source: "The Prophet, 1923"
+    text: |
+      Your children are not your children.
+      They are the sons and daughters of Life's longing for itself.
+      They come through you but not from you,
+      And though they are with you yet they belong not to you.
+
+- month: 1
+  day: 7
+  midday:
+    text: "I am not tragically colored. There is no great sorrow dammed up in my soul, nor lurking behind my eyes."
+    author: "Zora Neale Hurston"
+    source: "\"How It Feels to Be Colored Me,\" 1928"
+  evening:
+    title: "How It Feels to Be Colored Me"
+    author: "Zora Neale Hurston"
+    source: "1928"
+    text: |
+      Sometimes, I feel discriminated against, but it does not make me angry. It merely astonishes me. How can any deny themselves the pleasure of my company? It's beyond me.
+
+- month: 1
+  day: 8
+  midday:
+    text: "This is the story of what a Woman's patience can endure, and what a Man's resolution can achieve."
+    author: "Wilkie Collins"
+    source: "The Woman in White, 1860"
+  evening:
+    title: "The Woman in White"
+    author: "Wilkie Collins"
+    source: "1860"
+    text: |
+      There, in the middle of the broad bright high-road—there, as if it had that moment sprung out of the earth or dropped from the heaven—stood the figure of a solitary Woman, dressed from head to foot in white garments.
+
+- month: 1
+  day: 9
+  midday:
+    text: "Simone de Beauvoir came second in France's hardest philosophy exam in 1929, at twenty-one. Jean-Paul Sartre came first. They were partners for the next fifty years."
+  evening:
+    about: "Philosopher, novelist and memoirist, whose book The Second Sex asked what it means to be a woman, and showed how much of the answer the world had made up."
+
+- month: 1
+  day: 10
+  midday:
+    text: "Robinson Jeffers built his own stone house on the California coast, hauling boulders up from the shore. He wrote in the mornings and laid stones in the afternoons."
+  evening:
+    about: "The poet of the Big Sur coast, of hawks, granite and the Pacific, who asked readers to look away from themselves and toward the vast, indifferent beauty of the world."
+
+- month: 1
+  day: 11
+  midday:
+    text: "The art of being wise is the art of knowing what to overlook."
+    author: "William James"
+    source: "The Principles of Psychology, 1890"
+  evening:
+    title: "The Principles of Psychology"
+    author: "William James"
+    source: "1890"
+    text: |
+      Consciousness, then, does not appear to itself chopped up in bits. Such words as "chain" or "train" do not describe it fitly as it presents itself in the first instance. It is nothing jointed; it flows. A "river" or a "stream" are the metaphors by which it is most naturally described.
+
+- month: 1
+  day: 12
+  midday:
+    text: "No passion so effectually robs the mind of all its powers of acting and reasoning as fear."
+    author: "Edmund Burke"
+    source: "A Philosophical Enquiry into the Sublime and Beautiful, 1757"
+  evening:
+    title: "On the Sublime"
+    author: "Edmund Burke"
+    source: "A Philosophical Enquiry, 1757"
+    text: |
+      Whatever is fitted in any sort to excite the ideas of pain and danger, that is to say, whatever is in any sort terrible, or is conversant about terrible objects, or operates in a manner analogous to terror, is a source of the sublime.
+
+- month: 1
+  day: 13
+  midday:
+    text: "Welcome, O life! I go to encounter for the millionth time the reality of experience and to forge in the smithy of my soul the uncreated conscience of my race."
+    author: "James Joyce"
+    source: "A Portrait of the Artist as a Young Man, 1916"
+  evening:
+    title: "The Dead"
+    author: "James Joyce"
+    source: "Dubliners, 1914"
+    text: |
+      His soul swooned slowly as he heard the snow falling faintly through the universe and faintly falling, like the descent of their last end, upon all the living and the dead.
+
+- month: 1
+  day: 14
+  midday:
+    text: "John Dos Passos's U.S.A. trilogy breaks its story with \"Newsreels\": collages of real headlines and song lyrics, so the whole country seems to be talking at once."
+  evening:
+    about: "The novelist who tried to fit all of America into a book, cutting between lives, headlines and biographies like a newsreel of the twentieth century."
+
+- month: 1
+  day: 15
+  midday:
+    text: "One must eat to live, and not live to eat."
+    author: "Molière"
+    source: "The Miser, 1668 (translated for Longhand)"
+  evening:
+    about: "Actor, manager and the greatest comic playwright in French, who mocked hypocrites, misers and snobs, and collapsed on stage playing an imaginary invalid."
+
+- month: 1
+  day: 16
+  midday:
+    text: "In \"Against Interpretation,\" Susan Sontag argued that critics were so busy digging for hidden meanings that they forgot to feel the art in front of them."
+  evening:
+    about: "Critic, essayist and novelist who wrote about camp, photography, illness and war, and showed how to think hard, in public, with style."
+
+- month: 1
+  day: 17
+  midday:
+    text: "All true histories contain instruction."
+    author: "Anne Brontë"
+    source: "Agnes Grey, 1847"
+  evening:
+    title: "The Tenant of Wildfell Hall"
+    author: "Anne Brontë"
+    source: "preface to the second edition, 1848"
+    text: |
+      I am satisfied that if a book is a good one, it is so whatever the sex of the author may be. All novels are or should be written for both men and women to read.
+
+- month: 1
+  day: 18
+  midday:
+    text: "How can anyone be Persian?"
+    author: "Montesquieu"
+    source: "Persian Letters, 1721 (translated for Longhand)"
+  evening:
+    about: "A judge from Bordeaux who satirized Paris through the eyes of two Persian travelers, and argued that liberty is safest when power is divided."
+
+- month: 1
+  day: 19
+  midday:
+    text: "All that we see or seem / Is but a dream within a dream."
+    author: "Edgar Allan Poe"
+    source: "\"A Dream Within a Dream,\" 1849"
+  evening:
+    title: "The Raven"
+    author: "Edgar Allan Poe"
+    source: "1845"
+    text: |
+      Once upon a midnight dreary, while I pondered, weak and weary,
+      Over many a quaint and curious volume of forgotten lore—
+      While I nodded, nearly napping, suddenly there came a tapping,
+      As of some one gently rapping, rapping at my chamber door.
+
+- month: 1
+  day: 20
+  midday:
+    text: "Joy Adamson raised an orphaned lion cub named Elsa, taught her to hunt, and set her free. Elsa came back to visit, years later, with cubs of her own."
+  evening:
+    about: "Painter, botanist and the author of Born Free, the story of a lioness returned to the wild, which taught millions to see wild animals as lives worth protecting."
+
+- month: 1
+  day: 21
+  midday:
+    text: "George Orwell's six rules for writers end with this one: break any of these rules sooner than say anything outright barbarous."
+  evening:
+    about: "Essayist, journalist and novelist who washed dishes in Paris and fought in Spain, wrote Animal Farm and Nineteen Eighty-Four, and taught us to distrust vague language."
+
+- month: 1
+  day: 22
+  midday:
+    text: "Some books are to be tasted, others to be swallowed, and some few to be chewed and digested."
+    author: "Francis Bacon"
+    source: "\"Of Studies,\" 1625"
+  evening:
+    title: "Of Studies"
+    author: "Francis Bacon"
+    source: "Essays, 1625"
+    text: |
+      Reading maketh a full man; conference a ready man; and writing an exact man.
+
+- month: 1
+  day: 23
+  midday:
+    text: "A novel is a mirror walking along a main road."
+    author: "Stendhal"
+    source: "The Red and the Black, 1830 (translated for Longhand)"
+  evening:
+    about: "A soldier who survived the retreat from Moscow, wrote The Red and the Black and The Charterhouse of Parma, and expected to be understood in fifty years. He was."
+
+- month: 1
+  day: 24
+  midday:
+    text: "There are two ways of spreading light: to be / The candle or the mirror that reflects it."
+    author: "Edith Wharton"
+    source: "\"Vesalius in Zante,\" 1902"
+  evening:
+    title: "The Age of Innocence"
+    author: "Edith Wharton"
+    source: "1920, the opening"
+    text: |
+      On a January evening of the early seventies, Christine Nilsson was singing in Faust at the Academy of Music in New York.
+
+- month: 1
+  day: 25
+  midday:
+    text: "A woman must have money and a room of her own if she is to write fiction."
+    author: "Virginia Woolf"
+    source: "A Room of One's Own, 1929"
+  evening:
+    title: "Mrs. Dalloway"
+    author: "Virginia Woolf"
+    source: "1925, the opening"
+    text: |
+      Mrs. Dalloway said she would buy the flowers herself.
+
+      For Lucy had her work cut out for her. The doors would be taken off their hinges; Rumpelmayer's men were coming. And then, thought Clarissa Dalloway, what a morning—fresh as if issued to children on a beach.
+
+      What a lark! What a plunge!
+
+- month: 1
+  day: 26
+  midday:
+    text: "Mary Mapes Dodge had never been to the Netherlands when she wrote Hans Brinker, or the Silver Skates. She wrote it from books and her Dutch neighbors' stories."
+  evening:
+    about: "The author of Hans Brinker and the editor of St. Nicholas, who asked Twain, Kipling, Alcott and Stevenson to write for children, and invented children's literature as we know it."
+
+- month: 1
+  day: 27
+  midday:
+    text: "\"Begin at the beginning,\" the King said, very gravely, \"and go on till you come to the end: then stop.\""
+    author: "Lewis Carroll"
+    source: "Alice's Adventures in Wonderland, 1865"
+  evening:
+    title: "Jabberwocky"
+    author: "Lewis Carroll"
+    source: "Through the Looking-Glass, 1871"
+    text: |
+      'Twas brillig, and the slithy toves
+      Did gyre and gimble in the wabe:
+      All mimsy were the borogoves,
+      And the mome raths outgrabe.
+
+- month: 1
+  day: 28
+  midday:
+    text: "Colette's first novels came out under her husband's name, and he kept the money. She left him, danced in the music halls, and wrote under her own name ever after."
+  evening:
+    about: "Novelist of Chéri and Gigi, music-hall dancer and lover of cats, and the first woman given a state funeral in France."
+
+- month: 1
+  day: 29
+  midday:
+    text: "Medicine is my lawful wife and literature my mistress. When I get tired of one, I spend the night with the other."
+    author: "Anton Chekhov"
+    source: "letter to Alexei Suvorin, 1888 (translated for Longhand)"
+  evening:
+    about: "Doctor, grandson of a serf, and the writer who showed that a story could end without a moral or a twist, just a person seeing their life a little more clearly."
+
+- month: 1
+  day: 30
+  midday:
+    text: "Barbara Tuchman never went to graduate school. She said that's what saved her: no one had ever taught her to write badly."
+  evening:
+    about: "The historian of The Guns of August and A Distant Mirror, who won two Pulitzer Prizes and believed history should be told as a story, with real people and real suspense."
+
+- month: 1
+  day: 31
+  midday:
+    text: "Thomas Merton's abbot told him to write his life story. The Seven Storey Mountain sold hundreds of thousands of copies and sent many young men to monasteries."
+  evening:
+    about: "A restless young writer who became a Trappist monk in Kentucky, and spent his life writing about silence, contemplation, peace and the meeting of East and West."
