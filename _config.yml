@@ -19,7 +19,8 @@ bluesky: "https://bsky.app/profile/did:plc:fpx4ses6oidyiwqyp4zkl7vq"
 instagram: "https://www.instagram.com/longhandliterature/"
 x: "https://x.com/longhandlit"
 
-# Review submissions are emailed to the address above through Web3Forms. This
+# Review submissions and Great Reads waitlist sign-ups are emailed through
+# Web3Forms to the address its account was set up with (not the one above). This
 # key only allows sending to that inbox, so it's safe in public.
 # GoatCounter visitor counting (no cookies): stats at https://cdamonsmith.goatcounter.com
 goatcounter: cdamonsmith

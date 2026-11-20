@@ -37,7 +37,7 @@ Please check every date and fact against two sources before adding it, and write
 
 ## Reviews
 
-Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) with the form on the Reviews page (`/reviews/`). The review arrives by email in the Longhand Gmail inbox (longhandlit@gmail.com), sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`), only allows sending to that inbox.
+Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) with the form on the Reviews page (`/reviews/`). The review arrives by email, sent through Web3Forms, at the address the Web3Forms account was set up with (the owner's own Gmail, not the Longhand inbox); its access key, in `_config.yml` (`web3forms_key`), only allows sending to that address. To send them somewhere else, make a new key at web3forms.com with the other address and replace `web3forms_key`.
 
 Nothing is published automatically. To publish a review you've approved, open Pages CMS, choose **Reviews**, click **Add an entry**, and fill in the book, its author, the reviewer's name, the date, a one-line summary, the book's ISBN (for the bookstore link), and the review itself. It appears on the Reviews page a minute or two after you save, at its own address. Reviews are stored one file each in `_reviews/`; `_layouts/review.html` is the design of each review's page.
 
@@ -102,7 +102,7 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 - `assets/icons/`, `favicon.ico`: the site icon (a blue ink drop); `assets/brand/`: the banner and round logo for social profiles
 - `fonts/`: Newsreader (the site) and Literata (the calendar and cards) and IBM Plex Mono, all under the SIL Open Font License (see `fonts/OFL.txt`)
 - `write/`: the writing app's retirement page, which lets anyone who used the app download what they wrote (still saved in their browser); `write/sw.js` clears installed copies. The app itself is archived in `_archive/write/`.
-- `courses/index.html`: Great Reads 2027, the 2027 courses: the reading list and the waitlist form (sign-ups are emailed to the address in `_config.yml`, through Web3Forms, like reviews)
+- `courses/index.html`: Great Reads 2027, the 2027 courses: the reading list and the waitlist form (sign-ups are emailed through Web3Forms, to the same address as reviews; each arrives as "Great Reads waitlist: <name>")
 - `play/`: sends old links to the Mrs. Dalloway game to Great Reads 2027; the game is archived in `_archive/play/`
 - `_archive/day/`: A Quiet Day, the writing game, archived (see below)
 - `.github/`: the daily posting to Bluesky and Mastodon
