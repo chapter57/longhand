@@ -8,7 +8,6 @@
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
   var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  var SMALL = { of: 1, the: 1, van: 1, den: 1, de: 1, der: 1, sir: 1, la: 1, le: 1 };
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -22,40 +21,16 @@
   }
   function anchor(e) { return "d-" + e.month + "-" + e.day; }
 
-  // A lettered card stands in for a portrait: initials for people, a book for
-  // books, a quill for events.
-  function initials(name) {
-    var words = String(name).split(/\s+/).filter(function (w) { return w && !SMALL[w.toLowerCase()]; });
-    if (!words.length) return "";
-    var first = words[0].charAt(0);
-    var last = words.length > 1 ? words[words.length - 1].charAt(0) : "";
-    return (first + last).toUpperCase();
-  }
-  function mono(e) {
-    var inner;
-    if (e.kind === "Published") {
-      inner = '<path class="mono-line" d="M 30 44 Q 45 38 60 44 L 60 78 Q 45 72 30 78 Z M 60 44 Q 75 38 90 44 L 90 78 Q 75 72 60 78"/>' +
-        '<path class="mono-line mono-thin" d="M 36 52 Q 45 49 54 52 M 36 60 Q 45 57 54 60 M 66 52 Q 75 49 84 52 M 66 60 Q 75 57 84 60"/>';
-    } else if (e.kind === "Event") {
-      inner = '<path class="mono-line" d="M 82 30 C 60 36 44 56 38 86 M 82 30 C 82 52 66 70 46 74"/>' +
-        '<path class="mono-line mono-thin" d="M 38 86 L 34 94"/>';
-    } else {
-      inner = '<text class="mono-letters" x="60" y="70" text-anchor="middle">' + esc(initials(e.name)) + "</text>";
-    }
-    return '<svg class="entry-mono" viewBox="0 0 120 120" aria-hidden="true">' +
-      '<circle class="mono-ring" cx="60" cy="60" r="54"/><circle class="mono-ring mono-thin" cx="60" cy="60" r="46"/>' +
-      inner + "</svg>";
-  }
   function pictured(e) { return e.pictured || e.name; }
-  // A portrait stored on the site, if there is one. Otherwise the lettered card,
-  // which is swapped for the portrait on Wikipedia once that has loaded.
+  // A portrait stored on the site, if there is one. Otherwise nothing, until the
+  // photograph from Wikipedia has loaded.
   function art(e) {
     if (e.image) {
       var src = e.image.charAt(0) === "/" ? e.image : "/" + e.image;
       return '<img class="entry-portrait" src="' + esc(src) + '" alt="' + esc(pictured(e)) + '" loading="lazy">' +
         (e.image_credit ? '<p class="entry-credit">Portrait: ' + esc(e.image_credit) + "</p>" : "");
     }
-    return mono(e);
+    return ""; // no initials or drawings: the space closes up until a photograph loads
   }
   function artBox(e) {
     return '<div class="entry-art"' + (e.portrait && !e.image ? ' data-portrait="' + esc(e.portrait) + '" data-pictured="' + esc(pictured(e)) + '"' : "") +
@@ -229,7 +204,7 @@
   // Portraits come from the lead picture of the person's Wikipedia article,
   // loaded by the reader's browser. Only freely licensed pictures from
   // Wikimedia Commons are used, credited to their maker and license. If
-  // anything goes wrong, the lettered card stays.
+  // anything goes wrong, there's simply no picture.
   function cached(key, load) {
     try { var hit = sessionStorage.getItem(key); if (hit) return Promise.resolve(JSON.parse(hit)); } catch (err) {}
     return load().then(function (v) {

@@ -1,52 +1,38 @@
 ---
 layout: default
 ---
-<script>
-  // Copies of the writing app installed before it moved to /write/ open here. Send them on,
-  // unless someone followed a link here on purpose.
-  if ((matchMedia("(display-mode: standalone)").matches || navigator.standalone) && !document.referrer) location.replace("write/");
-</script>
 
-<section class="hero wrap">
-  <p class="kicker">{{ site.season }} · A writer, a book or a moment, every day</p>
-  <div class="hero-title">
-    {% include ill-hand.html %}
-    <h1>Longhand <span>Literature</span></h1>
-  </div>
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <p class="hero-line">Something worth reading, every day.</p>
-      <p class="dek">Each day the almanac opens a new entry: a writer's birthday, a famous book's anniversary, or a moment from literary history, with the story behind it and somewhere to start reading. Come back tomorrow for the next one.</p>
-      <p class="actions"><a class="button" href="{{ '/courses/' | relative_url }}">Great Reads 2027</a><a class="text-link" href="{{ '/almanac/' | relative_url }}">Today in the almanac</a></p>
-      {% include social-icons.html %}
-    </div>
-    <a class="course-card" href="{{ '/courses/' | relative_url }}">
-      <span class="course-card-kicker">New for 2027 · Longhand Courses</span>
-      <span class="course-card-title" role="heading" aria-level="2">Great Reads 2027</span>
-      <span class="course-card-dek">The humanities education you wish you'd had, one great book at a time. Four seasons, from Homer to Achebe.</span>
-      <span class="course-seasons" role="list">
-        <span role="listitem" class="cs-row"><span class="season">Winter</span><span class="season-title">Beginnings</span><span class="season-books">Homer, Sophocles, Plato, Marcus Aurelius</span></span>
-        <span role="listitem" class="cs-row"><span class="season">Spring</span><span class="season-title">The Self Appears</span><span class="season-books">Dante, Chaucer, Montaigne, Shakespeare</span></span>
-        <span role="listitem" class="cs-row"><span class="season">Summer</span><span class="season-title">The Age of the Novel</span><span class="season-books">Shelley, Austen, Douglass, Dickens</span></span>
-        <span role="listitem" class="cs-row"><span class="season">Fall</span><span class="season-title">The Modern Mind</span><span class="season-books">Dostoevsky, Kafka, Woolf, Achebe</span></span>
-      </span>
-      <span class="course-card-foot">Join the waitlist <span aria-hidden="true">▶</span></span>
-    </a>
-  </div>
-</section>
-
-<section class="dept wrap today" id="almanac" aria-labelledby="today-h">
-  <h2 class="label" id="today-h"><span>Today in the Almanac</span><span class="label-note" data-almanac-date></span></h2>
-  <div class="today-grid">
+<section class="wrap front" aria-label="Today">
+  <div class="front-lead" id="almanac">
+    <p class="kicker front-kicker"><span>Today in the almanac</span></p>
     <div data-almanac-today>
       <p class="soon">Today's entry appears here. You can also browse <a href="{{ '/almanac/' | relative_url }}">the whole almanac</a>.</p>
     </div>
-    <aside class="week-strip" aria-labelledby="strip-h">
-      <h3 class="label" id="strip-h"><span>Earlier this week</span></h3>
-      <ul data-almanac-strip></ul>
-      <p class="actions"><a class="text-link" href="{{ '/almanac/' | relative_url }}">Every entry so far</a>{% if site.bookshop_shop != "" %}<a class="text-link" href="{{ site.bookshop_shop }}">The Almanac Shelf</a>{% endif %}</p>
-    </aside>
   </div>
+  <aside class="front-side">
+    <a class="course-box" href="{{ '/courses/' | relative_url }}">
+      <span class="kicker">New · Longhand Courses · Starts January 11</span>
+      <span class="course-box-title">Great Reads 2027</span>
+      <span class="course-box-dek">The humanities education you wish you'd had, one great book at a time.</span>
+      <span class="course-seasons" role="list">
+        <span class="cs-row" role="listitem"><span class="season">Winter</span><span class="season-title">Beginnings: Homer to Marcus Aurelius</span></span>
+        <span class="cs-row" role="listitem"><span class="season">Spring</span><span class="season-title">The Self Appears: Dante to Hamlet</span></span>
+        <span class="cs-row" role="listitem"><span class="season">Summer</span><span class="season-title">The Age of the Novel</span></span>
+        <span class="cs-row" role="listitem"><span class="season">Fall</span><span class="season-title">The Modern Mind: Kafka to Achebe</span></span>
+      </span>
+      <span class="button">Join the waitlist</span>
+    </a>
+    <figure class="the-line" data-the-line>
+      <figcaption class="kicker">The line</figcaption>
+      <blockquote>“Read the best books first, or you may not have a chance to read them at all.”</blockquote>
+      <p class="the-line-by">Henry David Thoreau, <cite>A Week on the Concord and Merrimack Rivers</cite>, 1849</p>
+    </figure>
+  </aside>
+</section>
+
+<section class="wrap week-row" aria-labelledby="strip-h">
+  <h2 class="label" id="strip-h"><span>Earlier this week</span><a class="label-note" href="{{ '/almanac/' | relative_url }}">Every entry so far →</a></h2>
+  <ul class="week-cols" data-almanac-strip></ul>
 </section>
 
 <div class="wrap">{% include newsletter.html %}</div>
@@ -59,8 +45,6 @@ layout: default
     <p class="actions"><a class="button" href="{{ '/calendar/' | relative_url }}">See the calendar</a></p>
   </div>
 </section>
-
-<div class="wrap">{% include ill-rule.html %}</div>
 
 <section class="dept wrap review-call" id="reviews" aria-labelledby="reviews-h">
   <h2 class="label" id="reviews-h"><span>Reviews</span><span class="label-note">from our readers</span></h2>
@@ -77,34 +61,26 @@ layout: default
       <li><a class="review-item" href="{{ r.url | relative_url }}"><span class="review-book">{{ r.book }}</span><span class="review-meta">{{ r.book_author }} · reviewed by {{ r.reviewer }}</span></a></li>
       {%- endfor %}
     </ul>
-    {%- else %}
-    <div class="review-call-art">{% include ill-postmark.html month=site.time %}</div>
     {%- endif %}
   </div>
 </section>
 
-<section class="band" id="contact" aria-labelledby="contact-h">
-  <div class="band-inner wrap">
-    <div class="band-art">{% include ill-envelope.html %}</div>
-    <div>
-      <h2 class="band-title" id="contact-h">Write to us.</h2>
-      <p>Corrections, a writer or a date you'd like in the almanac, or just hello. We read everything.</p>
-      <p class="band-email"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="dept wrap tool" id="write" aria-labelledby="write-h">
-  <h2 class="label" id="write-h"><span>For writers</span><span class="label-note">a free tool</span></h2>
-  <div class="tool-grid">
-    <p class="tool-title">Longhand, the writing app</p>
-    <div>
-      <p>A plain, quiet word processor that opens to a blank page and gets out of the way. It saves as you type, exports to Word, PDF, Markdown or plain text, and can send a finished review straight to us. Your writing stays on your computer; nothing is sent anywhere unless you choose to send it.</p>
-      <p class="actions"><a class="text-link" href="{{ '/write/' | relative_url }}">Open the app</a><span class="fine">Free. For Chrome or Edge on a Mac or Windows computer.</span></p>
-    </div>
-  </div>
-</section>
-
-<p class="wrap fine site-note">This website counts its visits with GoatCounter, which uses no cookies and doesn't follow you around the web.</p>
+<script>
+  // The line: today's quotation from the almanac's midday post, when there is one.
+  (function () {
+    var lines = [
+    {%- for d in site.data.social %}{% if d.midday.author and d.midday.text %}
+      [{{ d.month }}, {{ d.day }}, {{ d.midday.text | jsonify }}, {{ d.midday.author | jsonify }}, {{ d.midday.source | default: "" | jsonify }}],
+    {%- endif %}{% endfor %}
+    ];
+    var now = new Date(), m = now.getMonth() + 1, d = now.getDate();
+    var hit = lines.filter(function (l) { return l[0] === m && l[1] === d; })[0];
+    var box = document.querySelector("[data-the-line]");
+    if (!hit || !box) return;
+    var esc = function (t) { var x = document.createElement("span"); x.textContent = t; return x.innerHTML; };
+    box.querySelector("blockquote").innerHTML = "“" + esc(hit[2].replace(/^["“]|["”]$/g, "")) + "”";
+    box.querySelector(".the-line-by").innerHTML = esc(hit[3]) + (hit[4] ? ", " + esc(hit[4].replace(/^["“]|["”]$/g, "")) : "");
+  })();
+</script>
 
 {% include almanac-data.html %}

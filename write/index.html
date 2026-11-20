@@ -1,318 +1,42 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Longhand</title>
-<meta name="description" content="A quiet place to write. Your writing is saved on your computer and never leaves it unless you send it.">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<meta name="theme-color" content="#F2F3EE" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141619" media="(prefers-color-scheme: dark)">
-<link rel="preload" href="../fonts/Literata-normal-400.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-  @font-face { font-family: "Literata"; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/Literata-normal-400.woff2) format("woff2"); }
-  @font-face { font-family: "Literata"; font-style: normal; font-weight: 600; font-display: swap; src: url(../fonts/Literata-normal-600.woff2) format("woff2"); }
-  @font-face { font-family: "Literata"; font-style: italic; font-weight: 400; font-display: swap; src: url(../fonts/Literata-italic-400.woff2) format("woff2"); }
-  @font-face { font-family: "Literata"; font-style: italic; font-weight: 600; font-display: swap; src: url(../fonts/Literata-italic-600.woff2) format("woff2"); }
-  @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/IBMPlexMono-normal-400.woff2) format("woff2"); }
-  @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url(../fonts/IBMPlexMono-normal-500.woff2) format("woff2"); }
-
-  :root {
-    color-scheme: light;
-    --paper: #F2F3EE;
-    --ink: #1E2227;
-    --ink-soft: #62686F;
-    --ink-faint: #999EA3;
-    --rule: #D8DBD2;
-    --surface: #E7E9E2;
-    --accent: #2F4F78;
-    --accent-wash: rgba(47, 79, 120, 0.16);
-    --warn: #9A3B2E;
-    --shadow: rgba(20, 24, 30, 0.14);
-    --text-size: 19px;
-    --serif: "Literata", Georgia, "Times New Roman", serif;
-    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --paper: #141619;
-      --ink: #DAD7CF;
-      --ink-soft: #8F949A;
-      --ink-faint: #5F646A;
-      --rule: #282B30;
-      --surface: #1C1F23;
-      --accent: #9DB6D6;
-      --accent-wash: rgba(157, 182, 214, 0.22);
-      --warn: #E39A8A;
-      --shadow: rgba(0, 0, 0, 0.5);
-    }
-  }
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --paper: #141619;
-    --ink: #DAD7CF;
-    --ink-soft: #8F949A;
-    --ink-faint: #5F646A;
-    --rule: #282B30;
-    --surface: #1C1F23;
-    --accent: #9DB6D6;
-    --accent-wash: rgba(157, 182, 214, 0.22);
-    --warn: #E39A8A;
-    --shadow: rgba(0, 0, 0, 0.5);
-  }
-
-  html, body { background: var(--paper); color: var(--ink); }
-  body { margin: 0; font-family: var(--mono); font-size: 12px; min-height: 100vh; }
-  [hidden] { display: none !important; }
-  ::selection { background: var(--accent-wash); }
-
-  button {
-    font: inherit; color: inherit; background: none; border: 0;
-    padding: 6px 8px; border-radius: 4px; cursor: pointer;
-    transition: background-color .2s, color .2s;
-  }
-  button:hover { color: var(--ink); background: var(--surface); }
-  button:disabled { opacity: .4; cursor: default; }
-  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-  button[aria-pressed="true"] { color: var(--accent); }
-  button[aria-pressed="true"]::before {
-    content: ""; display: inline-block; width: 5px; height: 5px; border-radius: 50%;
-    background: currentColor; margin-right: 6px; vertical-align: 2px;
-  }
-
-  .bar { color: var(--ink-soft); background: var(--paper); transition: opacity .7s ease; }
-  body.quiet .bar { opacity: 0; }
-  body.quiet .bar:focus-within { opacity: 1; }
-
-  .top {
-    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
-    display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px;
-    padding-inline: 16px; padding-block: 10px;
-  }
-  .mark { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--ink); letter-spacing: .01em; text-decoration: none; border-radius: 2px; }
-  .mark:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  .mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .drawer-foot { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
-  .home-link { color: var(--accent); text-underline-offset: 3px; }
-  .piece-title {
-    flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    color: var(--ink-faint);
-  }
-  .tools { display: flex; flex-wrap: wrap; gap: 2px; margin-left: auto; }
-  .tools .sep { width: 1px; background: var(--rule); margin: 6px 4px; }
-  #exportBtn { color: var(--accent); }
-  .export { position: relative; }
-  .export-menu {
-    position: absolute; right: 0; top: calc(100% + 6px); z-index: 25;
-    display: flex; flex-direction: column; width: max-content; max-width: min(320px, calc(100vw - 32px));
-    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 4px;
-    box-shadow: 0 10px 32px var(--shadow);
-  }
-  .export-menu button { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 8px 10px; }
-  .export-menu button:hover, .export-menu button:focus-visible { background: var(--paper); }
-  .x-name { color: var(--ink); font-weight: 500; }
-  .x-note { color: var(--ink-soft); font-size: 11px; }
-
-  .bottom {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
-    display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px;
-    padding-inline: 16px;
-    padding-block: 6px calc(6px + env(safe-area-inset-bottom, 0px));
-    font-size: 11.5px; font-variant-numeric: tabular-nums;
-  }
-  .bottom .push { margin-left: auto; }
-  #saveState.warn { color: var(--warn); }
-
-  main { padding-inline: 16px; }
-  #editor {
-    max-width: 34em; margin-inline: auto;
-    font-family: var(--serif); font-size: var(--text-size); line-height: 1.72;
-    font-optical-sizing: auto; overflow-wrap: break-word;
-    padding-block: 9vh 55vh; outline: none; caret-color: var(--accent);
-  }
-  #editor.typewriter { padding-top: 42vh; }
-  #editor > p, #editor > div { margin: 0 0 .9em; position: relative; }
-  #editor > h2 {
-    font-weight: 600; font-size: 1.32em; line-height: 1.3; letter-spacing: -.005em;
-    margin: 1.7em 0 .6em; text-wrap: balance;
-  }
-  #editor > h2:first-child { margin-top: 0; }
-  #editor.empty > :first-child::before {
-    content: "Begin anywhere."; position: absolute; color: var(--ink-faint); pointer-events: none;
-    font-style: italic;
-  }
-  #editor.focus > * { transition: opacity .45s ease; }
-  #editor.focus > :not(.current) { opacity: .24; }
-
-  #scrim { position: fixed; inset: 0; background: var(--shadow); z-index: 15; }
-  #drawer {
-    position: fixed; top: 0; bottom: 0; left: 0; z-index: 20;
-    width: min(360px, 88vw); background: var(--surface); overflow-y: auto; box-sizing: border-box;
-    padding-inline: 16px;
-    padding-block: calc(16px + env(safe-area-inset-top, 0px)) calc(16px + env(safe-area-inset-bottom, 0px));
-    box-shadow: 1px 0 0 var(--rule), 16px 0 48px var(--shadow);
-    display: flex; flex-direction: column; gap: 14px;
-  }
-  .drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-  .drawer-head h2 { margin: 0; font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); }
-  .drawer-actions { display: flex; gap: 6px; }
-  .drawer-actions button { color: var(--accent); border: 1px solid var(--rule); padding: 6px 10px; }
-  #pieceList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .piece { display: grid; grid-template-columns: 1fr auto; gap: 4px; align-items: start; border-top: 1px solid var(--rule); padding-block: 8px; }
-  .piece-open { text-align: left; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-  .piece-open .t {
-    font-family: var(--serif); font-size: 15.5px; color: var(--ink);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .piece[aria-current="true"] .t { color: var(--accent); }
-  .piece-open .m { font-size: 11px; color: var(--ink-soft); font-variant-numeric: tabular-nums; line-height: 1.5; }
-  .piece-del { font-size: 11px; color: var(--ink-faint); }
-  .piece-del:hover { color: var(--warn); }
-  .drawer-note { margin: 0; color: var(--ink-soft); line-height: 1.6; font-size: 11.5px; }
-  .drawer-note kbd { font-family: var(--mono); font-size: 11px; }
-
-  .menu-sep { height: 1px; background: var(--rule); margin: 4px 6px; }
-  #reviewDialog {
-    width: min(460px, calc(100vw - 32px)); box-sizing: border-box; max-height: calc(100vh - 32px); overflow-y: auto;
-    background: var(--surface); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
-    padding: 20px; box-shadow: 0 18px 60px var(--shadow);
-  }
-  #reviewDialog::backdrop { background: var(--shadow); }
-  #reviewDialog h2 { margin: 0 0 8px; font-family: var(--serif); font-size: 19px; font-weight: 600; }
-  #reviewForm { display: flex; flex-direction: column; gap: 10px; }
-  .dlg-note, .dlg-count, .dlg-status { margin: 0; line-height: 1.6; color: var(--ink-soft); font-size: 12px; }
-  .dlg-note a { color: var(--accent); }
-  .dlg-count { color: var(--ink); }
-  .dlg-count.warn, .dlg-status.warn { color: var(--warn); }
-  #reviewForm label { display: flex; flex-direction: column; gap: 4px; color: var(--ink-soft); font-size: 11.5px; }
-  #reviewForm input:not([type="checkbox"]) {
-    font: 15px var(--serif); color: var(--ink); background: var(--paper);
-    border: 1px solid var(--rule); border-radius: 4px; padding: 7px 9px;
-  }
-  #reviewForm input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-  #reviewForm .dlg-check { flex-direction: row; align-items: flex-start; gap: 8px; line-height: 1.5; color: var(--ink); }
-  .dlg-check input { margin-top: 3px; }
-  .dlg-trap { position: absolute; left: -9999px; }
-  .dlg-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
-  .dlg-primary { background: var(--accent); color: var(--paper); padding: 7px 14px; }
-  .dlg-primary:hover { background: var(--accent); color: var(--paper); opacity: .9; }
-
-  #toast {
-    position: fixed; left: 50%; transform: translateX(-50%); z-index: 30;
-    bottom: calc(44px + env(safe-area-inset-bottom, 0px));
-    display: flex; align-items: center; gap: 10px; box-sizing: border-box; width: max-content; max-width: calc(100% - 32px);
-    background: var(--ink); color: var(--paper); border-radius: 6px;
-    padding: 8px 8px 8px 14px; font-size: 12px; line-height: 1.5; box-shadow: 0 6px 24px var(--shadow);
-  }
-  #toast button { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-  #toast button:hover { background: transparent; opacity: .8; }
-
-  @media (max-width: 640px) {
-    .piece-title { display: none; }
-    .tools { margin-left: 0; }
-    #editor { line-height: 1.66; padding-top: 4vh; }
-  }
-  /* Exporting a PDF prints just the writing, like a clean manuscript page. */
-  @page { margin: 1in; }
-  @media print {
-    #reviewDialog { display: none !important; }
-    :root { color-scheme: light; --paper: #fff; --ink: #000; }
-    html, body { background: #fff; color: #000; }
-    .bar, #drawer, #scrim, #toast { display: none !important; }
-    main { padding: 0; }
-    #editor, #editor.typewriter {
-      max-width: none; padding: 0; margin: 0; font-size: 12pt; line-height: 1.6; caret-color: transparent;
-    }
-    #editor.focus > * { opacity: 1 !important; }
-    #editor.empty > :first-child::before { content: none; }
-    #editor > h2 { break-after: avoid; }
-    #editor > p { orphans: 3; widows: 3; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .bar, #editor.focus > *, button { transition: none; }
-  }
-</style>
-</head>
-<body>
-
-<header class="bar top" id="topbar">
-  <a class="mark" id="homeLink" href="../" title="Go to the Longhand home page">Longhand</a>
-  <button id="drawerBtn" aria-expanded="false" aria-controls="drawer">Pieces</button>
-  <span class="piece-title" id="pieceTitle"></span>
-  <div class="tools">
-    <button id="focusBtn" aria-pressed="false" title="Dim everything but the paragraph you're in">Focus</button>
-    <button id="typeBtn" aria-pressed="false" title="Keep the line you're writing in the middle of the screen">Typewriter</button>
-    <span class="sep" aria-hidden="true"></span>
-    <button id="sizeDown" title="Smaller text" aria-label="Smaller text">A−</button>
-    <button id="sizeUp" title="Larger text" aria-label="Larger text">A+</button>
-    <span class="sep" aria-hidden="true"></span>
-    <div class="export">
-      <button id="exportBtn" aria-haspopup="true" aria-expanded="false" aria-controls="exportMenu" title="Save a copy in another format">Export</button>
-      <div class="export-menu" id="exportMenu" role="menu" hidden>
-        <button role="menuitem" data-export="docx"><span class="x-name">Word</span><span class="x-note">.docx, for submitting to journals and publishers</span></button>
-        <button role="menuitem" data-export="pdf"><span class="x-name">PDF</span><span class="x-note">for sharing or printing</span></button>
-        <button role="menuitem" data-export="md"><span class="x-name">Markdown</span><span class="x-note">.md, for Substack, blogs and newsletters</span></button>
-        <button role="menuitem" data-export="txt"><span class="x-name">Plain text</span><span class="x-note">.txt, opens anywhere</span></button>
-        <span class="menu-sep" aria-hidden="true"></span>
-        <button role="menuitem" id="reviewItem"><span class="x-name">Submit as a review</span><span class="x-note">send this piece to Longhand's editors</span></button>
-      </div>
-    </div>
+---
+layout: default
+title: The writing app has been retired
+---
+<section class="lead wrap">
+  <div class="lead-copy">
+    <p class="kicker">The Longhand writing app</p>
+    <h1>The writing app has been retired.</h1>
+    <p class="dek">Longhand is narrowing its focus to reading: <a href="{{ '/almanac/' | relative_url }}">the almanac</a> and <a href="{{ '/courses/' | relative_url }}">Great Reads 2027</a>. If you wrote anything in the app, it's still saved in this browser, and you can download all of it below.</p>
+    <p class="actions"><button class="button" type="button" id="saveAll" hidden>Download my writing</button></p>
+    <p class="fine" id="saveNote" aria-live="polite">Looking for writing saved in this browser…</p>
   </div>
-</header>
-
-<div id="scrim" hidden></div>
-<aside id="drawer" hidden aria-label="Your pieces">
-  <div class="drawer-head">
-    <h2>Your pieces</h2>
-    <div class="drawer-actions">
-      <button id="newBtn">New piece</button>
-    </div>
-  </div>
-  <ul id="pieceList"></ul>
-  <div class="drawer-foot">
-    <p class="drawer-note">Your pieces are saved in this browser, on this computer, and nowhere else, unless you choose to submit one as a review. Use Export to keep a copy of anything that matters.</p>
-    <p class="drawer-note"><a class="home-link" id="homeLink2" href="../">Visit the Longhand home page</a></p>
-  </div>
-</aside>
-
-<main>
-  <article id="editor" contenteditable="true" spellcheck="false" aria-label="Writing area" aria-multiline="true" role="textbox"></article>
-</main>
-
-<footer class="bar bottom" id="statusbar">
-  <span id="wordCount">0 words</span>
-  <span id="readTime"></span>
-  <span id="today"></span>
-  <span id="sitting"></span>
-  <span class="push" id="saveState" aria-live="polite"></span>
-  <button id="spellBtn" aria-pressed="false" title="Show spelling underlines">Spelling</button>
-</footer>
-
-<dialog id="reviewDialog" aria-labelledby="reviewTitle">
-  <form id="reviewForm" method="dialog">
-    <h2 id="reviewTitle">Submit this piece as a review</h2>
-    <p class="dlg-note">This sends <strong>this piece, and only this piece</strong>, to Longhand's editors to consider for the <a href="../reviews/" target="_blank" rel="noopener">Reviews</a> page. Nothing else leaves your computer. We read everything and will write back either way.</p>
-    <p class="dlg-count" id="reviewCount"></p>
-    <label>Your name, as it should appear <input name="reviewer" autocomplete="name" required maxlength="80"></label>
-    <label>Your email, so we can reply (never published) <input name="email" type="email" autocomplete="email" required maxlength="120"></label>
-    <label>Book title <input name="book" required maxlength="160"></label>
-    <label>Book author <input name="book_author" required maxlength="120"></label>
-    <label class="dlg-check"><input name="consent" type="checkbox" required> I wrote this review myself, without using AI, and it hasn't been published elsewhere. Longhand may publish it on longhandlit.com and share it on social media. The review's author keeps the copyright.</label>
-    <input name="botcheck" type="checkbox" class="dlg-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <p class="dlg-status" id="reviewStatus" aria-live="polite"></p>
-    <div class="dlg-actions">
-      <button type="button" id="reviewCancel">Cancel</button>
-      <button type="submit" id="reviewSend" class="dlg-primary">Send review</button>
-    </div>
-  </form>
-</dialog>
-
-<div id="toast" role="status" hidden><span id="toastMsg"></span><button id="toastAction" hidden>Undo</button></div>
-
-<script src="export.js"></script>
-<script src="app.js"></script>
-</body>
-</html>
+</section>
+<script>
+(function () {
+  var note = document.getElementById("saveNote"), btn = document.getElementById("saveAll");
+  if (!window.indexedDB) { note.textContent = "This browser can't be checked for saved writing."; return; }
+  var req = indexedDB.open("longhand", 1);
+  req.onupgradeneeded = function () { req.result.createObjectStore("pieces", { keyPath: "id" }); };
+  req.onerror = function () { note.textContent = "Saved writing couldn't be read in this browser."; };
+  req.onsuccess = function () {
+    var get = req.result.transaction("pieces", "readonly").objectStore("pieces").getAll();
+    get.onsuccess = function () {
+      var pieces = (get.result || []).filter(function (p) { return p && p.html; }).sort(function (a, b) { return b.updated - a.updated; });
+      if (!pieces.length) { note.textContent = "There's no writing from the app saved in this browser."; return; }
+      var text = pieces.map(function (p) {
+        var box = document.createElement("div");
+        box.innerHTML = p.html.replace(/<br\s*\/?>/gi, "\n").replace(/<\/(p|h[1-6]|li|blockquote|div)>/gi, "$&\n\n");
+        return (box.textContent || "").replace(/\n{3,}/g, "\n\n").trim() + "\n\n(Last edited " + new Date(p.updated).toLocaleString() + ")";
+      }).join("\n\n\n----------\n\n\n");
+      note.textContent = pieces.length + (pieces.length === 1 ? " piece" : " pieces") + " found. They download as one plain-text file.";
+      btn.hidden = false;
+      btn.onclick = function () {
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" }));
+        a.download = "My Longhand writing.txt";
+        document.body.appendChild(a); a.click(); a.remove();
+      };
+    };
+  };
+})();
+</script>
