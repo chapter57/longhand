@@ -85,18 +85,10 @@ document.documentElement.classList.add("js");
   <div class="colophon-inner">
     <p class="colophon-mark">Longhand</p>
     <p>{{ site.description | strip }}</p>
-    <ul class="colophon-links">
-      <li><a href="{{ '/almanac/' | relative_url }}">The Almanac</a></li>
-      <li><a href="{{ '/reviews/' | relative_url }}">Reviews</a></li>
-      <li><a href="{{ '/calendar/' | relative_url }}">The 2027 calendar</a></li>
-      <li><a href="{{ '/gifts/' | relative_url }}">Gifts for readers</a></li>
-      <li><a href="{{ '/courses/' | relative_url }}">Great Reads 2027</a></li>
-      {% if site.newsletter != "" %}<li><a href="{{ site.newsletter }}">The Longhand Letter</a></li>{% endif %}
-      {% if site.x %}<li><a href="{{ site.x }}">X</a></li>{% endif %}
-      {% if site.instagram %}<li><a href="{{ site.instagram }}">Instagram</a></li>{% endif %}
-      {% if site.bluesky %}<li><a href="{{ site.bluesky }}">Bluesky</a></li>{% endif %}
-      <li><a href="mailto:{{ site.email }}">Write to us: {{ site.email }}</a></li>
-    </ul>
+    <div class="colophon-bar">
+      {% include social-icons.html %}
+      <a class="text-link" href="mailto:{{ site.email }}">Write to us</a>
+    </div>
     <p class="fine">Set in Newsreader and IBM Plex Mono. {{ site.season }}. Visits are counted with GoatCounter, which uses no cookies.</p>
   </div>
 </footer>
