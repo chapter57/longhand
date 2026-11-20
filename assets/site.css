@@ -223,13 +223,29 @@ h1, h2, h3 { text-wrap: balance; }
 .longhand .lh-thin { stroke-width: 1px; }
 
 /* The ink field: a drop of ink for every day. */
-/* The game, on the front page. */
-.game-card { display: block; justify-self: end; width: 100%; max-width: 34rem; background: #000; border: 4px solid var(--ink); box-shadow: 8px 8px 0 var(--accent); text-decoration: none; color: #fbf7ee; transition: transform .15s; }
-.game-card:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--accent); }
-.game-card img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
-.game-card-bar { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.8rem 1rem 0.9rem; border-top: 4px solid var(--ink); }
-.game-card-kicker { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #ffd36b; }
-.game-card-title { font-size: 1.25rem; line-height: 1.2; }
+/* Great Reads 2027, on the front page and the courses page. */
+.course-card { display: block; justify-self: end; width: 100%; max-width: 34rem; background: var(--paper); border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--accent); text-decoration: none; color: var(--ink); padding: 1.25rem 1.4rem 1.1rem; transition: transform .15s, box-shadow .15s; }
+a.course-card:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--accent); }
+.course-card-kicker, .course-card-title, .course-card-dek { display: block; }
+.course-card-dek { font-size: 1.02rem; line-height: 1.5; color: var(--ink-soft); margin: 0 0 0.9rem; }
+.course-card-kicker { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.35rem; }
+.course-card-title { font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 0.9rem; }
+.course-seasons { list-style: none; margin: 0; padding: 0; }
+.course-seasons { display: block; }
+.course-seasons li, .course-seasons .cs-row { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); column-gap: 0.75rem; padding: 0.6rem 0; border-top: 1px solid var(--rule); }
+.course-seasons .season { grid-row: span 2; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); padding-top: 0.2rem; }
+.course-seasons .season-title { font-size: 1.1rem; line-height: 1.25; }
+.course-seasons .season-books { font-size: 0.85rem; line-height: 1.4; color: var(--ink-soft); }
+.course-card-foot { display: block; margin-top: 0.8rem; padding-top: 0.75rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.course-how { list-style: none; padding: 0; margin: 0 0 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem 2rem; max-width: 60rem; }
+.course-how li { border-top: 2px solid var(--accent); padding-top: 0.6rem; line-height: 1.5; }
+.course-how b { display: block; font-weight: 600; margin-bottom: 0.2rem; }
+.season-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.75rem 2.5rem; margin-bottom: 1.25rem; }
+.season-block { border-top: 1px solid var(--rule); padding-top: 1rem; }
+.season-block .kicker { margin-bottom: 0.4rem; }
+.book-list { margin: 0; padding-left: 1.1rem; line-height: 1.55; }
+.season-picks { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
+.season-picks legend { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); margin-bottom: 0.4rem; padding: 0; }
 .ink-drop { fill: var(--ink); transition: transform 0.25s; transform-box: fill-box; transform-origin: center; }
 a:hover > .ink-drop, a:focus-visible > .ink-drop { fill: var(--accent); transform: scale(1.18); }
 .ink-today { fill: var(--accent); animation: ink-wet 3.2s ease-in-out infinite; }
@@ -406,7 +422,7 @@ a:hover > .ink-drop, a:focus-visible > .ink-drop { fill: var(--accent); transfor
 /* ---------- narrow screens ---------- */
 @media (max-width: 760px) {
   .lead, .write-grid, .today-grid, .band-inner, .review-call-grid, .tool-grid, .hero-grid { grid-template-columns: minmax(0, 1fr); }
-  .game-card { justify-self: stretch; max-width: none; order: -1; }
+  .course-card { justify-self: stretch; max-width: none; }
   .review-call-art { display: none; }
   .entry, .entry-feature { grid-template-columns: 5.5rem minmax(0, 1fr); }
   .piece-head, .review-grid { grid-template-columns: minmax(0, 1fr); }
