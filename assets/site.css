@@ -191,6 +191,21 @@ a.label-note:hover { color: var(--accent); }
 .social a:hover, .social a:focus-visible { color: var(--accent); }
 .social svg { display: block; }
 
+/* ---------- plates: 19th-century prints, printed on the page ---------- */
+.plate { margin: 0; }
+.plate img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; filter: grayscale(1) contrast(1.05); }
+.plate figcaption { margin-top: 0.45rem; font-family: var(--mono); font-size: 0.62rem; line-height: 1.5; letter-spacing: 0.04em; color: var(--ink-soft); }
+.plate figcaption cite { font-family: var(--serif); font-size: 0.78rem; letter-spacing: 0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plate img { mix-blend-mode: screen; filter: grayscale(1) invert(1) contrast(1.05); } }
+:root[data-theme="dark"] .plate img { mix-blend-mode: screen; filter: grayscale(1) invert(1) contrast(1.05); }
+.plate-side { border-top: 1px solid var(--ink); padding-top: 0.75rem; }
+.plate-side img { max-height: 22rem; width: auto; max-width: 100%; }
+.plate-lead { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+.plate-lead img { max-height: 26rem; width: auto; max-width: 100%; }
+.lead-plate { max-width: 17rem; align-self: end; }
+.lead-plate img { max-height: 20rem; width: auto; max-width: 100%; margin-left: auto; }
+.lead-plate figcaption { text-align: right; }
+
 /* ---------- entries ---------- */
 /* The kind of entry: Born, Died, Published, Event */
 .kind { display: inline-block; text-transform: uppercase; letter-spacing: 0.11em; font-family: var(--mono); font-size: 0.66rem; font-weight: 500; color: var(--accent); }
@@ -357,6 +372,7 @@ a.label-note:hover { color: var(--accent); }
   .front { grid-template-columns: minmax(0, 1fr); }
   .front-lead { border-right: 0; padding-right: 0; }
   .front-side { padding-left: 0; padding-top: 1.5rem; border-top: 1px solid var(--ink); }
+  .plate-side { display: none; }
 }
 @media (max-width: 760px) {
   .lead, .review-call-grid, .review-grid, .newsletter { grid-template-columns: minmax(0, 1fr); }

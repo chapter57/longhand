@@ -8,6 +8,7 @@ layout: default
     <div data-almanac-today>
       <p class="soon">Today's entry appears here. You can also browse <a href="{{ '/almanac/' | relative_url }}">the whole almanac</a>.</p>
     </div>
+    {% include plate.html slot=4 class="plate-lead" %}
   </div>
   <aside class="front-side">
     <a class="course-box" href="{{ '/courses/' | relative_url }}">
@@ -27,6 +28,7 @@ layout: default
       <blockquote>“Read the best books first, or you may not have a chance to read them at all.”</blockquote>
       <p class="the-line-by">Henry David Thoreau, <cite>A Week on the Concord and Merrimack Rivers</cite>, 1849</p>
     </figure>
+    {% include plate.html slot=0 class="plate-side" %}
   </aside>
 </section>
 
