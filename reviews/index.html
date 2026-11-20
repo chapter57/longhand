@@ -11,7 +11,6 @@ image: /assets/cards/reviews-call.png
     <h1>Classic books, read again.</h1>
     <p class="dek">Readers write about the old books that still matter to them: what surprised them, what moved them, and why they think you should read it too. Send us yours.</p>
   </div>
-  <div class="lead-art lead-art-small">{% include ill-envelope.html %}</div>
 </section>
 
 <section class="dept wrap" aria-labelledby="published-h">
@@ -33,7 +32,6 @@ image: /assets/cards/reviews-call.png
   {%- endif %}
 </section>
 
-<div class="wrap">{% include ill-rule.html %}</div>
 
 <section class="dept wrap" id="submit" aria-labelledby="submit-h">
   <h2 class="label" id="submit-h"><span>Send us a review</span><span class="label-note">we read everything</span></h2>
@@ -49,7 +47,6 @@ image: /assets/cards/reviews-call.png
         <li><strong>Written by you, not by AI.</strong> We don't publish reviews written or rewritten with AI tools; we want to hear your voice.</li>
       </ul>
       <p>As the review's author, you keep the copyright. By sending a review you agree that Longhand may publish it on this site and share it on social media. We may make small edits for clarity and will check any larger changes with you first. We'll write back either way, usually within two weeks.</p>
-      <p>You can write it in <a href="{{ '/write/' | relative_url }}">Longhand</a>, our free writing app, and send it from there: choose <em>Export</em>, then <em>Submit as a review</em>. Or paste it into the form here.</p>
     </div>
     <form class="review-form" id="reviewForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="{{ site.web3forms_key }}">

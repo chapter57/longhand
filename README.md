@@ -1,6 +1,6 @@
 # Longhand
 
-A literary almanac: a writer, a book or a moment from literary history, every day, with reviews of classic books by readers. A free writing app for writers is tucked in at the bottom of the front page and in the Reviews section.
+A literary almanac: a writer, a book or a moment from literary history, every day, with reviews of classic books by readers and Great Reads 2027, a year of reading courses. The look is a broadsheet: Newsreader and IBM Plex Mono, black ink on newsprint, one red (`assets/site.css`).
 
 The site is built by GitHub Pages from this project. Changes go live a minute or two after they reach the `gh-pages` branch. Readers write to hello@longhandlit.com (set as `email` in `_config.yml`). Namecheap forwards it to the Longhand Gmail inbox, longhandlit@gmail.com, and Gmail can reply as hello@longhandlit.com.
 
@@ -37,7 +37,7 @@ Please check every date and fact against two sources before adding it, and write
 
 ## Reviews
 
-Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) in two ways: from the writing app (Export, then *Submit as a review*), or with the form on the Reviews page (`/reviews/`). Either way the review arrives by email in the Longhand Gmail inbox (longhandlit@gmail.com), sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`) and `write/app.js` (`REVIEW_KEY`), only allows sending to that inbox. The writing app sends nothing unless the writer chooses *Submit as a review* for a piece, and then sends only that piece.
+Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) with the form on the Reviews page (`/reviews/`). The review arrives by email in the Longhand Gmail inbox (longhandlit@gmail.com), sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`), only allows sending to that inbox.
 
 Nothing is published automatically. To publish a review you've approved, open Pages CMS, choose **Reviews**, click **Add an entry**, and fill in the book, its author, the reviewer's name, the date, a one-line summary, the book's ISBN (for the bookstore link), and the review itself. It appears on the Reviews page a minute or two after you save, at its own address. Reviews are stored one file each in `_reviews/`; `_layouts/review.html` is the design of each review's page.
 
@@ -89,28 +89,28 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 
 ## What's where
 
-- `index.html`: the front page: the Great Reads 2027 card at the top, Today in the Almanac, the call for reviews, "Write to us", and the writing app at the bottom
+- `index.html`: the front page, laid out like a newspaper's: today's almanac entry as the lead story, Great Reads 2027 and "The line" (the day's quotation from `_data/social.yml`) beside it, then earlier this week, the newsletter, the calendar and the call for reviews
 - `reviews/index.html`, `_reviews/`: the Reviews page, its submission form, and the published reviews
 - `_data/social.yml` and `assets/cards/`: the midday quotes and evening quote cards
 - `_almanac/`: the almanac, one file per day; `_layouts/almanac-entry.html` is the design of each entry's page
 - `almanac/index.html`: the Almanac page, with this week and the whole calendar
 - `assets/almanac.js`: picks today's entry and the coming week, and loads the portraits; `_includes/almanac-data.html` hands it the calendar
 - `assets/images/almanac/`: portraits, if any are added
-- `_layouts/`, `_includes/`, `assets/site.css`: the page design; the drawings (pen, moon phases, postmark, envelope, ink rule) are in `_includes/ill-*.html`
+- `_layouts/`, `_includes/`, `assets/site.css`: the page design (the front page has the full masthead; other pages a small one)
 - `.pages.yml`: the Pages CMS editing screens
 - `_config.yml`: site settings
 - `assets/icons/`, `favicon.ico`: the site icon (a blue ink drop); `assets/brand/`: the banner and round logo for social profiles
-- `fonts/`: Literata and IBM Plex Mono, both under the SIL Open Font License (see `fonts/OFL.txt`)
-- `write/`: the Longhand writing app
+- `fonts/`: Newsreader (the site) and Literata (the calendar and cards) and IBM Plex Mono, all under the SIL Open Font License (see `fonts/OFL.txt`)
+- `write/`: the writing app's retirement page, which lets anyone who used the app download what they wrote (still saved in their browser); `write/sw.js` clears installed copies. The app itself is archived in `_archive/write/`.
 - `courses/index.html`: Great Reads 2027, the 2027 courses: the reading list and the waitlist form (sign-ups are emailed to the address in `_config.yml`, through Web3Forms, like reviews)
-- `play/`: Mrs. Dalloway, the 8-bit game (no longer on the front page, but still at `/play/` and in the footer)
+- `play/`: sends old links to the Mrs. Dalloway game to Great Reads 2027; the game is archived in `_archive/play/`
 - `_archive/day/`: A Quiet Day, the writing game, archived (see below)
 - `.github/`: the daily posting to Bluesky and Mastodon
 - `sw.js`: retires the offline copy that older installs of the app kept at the site's main address
 
 ## Visitor numbers
 
-The website counts its visits with GoatCounter, which uses no cookies and doesn't track people across sites. The numbers are at [cdamonsmith.goatcounter.com](https://cdamonsmith.goatcounter.com) (sign in with the GoatCounter account). The counter is added to every page that uses the site's design (`goatcounter` in `_config.yml`); the writing app counts nothing.
+The website counts its visits with GoatCounter, which uses no cookies and doesn't track people across sites. The numbers are at [cdamonsmith.goatcounter.com](https://cdamonsmith.goatcounter.com) (sign in with the GoatCounter account). The counter is added to every page that uses the site's design (`goatcounter` in `_config.yml`).
 
 ## The domain
 
@@ -126,22 +126,10 @@ DNS records for the website:
 | A | @ | 185.199.111.153 |
 | CNAME | www | chapter57.github.io |
 
-The writing app keeps pieces per address, so anyone who used it at an earlier address should Export their pieces there, then reinstall from longhandlit.com/write/ and paste them in.
 
-## The writing app
+## Archived: the writing app and the games
 
-Longhand runs in Chrome or Microsoft Edge on a Mac or Windows PC and works without the internet once installed. Every piece is saved as you type in the browser's own storage (IndexedDB) on that computer, and nothing is ever sent to a server. **Export** is the only way writing leaves the app: Word (.docx), PDF (through the print window's "Save as PDF"), Markdown (.md) or plain text (.txt).
-
-To install it, open `…/write/` in Chrome and click the install icon at the right end of the address bar. In Edge, open the **⋯** menu and choose **Apps → Install this site as an app**.
-
-Keys (on Windows, use Ctrl where these say ⌘, and Shift for ⇧):
-
-- ⌘S confirms the piece is saved. Longhand saves on its own as you type.
-- ⇧⌘S opens the Export menu.
-- ⌘I and ⌘B for italics and bold. Type `#` and a space at the start of a line for a heading.
-- Esc brings the buttons back while you're writing.
-
-The app's files are in `write/`: `index.html` (page and styling), `app.js` (editor and saving), `export.js` (Word, Markdown and plain-text exports), `sw.js` (offline support; bump `VERSION` there whenever an app file changes), and `manifest.webmanifest` with `icons/` (what Chrome needs to install it).
+The Longhand writing app, A Quiet Day and the Mrs. Dalloway game were retired in November 2026, when the site narrowed to reading. They're kept in `_archive/` (`write/`, `day/`, `play/`), which Jekyll doesn't publish. The notes below describe A Quiet Day as it was.
 
 ## A Quiet Day (archived)
 

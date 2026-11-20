@@ -1,9 +1,0 @@
-{%- comment -%} A postmark for the Almanac. Pass month= (a date). {%- endcomment -%}
-<svg class="ill ill-postmark" viewBox="0 0 120 120" role="img" aria-label="The Longhand Almanac, {{ include.month | date: '%B %Y' }}">
-  <defs><path id="pm-arc" d="M 60 60 m -44 0 a 44 44 0 1 1 88 0 a 44 44 0 1 1 -88 0"/></defs>
-  <circle class="pm-ring" cx="60" cy="60" r="56"/>
-  <circle class="pm-ring pm-thin" cx="60" cy="60" r="34"/>
-  <text class="pm-arc"><textPath href="#pm-arc" startOffset="0">THE LONGHAND ALMANAC · THE LONGHAND ALMANAC ·</textPath></text>
-  <text class="pm-no" x="60" y="58" text-anchor="middle">Almanac</text>
-  <text class="pm-date" x="60" y="74" text-anchor="middle">{{ include.month | date: "%b %Y" | upcase }}</text>
-</svg>

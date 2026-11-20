@@ -44,30 +44,38 @@ document.documentElement.classList.add("js");
 <link rel="icon" href="{{ '/assets/icons/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="icon" href="{{ '/assets/icons/favicon-32.png' | relative_url }}" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
-<meta name="theme-color" content="#F2F3EE" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141619" media="(prefers-color-scheme: dark)">
-<link rel="preload" href="{{ '/fonts/Literata-normal-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151413" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="{{ '/fonts/Newsreader-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to the page</a>
 
-{%- unless page.url == "/courses/" %}
-<p class="notice"><a href="{{ '/courses/' | relative_url }}"><b>New for 2027:</b> Great Reads, a year of the books you wish you'd read. <span>Join the waitlist →</span></a></p>
-{%- endunless %}
-<header class="masthead">
+{%- assign front = false %}{% if page.url == "/" %}{% assign front = true %}{% endif %}
+<header class="masthead{% if front %} masthead-front{% endif %}">
   <div class="masthead-inner">
+    {%- if front %}
+    <p class="dateline"><span data-dateline>{{ site.season }}</span><span>A writer for every day</span></p>
+    <div class="mast-title">
+      <h1 class="wordmark"><a href="{{ '/' | relative_url }}">Longhand</a></h1>
+      <p class="tagline">Old books for an urgent time.</p>
+    </div>
+    {%- else %}
     <a class="wordmark" href="{{ '/' | relative_url }}">Longhand</a>
+    {%- endif %}
     <nav class="nav" aria-label="Main">
-      <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" or page.collection == "almanac" %} aria-current="page"{% endif %}>Almanac</a>
+      <a href="{{ '/almanac/' | relative_url }}"{% if page.url == "/almanac/" or page.collection == "almanac" %} aria-current="page"{% endif %}>The Almanac</a>
+      <a href="{{ '/courses/' | relative_url }}"{% if page.url == "/courses/" %} aria-current="page"{% endif %}>Great Reads 2027</a>
       <a href="{{ '/reviews/' | relative_url }}"{% if page.url == "/reviews/" or page.collection == "reviews" %} aria-current="page"{% endif %}>Reviews</a>
       <a href="{{ '/calendar/' | relative_url }}"{% if page.url == "/calendar/" %} aria-current="page"{% endif %}>Calendar</a>
-      <a href="{{ '/courses/' | relative_url }}"{% if page.url == "/courses/" %} aria-current="page"{% endif %}>Courses</a>
-      {% if site.newsletter != "" %}<a href="{{ site.newsletter }}">Newsletter</a>{% endif %}
-      <a href="{{ '/#contact' | relative_url }}">Write to us</a>
+      {% if site.newsletter != "" %}<a href="{{ site.newsletter }}">The Letter</a>{% endif %}
     </nav>
   </div>
 </header>
+{%- if front %}
+<script>(function () { var el = document.querySelector("[data-dateline]"); if (el) el.textContent = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }); })();</script>
+{%- endif %}
 
 <main id="main">
 {{ content }}
@@ -78,20 +86,18 @@ document.documentElement.classList.add("js");
     <p class="colophon-mark">Longhand</p>
     <p>{{ site.description | strip }}</p>
     <ul class="colophon-links">
-      <li><a href="{{ '/write/' | relative_url }}">The writing app</a></li>
       <li><a href="{{ '/almanac/' | relative_url }}">The Almanac</a></li>
       <li><a href="{{ '/reviews/' | relative_url }}">Reviews</a></li>
       <li><a href="{{ '/calendar/' | relative_url }}">The 2027 calendar</a></li>
       <li><a href="{{ '/gifts/' | relative_url }}">Gifts for readers</a></li>
       <li><a href="{{ '/courses/' | relative_url }}">Great Reads 2027</a></li>
-      <li><a href="{{ '/play/' | relative_url }}">Play: Mrs. Dalloway, the game</a></li>
       {% if site.newsletter != "" %}<li><a href="{{ site.newsletter }}">The Longhand Letter</a></li>{% endif %}
       {% if site.x %}<li><a href="{{ site.x }}">X</a></li>{% endif %}
       {% if site.instagram %}<li><a href="{{ site.instagram }}">Instagram</a></li>{% endif %}
       {% if site.bluesky %}<li><a href="{{ site.bluesky }}">Bluesky</a></li>{% endif %}
-      <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+      <li><a href="mailto:{{ site.email }}">Write to us: {{ site.email }}</a></li>
     </ul>
-    <p class="fine">Set in Literata and IBM Plex Mono. {{ site.season }}.</p>
+    <p class="fine">Set in Newsreader and IBM Plex Mono. {{ site.season }}. Visits are counted with GoatCounter, which uses no cookies.</p>
   </div>
 </footer>
 {%- if site.goatcounter and jekyll.environment == "production" %}
