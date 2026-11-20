@@ -245,10 +245,10 @@ a.label-note:hover { color: var(--accent); }
 .cal-more { font-style: italic; color: var(--ink-soft); margin: 0 0 1.5rem; }
 
 /* ---------- one entry's own page ---------- */
-.piece { padding-block: clamp(1.75rem, 5vw, 3rem) 1rem; }
-.piece-back { margin-bottom: 1.5rem; }
+.piece { padding-block: clamp(1.25rem, 3.5vw, 2rem) 1rem; }
+.piece-back { margin-bottom: 0.9rem; }
 .piece-back a { color: var(--accent); }
-.piece-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(9rem, 16rem); gap: 1.5rem clamp(1.5rem, 5vw, 3.5rem); align-items: end; padding-bottom: clamp(1.25rem, 3vw, 2rem); margin-bottom: clamp(1.5rem, 4vw, 2.5rem); border-bottom: 1px solid var(--ink); }
+.piece-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(8rem, 13rem); gap: 1.5rem clamp(1.5rem, 5vw, 3.5rem); align-items: start; padding-bottom: clamp(1.25rem, 3vw, 2rem); margin-bottom: clamp(1.5rem, 4vw, 2.5rem); border-bottom: 1px solid var(--ink); }
 .piece-head .piece-art { grid-column: 2; grid-row: 1; }
 .piece-head .piece-title { grid-column: 1; grid-row: 1; }
 .piece-name { font-weight: 500; font-size: clamp(2.8rem, 7vw, 5.4rem); line-height: 0.95; letter-spacing: -0.04em; margin: 0 0 1rem; font-variation-settings: "opsz" 72; }
@@ -346,6 +346,8 @@ a.label-note:hover { color: var(--accent); }
 .colophon-inner { max-width: calc(76rem - 2 * var(--gutter)); margin-inline: auto; padding-block: 1.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 3px double var(--ink); color: var(--ink-soft); font-size: 1rem; }
 .colophon-inner p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .colophon-mark { font-size: 1.8rem; font-weight: 500; letter-spacing: -0.03em; color: var(--ink); }
+.colophon-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; margin: 1rem 0 1.1rem; }
+.colophon-bar .social { margin: 0; }
 .colophon-links { list-style: none; margin: 1rem 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .colophon-links a { color: var(--ink); text-decoration: none; }
 .colophon-links a:hover { color: var(--accent); }
