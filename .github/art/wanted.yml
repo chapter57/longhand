@@ -1,0 +1,12 @@
+# Searches for public-domain prints on Wikimedia Commons, for the newsletter's
+# end-of-letter picture. The Fetch portraits workflow runs each search and
+# saves the best matches, with their makers and licenses, in
+# .github/art/found/<name>/ (credits.yml lists them). Only public-domain files
+# are kept.
+turkey: "Audubon wild turkey"
+turkey-engraving: "wild turkey engraving"
+cornucopia: "cornucopia engraving"
+harvest: "harvest sheaf wheat engraving"
+pumpkin: "pumpkin engraving botanical"
+owl: "owl engraving 19th century"
+thanksgiving: "Thanksgiving engraving 1800s"
