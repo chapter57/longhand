@@ -89,7 +89,7 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 
 ## What's where
 
-- `index.html`: the front page, laid out like a newspaper's: today's almanac entry as the lead story, Great Reads 2027 and "The line" (the day's quotation from `_data/social.yml`) beside it, then earlier this week, the newsletter, the calendar and the call for reviews
+- `index.html`: the front page, laid out like a newspaper's: today's almanac entry as the lead story, then "From the archive" (a short public-domain poem or passage, an evening reading from `_data/social.yml`, by a writer the almanac has already featured, a different one each day, linking back to that entry) and earlier this week; beside them Great Reads 2027, "The line" (the day's quotation) and a plate; then the newsletter, the calendar and the call for reviews
 - `reviews/index.html`, `_reviews/`: the Reviews page, its submission form, and the published reviews
 - `_data/social.yml` and `assets/cards/`: the midday quotes and evening quote cards
 - `_almanac/`: the almanac, one file per day; `_layouts/almanac-entry.html` is the design of each entry's page

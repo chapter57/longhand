@@ -199,9 +199,23 @@ a.label-note:hover { color: var(--accent); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plate img { mix-blend-mode: screen; filter: grayscale(1) invert(1) contrast(1.05); } }
 :root[data-theme="dark"] .plate img { mix-blend-mode: screen; filter: grayscale(1) invert(1) contrast(1.05); }
 .plate-side { border-top: 1px solid var(--ink); padding-top: 0.75rem; }
-.plate-side img { max-height: 22rem; width: auto; max-width: 100%; }
-.plate-lead { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
-.plate-lead img { max-height: 26rem; width: auto; max-width: 100%; }
+.plate-side img { max-height: 17rem; width: auto; max-width: 100%; }
+/* Earlier this week, as a short list in the lead column */
+.week-brief { margin-top: 1.4rem; max-width: 36rem; }
+.week-brief .label { border-top-width: 1px; }
+.week-list-brief { list-style: none; margin: 0; padding: 0; }
+.week-list-brief a { display: flex; gap: 1rem; align-items: baseline; padding: 0.4rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); }
+.week-list-brief a:hover .strip-name { color: var(--accent); }
+.week-list-brief .strip-date { flex: 0 0 4.2rem; }
+.week-list-brief .strip-name { font-size: 1.15rem; }
+
+/* From the archive: a short poem or passage, under today's entry */
+.archive { margin-top: 1.4rem; padding-top: 0.9rem; border-top: 1px solid var(--ink); max-width: 36rem; }
+.archive .kicker { margin-bottom: 0.5rem; }
+.archive-title { margin: 0 0 0.6rem; font-size: 1.35rem; line-height: 1.2; font-style: italic; letter-spacing: -0.01em; }
+.archive-text { margin: 0; white-space: pre-line; font-size: 1.12rem; line-height: 1.55; }
+.archive-by { margin: 0.7rem 0 0; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.archive-link { margin: 0.6rem 0 0; }
 .lead-plate { max-width: 17rem; align-self: end; }
 .lead-plate img { max-height: 20rem; width: auto; max-width: 100%; margin-left: auto; }
 .lead-plate figcaption { text-align: right; }
