@@ -223,6 +223,12 @@ h1, h2, h3 { text-wrap: balance; }
 .longhand .lh-thin { stroke-width: 1px; }
 
 /* The ink field: a drop of ink for every day. */
+/* The Great Reads notice at the top of every page but its own. */
+.notice { margin: 0; background: var(--accent); text-align: center; font-size: 0.95rem; line-height: 1.4; }
+.notice a { display: block; padding: 0.55rem 16px; color: var(--accent-ink); text-decoration: none; }
+.notice span { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; margin-left: 0.4rem; white-space: nowrap; }
+.notice a:hover span { text-decoration: underline; }
+
 /* Great Reads 2027, on the front page and the courses page. */
 .course-card { display: block; justify-self: end; width: 100%; max-width: 34rem; background: var(--paper); border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--accent); text-decoration: none; color: var(--ink); padding: 1.25rem 1.4rem 1.1rem; transition: transform .15s, box-shadow .15s; }
 a.course-card:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--accent); }

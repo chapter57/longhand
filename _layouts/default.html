@@ -52,6 +52,9 @@ document.documentElement.classList.add("js");
 <body>
 <a class="skip" href="#main">Skip to the page</a>
 
+{%- unless page.url == "/courses/" %}
+<p class="notice"><a href="{{ '/courses/' | relative_url }}"><b>New for 2027:</b> Great Reads, a year of the books you wish you'd read. <span>Join the waitlist →</span></a></p>
+{%- endunless %}
 <header class="masthead">
   <div class="masthead-inner">
     <a class="wordmark" href="{{ '/' | relative_url }}">Longhand</a>
@@ -83,6 +86,9 @@ document.documentElement.classList.add("js");
       <li><a href="{{ '/courses/' | relative_url }}">Great Reads 2027</a></li>
       <li><a href="{{ '/play/' | relative_url }}">Play: Mrs. Dalloway, the game</a></li>
       {% if site.newsletter != "" %}<li><a href="{{ site.newsletter }}">The Longhand Letter</a></li>{% endif %}
+      {% if site.x %}<li><a href="{{ site.x }}">X</a></li>{% endif %}
+      {% if site.instagram %}<li><a href="{{ site.instagram }}">Instagram</a></li>{% endif %}
+      {% if site.bluesky %}<li><a href="{{ site.bluesky }}">Bluesky</a></li>{% endif %}
       <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
     </ul>
     <p class="fine">Set in Literata and IBM Plex Mono. {{ site.season }}.</p>
