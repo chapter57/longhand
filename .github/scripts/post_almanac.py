@@ -57,8 +57,36 @@ BLUESKY_LIMIT = 300
 MASTODON_LIMIT = 500
 HASHTAGS = "#OnThisDay #Books #Literature #Poetry"
 INSTAGRAM_API = "https://graph.instagram.com/v23.0/"
-INSTAGRAM_HASHTAGS = ("#poetry #books #literature #onthisday #bookstagram #booksofinstagram "
-                      "#classicbooks #classicliterature #literaryquotes #poetrycommunity #readingcommunity #writersofinstagram")
+# Instagram hashtags: a few chosen for each post, never the same block every
+# time (Instagram advises 3 to 5, and an identical set on every post looks
+# like spam). Each post gets its own tags first, then general ones in turn.
+INSTAGRAM_GENERAL = ["#classicliterature", "#bookstagram", "#literature", "#classicbooks",
+                     "#readingcommunity", "#booklovers", "#literaryhistory"]
+
+
+def writer_tag(e):
+    """#EmilyDickinson for a person's entry; nothing for books and events."""
+    if e.get("kind") not in ("Born", "Died"):
+        return None
+    tag = "".join(w[:1].upper() + w[1:] for w in re.sub(r"[^A-Za-z ]", "", str(e.get("name", ""))).split())
+    return "#" + tag if 3 <= len(tag) <= 24 else None
+
+
+def instagram_tags(*own, seed=None):
+    """The post's own tags, then general ones in turn by date, up to five."""
+    n = seed if seed is not None else datetime.date.today().toordinal()
+    tags = [t for t in own if t]
+    for i in range(len(INSTAGRAM_GENERAL)):
+        if len(tags) >= 4:
+            break
+        t = INSTAGRAM_GENERAL[(n + i) % len(INSTAGRAM_GENERAL)]
+        if t.lower() not in (x.lower() for x in tags):
+            tags.append(t)
+    return " ".join(tags[:5])
+
+
+def day_seed(e):
+    return datetime.date(2026, e["month"], e["day"]).toordinal() if e.get("month") else None
 # Bluesky carries these without showing them, so posts reach the book feeds
 # without using up the character limit.
 BLUESKY_TAGS = ["BookSky", "Books", "Literature", "OnThisDay", "Writing", "Poetry"]
@@ -154,7 +182,7 @@ def evening(e, social):
             "image": (f"assets/cards/{e['month']}-{e['day']}.png", alt[:1900]),
             # Instagram links don't work in captions, so the link is in the profile.
             "instagram": f"{top}\n\n{alt}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
-                         f"\n\n{INSTAGRAM_HASHTAGS}",
+                         f"\n\n{instagram_tags(writer_tag(e), seed=day_seed(e))}",
             "fallback": curly(str(p["text"]).strip()) + "\n— " + curly(p["author"])}
 
 
@@ -168,7 +196,7 @@ def about_card(e, p, date):
             "mastodon": top + "\n\nToday in the almanac:",
             "image": (f"assets/cards/{e['month']}-{e['day']}.png", alt[:1900]),
             "instagram": f"{top}\n\n{about}\n\nToday in the almanac: {e['name']}. The link is in our bio, longhandlit.com."
-                         f"\n\n{INSTAGRAM_HASHTAGS}",
+                         f"\n\n{instagram_tags(writer_tag(e), '#books', seed=day_seed(e))}",
             "fallback": about}
 
 
@@ -201,7 +229,7 @@ def meme(e, social, name=""):
             "mastodon": words + "\n\n" + (lead or "Longhand Literature:"),
             "image": (path, curly(m["alt"])[:1900]), "size": (1080, m.get("height", 1080)),
             "instagram": f"{words}\n\n{where} The link is in our bio, longhandlit.com."
-                         f"\n\n{INSTAGRAM_HASHTAGS} #LiteraryMemes #BookMemes",
+                         f"\n\n{instagram_tags('#bookmemes', '#literaryhumor', seed=day_seed(e))}",
             "instagram_image": path,
             "fallback": words}
 
@@ -567,7 +595,7 @@ def reel(name):
     bsky = curly(fit(r.get("bluesky", r["caption"].split("\n")[0]), 240)) + "\n\n" + SITE + "/"
     return link, {"bluesky": bsky, "mastodon": bsky, "video": f"assets/reels/{name}.mp4",
                   "alt": f"An animation: a drawing of the writer, then the words \"{r['text']}\" and \"{r['by']}\".",
-                  "instagram": words + f"\n\n{INSTAGRAM_HASHTAGS}", "fallback": words}
+                  "instagram": words + "\n\n" + instagram_tags("#bookreels", "#classicliterature"), "fallback": words}
 
 
 def post_instagram_carousel(name, dry):
@@ -656,6 +684,16 @@ def main():
     posted = os.environ.get("POSTED_DIR", "").strip()
     if posted:
         os.makedirs(posted, exist_ok=True)
+    # Instagram gets one of these a day, taking turns: the meme on even days,
+    # the evening card on odd ones (or whichever the day has). Bluesky gets both.
+    if slot in ("evening", "meme") and "instagram" in post:
+        has_meme = meme(e, None) is not None
+        has_evening = bool(social and social[0].get("evening"))
+        even = datetime.date(2026, month, day).toordinal() % 2 == 0
+        owner = "meme" if (has_meme and (even or not has_evening)) else "evening"
+        if slot != owner:
+            print(f"Instagram: today's Instagram post is the {owner}, not the {slot}; skipping.")
+            post = {k: v for k, v in post.items() if not k.startswith("instagram")}
     for name, send in (("bluesky", post_bluesky), ("mastodon", post_mastodon), ("instagram", post_instagram)):
         mark = os.path.join(posted, f"{slot}-{name}") if posted else ""
         if mark and os.path.exists(mark) and not dry:

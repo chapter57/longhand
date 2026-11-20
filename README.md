@@ -37,7 +37,7 @@ Please check every date and fact against two sources before adding it, and write
 
 ## Reviews
 
-Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) with the form on the Reviews page (`/reviews/`). The review arrives by email in the Longhand Gmail inbox (longhandlit@gmail.com), sent through Web3Forms; its access key, in `_config.yml` (`web3forms_key`), only allows sending to that inbox.
+Readers send reviews of classic books (published at least fifty years ago, 700 to 1,000 words, written by them and not by AI) with the form on the Reviews page (`/reviews/`). The review arrives by email, sent through Web3Forms, at the address the Web3Forms account was set up with (the owner's own Gmail, not the Longhand inbox); its access key, in `_config.yml` (`web3forms_key`), only allows sending to that address. To send them somewhere else, make a new key at web3forms.com with the other address and replace `web3forms_key`.
 
 Nothing is published automatically. To publish a review you've approved, open Pages CMS, choose **Reviews**, click **Add an entry**, and fill in the book, its author, the reviewer's name, the date, a one-line summary, the book's ISBN (for the bookstore link), and the review itself. It appears on the Reviews page a minute or two after you save, at its own address. Reviews are stored one file each in `_reviews/`; `_layouts/review.html` is the design of each review's page.
 
@@ -71,7 +71,7 @@ The accounts' details are kept privately in the project's **Settings → Secrets
 
 - `INSTAGRAM_TOKEN`: an Instagram API access token for the Longhand Instagram account (a Professional account), made in the Meta app dashboard under **Instagram → API setup with Instagram login → Generate access tokens**
 
-Instagram gets the evening quote card only, from the `.jpg` copy of the card (Instagram takes only JPEG pictures). Links don't work in Instagram captions, so the caption points to the link in the profile, which should be longhandlit.com/almanac/. Instagram tokens last 60 days; the posting renews the token every week and keeps the new one, locked, in GitHub's cache. If more than 60 days pass with no evening post, make a new token and replace the secret.
+Instagram gets one post a day, taking turns: the meme on even days and the evening quote card on odd ones (or whichever the day has); Bluesky still gets both. Cards go up as the `.jpg` copy (Instagram takes only JPEG pictures). Each post has its own three to five hashtags (the writer's name, the kind of post, then general ones in turn), never the same block every time: see `instagram_tags` in `.github/scripts/post_almanac.py`. Links don't work in Instagram captions, so the caption points to the link in the profile, which should be longhandlit.com/almanac/. Instagram tokens last 60 days; the posting renews the token every week and keeps the new one, locked, in GitHub's cache. If more than 60 days pass with no evening post, make a new token and replace the secret.
 
 **Instagram carousels.** A post of several slides is written in `_data/instagram.yml` (its slides and caption), drawn into `assets/instagram/<id>-<n>.jpg` by `.github/instagram/carousel.mjs`, and posted, once the pictures are on the site, by running **Post the almanac** with **instagram** and the post's id. The cover slide uses the writer's portrait from `.github/instagram/portraits/`, which the **Fetch portraits** workflow downloads from Wikimedia Commons with each picture's maker and license (`credits.yml`); the credit is printed on the slide.
 
@@ -102,7 +102,7 @@ To post by hand, or to preview without posting, open the **Actions** tab, choose
 - `assets/icons/`, `favicon.ico`: the site icon (a blue ink drop); `assets/brand/`: the banner and round logo for social profiles
 - `fonts/`: Newsreader (the site) and Literata (the calendar and cards) and IBM Plex Mono, all under the SIL Open Font License (see `fonts/OFL.txt`)
 - `write/`: the writing app's retirement page, which lets anyone who used the app download what they wrote (still saved in their browser); `write/sw.js` clears installed copies. The app itself is archived in `_archive/write/`.
-- `courses/index.html`: Great Reads 2027, the 2027 courses: the reading list and the waitlist form (sign-ups are emailed to the address in `_config.yml`, through Web3Forms, like reviews)
+- `courses/index.html`: Great Reads 2027, the 2027 courses: the reading list and the waitlist form (sign-ups are emailed through Web3Forms, to the same address as reviews; each arrives as "Great Reads waitlist: <name>")
 - `play/`: sends old links to the Mrs. Dalloway game to Great Reads 2027; the game is archived in `_archive/play/`
 - `_archive/day/`: A Quiet Day, the writing game, archived (see below)
 - `.github/`: the daily posting to Bluesky and Mastodon
