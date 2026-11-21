@@ -10,8 +10,8 @@ posts (today's date in New York time):
   evening  a short poem or passage from _data/social.yml, posted as its quote
            card picture (assets/cards/<month>-<day>.png), with a link to the entry
 
-  meme     on days with one in _data/memes.yml, a homemade-looking meme
-           (assets/memes/<month>-<day>.jpg), to Bluesky and Instagram
+  meme     retired in November 2026; posts nothing (_data/memes.yml is kept
+           as a record)
 
 For a writer still in copyright, both are about the writer instead: a line
 in our own words at midday, and a card with their portrait in the evening.
@@ -657,14 +657,10 @@ def main():
         for send in (post_bluesky, post_instagram):
             send(e, post, dry)
         return
-    if slot == "meme" and os.environ.get("ANNOUNCEMENT", "").strip():
-        # A meme that isn't tied to a day links to the front page.
-        e = {"url": SITE + "/", "name": "Longhand Literature", "note": "", "month": 0, "day": 0}
-        post = meme(e, None, os.environ["ANNOUNCEMENT"].strip())
-        if not post:
-            raise SystemExit("No meme called " + os.environ["ANNOUNCEMENT"] + " in _data/memes.yml.")
-        for send in (post_bluesky, post_mastodon, post_instagram):
-            send(e, post, dry)
+    if slot == "meme":
+        # The memes are retired (November 2026): Longhand posts portraits,
+        # plates and the writers' own words. _data/memes.yml is kept as a record.
+        print("Memes are retired; nothing to post.")
         return
     if slot == "instagram":
         post_instagram_carousel(os.environ.get("ANNOUNCEMENT", "").strip(), dry)
@@ -684,16 +680,7 @@ def main():
     posted = os.environ.get("POSTED_DIR", "").strip()
     if posted:
         os.makedirs(posted, exist_ok=True)
-    # Instagram gets one of these a day, taking turns: the meme on even days,
-    # the evening card on odd ones (or whichever the day has). Bluesky gets both.
-    if slot in ("evening", "meme") and "instagram" in post:
-        has_meme = meme(e, None) is not None
-        has_evening = bool(social and social[0].get("evening"))
-        even = datetime.date(2026, month, day).toordinal() % 2 == 0
-        owner = "meme" if (has_meme and (even or not has_evening)) else "evening"
-        if slot != owner:
-            print(f"Instagram: today's Instagram post is the {owner}, not the {slot}; skipping.")
-            post = {k: v for k, v in post.items() if not k.startswith("instagram")}
+    # Instagram gets one post a day: the evening card.
     for name, send in (("bluesky", post_bluesky), ("mastodon", post_mastodon), ("instagram", post_instagram)):
         mark = os.path.join(posted, f"{slot}-{name}") if posted else ""
         if mark and os.path.exists(mark) and not dry:
