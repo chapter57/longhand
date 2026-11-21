@@ -1,7 +1,8 @@
 # Posts the day's almanac to Bluesky and Mastodon three times a day: the
 # entry in the morning, a quote at midday and a quote card in the evening,
-# which also goes to Instagram. A meme (or a portrait card) goes to Bluesky
-# and Instagram every afternoon, and a reel on Sundays and Wednesdays.
+# which also goes to Instagram (its one post a day). The afternoon memes and
+# the scheduled reels were retired in November 2026; a reel can still be
+# posted by hand.
 # The script is .github/scripts/post_almanac.py. The accounts' passwords are
 # kept in the project's Settings → Secrets and variables → Actions.
 name: Post the almanac
@@ -16,9 +17,6 @@ on:
     - cron: "23 15 * * *"   # morning backup
     - cron: "7 17 * * *"    # midday: 1:07 p.m. summer, 12:07 p.m. winter
     - cron: "41 18 * * *"   # midday backup
-    - cron: "47 19 * * *"   # meme: 3:47 p.m. summer, 2:47 p.m. winter
-    - cron: "11 21 * * *"   # meme backup
-    - cron: "17 18 * * 0,3" # reel, Sundays and Wednesdays: 2:17 p.m. summer, 1:17 p.m. winter
     - cron: "37 20 * * *"   # evening: 4:37 p.m. summer, 3:37 p.m. winter (GitHub has been
                             # starting these hours late, so it posts in the evening anyway)
     - cron: "53 22 * * *"   # evening backup
@@ -27,10 +25,10 @@ on:
       slot:
         description: "Which post"
         type: choice
-        options: [morning, midday, meme, evening, announcement, instagram, reel]
+        options: [morning, midday, evening, announcement, instagram, reel]
         default: morning
       announcement:
-        description: 'For "announcement", "instagram", "meme" or "reel": the post''s id in _data/announcements.yml, instagram.yml, memes.yml or reels.yml'
+        description: 'For "announcement", "instagram" or "reel": the post''s id in _data/announcements.yml, instagram.yml or reels.yml'
         required: false
         default: ""
       date:
@@ -64,8 +62,6 @@ jobs:
           case "$SCHEDULE" in
             "47 13 * * *"|"23 15 * * *") slot=morning ;;
             "7 17 * * *"|"41 18 * * *") slot=midday ;;
-            "47 19 * * *"|"11 21 * * *") slot=meme ;;
-            "17 18 * * 0,3") slot=reel ;;
             "37 20 * * *"|"53 22 * * *") slot=evening ;;
             *) slot="${CHOSEN:-morning}" ;;
           esac

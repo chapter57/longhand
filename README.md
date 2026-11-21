@@ -18,7 +18,7 @@ Once a full year has passed, every entry is open. (Pages for days to come are hi
 
 The calendar currently runs from October 17 to December 31. Entries repeat every year.
 
-**Portraits.** Each entry's `portrait` names a Wikipedia article (for example `John_Keats`). The reader's browser loads the picture at the top of that article, but only if it's a freely licensed picture from Wikimedia Commons, and credits its maker and license, linked to the picture's page. For a book or event, `pictured` says who is shown. If there is no portrait, or Wikipedia can't be reached, a lettered card appears instead. To store a portrait on the site instead, add the image and fill in `image` and `image_credit`.
+**Portraits.** Each entry's `portrait` names a Wikipedia article (for example `John_Keats`). The reader's browser loads the picture at the top of that article, but only if it's a freely licensed picture from Wikimedia Commons, and credits its maker and license, linked to the picture's page. For a book or event, `pictured` says who is shown. If there is no portrait, or Wikipedia can't be reached, there is simply no picture. To store a portrait on the site instead, add the image and fill in `image` and `image_credit`.
 
 **Bookstore links.** An entry with a `buy` (the book's title) and an `isbn` (the 13-digit ISBN of an edition) links to that book on Bookshop.org, using Longhand's affiliate ID (`bookshop_id` in `_config.yml`). Bookshop.org shares its profits with independent bookstores, and Longhand earns a small commission on sales; the page says so under the link. Entries without an ISBN have no bookstore link. Reviews work the same way, with `isbn`. Once `bookshop_shop` in `_config.yml` holds the address of the Longhand storefront on Bookshop.org, the front page and the Almanac page link to it as the Almanac Shelf.
 
@@ -47,18 +47,17 @@ GitHub posts the almanac to Bluesky and Mastodon three times a day, New York tim
 
 - **About 9:45 a.m.:** the day's entry, its short note with a link card to its full page. On Bluesky the card carries the entry's portrait.
 - **About 1 p.m.:** a short quote, with the same link card.
-- **About 3:45 p.m., on days that have one:** a homemade-looking meme, to Bluesky and Instagram.
 - **About 7:30 p.m.:** a short poem or passage, posted as a quote card picture, with a link to the day's entry. The full text goes in the picture's description, for people using screen readers.
 
 From January 2027 the almanac mixes in more critics, philosophers, essayists and historians (William James, Burke, Montesquieu, Bacon, Sontag, Tuchman, Merton): literary nonfiction, and the thinkers literature argues with. If a book has no ISBN in its entry, the bookstore link searches Bookshop.org for it instead.
 
 When the day's writer is still in copyright, the midday post is a line about them in our own words, and the evening card shows their portrait and a few sentences about them.
 
-Days without a meme of their own take one from a rotating pool: the memes and portrait cards marked `pool: true` in `_data/memes.yml`. The portraits are drawn in code by `.github/portraits/draw.mjs` into `assets/portraits/`.
+**The look and the voice (from November 2026).** Longhand posts photographs of writers, 19th-century plates (Audubon, Bewick, Doré and the like) and the writers' own words, and writes about them seriously. No memes, jokes, cartoons or drawn illustrations. The afternoon memes and the scheduled reels were retired; `_data/memes.yml`, `assets/memes/`, `_data/reels.yml` and `assets/reels/` are kept only as a record.
 
-Reels (short videos, for Instagram and Bluesky) are in `_data/reels.yml`, made into `assets/reels/<id>.mp4` by `.github/reels/reel.mjs` (it needs ffmpeg), and posted by hand: Actions → Post the almanac → Run workflow, choose "reel" and type its id.
+Reels (short videos, for Instagram and Bluesky) are in `_data/reels.yml`, made into `assets/reels/<id>.mp4` by `.github/reels/reel.mjs` (it needs ffmpeg). They are no longer posted on a schedule; one can be posted by hand: Actions → Post the almanac → Run workflow, choose "reel" and type its id.
 
-The memes' captions are in `_data/memes.yml`, and the pictures in `assets/memes/` are drawn by `.github/memes/memes.mjs` (`npm install playwright`, plus Python's Pillow, then `node .github/memes/memes.mjs`). Each meme is written into that script by hand. The photos in them are public-domain portraits only.
+The retired memes' captions are in `_data/memes.yml` and their pictures in `assets/memes/`.
 
 The midday quotes and evening readings are in `_data/social.yml`, one pair per day. Everything in them is in the public domain; "translated for Longhand" marks our own translations. The quote cards are pictures in `assets/cards/`, drawn from that file by `.github/cards/render.mjs` (`npm install playwright js-yaml`, then `node .github/cards/render.mjs`); after changing an evening reading, draw its card again.
 
@@ -73,7 +72,7 @@ The accounts' details are kept privately in the project's **Settings → Secrets
 
 - `INSTAGRAM_TOKEN`: an Instagram API access token for the Longhand Instagram account (a Professional account), made in the Meta app dashboard under **Instagram → API setup with Instagram login → Generate access tokens**
 
-Instagram gets one post a day, taking turns: the meme on even days and the evening quote card on odd ones (or whichever the day has); Bluesky still gets both. Cards go up as the `.jpg` copy (Instagram takes only JPEG pictures). Each post has its own three to five hashtags (the writer's name, the kind of post, then general ones in turn), never the same block every time: see `instagram_tags` in `.github/scripts/post_almanac.py`. Links don't work in Instagram captions, so the caption points to the link in the profile, which should be longhandlit.com/almanac/. Instagram tokens last 60 days; the posting renews the token every week and keeps the new one, locked, in GitHub's cache. If more than 60 days pass with no evening post, make a new token and replace the secret.
+Instagram gets one post a day: the evening card. Cards go up as the `.jpg` copy (Instagram takes only JPEG pictures). Each post has its own three to five hashtags (the writer's name, the kind of post, then general ones in turn), never the same block every time: see `instagram_tags` in `.github/scripts/post_almanac.py`. Links don't work in Instagram captions, so the caption points to the link in the profile, which should be longhandlit.com/almanac/. Instagram tokens last 60 days; the posting renews the token every week and keeps the new one, locked, in GitHub's cache. If more than 60 days pass with no evening post, make a new token and replace the secret.
 
 **Instagram carousels.** A post of several slides is written in `_data/instagram.yml` (its slides and caption), drawn into `assets/instagram/<id>-<n>.jpg` by `.github/instagram/carousel.mjs`, and posted, once the pictures are on the site, by running **Post the almanac** with **instagram** and the post's id. The cover slide uses the writer's portrait from `.github/instagram/portraits/`, which the **Fetch portraits** workflow downloads from Wikimedia Commons with each picture's maker and license (`credits.yml`); the credit is printed on the slide.
 
