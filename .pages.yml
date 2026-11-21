@@ -127,6 +127,18 @@ content:
         label: Read it free link
         description: For public-domain books, a link to a free copy, such as on Project Gutenberg.
         type: string
+      - name: image
+        label: Picture (optional)
+        description: A public-domain print to go with the review, since book covers are usually still in copyright.
+        type: image
+      - name: image_alt
+        label: Describe the picture
+        description: For readers who can't see it.
+        type: string
+      - name: image_caption
+        label: Picture credit
+        description: "Who made it, where it's from, and \"Public domain.\""
+        type: string
       - name: body
         label: The review
         type: rich-text
